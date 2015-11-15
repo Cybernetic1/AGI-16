@@ -1,13 +1,13 @@
 \documentclass{llncs}
 \usepackage{graphicx}
+\usepackage{amsmath}		% for "cases"
 \usepackage{mathrsfs}		% for curly "E" error symbol
 \usepackage{float}
 \usepackage{tcolorbox}		% for wrapping example in color box
 \usepackage{wrapfig}		% wrap figure beside text, used in example
 
 \newcommand*\sigmoid{\vcenter{\hbox{\includegraphics{sigmoid.png}}}}
-% \newcommand*\tab{\hspace{1cm}}
-\newcommand*\tab{\qquad}
+\newcommand*\rectifier{\vcenter{\hbox{\includegraphics{rectifier.png}}}}
 
 \newsavebox{\MyName}
 \savebox{\MyName}{\includegraphics[scale=0.6]{YKY.png}}
@@ -58,7 +58,7 @@ By representing a cognitive state as a vector $\vec{x} \in X$ where $X$ is the c
 \item neural networks and deep learning ... etc.
 \end{itemize}
 
-This is also partly inspired by the success of Google's PageRank and Word2Vec algorithms. %, both exploit the efficiency of vector and matrix calculus.
+This is also partly inspired by the success of Google's PageRank and Word2Vec \cite{} algorithms. %, both exploit the efficiency of vector and matrix calculus.
 
 \section{Relation to Logic-based AI (LBAI)}
 
@@ -203,12 +203,22 @@ where $\vec{x}^*$ is the target value which is independent of time.
 &=& - \frac{\partial}{\partial\vec{W}} \int_0^T \sigmoid(W_1 \sigmoid(W_2 ... \sigmoid(W_L \vec{x}(t))) dt
 \end{eqnarray}
 
+When there are many layers or if the recurrence is too long, back-prop learning becomes ineffective due to the \textbf{vanishing gradient} problem.  One solution is to use the \textbf{rectifier} activation function:
+\begin{equation}
+\rectifier (x) = 
+\begin{cases}
+x, & \mbox{if } x \geq 0 \\
+0, & \mbox{otherwise}
+\end{cases}
+\end{equation}
+Since its derivative is piecewise constant, it does not suffer from the vanishing gradient problem.
+
 \subsection{Forward-backward Algorithm}
 
 This is inspired by forward- and backward-chaining in LBAI.  We propagate the state vector from both the initial state $\vec{x}_0$ as well as the final state $\vec{x}^*$.  This bi-directional propagation is added with noise and repeated many times, thus implementing a \textbf{stochastic local search}:
 
 \begin{equation}
-\includegraphics[scale=0.5]{forward-backward-algorithm.png}
+\includegraphics[scale=0.6]{forward-backward-algorithm.png}
 \end{equation}
 
 When the forward and backward states get close enough, a successful path is found, and we record the gap and the noises along the path, and use them to train $R$ so that this new path would be recognized.
