@@ -1,6 +1,7 @@
 \documentclass{llncs}
 \usepackage{graphicx}
 \usepackage{amsmath}		% for "cases"
+\usepackage{amsfonts}		% for frakur fonts
 \usepackage{mathrsfs}		% for curly "E" error symbol
 \usepackage{float}
 \usepackage{tcolorbox}		% for wrapping example in color box
@@ -8,6 +9,8 @@
 
 \newcommand*\sigmoid{\vcenter{\hbox{\includegraphics{sigmoid.png}}}}
 \newcommand*\rectifier{\vcenter{\hbox{\includegraphics{rectifier.png}}}}
+
+\overfullrule=0mm
 
 \newsavebox{\MyName}
 \savebox{\MyName}{\includegraphics[scale=0.6]{YKY.png}}
@@ -100,6 +103,8 @@ R(\vec{x}) = \sigmoid(W_1 \sigmoid(W_2 ... \sigmoid(W_L \vec{x} )))
 \end{equation}
 where $L$ is the number of layers.  MLPs would be our starting point to explore more design options.
 
+In 1991 Siegelmann and Sontag \cite{Siegelmann1991} proved that recurrent neural networks (RNNs) can emulate any Turing machine.  In 1993 James Lo \cite{Lo1993} proved that RNNs can universally approximate any non-linear dynamical system.
+
 The idea of $R$ as an operator acting on the state is inspired by the ``consequence operator'' in logic, usually denoted as $\mbox{Cn}$:
 \begin{equation}
 \mbox{Cn}(\Gamma) = \{ \mbox{ set of propositions that entails from } \Gamma \; \}
@@ -111,7 +116,7 @@ but the function of $R$ can be broader than logical entailment.  We could use $R
 \item \textbf{inductive learning}
 \end{itemize}
 
-\begin{tcolorbox}[width=\textwidth,colback={white},title={\centering \textbf{Example: } primary-school arithmetic},colbacktitle=white,coltitle=black]
+\begin{tcolorbox}[width=\textwidth,colback={white},title={\centering \textbf{Example 1: } primary-school arithmetic},colbacktitle=white,coltitle=black]
 
 A recurrent neural network is a \textit{much more powerful} learning machine than a feed-forward network, even if they look the same superficially.
 
@@ -123,7 +128,20 @@ As an example, consider the way we perform 2-digit subtraction in primary school
 
 The use of the paper is analogous to the ``tape'' in a Turing machine -- the ability to use short-term memory allows us to perform much more complex mental tasks.
 
-We did a simple experiment to train a neural network to perform primary-school subtraction.  The operator is learned easily if we train the 2 steps \textit{separately}.  The challenge is to find an algorithm that can learn \textbf{multi-step} operations by itself.
+We did a simple experiment to train a neural network to perform primary-school subtraction.  The operator is learned easily if we train the two steps \textit{separately}.  The challenge is to find an algorithm that can learn \textbf{multi-step} operations by itself.
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[width=\textwidth,colback={white},title={\centering \textbf{Example 2: } variable binding in predicate logic},colbacktitle=white,coltitle=black]
+
+The following formula in predicate logic defines the ``grandfather'' relation:
+
+\begin{equation}
+\includegraphics[scale=0.75]{linkage-in-logic-variables.png}
+\end{equation}
+
+
+We did a simple experiment to train a neural network to perform primary-school subtraction.  The operator is learned easily if we train the two steps \textit{separately}.  The challenge is to find an algorithm that can learn \textbf{multi-step} operations by itself.
 
 \end{tcolorbox}  
 
@@ -159,6 +177,24 @@ This would force the vector space dimension to become very high.
 
 But the more logical structure we add to $X$, the more it will resemble logic, and this whole exercise becomes pointless.  Remember our original goal is to try something different from logic, by \textit{relaxing} what defines a logical structure.  So we would selectively add features to $X$.
 
+\section{Misc points}
+
+\begin{itemize}
+\item If sigmoid is replaced by polynomial, universal approximating property may be retained.
+
+\item Banach fixed point theorem does not apply because $R$ in general need not be contractive.  Question is whether $R$ necessarily converges to fixed points and the answer is no.
+
+\item If reasoning operator $R$ is continuous, the flow of the dynamical system is governed by an autonomous differential equation.  Poincare-Bendixson only applies to dynamical systems on the plane, and is irrelevant to systems whose phase space has dimension $\geq 3$, or to discrete dynamical systems.
+
+\item Time can be discrete or continuous.
+
+\item Goal is to find minimizer of error (ie, to approximate a function given some input-output data points).  The (finite) set of local minima can be solved via setting $\frac{\partial R}{\partial W} = 0$.  The number of local minima can be calculated as: ?  McClelland paper.
+
+\item If operator is discontinuous, what advantages can be gained?
+\end{itemize}
+
+What I want to do now is to determine if $R$ implemented as a deep network is sufficient to model human-level reasoning.
+
 \section{Architecture}
 
 First, cartoon version:
@@ -181,25 +217,25 @@ The learning algorithm for $R$ is central to our system.  $R$ learns to recogniz
 
 Suppose the recurrent network $R$ iterates $n$ times:
 \begin{equation}
-\vec{x}' = \overbrace{R \circ R \circ ...}^{n} (\vec{x})
+\vec{x}_{t+1} = \overbrace{R \circ R \circ ...}^{n} (\vec{x})
 \end{equation}
 
 As $n \rightarrow \infty$, we get the continuous-time version (a differential equation):
 \begin{equation}
-\frac{d\vec{x}(t)}{dt} = R(\vec{x}(t))
+\frac{d\vec{x}(t)}{dt} = \mathfrak{R}(\vec{x}(t))
 \end{equation}
 
 We could run the network $R$ for a long enough time $T$ such that it is highly likely to reach an equilibrium point.  Then:
 \begin{equation}
-\vec{x}' = \int_0^T R(\vec{x}(t)) dt
+\vec{x}_{T} = \int_0^T \mathfrak{R}(\vec{x}(t)) dt
 \end{equation}
 and the error:
 \begin{equation}
-\mathscr{E} = \vec{x}^* - \vec{x}'
+\mathscr{E} = \vec{x}^* - \vec{x}_{T}
 \end{equation}
 where $\vec{x}^*$ is the target value which is independent of time.
 \begin{eqnarray}
-\frac{\partial\mathscr{E}}{\partial\vec{W}} &=& - \frac{\partial}{\partial\vec{W}} \int_0^T R(\vec{x}(t)) dt \nonumber \\
+\frac{\partial\mathscr{E}}{\partial\vec{W}} &=& - \frac{\partial}{\partial\vec{W}} \int_0^T \mathfrak{R}(\vec{x}(t)) dt \nonumber \\
 &=& - \frac{\partial}{\partial\vec{W}} \int_0^T \sigmoid(W_1 \sigmoid(W_2 ... \sigmoid(W_L \vec{x}(t))) dt
 \end{eqnarray}
 
@@ -233,5 +269,8 @@ When the forward and backward states get close enough, a successful path is foun
 
 \footnotesize{In a forum discussion with Ben Goertzel dated 25 June 2014 on the AGI mailing-list: (artificial-general-intelligence @googlegroups.com), YKY asked: Why bother with neural networks, which typically require many neurons to encode data, when logic-based AI can represent a proposition with just a few symbols?  Ben's insight is that neural networks are capable of learning its own representations, and their learning algorithms are relatively fast.  We have been working on "neo-classical" logic-based AI for a long time, and begin to realize that inductive learning in logic (based on combinatorial search in a symbolic space) is perhaps \textit{the bottleneck} in the entire logic-based paradigm.  So we try to look for alternatives that might enable learning to be faster, though we would still emphasize that logic-based AI remains a viable approach to AGI. %, provided that the right search heuristics be found (most probably in the form of \textbf{hierarchical organization} of the learning space).
 }
+
+\bibliographystyle{plain} % or number or aaai ...
+\bibliography{AGI-book}
 
 \end{document}
