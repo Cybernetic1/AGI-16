@@ -6,9 +6,19 @@
 \usepackage{float}
 \usepackage{tcolorbox}		% for wrapping example in color box
 \usepackage{wrapfig}		% wrap figure beside text, used in example
+\usepackage{tikz-cd}		% commutative diagrams
+% \usepackage{amsfonts}
+\usepackage{amssymb}		% for \multimap, \updownarrow, \bigstar
+
+% *************** Delete when not using Chinese or colors **********************
+\usepackage{xeCJK}
+\setCJKmainfont[BoldFont=SimHei,ItalicFont=KaiTi]{SimSun}
+\usepackage{color}
+\newcommand{\emp}[1]{\textbf{\textcolor{blue}{#1}}}
 
 \newcommand*\sigmoid{\vcenter{\hbox{\includegraphics{sigmoid.png}}}}
 \newcommand*\rectifier{\vcenter{\hbox{\includegraphics{rectifier.png}}}}
+\newcommand{\dashh}{\textemdash~}
 
 \overfullrule=0mm
 
@@ -34,7 +44,7 @@ This is a draft.
 
 \section{Main idea}
 
-The main idea is to regard ``thinking'' as a \textbf{dynamical system} operating on \textbf{mental states}:
+The main idea is to regard ``thinking'' as a \emp{dynamical system} operating on \emp{mental states}:
 \begin{equation}
 \label{fig:mental-state}
 \includegraphics[scale=0.5]{mental-state.png}
@@ -47,7 +57,7 @@ For example, a mental state could be the following set of propositions:
 \item I am about to write an infinitive phrase ``to regard...''
 \end{itemize}
 
-Thinking is the process of \textbf{transitioning} from one mental state to another.
+Thinking is the process of \emp{transitioning} from one mental state to another.
 
 By representing a cognitive state as a vector $\vec{x} \in X$ where $X$ is the cognitive state-space, the reasoning operator $R$ as a map $X \rightarrow X$, we would have at disposal all the tools available in vector space such as:
 
@@ -89,7 +99,7 @@ In LBAI the knowledge representation structure is built (\textit{fixed}) from th
 but is it valid (or profitable) to assume that our mental representations are \textit{isomorphic} to such logical structures?  Or drastically different?
 
 Humans are good at designing symbolic structures, but we don't know how to design \textit{neural} representations which are more or less opaque to us.
-Perhaps we could use a neural network acting recurrently on the state vector to \textbf{induce} an internal representation of mental space.  ``\textit{Induced by what},'' you ask?  By the very structure of the neural network itself.  In other words, forcing a neural network to \textit{approximate} the ideal operator $R^*$.
+Perhaps we could use a neural network acting recurrently on the state vector to \emp{induce} an internal representation of mental space.  ``\textit{Induced by what},'' you ask?  By the very structure of the neural network itself.  In other words, forcing a neural network to \textit{approximate} the ideal operator $R^*$.
 
 From an abstract point of view, we require:
 \begin{itemize}
@@ -97,7 +107,7 @@ From an abstract point of view, we require:
 \item $R$ has a learning algorithm: $R \stackrel{A}{\longmapsto} R^*$
 \end{itemize}
 
-$R$ would contain all the knowledge of the KB, so we expect it to be ``large'' (eg. having a huge number of parameters).  We also desire $R$ to possess a \textbf{hierarchical} structure because hierarchies are computationally very efficient.  A multi-layer perceptron (MLP) seems to be a good candidate, as it is just a bunch of numbers (weight matrices $W$) interleaved by non-linear activation functions:
+$R$ would contain all the knowledge of the KB, so we expect it to be ``large'' (eg. having a huge number of parameters).  We also desire $R$ to possess a \emp{hierarchical} structure because hierarchies are computationally very efficient.  A multi-layer perceptron (MLP) seems to be a good candidate, as it is just a bunch of numbers (weight matrices $W$) interleaved by non-linear activation functions:
 \begin{equation}
 R(\vec{x}) = \sigmoid(W_1 \sigmoid(W_2 ... \sigmoid(W_L \vec{x} )))
 \end{equation}
@@ -111,12 +121,12 @@ The idea of $R$ as an operator acting on the state is inspired by the ``conseque
 \end{equation}
 but the function of $R$ can be broader than logical entailment.  We could use $R$ to perform the following functions which are central to LBAI:
 \begin{itemize}
-\item \textbf{deduction} -- forward- and backward-chaining
-\item \textbf{abduction} -- finding explanations
-\item \textbf{inductive learning}
+\item \emp{deduction} -- forward- and backward-chaining
+\item \emp{abduction} -- finding explanations
+\item \emp{inductive learning}
 \end{itemize}
 
-\begin{tcolorbox}[width=\textwidth,colback={white},title={\centering \textbf{Example 1: } primary-school arithmetic},colbacktitle=white,coltitle=black]
+\begin{tcolorbox}[width=\textwidth,colback={white},title={\centering \emp{Example 1: } primary-school arithmetic},colbacktitle=white,coltitle=black]
 
 A recurrent neural network is a \textit{much more powerful} learning machine than a feed-forward network, even if they look the same superficially.
 
@@ -128,11 +138,11 @@ As an example, consider the way we perform 2-digit subtraction in primary school
 
 The use of the paper is analogous to the ``tape'' in a Turing machine -- the ability to use short-term memory allows us to perform much more complex mental tasks.
 
-We did a simple experiment to train a neural network to perform primary-school subtraction.  The operator is learned easily if we train the two steps \textit{separately}.  The challenge is to find an algorithm that can learn \textbf{multi-step} operations by itself.
+We did a simple experiment to train a neural network to perform primary-school subtraction.  The operator is learned easily if we train the two steps \textit{separately}.  The challenge is to find an algorithm that can learn \emp{multi-step} operations by itself.
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[width=\textwidth,colback={white},title={\centering \textbf{Example 2: } variable binding in predicate logic},colbacktitle=white,coltitle=black]
+\begin{tcolorbox}[width=\textwidth,colback={white},title={\centering \emp{Example 2: } variable binding in predicate logic},colbacktitle=white,coltitle=black]
 
 The following formula in predicate logic defines the ``grandfather'' relation:
 
@@ -141,22 +151,22 @@ The following formula in predicate logic defines the ``grandfather'' relation:
 \end{equation}
 
 
-We did a simple experiment to train a neural network to perform primary-school subtraction.  The operator is learned easily if we train the two steps \textit{separately}.  The challenge is to find an algorithm that can learn \textbf{multi-step} operations by itself.
+We did a simple experiment to train a neural network to perform primary-school subtraction.  The operator is learned easily if we train the two steps \textit{separately}.  The challenge is to find an algorithm that can learn \emp{multi-step} operations by itself.
 
 \end{tcolorbox}  
 
 In LBAI, logic possesses additional structure:
 \begin{itemize}
-\item \textbf{truth values} (eg. P(rain tomorrow) = 0.7)
-\item \textbf{propositional structure} (eg. conjunction: $A \wedge B$) 
-\item \textbf{sub-propositional structure} (eg. predication: loves(john, mary) )
-\item \textbf{subsumption structure} (eg. $\mbox{dog} \subseteq \mbox{animal}$)
+\item \emp{truth values} (eg. P(rain tomorrow) = 0.7)
+\item \emp{propositional structure} (eg. conjunction: $A \wedge B$) 
+\item \emp{sub-propositional structure} (eg. predication: loves(john, mary) )
+\item \emp{subsumption structure} (eg. $\mbox{dog} \subseteq \mbox{animal}$)
 \end{itemize}
 
 These structures can be ``transplanted'' to the vector space $X$ via:
 \begin{itemize}
-\item \textbf{truth values: } an extra dimension conveying the ``strength'' of states
-\item \textbf{propositional structure: } eg. conjunction as vector addition,
+\item \emp{truth values: } an extra dimension conveying the ``strength'' of states
+\item \emp{propositional structure: } eg. conjunction as vector addition,
 \begin{equation}
 A \wedge B = \vec{x}_A + \vec{x}_B + ...
 \end{equation}
@@ -165,17 +175,143 @@ but we have to avoid linear dependencies (``clashing'') such as:
 \vec{x}_3 = a_1 \vec{x}_1 + a_2 \vec{x}_2
 \end{equation}
 This would force the vector space dimension to become very high.
-\item \textbf{sub-propositional structure: } eg. tensor products as composition of concept atoms:
+\item \emp{sub-propositional structure: } eg. tensor products as composition of concept atoms:
 \begin{equation}
 \mbox{loves(john, pete)} = \overrightarrow{john} \otimes \overrightarrow{love} \otimes \overrightarrow{pete}
 \end{equation}
-\item \textbf{subsumption structure: } eg. define the positive cone $C$ such that
+\item \emp{subsumption structure: } eg. define the positive cone $C$ such that
 \begin{equation}
 \mbox{animal} \supseteq \mbox{dog} \quad \Leftrightarrow \quad \overrightarrow{animal} - \overrightarrow{dog} \in C
 \end{equation}
 \end{itemize}
 
 But the more logical structure we add to $X$, the more it will resemble logic, and this whole exercise becomes pointless.  Remember our original goal is to try something different from logic, by \textit{relaxing} what defines a logical structure.  So we would selectively add features to $X$.
+
+\section{Unifying RL and RNN}
+
+From the viewpoint of reinforcement learning, we aim to learn the \emp{policy} function: \par
+\begin{equation}
+\begin{tikzcd}[]
+\mbox{policy : ~~state} \arrow[r, mapsto, "\scalebox{0.8}{action}"] & \mbox{state'}
+\end{tikzcd}
+\end{equation}
+Where $K$ can be regarded as the \emp{mental state}, and thus an \emp{action} in RL turns $K$ into $K'$.
+
+In our system, there are 2 pathways that act on $K$, via RNN and RL respectively: \par
+\begin{equation}
+\begin{tikzcd}[column sep=huge]
+& K'_1 \arrow[dd, dashed, no head, "\scalebox{1.3}{$\approx$}"] \\
+K \arrow[ur, "\mbox{RL}"] \arrow[dr, "\mbox{RNN}"'] & \\
+& K'_2
+\end{tikzcd}
+\end{equation}
+In RL, the action $a$ acts on $K$, whereas in RNN, $R$ acts on $K$.
+
+\emp{Note}： RNN and RL are learning algorithms, and if they are both applied to the same problem, conflicts will necessarily arise, unless there is a way to combine them.
+
+At state $K$, we estimate the Q-value $Q(K \stackrel{a}{\mapsto} K')$.  The action that would be chosen at state $K$ is $\displaystyle \arg\max_a Q(K \stackrel{a}{\mapsto} K')$.  This could be used to train the RNN via $\displaystyle K \vdash_W ...^n K'$.
+
+RL 在众多状态 $K$ 之间游荡，学习 $Q(K \mapsto K')$。  因为 RL 独有奖励讯息，我们必需用 RL 来教导 RNN 学习，反之不可。  第一个问题是： RL 如何在 $K$ 之间游荡？   游荡是随机的，但也可以借助 RNN 的随机性、或在 RNN 自身的游荡中注入更多随机性、或者根本就是 RL 自己产生的随机性。  接下来的问题是： RNN 如何用 $Q$ 值来诱发学习？
+
+RNN 的 ``$n$-fold'' 学习可以通过以下方式实现： 
+\begin{itemize}
+\item stochastic forward-backward propagation
+\item genetic?
+\item 最有趣的是 Hebbian learning，因为它似乎特别适合这情况。  
+\end{itemize}
+
+RNN 的本质是什么？  它似乎是一个 recurrent hetero-associative memory。  但其实它还需要将 input 作类似於 Word2vec 的 encoding。  这个 encoding 将「相似」的思维状态 $K$ 归到同类。  利用空间中的相似度，RL 可以用一些连续函数来近似 Q 值（详细情况还有待分析）。
+
+另一个问题是： 虽然用函数的近似可以做到 generalization，但另一个方法是利用状态 $K$ 中的空位作暂时储存。 这两者似乎很不同。  问题似乎在於： 状态转换 $K \mapsto K'$ 是不是对应於逻辑中的\emp{一条} rule？  答案似乎是 yes。  这个共识是很重要的。  如果用 decision tree，需要的是向量空间中的相似度。
+
+现在的关键是「状态变量」。  因为它可以做到符号逻辑中靠变量的 generalization，这是前所未有的。  这种 generalization 似乎不需要相似度，因为它是符号的！  会不会在向量空间中的状态变量 能够做到之前逻辑变量做不到的动作？  不管怎样，用 RNN 学习这些变量的动作似乎是很难的，因为这些动作似乎不是对\emp{误差}的梯度下降。  除非这些动作本身也近似於其他动作，但那是怎样的近似？  学习 multi-step logic 其实和以前的 forward / backward chaining 没有分别！  唯一分别是命题的 representation 改变了，它未必像符号的 concatenation。  所以问题仍然是 ``$n$-fold'' 学习法。 
+
+而且注意： RL 的 generalization 根本上不同於 rules 空间中的 generalization。 前者是思维空间 $K$ 中的一般化，后者也可以是 $K$ 空间的一般化，但也可以是依赖「状态变量」的一般化。
+
+一般来说，RL 和 RNN 的行动和学习，是可以互相独立的。  
+
+还有 heterarchical 的分类法。  想用 decision tree 或什么，达到不同网络的\emp{分工}。  在组织知识这方面，深度网络有没有用？  可以想像，在视觉识别中，在网络的最上层有很多 objects，而它们都可以还原到底层的 features。  网络有更多层，可以识别的事物更抽象。  但现在我们要的不是\emp{模式识别}，而是 mapping。 特别是抽象模式的 mapping。  想要的是： 大量的 rules，将不同的 $K$ 映射到新的 $K'$。
+
+还有一点要澄清的是： 究竟每一个「思元素」在向量空间中是不是\emp{一点}？  如果有了这个「思元素 = 点」假设，则每次 iteration 应该会删除一个思元素，而用另一个（全新的）思元素取代之。  这样，$K \mapsto K'$ mapping 就有了更确定的结构。  这样的 setup 已经很接近 logic 系统，但其学习算法仍然很有 combinatorial 的 ``feel''。 （因为只有当两个 rules 串连之后，才能达到某个结论，而这个串连有没有中间的 continuous 状态？）  这种串连通常是怎样找到的？  
+
+现在有一转机： 如果「思元素 = 点」，则「状态变量」的形成似乎会很普遍，而我们可以集中研究如何学习 single-step rules。 RL 的 rewards 可以指导学习，但这些「终极 rewards」对学习的细节没有指导作用。  我们似乎可以用「\emp{时间延迟}」来达到「状态变量」的效果，这个做法无形中增加了使用状态变量的机会。  
+
+现在总结一下仍然有待回答的问题：
+\begin{itemize}
+\item RL 的 generalization 如何做？
+\item iterative thinking map 如何 learn？
+\item 
+\end{itemize}
+
+Hebbian 的情况是： 有某一 I/O pattern； 我想 strengthen 这 pattern。 
+
+Assuming the learning is correct, $K'_1$ and $K'_2$ should be roughly the same \textemdash~ but this ignored the possibility that one path may take multiple steps to converge with the other path.  \footnote{This situation has been encountered in term rewriting systems (TRS):  If in a TRS any 2 different rewriting paths always converge to the same result, it is said to have the \emp{Church-Rosser property}.  For example the $\lambda$-calculus invented by Church has this property.} 
+
+Now I stipulate that $R$ be more ``refined'', that is to say, applying $D^n$ times may be equivalent to applying $a$ once:
+\begin{equation}
+\begin{tikzcd}[column sep=huge]
+& K'_1 \arrow[dd, dashed, no head, "\scalebox{1.3}{$\approx$}"] \\
+K \arrow[ur, "\scalebox{1.3}{$a$}"] \arrow[dr, "{\scalebox{1.3}{$D^n$}}"'] & \\
+& K'_2
+\end{tikzcd}
+\end{equation}
+Using a different notation, $a$ is the \emp{restriction} or \emp{section} of $D^n$ at point $K$: $a = D^n|_K$.
+
+Now the question is, do the RNN and RL paths have any \textit{essential} difference?
+\begin{itemize}
+\item Their internal \emp{representations} are different:\par
+\dashh RNN is a multi-layer neural network\par
+\dashh RL's representation is $Q(\mbox{state},\mbox{action})$, usually stored as a \textit{look-up table}, although $Q$ could be approximated by a neural network as well.
+\item RL learns through \emp{rewards}, RNN learns from \emp{errors}.  Thus RL has broader applicability, because not all questions have ``correct answers'' that could be measured by errors.  In RL we just need to praise Genifer whenever she displays good behavior.
+\item The internal cognitive state $K$ exists because of RNN:  it is simply the vector input and output of the RNN.  Without this $K$, RL would be clueless as to what are its internal states.  It can be said that the RNN provides a \textit{machinery} for RL to control.
+\end{itemize}
+
+% programming needed:
+% RNN: with special back-prop
+% RL: approximate Q(K,a), using special NN that can find max also
+
+% 整体来说，RL 可以操控的 actions 包括：
+% \begin{enumerate}[\tab (A)]
+% \item apply $K \stackrel{D}{\mapsto} K'$ \par
+% 但注意： $K$ 是认知状态，$R$ 是对 $K$ 进行「合乎逻辑的推论」。 所以，无论发生什么事，我们都会将 $R$ 作用在 $K$ 上几次。 换句话说，$R$ 是\ds{必然}进行的动作，或者可以看成是在\ds{背景}下进行的运作，所以不需要用 RL 学习。 %RL 的用处是学习如何在很多 actions 之间选择最好的一个，所以 $R$ 不是 RL 需要学习的 action，它只是。
+
+% \item 改写认知状态 $K \mapsto K'$ \par
+% RL 的 actions (A) 是
+% 在思考过程中改变 $K$ 的值。 例如我们得到一个局部结论，这个局部结论的状态不是最终答案，但也比什么都没有的效用更高。 改写 $K$ 的方法可以是： 例如 将 $K \mbox{ += } \delta K$，或者 「if $K \in$ 某 region，then $K \mbox{ += } \delta K $」。
+
+% \item 学习： change $R$ \par
+
+From the perspective of reinforcement learning, we could reward some results of multi-step inference: \par
+\begin{equation}
+\begin{tikzcd}[row sep=tiny]
+K_0 \arrow[r, mapsto, "\scalebox{1.3}{$a$}"] & K_\vdash \quad \updownarrow \bigstar
+\end{tikzcd}
+\end{equation}
+$\updownarrow \bigstar$ means ``to give positive or negative rewards''.  We want to learn $a$ which is the action to be taken at state $K$.  The learning algorithm is based on the famous \emp{Bellman optimality condition} (see next section).
+
+Perhaps we should use RL to \textit{guide} the learning in RNN, as RNN is more fine-grained....
+
+To combine the 2 learning approaches, we could use the technique of \emp{interleaving}: for each step apply RL once, apply RNN $n$ times.
+
+% 但 $R$ 本身是 RNN，它还可以透过 back-prop 进行学习，两者似乎是不同的。  Back-prop 是透过 $\frac{\partial}{\partial D}(\mbox{error})$ 的梯度来学习。
+
+The learning in RNN may also involve \emp{neurogenesis} (adding new neurons and connections), but I have not considered this aspect yet.
+
+% RNN 的 $R$ 也是将 $K$ 变成 $K'$ 的作用：\par
+%\begin{figure}[h]
+%\centering
+%\begin{tikzcd}[row sep=tiny]
+%K \arrow[r, mapsto, "\scalebox{1.3}{$R$}"] & K'
+%\end{tikzcd}
+%\end{figure}
+% $R$ 和 RL 的 actions 是不一样的。
+
+There are 4 learning modes:
+\begin{itemize}
+\item learning to listen/talk
+\item RL-based learning
+\item inductive learning
+\end{itemize}
 
 \section{Misc points}
 
@@ -210,7 +346,7 @@ First, cartoon version:
 \includegraphics[scale=0.5]{RNN-topology.png}
 \end{equation}
 
-TO-DO:  The state space $X$ may be too large and we may need an \textbf{attention mechanism} to select some parts of $X$ for processing by $R$.  This is the notion of \textbf{working memory} in cognitive science.
+TO-DO:  The state space $X$ may be too large and we may need an \emp{attention mechanism} to select some parts of $X$ for processing by $R$.  This is the notion of \emp{working memory} in cognitive science.
 \begin{equation}
 \includegraphics[scale=0.4]{working-memory.png}
 \end{equation}
@@ -243,7 +379,7 @@ where $\vec{x}^*$ is the target value which is independent of time.
 &=& - \frac{\partial}{\partial\vec{W}} \int_0^T \sigmoid(W_1 \sigmoid(W_2 ... \sigmoid(W_L \vec{x}(t))) dt
 \end{eqnarray}
 
-When there are many layers or if the recurrence is too long, back-prop learning becomes ineffective due to the \textbf{vanishing gradient} problem.  One solution is to use the \textbf{rectifier} activation function:
+When there are many layers or if the recurrence is too long, back-prop learning becomes ineffective due to the \emp{vanishing gradient} problem.  One solution is to use the \emp{rectifier} activation function:
 \begin{equation}
 \rectifier (x) = 
 \begin{cases}
@@ -255,7 +391,7 @@ Since its derivative is piecewise constant, it does not suffer from the vanishin
 
 \subsection{Forward-backward Algorithm}
 
-This is inspired by forward- and backward-chaining in LBAI.  We propagate the state vector from both the initial state $\vec{x}_0$ as well as the final state $\vec{x}^*$.  This bi-directional propagation is added with noise and repeated many times, thus implementing a \textbf{stochastic local search}:
+This is inspired by forward- and backward-chaining in LBAI.  We propagate the state vector from both the initial state $\vec{x}_0$ as well as the final state $\vec{x}^*$.  This bi-directional propagation is added with noise and repeated many times, thus implementing a \emp{stochastic local search}:
 
 \begin{equation}
 \includegraphics[scale=0.6]{forward-backward-algorithm.png}
@@ -265,13 +401,13 @@ When the forward and backward states get close enough, a successful path is foun
 
 % One key question is how to deal with "don't care" bits?  One answer is that their errors are zero.  But then this is the same as the error for "correct" weights, which seems not well.  There's got to be a way to alter weights when the answer is correct...
 
-% For \# Iteration = 0, output is immediately known, so potentially the training can be done.  But how to convey that all these alterations of weights are \textbf{optional}?
+% For \# Iteration = 0, output is immediately known, so potentially the training can be done.  But how to convey that all these alterations of weights are \emp{optional}?
 
 % \section{Reinforcement learning}
 
 \section*{Acknowledgements}
 
-\footnotesize{In a forum discussion with Ben Goertzel dated 25 June 2014 on the AGI mailing-list: (artificial-general-intelligence @googlegroups.com), YKY asked: Why bother with neural networks, which typically require many neurons to encode data, when logic-based AI can represent a proposition with just a few symbols?  Ben's insight is that neural networks are capable of learning its own representations, and their learning algorithms are relatively fast.  We have been working on "neo-classical" logic-based AI for a long time, and begin to realize that inductive learning in logic (based on combinatorial search in a symbolic space) is perhaps \textit{the bottleneck} in the entire logic-based paradigm.  So we try to look for alternatives that might enable learning to be faster, though we would still emphasize that logic-based AI remains a viable approach to AGI. %, provided that the right search heuristics be found (most probably in the form of \textbf{hierarchical organization} of the learning space).
+\footnotesize{In a forum discussion with Ben Goertzel dated 25 June 2014 on the AGI mailing-list: (artificial-general-intelligence @googlegroups.com), YKY asked: Why bother with neural networks, which typically require many neurons to encode data, when logic-based AI can represent a proposition with just a few symbols?  Ben's insight is that neural networks are capable of learning its own representations, and their learning algorithms are relatively fast.  We have been working on "neo-classical" logic-based AI for a long time, and begin to realize that inductive learning in logic (based on combinatorial search in a symbolic space) is perhaps \textit{the bottleneck} in the entire logic-based paradigm.  So we try to look for alternatives that might enable learning to be faster, though we would still emphasize that logic-based AI remains a viable approach to AGI. %, provided that the right search heuristics be found (most probably in the form of \emp{hierarchical organization} of the learning space).
 }
 
 \bibliographystyle{plain} % or number or aaai ...
