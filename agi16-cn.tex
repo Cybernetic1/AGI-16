@@ -25,6 +25,9 @@
 
 \newcommand{\vect}[1]{\boldsymbol{#1}}
 \newcommand*\sigmoid{\vcenter{\hbox{\includegraphics{sigmoid.png}}}}
+\newcommand*\invsigmoid{\vcenter{\hbox{\includegraphics{inverse-sigmoid.png}}}}
+\newcommand{\invW}{\, \rotatebox[origin=c]{90}{W}}
+\newcommand{\invw}{\, \rotatebox[origin=c]{90}{w}}
 \newcommand*\rectifier{\vcenter{\hbox{\includegraphics{rectifier.png}}}}
 \newcommand{\dashh}{\textemdash~}
 
@@ -93,111 +96,6 @@ Logic-based AI 可以看成是将世界的「模型」压缩成一个「知识�
 \end{equation}
 世界模型是由大量的逻辑式子经过组合而\emp{生成}的，有点像向量空间是由其「基底」生成； 但这生成过程在逻辑中特别复杂，所以符号逻辑具有很高的\emp{压缩比}，但要学习一套逻辑知识库，则相应地也有极高的\emp{复杂度}。
 
-In LBAI the knowledge representation structure is built (\textit{fixed}) from the bottom up:
-%\begin{equation}
-%\mbox{words } \triangleright \mbox{ sentences } \triangleright \mbox{ logical form } \triangleright \mbox{ logical KB}
-%\end{equation}
-%Thus the structure of the KB is \textit{fixed} by the human designer. % This rigidity is perhaps why learning in logic-based systems is slow.
-
-% In natural language, an idea can be expressed as a concatenation of words, for example:\\
-% And it is just a short jump from word concatenations to symbolic logic.  But this jump may land us into a logic-based ``tar pit'', in which everything is theoretically possible, but often too slow in practice.
-
-%It is just a short jump from the expression of ideas as word concatenations to logical form as linear (or tree-like, or graph-like) compositions of symbols:
-\begin{equation}
-\includegraphics[scale=0.5]{ideas-vs-logical-form.png}
-\end{equation}
-but is it valid (or profitable) to assume that our mental representations are \textit{isomorphic} to such logical structures?  Or drastically different?
-
-Humans are good at designing symbolic structures, but we don't know how to design \textit{neural} representations which are more or less opaque to us.
-Perhaps we could use a neural network acting recurrently on the state vector to \emp{induce} an internal representation of mental space.  ``\textit{Induced by what},'' you ask?  By the very structure of the neural network itself.  In other words, forcing a neural network to \textit{approximate} the ideal operator $R^*$.
-
-From an abstract point of view, we require:
-\begin{itemize}
-\item $R$ be an endomorphism: $X \rightarrow X$
-\item $R$ has a learning algorithm: $R \stackrel{A}{\longmapsto} R^*$
-\end{itemize}
-
-$R$ would contain all the knowledge of the KB, so we expect it to be ``large'' (eg. having a huge number of parameters).  We also desire $R$ to possess a \emp{hierarchical} structure because hierarchies are computationally very efficient.  A multi-layer perceptron (MLP) seems to be a good candidate, as it is just a bunch of numbers (weight matrices $W$) interleaved by non-linear activation functions:
-\begin{equation}
-R(\vect{x}) = \sigmoid(W_1 \sigmoid(W_2 ... \sigmoid(W_L \vect{x} )))
-\end{equation}
-where $L$ is the number of layers.  MLPs would be our starting point to explore more design options.
-
-In 1991 Siegelmann and Sontag \cite{Siegelmann1991} proved that recurrent neural networks (RNNs) can emulate any Turing machine.  In 1993 James Lo \cite{Lo1993} proved that RNNs can universally approximate any non-linear dynamical system.
-
-The idea of $R$ as an operator acting on the state is inspired by the ``consequence operator'' in logic, usually denoted as $\mbox{Cn}$:
-\begin{equation}
-\mbox{Cn}(\Gamma) = \{ \mbox{ set of propositions that entails from } \Gamma \; \}
-\end{equation}
-but the function of $R$ can be broader than logical entailment.  We could use $R$ to perform the following functions which are central to LBAI:
-\begin{itemize}
-\item \emp{deduction} -- forward- and backward-chaining
-\item \emp{abduction} -- finding explanations
-\item \emp{inductive learning}
-\end{itemize}
-
-\begin{tcolorbox}[width=\textwidth,colback={white},title={\centering \emp{Example 1: } primary-school arithmetic},colbacktitle=white,coltitle=black]
-
-A recurrent neural network is a \textit{much more powerful} learning machine than a feed-forward network, even if they look the same superficially.
-
-\begin{wrapfigure}{l}{2cm}
-\includegraphics[scale=0.6]{elementary-arithmetic.png}
-\end{wrapfigure} 
-
-As an example, consider the way we perform 2-digit subtraction in primary school.  This is done in two steps, and we put a dot on paper to mark ``carry-over''.
-
-The use of the paper is analogous to the ``tape'' in a Turing machine -- the ability to use short-term memory allows us to perform much more complex mental tasks.
-
-We did a simple experiment to train a neural network to perform primary-school subtraction.  The operator is learned easily if we train the two steps \textit{separately}.  The challenge is to find an algorithm that can learn \emp{multi-step} operations by itself.
-
-\end{tcolorbox}
-
-\begin{tcolorbox}[width=\textwidth,colback={white},title={\centering \emp{Example 2: } variable binding in predicate logic},colbacktitle=white,coltitle=black]
-
-The following formula in predicate logic defines the ``grandfather'' relation:
-
-\begin{equation}
-\includegraphics[scale=0.75]{linkage-in-logic-variables.png}
-\end{equation}
-
-
-We did a simple experiment to train a neural network to perform primary-school subtraction.  The operator is learned easily if we train the two steps \textit{separately}.  The challenge is to find an algorithm that can learn \emp{multi-step} operations by itself.
-
-\end{tcolorbox}  
-
-In LBAI, logic possesses additional structure:
-\begin{itemize}
-\item \emp{truth values} (eg. P(rain tomorrow) = 0.7)
-\item \emp{propositional structure} (eg. conjunction: $A \wedge B$) 
-\item \emp{sub-propositional structure} (eg. predication: loves(john, mary) )
-\item \emp{subsumption structure} (eg. $\mbox{dog} \subseteq \mbox{animal}$)
-\end{itemize}
-
-These structures can be ``transplanted'' to the vector space $X$ via:
-\begin{itemize}
-\item \emp{truth values: } an extra dimension conveying the ``strength'' of states
-\item \emp{propositional structure: } eg. conjunction as vector addition,
-\begin{equation}
-A \wedge B = \vect{x}_A + \vect{x}_B + ...
-\end{equation}
-but we have to avoid linear dependencies (``clashing'') such as:
-\begin{equation}
-\vect{x}_3 = a_1 \vect{x}_1 + a_2 \vect{x}_2
-\end{equation}
-This would force the vector space dimension to become very high.
-\item \emp{sub-propositional structure: } eg. tensor products as composition of concept atoms:
-\begin{equation}
-\mbox{loves(john, pete)} = \overrightarrow{john} \otimes \overrightarrow{love} \otimes \overrightarrow{pete}
-\end{equation}
-\item \emp{subsumption structure: } eg. define the positive cone $C$ such that
-\begin{equation}
-\mbox{animal} \supseteq \mbox{dog} \quad \Leftrightarrow \quad \overrightarrow{animal} - \overrightarrow{dog} \in C
-\end{equation}
-\end{itemize}
-
-But the more logical structure we add to $X$, the more it will resemble logic, and this whole exercise becomes pointless.  Remember our original goal is to try something different from logic, by \textit{relaxing} what defines a logical structure.  So we would selectively add features to $X$.
-
-
 \section{中心思想}
 
 关键是将「思考」看成是一个\emp{动态系统} (dynamical system)，它运行在\emp{思维状态} (mental states) 的空间中：
@@ -210,12 +108,12 @@ But the more logical structure we add to $X$, the more it will resemble logic, a
 \begin{itemize}
 \item 我在我的房间内，正在写一篇 AGI-16 的论文。
 \item 我正在写一句句子的开头：「举例来说，....」
-\item 我将会写一个 noun phrase：「一个思维状态....」
+\item 我将会写一个 NP (noun phrase)：「一个思维状态....」
 \end{itemize}
 
 思考的过程就是从一个思维状态 \emp{过渡} (transition) 到另一个思维状态。 就算我现在说话，我的脑子也是靠思维状态记住我说话说到句子结构的哪部分，所以我才能组织句子的语法。
 
-思维状态是一支向量 $\vect{x} \in X$，$X$ 是全体思维空间，思考算子 (reasoning operator) $R$ 是一个映射： $X \rightarrow X$。
+思维状态是一支向量 $\vect{x} \in X$，$X$ 是全体思维空间，思考算子 (reasoning operator) $R$ 是一个 automorphism 映射： $X \rightarrow X$。
 
 %, we would have at disposal all the tools available in vector space such as:
 
@@ -251,7 +149,7 @@ But the more logical structure we add to $X$, the more it will resemble logic, a
 在我的智能系统理论里，我把 $F$ 或 $f$ 设定成 RNN (recurrent neural network)，即反馈式神经网络：
 \begin{eqnarray}
 \mbox{离散时间：} \quad \quad & \vect{x}_{t+1} = \boxed{\mbox{RNN}}(\vect{x}_t) \\
-\mbox{连续时间：} \quad \quad & \dot{\vect{x}} = \boxed{\mbox{RNN}}(\vect{x}) \label{eqn1}
+\mbox{连续时间：} \quad \quad & \dot{\vect{x}} = \boxed{\mbox{RNN}}(\vect{x})
 \end{eqnarray}
 这里 recurrent 指的是它不断重复作用在 $\vect{x}$ 之上，但实际上它是一个普通的前馈式 (feed-forward) 神经网络。 注意： 在抽象理论中，$f$ 和 $F$ 可以是任意函数，我把它们设计成 NN 只是众多可能的想法之一。 之所以选用 NN，是因为它有 universal function approximator 的功能，而且是我们所知的最「聪明」的学习机器之一。
 
@@ -708,7 +606,7 @@ $V$ 是向量空间。 在 $V$ 上的 symplectic 变换的全体记作 $Sp(V)$�
 
 例如一架车可以有两个基本动作： (A) 绕中心旋转、或 (B) 前后行驶，它们的 Lie 括号 $[A,B]$，产生出的动作是左右方向行驶，这类似於「平行泊车」的时候，车子的移动方向：
 \begin{equation}
-\includegraphics[scale=0.7]{Lie-bracket-car.png}
+\includegraphics[scale=0.5]{Lie-bracket-car.png}
 \end{equation}
 
 （可控性与 ``reachable'' 概念。）
@@ -726,6 +624,374 @@ $V$ 是向量空间。 在 $V$ 上的 symplectic 变换的全体记作 $Sp(V)$�
 \subsubsection{Lyapunov 函数第一方法}
 
 \subsubsection{Lyapunov 函数第二方法}
+
+\clearpage
+\section{Jacobian 神经网络学习算法}
+
+经典的神经网络 back prop 学习算法，它是一个 error-driven 算法，但在很多人工智能的实际应用中，不存在唯一的「理想答案」，而是根据正或负的奖励 (reward) 学习。  当答案正确时，奖励 $> 0, \mbox{error} = 0$； 当答案不正确时，奖励 $< 0$，但 $\mbox{error}$ 仍是不知道的（因为不知道理想答案）。  简言之，就是不能用 error-driven 学习。 
+
+所以我想出了一个 reward-driven 的学习法： 假设神经网络将 $\vect{x}_0 \mapsto \vect{y}_0$，它通常也会将 $\vect{x}_0$ 的邻域 map 到 $\vect{y}_0$ 的邻域。 如果我们想「加强」这个映射，可以将「更大的 $\vect{x}_0$ 的邻域」映射到「接近 $\vect{y}_0$ 的邻域」。
+
+这种算法对人工智能应该很重要，暂时我还想不出有什么其他办法，可以做到[深度]神经网络的 reward-driven 学习。 
+
+将这思想更准确化，可以将 feed-forward 神经网络的构造看成是这样的：
+\begin{eqnarray}
+\vect{y} &=& \vect{F}(\vect{x}) \\
+\vect{y} &=& \sigmoid \stackrel{_L}{W} ... \sigmoid \stackrel{_\ell}{W} ... \sigmoid \stackrel{_1}{W} \vect{x}
+\end{eqnarray}
+其中 $W$ 代表每一层 (layer) $\ell$ 的矩阵。
+
+$F$ 的\textbf{反方向}是：
+\begin{eqnarray}
+\vect{x} &=& \vect{F}^{-1}(\vect{y}) \\
+\vect{x} &=& \stackrel{_1}{\invW} \invsigmoid ... \stackrel{_\ell}{\invW} \invsigmoid ... \stackrel{_L}{\invW} \invsigmoid \; \vect{y}
+\end{eqnarray}
+注意： $\invW = W^{-1} \;,\; \invsigmoid = \sigmoid^{-1}$，形状不同。
+
+假设在 $\vect{x}$ 空间有体积元 $U$，经过 $\vect{F}$ 变换成 $\vect{y}$ 空间的体积元 $V$，那么：
+\begin{equation}
+U = |J| \cdot V
+\end{equation}
+$\displaystyle J = \left[ \frac{\partial \vect{F}(x)}{\partial x} \right]$ 叫 Jacobian 矩阵。
+
+在我们的情况下，$\displaystyle |J| = \left| \frac{\partial \vect{F}^{-1}(\vect{y})}{\partial \vect{y}} \right|$ 在 $\vect{y}_0$ 的值，代表「单位体积元由 $\vect{y}_0 \mapsto \vect{x}_0$ 的变化率」。 （下面会看到，$\vect{F}$ 和 $\vect{F}^{-1}$ 的正/反方向不太重要，因为基本上不影响计算复杂度。）
+
+每次得到\textbf{正奖励}，我们会令 Jacobian $|J|$ 增加一点：
+\begin{equation}
+|J| := \det \left[ \frac{\partial \vect{F}^{-1}(\vect{y})}{\partial \vect{y}} \right]_{n \times n}
+\end{equation}
+下标表示那是一个 $n \times n$ 矩阵。
+
+其实 Jacobian 矩阵的意义就是：
+\begin{equation}
+J = \left[ \frac{\partial \mbox{ 输出}}{\partial \mbox{ 输入}} \right]
+\end{equation}
+神经网络的输入和输出都是 $\dim n$，所以 Jacobian 很自然是 $n \times n$ 矩阵。
+
+用\textbf{梯度下降法}，我们需要计算这些梯度： $\displaystyle \left[ \frac{\partial |J|}{\partial \vect{W}} \right]$，总数是网络中的 weights 的个数 $ = \sum m_\ell$。 
+
+要用到 determinant 的微分公式：
+\begin{eqnarray}
+\frac{d}{dt} |A(t)| = tr ( \mbox{adj}(A) \cdot \frac{dA(t)}{dt} ) \\
+\mbox{adj}(A) := |A| \cdot A^{-1}
+\end{eqnarray}
+换句话说，对於每个权重 $w := \stackrel{\ell}{W}_{ij}$，我们要计算：
+\begin{equation}
+\frac{\partial}{\partial w} |J| = tr ( |J| \cdot J^{-1} \cdot \left[ \frac{\partial J}{\partial w} \right] )
+\end{equation}
+注意： $|J|$ 和 $J^{-1}$ 是 $\vect{y}_0$ 的函数，只需在大 loop 外一次过计算。
+
+问题是，计算 $\displaystyle \left[ \frac{\partial J}{\partial w} \right]_{n \times n}$ 的时候：
+\begin{equation}
+\frac{\partial J}{\partial w} = \frac{\partial}{\partial w} \frac{\partial \vect{F}^{-1}}{\partial y} = \frac{\partial}{\partial w} \frac{\partial}{\partial \vect{y}} \; \stackrel{_1}{\invW} \invsigmoid ... \stackrel{_\ell}{\invW} \invsigmoid ... \stackrel{_L}{\invW} \invsigmoid \; \vect{y}
+\end{equation}
+这牵涉到用 $w$ 对 $W^{-1}$ 的分量微分，可以想像就算计了出来也会是极复杂的。 解决办法是，索性「\textbf{本末倒置}」，用 $\invW$ 来定义神经网络，然后在 forward propagation 时才用 $W = \invW^{-1}$ 计算。
+
+$J$ 的分量写出来是：
+\begin{equation}
+J_{ij} = \displaystyle \frac{\partial \vect{F}^{-1}_i}{\partial y_j} = \frac{\partial}{\partial y_j} \left[ \stackrel{_1}{\invW} \invsigmoid ... \stackrel{_\ell}{\invW} \invsigmoid ... \stackrel{_L}{\invW} \invsigmoid \; \vect{y} \right]_i =: \nabla^1_{i j} \\
+\end{equation}
+% & = \sum_{k_1} (\, \stackrel{_1 \hspace{15pt}}{\invW_{i k_1}} \invsigmoid' ... \sum_{k_\ell} (\, \stackrel{_\ell \hspace{21pt}}{\invW_{k_{\ell - 1} k_\ell}} \invsigmoid' ... \sum_{k_L} (\, \stackrel{_L \hspace{25pt}}{\invW_{k_{L - 1} k_L}} \invsigmoid' (y_{k_L}) \displaystyle \frac{\partial y_{k_L}}{\partial y_j} ))) \nonumber
+\begin{equation}
+\begin{cases}
+\nabla^1_{i j} &:= \displaystyle \sum_{k_1} [\, \stackrel{_1 \hspace{11pt}}{\invW_{i k_1}} \invsigmoid'(y^2_j) \nabla^2_{i j} \,] \\
+\nabla^\ell_{i j} &:= \displaystyle \sum_{k_\ell} [\, \stackrel{_\ell \hspace{22pt}}{\invW_{k_{\ell - 1} k_\ell}} \invsigmoid'(y^{\ell + 1}_j) \nabla^{\ell + 1}_{i j} \,] \\
+\nabla^L_{i j} &:= \quad \quad \displaystyle \stackrel{_L \hspace{21pt}}{\invW_{k_{L - 1} j}} \invsigmoid' (y_j)
+\end{cases}
+\end{equation}
+这情况完全类似於经典 back prop，以上只是 chain rule 的应用，$\nabla^\ell$ 将每层用 chain rule 分拆开来，所以 $\nabla$ 又叫 ``local gradient''。 上式就是整个网络的\textbf{反向传递}，其中每个 weight 出现 exactly 一次。
+%但 $\displaystyle \frac{\partial y_{k_L}}{\partial y_j}$ 只有当 $k_L = j$ 时为 $1$，其他全为 $0$，所以前面各项没变，最后的一个 $\sum$ 改写：
+%\begin{equation}
+%J_{ij} = \sum_{k_1} (\, \stackrel{_1 \hspace{15pt}}{\invW_{i k_1}} \invsigmoid' ... \sum_{k_\ell} (\, \stackrel{_\ell \hspace{21pt}}{\invW_{k_{\ell - 1} k_\ell}} \invsigmoid' ...  \stackrel{_L \hspace{21pt}}{\invW_{k_{L - 1} j}} \invsigmoid' (y_j) \;))
+%\end{equation}
+
+但工作还未完，我们要计算 $\displaystyle \frac{\partial J_{ij}}{\partial \invw} = \dot{\nabla}^1_{ij}$。 （定义 $\invw := \stackrel{\ell}{\invW}_{g h} \;,\; k_0 := i \;,\; k_L := j$） \\
+注意： $\vect{x} = \vect{F}^{-1}(\vect{y})$，所以 $\vect{y}$ 是\textbf{自变量}，$\invw$ 不影响 $\vect{y}$，所以 $\displaystyle \frac{\partial \vect{y}}{\partial \invw} \equiv 0$。\\
+%\frac{\partial J_{ij}}{\partial \invw} = \frac{\partial}{\partial \invw} \sum_{k_1} (\, \stackrel{_1 \hspace{15pt}}{\invW_{k_0 k_1}} \invsigmoid' ... \sum_{k_\ell} (\, \stackrel{_\ell \hspace{21pt}}{\invW_{k_{\ell - 1} k_\ell}} \invsigmoid' ...  \stackrel{_L \hspace{21pt}}{\invW_{k_{L - 1} k_L}} \invsigmoid' (y_j) \;))
+$\invw$ 必会是 $\invW$ 的其中一元，但如果 $\invw \not\in \invW$，以下的项微分后都会变成 $0$：
+\begin{equation}
+\begin{cases}
+\displaystyle \dot{\nabla}^1_{i j} = \sum_{k_1} \left[\, \stackrel{_1 \hspace{15pt}}{\invW_{i k_1}} \invsigmoid'(y^2_j) \dot{\nabla}^2_{i j}  \,\right] \\
+\displaystyle \dot{\nabla}^\ell_{i j} = \sum_{k_\ell} \left[\, \stackrel{_\ell \hspace{15pt}}{\invW_{k_{\ell - 1} k_\ell}} \invsigmoid'(y^{\ell + 1}_j) \dot{\nabla}^{\ell + 1}_{i j} \,\right] \\
+\displaystyle \dot{\nabla}^L_{i j} = \quad \quad \stackrel{_L \hspace{21pt}}{\invW_{k_{L - 1} j}} \invsigmoid' (y_j) \equiv 0
+\end{cases}
+\end{equation}
+所以实际上只剩下一项：
+\begin{eqnarray}
+& \displaystyle \frac{\partial J_{ij}}{\partial \invw} = \sum_{k_1} \left[\, \stackrel{_1 \hspace{15pt}}{\invW_{k_0 k_1}} \invsigmoid'(y^2_j) ... \sum_{k_\ell} \left[\, \stackrel{_\ell \hspace{20pt}}{\invW_{k_{\ell - 1} k_\ell}} \invsigmoid'(y^{\ell + 1}_j) ... \right. \right. \\
+& \begin{cases}
+... \; \left. \left. \invsigmoid'(y^{\ell + 1}_j) \nabla^{\ell + 1}_{i j} \right] \right] \\
+... \; \left. \left. \invsigmoid'(y^{\ell + 1}_j) \right] \right] \quad \quad \quad \mbox{if } \invw \in \mbox{last layer} \nonumber
+\end{cases}
+\end{eqnarray}
+% \sum_{k_{\ell + 1}} (\, \stackrel{_{\ell + 1} \hspace{21pt}}{\invW_{k_\ell k_{\ell + 1}}} \invsigmoid' ... \; \stackrel{_L \hspace{21pt}}{\invW_{k_{L - 1} k_L}} \invsigmoid' (y_j) \;)) \\
+% &:=& \sum_{k_1} (\, \stackrel{_1 \hspace{15pt}}{\invW_{k_0 k_1}} \invsigmoid'' ... \; \invsigmoid' (\vect{u}) \;)
+上式的意思是： 每层 layer 重复一块 $\left[ \sum \invW \; \invsigmoid \right]$，直到遇到 $\invw = \stackrel{\ell}\invW_{g h}$，则用结尾形式取代之。
+
+和经典 back prop 不同的是，上式只是 $n \times n$ 矩阵中的一个元素，从复杂度而论，每个 weight 的 $\nabla$ 计算，增加了起码 $n^2$ 倍的复杂度（虽然其计算上可以共用一些结果）。 记住 $n = \mbox{dim } \boxed{\mbox{状态空间}}$。
+
+可以这样理解： 每个 weight 的调教，需要计算这个 weight 对 Jacobian 的影响，而那 Jacobian 是\textbf{整个}网络的特性。 关键似乎就在於每个 weight 对 Jacobian 的\textbf{影响}。 
+
+现在回看更高层次的这个式子：
+\begin{eqnarray}
+\frac{\partial}{\partial w} |J| &=& tr ( |J| \cdot J^{-1} \cdot \left[ \frac{\partial J}{\partial w} \right] ) \\
+&=& |J| \cdot tr ( \left[ \frac{\partial y}{\partial x} \right] \cdot \left[ \frac{\partial }{\partial w} \frac{\partial x}{\partial y} \right] ) \\
+&=& |J| \cdot \sum_{i j} \left( \frac{\partial y}{\partial x} \right)_{i j} \left( \frac{\partial }{\partial w} \frac{\partial x}{\partial y} \right)_{i j}
+\label{code-eqn}
+\end{eqnarray}
+
+上式中最重要（最慢）的是那 $(i, j) \in n \times n$ 求和。 裡面的第一個因子是 Jacobian $J$，第二个因子是我们刚计算了的 $\nabla_w J^{-1}$。 
+
+% 比较一下经典 back prop 算法： 对每个 weight 我们会计算 ``local gradient'' $\displaystyle \nabla = \frac{\partial \mbox{ 误差}}{\partial w}$，但那个 $\nabla$ 比较易计算。
+
+Back prop 的 $\nabla$ 形式上是 $\displaystyle \frac{\partial \mbox{ 输出}}{\partial \, \mbox{w}}$，我们的 $\nabla$ 形式是 $\displaystyle \left[ \frac{\partial}{\partial w} \frac{\partial \mbox{ 输入}}{\partial \mbox{ 输出}} \right]_{n \times n}$。
+
+其实我们只需要计算 $\nabla_w |J|$ 的\textbf{大约方向}。 暂时我在代码中的做法是： 忽略式 (\ref{code-eqn}) 中较小的项，那就不需做足 $n^2$ 个乘积。 
+
+或者可不可以将 $|J|(\invw)$ 看成是一个 weight $\invw$ 的函数，然后用它的 Taylor series expansion 来近似？ 
+
+\begin{center}
+\line(1,0){100} Notes \line(1,0){100}
+\end{center}
+
+\begin{equation}
+\centering
+\includegraphics[scale=0.5]{R-network.png}
+\end{equation}
+
+或者，照旧是 feedforward network，但 somehow 它的学习是基於某 reward function。 问题是这 reward function 从何而来？  $R$ 可以是一个全部 $W$ 的函数，是由我们任意定义的。  
+
+\clearpage
+\section{Jacobian learning algorithm}
+
+The classical back prop algorithm is \textbf{error-driven}, but in many AI problems the ``correct'' answers are not given, instead the feedback is provided via \textbf{rewards}. When an answer is correct, the reward $R > 0$, error $\mathscr{E} = 0$; when the answer is incorrect, $R < 0$, but $\mathscr{E}$ is still unknown (because we don't know the correct answer).  In other words, error-driven learning is inapplicable.
+
+So I thought of a reward-driven learning method:  assume the neural network maps $\vect{x}_0 \mapsto \vect{y}_0$, usually it also maps the neighborhood of $\vect{x}_0$ to the neighborhood of $\vect{y}_0$.  If we wish to ``strengthen'' this pair of mapping, we can make a \textbf{bigger} neighborhood of $\vect{x}_0$ map to the same neighborhood close to $\vect{y}_0$.  We will make this precise.
+
+This type of learning algorithm should be very useful to AI, and currently the author is not aware of other alternatives for training [deep] neural networks via rewards.
+
+A feed-forward neural network can be constructed this way:
+\begin{eqnarray}
+\vect{y} &=& \vect{F}(\vect{x}) \\
+\vect{y} &=& \sigmoid \stackrel{_L}{W} ... \sigmoid \stackrel{_\ell}{W} ... \sigmoid \stackrel{_1}{W} \vect{x}
+\end{eqnarray}
+where $W$ represents the matrix of \textbf{weights} on each layer $\ell$.
+
+The \textbf{inverse} of $F$ is:
+\begin{eqnarray}
+\vect{x} &=& \vect{F}^{-1}(\vect{y}) \\
+\vect{x} &=& \stackrel{_1}{\invW} \invsigmoid ... \stackrel{_\ell}{\invW} \invsigmoid ... \stackrel{_L}{\invW} \invsigmoid \; \vect{y}
+\end{eqnarray}
+Note: $\invW = W^{-1} \;,\; \invsigmoid = \sigmoid^{-1}$, the shape is different.
+
+Assume that in the space of $\vect{x}$ there is a volume element $U$, which transforms via $\vect{F}$ to a volume element $V$ in the space of $\vect{y}$, then:
+\begin{equation}
+U = |J| \cdot V
+\end{equation}
+$\displaystyle J = \left[ \frac{\partial \vect{F}(x)}{\partial x} \right]$ is called the \textbf{Jacobian} matrix.
+
+In our case, the value of $\displaystyle |J| = \left| \frac{\partial \vect{F}^{-1}(\vect{y})}{\partial \vect{y}} \right|$ at $\vect{y}_0$ represents ``the change in volume from $\vect{y}_0 \mapsto \vect{x}_0$''.  (Below, we will see that the direction of $\vect{F}$ or $\vect{F}^{-1}$ is not too important, as either way the computational complexity is essentially the same.)
+
+Every time we get a \textbf{positive reward}, we can let the Jacobian $|J|$ increase slightly:
+\begin{equation}
+|J| := \det \left[ \frac{\partial \vect{F}^{-1}(\vect{y})}{\partial \vect{y}} \right]_{n \times n}
+\end{equation}
+The subscript indicates that it is a $n \times n$ matrix.
+
+The meaning of the Jacobian matrix is:
+\begin{equation}
+J = \left[ \frac{\partial \mbox{ input}}{\partial \mbox{ output}} \right]
+\end{equation}
+The neural network's input and output are both of $\dim n$, so the Jacobian is naturally an $n \times n$ matrix.
+
+To use \textbf{gradient descent}, we need to calculate these gradients: $\displaystyle \left[ \frac{\partial |J|}{\partial \vect{W}} \right]$, their total number is the number of weights in the network $= \sum \ell \; \#(\stackrel{_\ell}{W})$.
+
+We need the formula for the derivative of the determinant:
+\begin{eqnarray}
+\frac{d}{dt} |A(t)| = tr ( \mbox{adj}(A) \cdot \frac{dA(t)}{dt} ) \\
+\mbox{adj}(A) := |A| \cdot A^{-1}
+\end{eqnarray}
+In other words, for each weight $w := \stackrel{\ell}{W}_{ij}$, we need to calculate:
+\begin{equation}
+\frac{\partial}{\partial w} |J| = tr ( |J| \cdot J^{-1} \cdot \left[ \frac{\partial J}{\partial w} \right] )
+\end{equation}
+Note: $|J|$ and $J^{-1}$ are functions of $\vect{y}_0$, we only need to calculate them once outside the big loop.
+
+Now a problem arises in the calculation of $\displaystyle \left[ \frac{\partial J}{\partial w} \right]_{n \times n}$:
+\begin{equation}
+\frac{\partial J}{\partial w} = \frac{\partial}{\partial w} \frac{\partial \vect{F}^{-1}}{\partial y} = \frac{\partial}{\partial w} \frac{\partial}{\partial \vect{y}} \; \stackrel{_1}{\invW} \invsigmoid ... \stackrel{_\ell}{\invW} \invsigmoid ... \stackrel{_L}{\invW} \invsigmoid \; \vect{y}
+\end{equation}
+This requires us to differentiation $W^{-1}$ w.r.t. $w$;  we can imagine the result would be very complicated.  So we use a trick, by ``reversing'' the network, we use $\invW$ to define the network weights, and then use $W = \invW^{-1}$ during forward propagation.
+
+The components of $J$ are:
+\begin{equation}
+J_{ij} = \displaystyle \frac{\partial \vect{F}^{-1}_i}{\partial y_j} = \frac{\partial}{\partial y_j} \left[ \stackrel{_1}{\invW} \invsigmoid ... \stackrel{_\ell}{\invW} \invsigmoid ... \stackrel{_L}{\invW} \invsigmoid \; \vect{y} \right]_i =: \nabla^1_{i j} \\
+\end{equation}
+\begin{equation}
+\begin{cases}
+\nabla^1_{i j} &:= \displaystyle \sum_{k_1} [\, \stackrel{_1 \hspace{11pt}}{\invW_{i k_1}} \invsigmoid'(y^2_j) \nabla^2_{i j} \,] \\
+\nabla^\ell_{i j} &:= \displaystyle \sum_{k_\ell} [\, \stackrel{_\ell \hspace{22pt}}{\invW_{k_{\ell - 1} k_\ell}} \invsigmoid'(y^{\ell + 1}_j) \nabla^{\ell + 1}_{i j} \,] \\
+\nabla^L_{i j} &:= \quad \quad \displaystyle \stackrel{_L \hspace{21pt}}{\invW_{k_{L - 1} j}} \invsigmoid' (y_j)
+\end{cases}
+\end{equation}
+This situation is exactly analogous to the classical back prop algorithm;  The above is just the application of the \textbf{chain rule}, with $\nabla^\ell$ written separately for each layer, therefore $\nabla$ is called the ``local gradient''.  The above formula amounts to propagating the entire network one time, where every weight appears \textbf{exactly once}.
+
+But our work is not finished yet;  We need to calculate $\displaystyle \frac{\partial J_{ij}}{\partial \invw} =: \dot{\nabla}^1_{ij}$. \\
+(Let's define $\invw := \stackrel{\ell}{\invW}_{g h} \;,\; k_0 := i \;,\; k_L := j$) \\
+$\invw$ would be an element of $\invW$, but if $\invw \not\in \invW$, all the terms below would vanish:
+\begin{equation}
+\begin{cases}
+\displaystyle \dot{\nabla}^1_{i j} = \sum_{k_1} \left[\, \stackrel{_1 \hspace{15pt}}{\invW_{i k_1}} \invsigmoid'(y^2_j) \dot{\nabla}^2_{i j}  \,\right] \\
+\displaystyle \dot{\nabla}^\ell_{i j} = \sum_{k_\ell} \left[\, \stackrel{_\ell \hspace{15pt}}{\invW_{k_{\ell - 1} k_\ell}} \invsigmoid'(y^{\ell + 1}_j) \dot{\nabla}^{\ell + 1}_{i j} \,\right] \\
+\displaystyle \dot{\nabla}^L_{i j} = \quad \quad \stackrel{_L \hspace{21pt}}{\invW_{k_{L - 1} j}} \invsigmoid' (y_j) \equiv 0
+\end{cases}
+\end{equation}
+So what is left over is just this term:
+\begin{eqnarray}
+& \displaystyle \frac{\partial J_{ij}}{\partial \invw} = \sum_{k_1} \left[\, \stackrel{_1 \hspace{15pt}}{\invW_{k_0 k_1}} \invsigmoid'(y^2_j) ... \sum_{k_\ell} \left[\, \stackrel{_\ell \hspace{20pt}}{\invW_{k_{\ell - 1} k_\ell}} \invsigmoid'(y^{\ell + 1}_j) ... \right. \right. \\
+& \begin{cases}
+... \; \left. \left. \invsigmoid'(y^{\ell + 1}_j) \nabla^{\ell + 1}_{i j} \right] \right] \\
+... \; \left. \left. \invsigmoid'(y^{\ell + 1}_j) \right] \right] \quad \quad \quad \mbox{if } \invw \in \mbox{last layer} \nonumber
+\end{cases}
+\end{eqnarray}
+% \sum_{k_{\ell + 1}} (\, \stackrel{_{\ell + 1} \hspace{21pt}}{\invW_{k_\ell k_{\ell + 1}}} \invsigmoid' ... \; \stackrel{_L \hspace{21pt}}{\invW_{k_{L - 1} k_L}} \invsigmoid' (y_j) \;)) \\
+% &:=& \sum_{k_1} (\, \stackrel{_1 \hspace{15pt}}{\invW_{k_0 k_1}} \invsigmoid'' ... \; \invsigmoid' (\vect{u}) \;)
+The above formula means:  For each layer we repeat a block of $\left[ \sum \invW \; \invsigmoid \right]$, until we encounter $\invw = \stackrel{\ell}\invW_{g h}$, then we replace with the terminal form.
+
+In contrast to classical Back Prop, the above formula gives us only one element in an $n \times n$ matrix;  From the complexity point of view, calculating the $\nabla$ for each weight is at least $n^2$ times as costly as classical Back Prop (even though we may re-use some intermediate computation results).  Recall that $n = \mbox{dim } \boxed{\mbox{state space}}$.
+
+We can understand it thusly:  For each weight we try to calculate its influence towards the Jacobian, but the Jacobian is a \textbf{global} property of the network.  The key seems to lie in how each weight \textbf{influences} the Jacobian.
+
+Now let's look back at this higher-level formula:
+\begin{eqnarray}
+\frac{\partial}{\partial w} |J| &=& tr ( |J| \cdot J^{-1} \cdot \left[ \frac{\partial J}{\partial w} \right] ) \\
+&=& |J| \cdot tr ( \left[ \frac{\partial y}{\partial x} \right] \cdot \left[ \frac{\partial }{\partial w} \frac{\partial x}{\partial y} \right] ) \\
+&=& |J| \cdot \sum_{i j} \left( \frac{\partial y}{\partial x} \right)_{i j} \left( \frac{\partial }{\partial w} \frac{\partial x}{\partial y} \right)_{i j}
+\label{code-eqn2}
+\end{eqnarray}
+
+The most critical (slowest) part is the $(i, j) \in n \times n$ summation.  The first factor inside $\sum$ is the Jacobian $J$, the second factor is the $\nabla_w J^{-1}$ that we just calculated. 
+
+% 比较一下经典 Back Prop 算法： 对每个 weight 我们会计算 ``local gradient'' $\displaystyle \nabla = \frac{\partial \mbox{ 误差}}{\partial w}$，但那个 $\nabla$ 比较易计算。
+
+Back Prop's $\nabla$ has the form $\displaystyle \frac{\partial \, \boxed{\mbox{output}}}{\partial \, \boxed{\mbox{weights}}}$\\
+whereas our $\nabla$ has the form $\displaystyle \left[ \frac{\partial}{\partial \, \boxed{\mbox{weights}}} \frac{\partial \, \boxed{\mbox{input}}}{\partial \, \boxed{\mbox{output}}} \right]_{n \times n}$.
+
+In fact we just need to calculate the \textbf{approximate} direction and size of $\nabla_w |J|$.  Currently in our code we use this trick:  ignore the smaller terms in (\ref{code-eqn2}), so we don't need to do all of $n^2$ products. 
+
+Or perhaps we can regard $|J|(\invw)$ as a function of the weight $\invw$, and then use its Taylor series expansion to approximate?
+
+\bibliographystyle{plain} % or number or aaai ...
+\bibliography{AGI-book}
+
+\end{document}
+
+\section{Misc logic....}
+
+In LBAI the knowledge representation structure is built (\textit{fixed}) from the bottom up:
+%\begin{equation}
+%\mbox{words } \triangleright \mbox{ sentences } \triangleright \mbox{ logical form } \triangleright \mbox{ logical KB}
+%\end{equation}
+%Thus the structure of the KB is \textit{fixed} by the human designer. % This rigidity is perhaps why learning in logic-based systems is slow.
+
+% In natural language, an idea can be expressed as a concatenation of words, for example:\\
+% And it is just a short jump from word concatenations to symbolic logic.  But this jump may land us into a logic-based ``tar pit'', in which everything is theoretically possible, but often too slow in practice.
+
+%It is just a short jump from the expression of ideas as word concatenations to logical form as linear (or tree-like, or graph-like) compositions of symbols:
+\begin{equation}
+\includegraphics[scale=0.5]{ideas-vs-logical-form.png}
+\end{equation}
+but is it valid (or profitable) to assume that our mental representations are \textit{isomorphic} to such logical structures?  Or drastically different?
+
+Humans are good at designing symbolic structures, but we don't know how to design \textit{neural} representations which are more or less opaque to us.
+Perhaps we could use a neural network acting recurrently on the state vector to \emp{induce} an internal representation of mental space.  ``\textit{Induced by what},'' you ask?  By the very structure of the neural network itself.  In other words, forcing a neural network to \textit{approximate} the ideal operator $R^*$.
+
+From an abstract point of view, we require:
+\begin{itemize}
+\item $R$ be an endomorphism: $X \rightarrow X$
+\item $R$ has a learning algorithm: $R \stackrel{A}{\longmapsto} R^*$
+\end{itemize}
+
+$R$ would contain all the knowledge of the KB, so we expect it to be ``large'' (eg. having a huge number of parameters).  We also desire $R$ to possess a \emp{hierarchical} structure because hierarchies are computationally very efficient.  A multi-layer perceptron (MLP) seems to be a good candidate, as it is just a bunch of numbers (weight matrices $W$) interleaved by non-linear activation functions:
+\begin{equation}
+R(\vect{x}) = \sigmoid(W_1 \sigmoid(W_2 ... \sigmoid(W_L \vect{x} )))
+\end{equation}
+where $L$ is the number of layers.  MLPs would be our starting point to explore more design options.
+
+In 1991 Siegelmann and Sontag \cite{Siegelmann1991} proved that recurrent neural networks (RNNs) can emulate any Turing machine.  In 1993 James Lo \cite{Lo1993} proved that RNNs can universally approximate any non-linear dynamical system.
+
+The idea of $R$ as an operator acting on the state is inspired by the ``consequence operator'' in logic, usually denoted as $\mbox{Cn}$:
+\begin{equation}
+\mbox{Cn}(\Gamma) = \{ \mbox{ set of propositions that entails from } \Gamma \; \}
+\end{equation}
+but the function of $R$ can be broader than logical entailment.  We could use $R$ to perform the following functions which are central to LBAI:
+\begin{itemize}
+\item \emp{deduction} -- forward- and backward-chaining
+\item \emp{abduction} -- finding explanations
+\item \emp{inductive learning}
+\end{itemize}
+
+\begin{tcolorbox}[width=\textwidth,colback={white},title={\centering \emp{Example 1: } primary-school arithmetic},colbacktitle=white,coltitle=black]
+
+A recurrent neural network is a \textit{much more powerful} learning machine than a feed-forward network, even if they look the same superficially.
+
+\begin{wrapfigure}{l}{2cm}
+\includegraphics[scale=0.6]{elementary-arithmetic.png}
+\end{wrapfigure} 
+
+As an example, consider the way we perform 2-digit subtraction in primary school.  This is done in two steps, and we put a dot on paper to mark ``carry-over''.
+
+The use of the paper is analogous to the ``tape'' in a Turing machine -- the ability to use short-term memory allows us to perform much more complex mental tasks.
+
+We did a simple experiment to train a neural network to perform primary-school subtraction.  The operator is learned easily if we train the two steps \textit{separately}.  The challenge is to find an algorithm that can learn \emp{multi-step} operations by itself.
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[width=\textwidth,colback={white},title={\centering \emp{Example 2: } variable binding in predicate logic},colbacktitle=white,coltitle=black]
+
+The following formula in predicate logic defines the ``grandfather'' relation:
+
+\begin{equation}
+\includegraphics[scale=0.75]{linkage-in-logic-variables.png}
+\end{equation}
+
+
+We did a simple experiment to train a neural network to perform primary-school subtraction.  The operator is learned easily if we train the two steps \textit{separately}.  The challenge is to find an algorithm that can learn \emp{multi-step} operations by itself.
+
+\end{tcolorbox}  
+
+In LBAI, logic possesses additional structure:
+\begin{itemize}
+\item \emp{truth values} (eg. P(rain tomorrow) = 0.7)
+\item \emp{propositional structure} (eg. conjunction: $A \wedge B$) 
+\item \emp{sub-propositional structure} (eg. predication: loves(john, mary) )
+\item \emp{subsumption structure} (eg. $\mbox{dog} \subseteq \mbox{animal}$)
+\end{itemize}
+
+These structures can be ``transplanted'' to the vector space $X$ via:
+\begin{itemize}
+\item \emp{truth values: } an extra dimension conveying the ``strength'' of states
+\item \emp{propositional structure: } eg. conjunction as vector addition,
+\begin{equation}
+A \wedge B = \vect{x}_A + \vect{x}_B + ...
+\end{equation}
+but we have to avoid linear dependencies (``clashing'') such as:
+\begin{equation}
+\vect{x}_3 = a_1 \vect{x}_1 + a_2 \vect{x}_2
+\end{equation}
+This would force the vector space dimension to become very high.
+\item \emp{sub-propositional structure: } eg. tensor products as composition of concept atoms:
+\begin{equation}
+\mbox{loves(john, pete)} = \overrightarrow{john} \otimes \overrightarrow{love} \otimes \overrightarrow{pete}
+\end{equation}
+\item \emp{subsumption structure: } eg. define the positive cone $C$ such that
+\begin{equation}
+\mbox{animal} \supseteq \mbox{dog} \quad \Leftrightarrow \quad \overrightarrow{animal} - \overrightarrow{dog} \in C
+\end{equation}
+\end{itemize}
+
+But the more logical structure we add to $X$, the more it will resemble logic, and this whole exercise becomes pointless.  Remember our original goal is to try something different from logic, by \textit{relaxing} what defines a logical structure.  So we would selectively add features to $X$.
+
 
 \section{Unifying RL and RNN}
 
@@ -943,8 +1209,6 @@ When the forward and backward states get close enough, a successful path is foun
 % One key question is how to deal with "don't care" bits?  One answer is that their errors are zero.  But then this is the same as the error for "correct" weights, which seems not well.  There's got to be a way to alter weights when the answer is correct...
 
 % For \# Iteration = 0, output is immediately known, so potentially the training can be done.  But how to convey that all these alterations of weights are \emp{optional}?
-
-% \section{Reinforcement learning}
 
 \section*{Acknowledgements}
 

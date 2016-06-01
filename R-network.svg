@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="R-network.svg"
+   inkscape:export-filename="/home/yky/latex/AGI-16/R-network.png"
+   inkscape:export-xdpi="400"
+   inkscape:export-ydpi="400">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.0714286"
+     inkscape:cx="375"
+     inkscape:cy="560"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="993"
+     inkscape:window-height="1322"
+     inkscape:window-x="49"
+     inkscape:window-y="317"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:none;stroke:#000000"
+       d="m 281,534.36218 100,0 0,90 -36,90 -100,0 36,-90 z"
+       id="rect2985"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccc" />
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:none;stroke:#000000"
+       d="m 381,534.42885 100,0 0,90 34,90 -100,0 -34,-90 z"
+       id="rect2985-6"
+       sodipodi:nodetypes="ccccccc" />
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:none;stroke:#000000"
+       d="m 381.06667,376.36218 100.26666,85 0,73 -200.4,0 0.0667,-77 z"
+       id="rect2985-4"
+       sodipodi:nodetypes="cccccc" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3013"
+       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:serif;-inkscape-font-specification:serif"
+       transform="translate(-24,-51)"><flowRegion
+         id="flowRegion3015"><rect
+           id="rect3017"
+           width="66"
+           height="76"
+           x="285"
+           y="766.36218"
+           style="font-family:serif;-inkscape-font-specification:serif" /></flowRegion><flowPara
+         id="flowPara3019"
+         style="font-size:24px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Times New Roman;-inkscape-font-specification:Times New Roman">x</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3013-9"
+       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:serif;-inkscape-font-specification:serif"
+       transform="translate(146.49219,-49.09912)"><flowRegion
+         id="flowRegion3015-3"><rect
+           id="rect3017-1"
+           width="66"
+           height="76"
+           x="285"
+           y="766.36218"
+           style="font-family:serif;-inkscape-font-specification:serif" /></flowRegion><flowPara
+         id="flowPara3019-6"
+         style="font-size:24px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Times New Roman;-inkscape-font-specification:Times New Roman">y</flowPara></flowRoot>    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 216.53333,561.42885 118.53334,69.06667"
+       id="path3048"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 217.93333,561.42884 229.60001,73.73334"
+       id="path3048-8"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3068"
+       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       transform="translate(38.133333,0.4)"><flowRegion
+         id="flowRegion3070"><rect
+           id="rect3072"
+           width="177.33333"
+           height="54.133324"
+           x="82.133331"
+           y="507.2955" /></flowRegion><flowPara
+         id="flowPara3074">identical</flowPara><flowPara
+         id="flowPara3076">copies</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3013-8"
+       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:serif;-inkscape-font-specification:serif"
+       transform="translate(62.625517,-422.89912)"><flowRegion
+         id="flowRegion3015-9"><rect
+           id="rect3017-5"
+           width="66"
+           height="76"
+           x="285"
+           y="766.36218"
+           style="font-family:serif;-inkscape-font-specification:serif" /></flowRegion><flowPara
+         id="flowPara3019-8"
+         style="font-size:24px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Times New Roman;-inkscape-font-specification:Times New Roman">R</flowPara></flowRoot>  </g>
+</svg>
