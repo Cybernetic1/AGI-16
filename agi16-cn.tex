@@ -628,7 +628,7 @@ $V$ 是向量空间。 在 $V$ 上的 symplectic 变换的全体记作 $Sp(V)$�
 \clearpage
 \section{Jacobian 神经网络学习算法}
 
-经典的神经网络 back prop 学习算法，它是一个 error-driven 算法，但在很多人工智能的实际应用中，不存在唯一的「理想答案」，而是根据正或负的奖励 (reward) 学习。  当答案正确时，奖励 $> 0, \mbox{error} = 0$； 当答案不正确时，奖励 $< 0$，但 $\mbox{error}$ 仍是不知道的（因为不知道理想答案）。  简言之，就是不能用 error-driven 学习。 
+经典的神经网络 Back Prop 学习算法，它是一个 error-driven 算法，但在很多人工智能的实际应用中，不存在唯一的「理想答案」，而是根据正或负的奖励 (reward) 学习。  当答案正确时，奖励 $> 0, \mbox{error} = 0$； 当答案不正确时，奖励 $< 0$，但 $\mbox{error}$ 仍是不知道的（因为不知道理想答案）。  简言之，就是不能用 error-driven 学习。 
 
 所以我想出了一个 reward-driven 的学习法： 假设神经网络将 $\vect{x}_0 \mapsto \vect{y}_0$，它通常也会将 $\vect{x}_0$ 的邻域 map 到 $\vect{y}_0$ 的邻域。 如果我们想「加强」这个映射，可以将「更大的 $\vect{x}_0$ 的邻域」映射到「接近 $\vect{y}_0$ 的邻域」。
 
@@ -699,7 +699,7 @@ J_{ij} = \displaystyle \frac{\partial \vect{F}^{-1}_i}{\partial y_j} = \frac{\pa
 \nabla^L_{i j} &:= \quad \quad \displaystyle \stackrel{_L \hspace{21pt}}{\invW_{k_{L - 1} j}} \invsigmoid' (y_j)
 \end{cases}
 \end{equation}
-这情况完全类似於经典 back prop，以上只是 chain rule 的应用，$\nabla^\ell$ 将每层用 chain rule 分拆开来，所以 $\nabla$ 又叫 ``local gradient''。 上式就是整个网络的\textbf{反向传递}，其中每个 weight 出现 exactly 一次。
+这情况完全类似於经典 Back Prop，以上只是 chain rule 的应用，$\nabla^\ell$ 将每层用 chain rule 分拆开来，所以 $\nabla$ 又叫 ``local gradient''。 上式就是整个网络的\textbf{反向传递}，其中每个 weight 出现 exactly 一次。
 %但 $\displaystyle \frac{\partial y_{k_L}}{\partial y_j}$ 只有当 $k_L = j$ 时为 $1$，其他全为 $0$，所以前面各项没变，最后的一个 $\sum$ 改写：
 %\begin{equation}
 %J_{ij} = \sum_{k_1} (\, \stackrel{_1 \hspace{15pt}}{\invW_{i k_1}} \invsigmoid' ... \sum_{k_\ell} (\, \stackrel{_\ell \hspace{21pt}}{\invW_{k_{\ell - 1} k_\ell}} \invsigmoid' ...  \stackrel{_L \hspace{21pt}}{\invW_{k_{L - 1} j}} \invsigmoid' (y_j) \;))
@@ -728,7 +728,7 @@ $\invw$ 必会是 $\invW$ 的其中一元，但如果 $\invw \not\in \invW$，�
 % &:=& \sum_{k_1} (\, \stackrel{_1 \hspace{15pt}}{\invW_{k_0 k_1}} \invsigmoid'' ... \; \invsigmoid' (\vect{u}) \;)
 上式的意思是： 每层 layer 重复一块 $\left[ \sum \invW \; \invsigmoid \right]$，直到遇到 $\invw = \stackrel{\ell}\invW_{g h}$，则用结尾形式取代之。
 
-和经典 back prop 不同的是，上式只是 $n \times n$ 矩阵中的一个元素，从复杂度而论，每个 weight 的 $\nabla$ 计算，增加了起码 $n^2$ 倍的复杂度（虽然其计算上可以共用一些结果）。 记住 $n = \mbox{dim } \boxed{\mbox{状态空间}}$。
+和经典 Back Prop 不同的是，上式只是 $n \times n$ 矩阵中的一个元素，从复杂度而论，每个 weight 的 $\nabla$ 计算，增加了起码 $n^2$ 倍的复杂度（虽然其计算上可以共用一些结果）。 记住 $n = \mbox{dim } \boxed{\mbox{状态空间}}$。
 
 可以这样理解： 每个 weight 的调教，需要计算这个 weight 对 Jacobian 的影响，而那 Jacobian 是\textbf{整个}网络的特性。 关键似乎就在於每个 weight 对 Jacobian 的\textbf{影响}。 
 
@@ -742,9 +742,9 @@ $\invw$ 必会是 $\invW$ 的其中一元，但如果 $\invw \not\in \invW$，�
 
 上式中最重要（最慢）的是那 $(i, j) \in n \times n$ 求和。 裡面的第一個因子是 Jacobian $J$，第二个因子是我们刚计算了的 $\nabla_w J^{-1}$。 
 
-% 比较一下经典 back prop 算法： 对每个 weight 我们会计算 ``local gradient'' $\displaystyle \nabla = \frac{\partial \mbox{ 误差}}{\partial w}$，但那个 $\nabla$ 比较易计算。
+% 比较一下经典 Back Prop 算法： 对每个 weight 我们会计算 ``local gradient'' $\displaystyle \nabla = \frac{\partial \mbox{ 误差}}{\partial w}$，但那个 $\nabla$ 比较易计算。
 
-Back prop 的 $\nabla$ 形式上是 $\displaystyle \frac{\partial \mbox{ 输出}}{\partial \, \mbox{w}}$，我们的 $\nabla$ 形式是 $\displaystyle \left[ \frac{\partial}{\partial w} \frac{\partial \mbox{ 输入}}{\partial \mbox{ 输出}} \right]_{n \times n}$。
+Back Prop 的 $\nabla$ 形式上是 $\displaystyle \frac{\partial \mbox{ 输出}}{\partial \, \mbox{w}}$，我们的 $\nabla$ 形式是 $\displaystyle \left[ \frac{\partial}{\partial w} \frac{\partial \mbox{ 输入}}{\partial \mbox{ 输出}} \right]_{n \times n}$。
 
 其实我们只需要计算 $\nabla_w |J|$ 的\textbf{大约方向}。 暂时我在代码中的做法是： 忽略式 (\ref{code-eqn}) 中较小的项，那就不需做足 $n^2$ 个乘积。 
 
@@ -764,7 +764,7 @@ Back prop 的 $\nabla$ 形式上是 $\displaystyle \frac{\partial \mbox{ 输出}
 \clearpage
 \section{Jacobian learning algorithm}
 
-The classical back prop algorithm is \textbf{error-driven}, but in many AI problems the ``correct'' answers are not given, instead the feedback is provided via \textbf{rewards}. When an answer is correct, the reward $R > 0$, error $\mathscr{E} = 0$; when the answer is incorrect, $R < 0$, but $\mathscr{E}$ is still unknown (because we don't know the correct answer).  In other words, error-driven learning is inapplicable.
+The classical Back Prop algorithm is \textbf{error-driven}, but in many AI problems the ``correct'' answers are not given, instead the feedback is provided via \textbf{rewards}. When an answer is correct, the reward $R > 0$, error $\mathscr{E} = 0$; when the answer is incorrect, $R < 0$, but $\mathscr{E}$ is still unknown (because we don't know the correct answer).  In other words, error-driven learning is inapplicable.
 
 So I thought of a reward-driven learning method:  assume the neural network maps $\vect{x}_0 \mapsto \vect{y}_0$, usually it also maps the neighborhood of $\vect{x}_0$ to the neighborhood of $\vect{y}_0$.  If we wish to ``strengthen'' this pair of mapping, we can make a \textbf{bigger} neighborhood of $\vect{x}_0$ map to the same neighborhood close to $\vect{y}_0$.  We will make this precise.
 
@@ -834,7 +834,7 @@ J_{ij} = \displaystyle \frac{\partial \vect{F}^{-1}_i}{\partial y_j} = \frac{\pa
 \nabla^L_{i j} &:= \quad \quad \displaystyle \stackrel{_L \hspace{21pt}}{\invW_{k_{L - 1} j}} \invsigmoid' (y_j)
 \end{cases}
 \end{equation}
-This situation is exactly analogous to the classical back prop algorithm;  The above is just the application of the \textbf{chain rule}, with $\nabla^\ell$ written separately for each layer, therefore $\nabla$ is called the ``local gradient''.  The above formula amounts to propagating the entire network one time, where every weight appears \textbf{exactly once}.
+This situation is exactly analogous to the classical Back Prop algorithm;  The above is just the application of the \textbf{chain rule}, with $\nabla^\ell$ written separately for each layer, therefore $\nabla$ is called the ``local gradient''.  The above formula amounts to propagating the entire network one time, where every weight appears \textbf{exactly once}.
 
 But our work is not finished yet;  We need to calculate $\displaystyle \frac{\partial J_{ij}}{\partial \invw} =: \dot{\nabla}^1_{ij}$. \\
 (Let's define $\invw := \stackrel{\ell}{\invW}_{g h} \;,\; k_0 := i \;,\; k_L := j$) \\
