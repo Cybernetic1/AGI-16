@@ -157,7 +157,7 @@ Logic-based AI 可以看成是将世界的「模型」压缩成一个「知识�
 
 一个（连续时间的）\emp{控制系统 (control system)} 定义为：
 \begin{equation}
-\dot{\vect{x}(t)} = f(\vect{x}(t), \vect{u}(t), t)
+\dot{\vect{x}}(t) = f(\vect{x}(t), \vect{u}(t), t)
 \end{equation}
 其中 $\vect{u}(t)$ 是\emp{控制向量}。 控制论的目的就是找出最好的 $\vect{u}(t)$ 函数，令系统由初始状态 $\vect{x}_0$ 去到终点状态 $\vect{x_\bot}$。
 
@@ -351,7 +351,7 @@ J = \int_{t_0}^{t_\bot} \{ L + \vect{\lambda}^T(t) \left[ f(\vect{x}, \vect{u}, 
 \begin{equation}
 H(\vect{x}, \vect{u}, t) = L(\vect{x}, \vect{u}, t) + \vect{\lambda}^T(t) f(\vect{x}, \vect{u}, t)
 \end{equation}
-物理学上，$\vect{f}$ 的单位是速度，而 $L$ 的单位是能量，所以 $\lambda$ 应该具有 \emp{动量} 的单位。
+物理学上，$\vect{f}$ 的单位是速度，而 $L$ 的单位是能量，所以 $\vect{\lambda}$ 应该具有 \emp{动量} 的单位。
 
 \subsubsection{极小值原理}
 
@@ -655,6 +655,9 @@ U = |J| \cdot V
 $\displaystyle J = \left[ \frac{\partial \vect{F}(x)}{\partial x} \right]$ 叫 Jacobian 矩阵。
 
 在我们的情况下，$\displaystyle |J| = \left| \frac{\partial \vect{F}^{-1}(\vect{y})}{\partial \vect{y}} \right|$ 在 $\vect{y}_0$ 的值，代表「单位体积元由 $\vect{y}_0 \mapsto \vect{x}_0$ 的变化率」。 （下面会看到，$\vect{F}$ 和 $\vect{F}^{-1}$ 的正/反方向不太重要，因为基本上不影响计算复杂度。）
+\begin{equation}
+\includegraphics[scale=0.5]{Jacobian.png} 
+\end{equation}
 
 每次得到\textbf{正奖励}，我们会令 Jacobian $|J|$ 增加一点：
 \begin{equation}
@@ -694,8 +697,8 @@ J_{ij} = \displaystyle \frac{\partial \vect{F}^{-1}_i}{\partial y_j} = \frac{\pa
 % & = \sum_{k_1} (\, \stackrel{_1 \hspace{15pt}}{\invW_{i k_1}} \invsigmoid' ... \sum_{k_\ell} (\, \stackrel{_\ell \hspace{21pt}}{\invW_{k_{\ell - 1} k_\ell}} \invsigmoid' ... \sum_{k_L} (\, \stackrel{_L \hspace{25pt}}{\invW_{k_{L - 1} k_L}} \invsigmoid' (y_{k_L}) \displaystyle \frac{\partial y_{k_L}}{\partial y_j} ))) \nonumber
 \begin{equation}
 \begin{cases}
-\nabla^1_{i j} &:= \displaystyle \sum_{k_1} [\, \stackrel{_1 \hspace{11pt}}{\invW_{i k_1}} \invsigmoid'(y^2_j) \nabla^2_{i j} \,] \\
-\nabla^\ell_{i j} &:= \displaystyle \sum_{k_\ell} [\, \stackrel{_\ell \hspace{22pt}}{\invW_{k_{\ell - 1} k_\ell}} \invsigmoid'(y^{\ell + 1}_j) \nabla^{\ell + 1}_{i j} \,] \\
+\nabla^1_{i j} &:= \displaystyle \sum_{k_1} [\, \stackrel{_1 \hspace{11pt}}{\invW_{i k_1}} \invsigmoid'(y^2_{k_1}) \nabla^2_{i j} \,] \\
+\nabla^\ell_{i j} &:= \displaystyle \sum_{k_\ell} [\, \stackrel{_\ell \hspace{22pt}}{\invW_{k_{\ell - 1} k_\ell}} \invsigmoid'(y^{\ell + 1}_{k_\ell}) \nabla^{\ell + 1}_{i j} \,] \\
 \nabla^L_{i j} &:= \quad \quad \displaystyle \stackrel{_L \hspace{21pt}}{\invW_{k_{L - 1} j}} \invsigmoid' (y_j)
 \end{cases}
 \end{equation}
@@ -711,17 +714,17 @@ J_{ij} = \displaystyle \frac{\partial \vect{F}^{-1}_i}{\partial y_j} = \frac{\pa
 $\invw$ 必会是 $\invW$ 的其中一元，但如果 $\invw \not\in \invW$，以下的项微分后都会变成 $0$：
 \begin{equation}
 \begin{cases}
-\displaystyle \dot{\nabla}^1_{i j} = \sum_{k_1} \left[\, \stackrel{_1 \hspace{15pt}}{\invW_{i k_1}} \invsigmoid'(y^2_j) \dot{\nabla}^2_{i j}  \,\right] \\
-\displaystyle \dot{\nabla}^\ell_{i j} = \sum_{k_\ell} \left[\, \stackrel{_\ell \hspace{15pt}}{\invW_{k_{\ell - 1} k_\ell}} \invsigmoid'(y^{\ell + 1}_j) \dot{\nabla}^{\ell + 1}_{i j} \,\right] \\
+\displaystyle \dot{\nabla}^1_{i j} = \sum_{k_1} \left[\, \stackrel{_1 \hspace{15pt}}{\invW_{i k_1}} \invsigmoid'(y^2_{k_1}) \dot{\nabla}^2_{i j}  \,\right] \\
+\displaystyle \dot{\nabla}^\ell_{i j} = \sum_{k_\ell} \left[\, \stackrel{_\ell \hspace{15pt}}{\invW_{k_{\ell - 1} k_\ell}} \invsigmoid'(y^{\ell + 1}_{k_\ell}) \dot{\nabla}^{\ell + 1}_{i j} \,\right] \\
 \displaystyle \dot{\nabla}^L_{i j} = \quad \quad \stackrel{_L \hspace{21pt}}{\invW_{k_{L - 1} j}} \invsigmoid' (y_j) \equiv 0
 \end{cases}
 \end{equation}
 所以实际上只剩下一项：
 \begin{eqnarray}
-& \displaystyle \frac{\partial J_{ij}}{\partial \invw} = \sum_{k_1} \left[\, \stackrel{_1 \hspace{15pt}}{\invW_{k_0 k_1}} \invsigmoid'(y^2_j) ... \sum_{k_\ell} \left[\, \stackrel{_\ell \hspace{20pt}}{\invW_{k_{\ell - 1} k_\ell}} \invsigmoid'(y^{\ell + 1}_j) ... \right. \right. \\
+& \displaystyle \frac{\partial J_{ij}}{\partial \invw} = \sum_{k_1} \left[\, \stackrel{_1 \hspace{15pt}}{\invW_{k_0 k_1}} \invsigmoid'(y^2_{k_1}) ... \sum_{k_{\ell - 2}} \left[\, \stackrel{_{\ell - 2} \hspace{27pt}}{\invW_{k_{\ell - 3} k_{\ell - 2}}} \invsigmoid'(y^{\ell - 1}_{k_{\ell - 2}}) ... \right. \right. \\
 & \begin{cases}
-... \; \left. \left. \invsigmoid'(y^{\ell + 1}_j) \nabla^{\ell + 1}_{i j} \right] \right] \\
-... \; \left. \left. \invsigmoid'(y^{\ell + 1}_j) \right] \right] \quad \quad \quad \mbox{if } \invw \in \mbox{last layer} \nonumber
+... \; \left. \left. \stackrel{_{\ell - 1} \hspace{20pt}}{\invW_{k_{\ell - 2}, g}} \invsigmoid'(y^{\ell}_g) \, \invsigmoid'(y^{\ell + 1}_h) \nabla^{\ell + 1}_{i j} \right] \right] \\
+... \; \left. \left. \stackrel{_{\ell - 1} \hspace{20pt}}{\invW_{k_{\ell - 2}, g}} \invsigmoid'(y^{\ell}_g) \, \invsigmoid'(y^{\ell + 1}_h) \right] \right] \quad \quad \quad \mbox{if } \invw \in \mbox{last layer} \nonumber
 \end{cases}
 \end{eqnarray}
 % \sum_{k_{\ell + 1}} (\, \stackrel{_{\ell + 1} \hspace{21pt}}{\invW_{k_\ell k_{\ell + 1}}} \invsigmoid' ... \; \stackrel{_L \hspace{21pt}}{\invW_{k_{L - 1} k_L}} \invsigmoid' (y_j) \;)) \\
@@ -791,6 +794,9 @@ U = |J| \cdot V
 $\displaystyle J = \left[ \frac{\partial \vect{F}(x)}{\partial x} \right]$ is called the \textbf{Jacobian} matrix.
 
 In our case, the value of $\displaystyle |J| = \left| \frac{\partial \vect{F}^{-1}(\vect{y})}{\partial \vect{y}} \right|$ at $\vect{y}_0$ represents ``the change in volume from $\vect{y}_0 \mapsto \vect{x}_0$''.  (Below, we will see that the direction of $\vect{F}$ or $\vect{F}^{-1}$ is not too important, as either way the computational complexity is essentially the same.)
+\begin{equation}
+\includegraphics[scale=0.5]{Jacobian.png} 
+\end{equation}
 
 Every time we get a \textbf{positive reward}, we can let the Jacobian $|J|$ increase slightly:
 \begin{equation}
