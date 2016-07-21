@@ -27,6 +27,7 @@
 \newcommand*\sigmoid{\vcenter{\hbox{\includegraphics{sigmoid.png}}}}
 \newcommand*\rectifier{\vcenter{\hbox{\includegraphics{rectifier.png}}}}
 \newcommand{\dashh}{\textemdash~}
+\newcommand{\english}[1]{\rmfamily \textit{``#1''}\rmfamily}
 
 % ***** Boxed variables inside math equations
 % \newcommand*{\boxedcolor}{black}
@@ -136,7 +137,9 @@ LBAI can be viewed as the compression of a world model into a knowledge-base (KB
 \end{equation}
 The world model is \textit{generated} combinatorially from the set of logic formulas, vaguely reminiscent of a ``basis'' in vector space.  The generative process in logic is much more complicated, contributing to its high \textit{compressive} ability on the one hand, and the \textit{complexity} of learning such formulas on the other hand.
 
-In LBAI the knowledge representation structure is built (\textit{fixed}) from the bottom up:
+\subsection{Bottom-up vs top-down representations}
+
+In LBAI the knowledge representation structure is built (\textit{fixed}) from the bottom up (For example, predicate symbols and constant symbols build up propositions, and sets of propositions form theories):
 %\begin{equation}
 %\mbox{words } \triangleright \mbox{ sentences } \triangleright \mbox{ logical form } \triangleright \mbox{ logical KB}
 %\end{equation}
@@ -150,6 +153,8 @@ In LBAI the knowledge representation structure is built (\textit{fixed}) from th
 \includegraphics[scale=0.5]{ideas-vs-logical-form.png}
 \end{equation}
 but is it valid (or profitable) to assume that our mental representations are \textit{isomorphic} to such logical structures?  Or drastically different?
+
+The most serious disadvantage of bottom-up representations lies in the difference between \emp{syntactic distance} and \emp{semantic distance}.  Suppose propositions are built up from an ``alphabet'' of atomic concepts, through the use of a multiplication operation such as tensor product.  We embed atomic concepts into a vector space, in the manner of the Word2Vec algorithm.  Then, using the tensor product, propositions (ie sentences) will be mapped to positions in the tensor-product vector space.  Thus we can measure the \textbf{distance} between any two propositions.  However, this is a \textbf{syntactic} distance.  For example, \textit{``Don't judge a book by its cover''} and \textit{``Clothes do not make the man''} are superficially very different (syntactically distant) but are semantically close.  In a good learning system we need to \textbf{generalize} according to semantic distance.  The embedding of bottom-up representations usually gives us a discrete space with fractal structure, and the metric defined on such a space is always syntactic.
 
 Humans are good at designing symbolic structures, but we don't know how to design \textit{neural} representations which are more or less opaque to us.
 Perhaps we could use a neural network acting recurrently on the state vector to \emp{induce} an internal representation of mental space.  ``\textit{Induced by what},'' you ask?  By the very structure of the neural network itself.  In other words, forcing a neural network to \textit{approximate} the ideal operator $R^*$.
@@ -276,7 +281,7 @@ We did a simple experiment to train a neural network to perform primary-school s
 The following formula in predicate logic defines the ``grandfather'' relation:
 
 \begin{equation}
-\includegraphics[scale=0.75]{linkage-in-logic-variables.png}
+\includegraphics[scale=0.25]{linkage-in-logic-variables.jpg}
 \end{equation}
 
 We did a simple experiment to train a neural network to perform primary-school subtraction.  The operator is learned easily if we train the two steps \textit{separately}.  The challenge is to find an algorithm that can learn \emp{multi-step} operations by itself.
@@ -348,7 +353,7 @@ where $U$ is the ``long-term value'' or \emp{utility} of a path.
 
 Conceptually, $U$ is the \textbf{integration} of instantaneous rewards over time:
 \begin{equation}
-\boxed{\mbox{utility / value} U} = \int \boxed{\mbox{reward} R} \,dt
+\boxed{\mbox{utility, or value} U} = \int \boxed{\mbox{reward} R} \,dt
 \end{equation}
 
 \subsection{Connection with Hamiltonian mechanics}
@@ -392,6 +397,27 @@ i \hbar \frac{\partial}{\partial t} \Psi(x,t) = \left[ V(x,t) + \frac{-\hbar^2}{
 where $\Psi$ is analogous to our $U$ (perhaps $\Psi$ is something that nature wants to optimize?)
 
 All these ``physical'' ideas flow automatically from our definition of \textbf{rewards}, without the need to introduce them artificially.  But these ideas seem not immediately useful to our project, unless we are to explore \textbf{continuous-time} models.
+
+\subsection{Deep learning}
+
+The combination of deep learning with reinforcement learning, ie deep reinforcement learning (DRL), is very powerful.  For example, DRL is able to play Atari games to human levels \cite{Mnih2013}.
+
+Recall our main architecture:
+\begin{equation}
+\includegraphics[scale=0.5]{genifer-model-0.png}
+\end{equation}
+
+The ``transition function'' neural network can also take an \textbf{action} parameter $u$:
+\begin{equation}
+\includegraphics[scale=0.5]{model-with-u.png}
+\end{equation}
+But such a neural network requires a novel learning algorithm that is \textbf{reward-driven} rather than the traditionally \textbf{error-driven} back-propagation.  Such an algorithm is difficult to design because it cannot rely on old-fashioned gradient descent.
+
+One solution that avoids the difficulty is to make the neural network compute the Q-value:
+\begin{equation}
+\includegraphics[scale=0.5]{model-Sayaka.png}
+\end{equation}
+This means that we can compute $Q$ for any transition $x \stackrel{u}{\mapsto} x'$.  During the ``action'' (ie, thinking) stage, we hold $x$ fixed, and search for $(u, x')$ that maximizes $Q$ value, this can be done by \textbf{stochastic gradient descent}.  During the ``learning'' stage, we are given certain transitions $(x, u, x')$ and we train the neural network to adjust the $Q$ values via standard \textbf{Bellman update}.
 
 % ================================== comment out ==================================
 \iffalse
