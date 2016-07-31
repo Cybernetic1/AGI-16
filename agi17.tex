@@ -63,10 +63,15 @@ Juan Carlos Kuri Pinto
 % \setlength{\parskip}{2.8ex}
 
 \begin{abstract}
-This is a draft.
+The problem of general intelligence can be described and solved in the logic-based AI paradigm, but the main obstacle is that learning is too slow.  The logic-based knowledge representation with discrete propositions is abandoned in favor of a neural-based ``amorphous'' representation induced from the top down, using a deep neural network (DNN).  The DNN acts iteratively on a state space (the ``mental state''), forming a dynamical system.  This system is in turn controlled by reinforcement learning, ``navigating'' the space of mental states as in a maze.
 \end{abstract}
 
 \section{Main idea}
+
+The \textbf{metaphor} here is that of reinforcement learning controlling an autonomous agent to navigate the maze of ``thoughts space'':
+\begin{equation}
+\includegraphics[scale=0.5]{maze-metaphor.png}
+\end{equation}
 
 The main idea is to regard ``thinking'' as a \emp{dynamical system} operating on \emp{mental states}:
 \begin{equation}
@@ -77,11 +82,11 @@ The main idea is to regard ``thinking'' as a \emp{dynamical system} operating on
 For example, a mental state could be the following set of propositions:
 \begin{itemize}
 \item I am in my room, writing a paper for AGI-16.
-\item I am in the midst of writing the first sentence, ``The main idea is...''
-\item I am about to write an infinitive phrase ``to regard...''
+\item I am in the midst of writing the sentence, ``I am in my room, ...''
+\item I am about to write a gerund phrase ``writing a paper...''
 \end{itemize}
 
-Thinking is the process of \emp{transitioning} from one mental state to another.
+Thinking is the process of \emp{transitioning} from one mental state to another.  Even as I am speaking now, I use my mental state to keep track of where I am at within the sentence's syntax, so that I can structure sentences grammatically.
 
 By representing a cognitive state as a vector $\vec{x} \in X$ where $X$ is the cognitive state-space, the reasoning operator $R$ as an \emp{iterative map} $X \rightarrow X$, we would have at disposal all the tools available in vector space such as:
 
@@ -304,11 +309,6 @@ Main points:
 \includegraphics[scale=0.5]{genifer-model-0.png}
 \end{equation}
 
-Our \textbf{metaphor} here is that of reinforcement learning controlling an autonomous agent to navigate the maze of ``thoughts space'':
-\begin{equation}
-\includegraphics[scale=0.5]{maze-metaphor.png}
-\end{equation}
-
 \subsection{What is control theory?}
 
 A \emp{dynamical system} can be defined by:
@@ -384,23 +384,24 @@ H(\vect{x}, \vect{u}, t) = L(\vect{x}, \vect{u}, t) + \vect{\lambda}^T(t) f(\vec
 \end{equation}
 Physically, the unit of $\vect{f}$ is velocity, while the unit of $L$ is energy, therefore $\vect{\lambda}$ should have the unit of \emp{momentum}.  This is the reason why the phase space is made up of the diad of $(\mbox{position}, \mbox{momentum})$.
 
-In its most general form we have the \emp{Hamilton-Jacobi-Bellman equation}:
+In its most general form we have the \emp{Hamilton-Jacobi-Bellman equation}: \footnote{To digress a bit, this equation is also analogous to the \emp{Schr\"{o}dinger equation} in quantum mechanics:
+\begin{equation}
+i \hbar \frac{\partial}{\partial t} \Psi(x,t) = \left[ V(x,t) + \frac{-\hbar^2}{2\mu} \nabla^2 \right] \Psi(x,t).
+\end{equation}
+where $\Psi$ is analogous to our $U$ (perhaps $\Psi$ is something that nature wants to optimize?)}
 \begin{equation}
 \boxed{\mbox{Hamilton-Jacobi-Bellman}} \quad
 0 = \frac{\partial U^*}{\partial t} + \min_u H
 \end{equation}
 
-To digress a bit, this equation is also analogous to the \emp{Schr\"{o}dinger equation} in quantum mechanics:
-\begin{equation}
-i \hbar \frac{\partial}{\partial t} \Psi(x,t) = \left[ V(x,t) + \frac{-\hbar^2}{2\mu} \nabla^2 \right] \Psi(x,t).
-\end{equation}
-where $\Psi$ is analogous to our $U$ (perhaps $\Psi$ is something that nature wants to optimize?)
-
 All these ``physical'' ideas flow automatically from our definition of \textbf{rewards}, without the need to introduce them artificially.  But these ideas seem not immediately useful to our project, unless we are to explore \textbf{continuous-time} models.
 
 \subsection{Deep learning}
 
-The combination of deep learning with reinforcement learning, ie deep reinforcement learning (DRL), is very powerful.  For example, DRL is able to play Atari games to human levels \cite{Mnih2013}.
+The combination of deep learning with reinforcement learning, ie deep reinforcement learning (DRL), is very powerful.  For example, DRL is able to play Atari games to human levels \cite{Mnih2013}.  Their architecture is depicted in this diagram:
+\begin{equation}
+\includegraphics[scale=0.5]{Atari-Q-learning.jpg}
+\end{equation}
 
 Recall our main architecture:
 \begin{equation}
@@ -417,7 +418,7 @@ One solution that avoids the difficulty is to make the neural network compute th
 \begin{equation}
 \includegraphics[scale=0.5]{model-Sayaka.png}
 \end{equation}
-This means that we can compute $Q$ for any transition $x \stackrel{u}{\mapsto} x'$.  During the ``action'' (ie, thinking) stage, we hold $x$ fixed, and search for $(u, x')$ that maximizes $Q$ value, this can be done by \textbf{stochastic gradient descent}.  During the ``learning'' stage, we are given certain transitions $(x, u, x')$ and we train the neural network to adjust the $Q$ values via standard \textbf{Bellman update}.
+This means that we can compute $Q$ for any transition $x \stackrel{u}{\mapsto} x'$.  During the ``action'' (ie, ``thinking'') stage, we hold $x$ fixed, and search for $(u, x')$ that maximizes $Q$;  This can be done by \textbf{stochastic gradient descent}.  During the ``learning'' stage, we are given certain transitions $(x, u, x')$ and we train the neural network to adjust $Q$ via standard \textbf{Bellman update}.
 
 % ================================== comment out ==================================
 \iffalse

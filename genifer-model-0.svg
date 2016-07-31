@@ -362,7 +362,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -378,7 +378,7 @@
        inkscape:export-ydpi="600">
       <path
          transform="matrix(0.61016949,0,0,0.56521739,132.83051,75.374863)"
-         d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+         d="m 244,662.36218 c 0,3.31371 -2.46243,6 -5.5,6 -3.03757,0 -5.5,-2.68629 -5.5,-6 0,-3.31371 2.46243,-6 5.5,-6 3.03757,0 5.5,2.68629 5.5,6 z"
          sodipodi:ry="6"
          sodipodi:rx="5.5"
          sodipodi:cy="662.36218"
@@ -387,7 +387,7 @@
          style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
          sodipodi:type="arc" />
       <path
-         d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+         d="m 244,662.36218 c 0,3.31371 -2.46243,6 -5.5,6 -3.03757,0 -5.5,-2.68629 -5.5,-6 0,-3.31371 2.46243,-6 5.5,-6 3.03757,0 5.5,2.68629 5.5,6 z"
          sodipodi:ry="6"
          sodipodi:rx="5.5"
          sodipodi:cy="662.36218"
@@ -397,7 +397,7 @@
          sodipodi:type="arc"
          transform="matrix(0.61016949,0,0,0.56521739,132.83051,90.635732)" />
       <path
-         d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+         d="m 244,662.36218 c 0,3.31371 -2.46243,6 -5.5,6 -3.03757,0 -5.5,-2.68629 -5.5,-6 0,-3.31371 2.46243,-6 5.5,-6 3.03757,0 5.5,2.68629 5.5,6 z"
          sodipodi:ry="6"
          sodipodi:rx="5.5"
          sodipodi:cy="662.36218"
@@ -408,7 +408,7 @@
          transform="matrix(0.61016949,0,0,0.56521739,132.83051,120.59225)" />
       <path
          transform="matrix(0.61016949,0,0,0.56521739,158.59323,75.374863)"
-         d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+         d="m 244,662.36218 c 0,3.31371 -2.46243,6 -5.5,6 -3.03757,0 -5.5,-2.68629 -5.5,-6 0,-3.31371 2.46243,-6 5.5,-6 3.03757,0 5.5,2.68629 5.5,6 z"
          sodipodi:ry="6"
          sodipodi:rx="5.5"
          sodipodi:cy="662.36218"
@@ -417,7 +417,7 @@
          style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
          sodipodi:type="arc" />
       <path
-         d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+         d="m 244,662.36218 c 0,3.31371 -2.46243,6 -5.5,6 -3.03757,0 -5.5,-2.68629 -5.5,-6 0,-3.31371 2.46243,-6 5.5,-6 3.03757,0 5.5,2.68629 5.5,6 z"
          sodipodi:ry="6"
          sodipodi:rx="5.5"
          sodipodi:cy="662.36218"
@@ -427,7 +427,7 @@
          sodipodi:type="arc"
          transform="matrix(0.61016949,0,0,0.56521739,158.59323,90.635732)" />
       <path
-         d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+         d="m 244,662.36218 c 0,3.31371 -2.46243,6 -5.5,6 -3.03757,0 -5.5,-2.68629 -5.5,-6 0,-3.31371 2.46243,-6 5.5,-6 3.03757,0 5.5,2.68629 5.5,6 z"
          sodipodi:ry="6"
          sodipodi:rx="5.5"
          sodipodi:cy="662.36218"
@@ -438,7 +438,7 @@
          transform="matrix(0.61016949,0,0,0.56521739,158.59323,120.59225)" />
       <path
          transform="matrix(0.61016949,0,0,0.56521739,206.35593,75.374863)"
-         d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+         d="m 244,662.36218 c 0,3.31371 -2.46243,6 -5.5,6 -3.03757,0 -5.5,-2.68629 -5.5,-6 0,-3.31371 2.46243,-6 5.5,-6 3.03757,0 5.5,2.68629 5.5,6 z"
          sodipodi:ry="6"
          sodipodi:rx="5.5"
          sodipodi:cy="662.36218"
@@ -447,7 +447,7 @@
          style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
          sodipodi:type="arc" />
       <path
-         d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+         d="m 244,662.36218 c 0,3.31371 -2.46243,6 -5.5,6 -3.03757,0 -5.5,-2.68629 -5.5,-6 0,-3.31371 2.46243,-6 5.5,-6 3.03757,0 5.5,2.68629 5.5,6 z"
          sodipodi:ry="6"
          sodipodi:rx="5.5"
          sodipodi:cy="662.36218"
@@ -457,7 +457,7 @@
          sodipodi:type="arc"
          transform="matrix(0.61016949,0,0,0.56521739,206.35593,90.635732)" />
       <path
-         d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+         d="m 244,662.36218 c 0,3.31371 -2.46243,6 -5.5,6 -3.03757,0 -5.5,-2.68629 -5.5,-6 0,-3.31371 2.46243,-6 5.5,-6 3.03757,0 5.5,2.68629 5.5,6 z"
          sodipodi:ry="6"
          sodipodi:rx="5.5"
          sodipodi:cy="662.36218"
@@ -468,7 +468,7 @@
          transform="matrix(0.61016949,0,0,0.56521739,206.35593,120.59225)" />
       <path
          transform="matrix(0.61016949,0,0,0.56521739,234.11864,75.374863)"
-         d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+         d="m 244,662.36218 c 0,3.31371 -2.46243,6 -5.5,6 -3.03757,0 -5.5,-2.68629 -5.5,-6 0,-3.31371 2.46243,-6 5.5,-6 3.03757,0 5.5,2.68629 5.5,6 z"
          sodipodi:ry="6"
          sodipodi:rx="5.5"
          sodipodi:cy="662.36218"
@@ -477,7 +477,7 @@
          style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
          sodipodi:type="arc" />
       <path
-         d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+         d="m 244,662.36218 c 0,3.31371 -2.46243,6 -5.5,6 -3.03757,0 -5.5,-2.68629 -5.5,-6 0,-3.31371 2.46243,-6 5.5,-6 3.03757,0 5.5,2.68629 5.5,6 z"
          sodipodi:ry="6"
          sodipodi:rx="5.5"
          sodipodi:cy="662.36218"
@@ -487,7 +487,7 @@
          sodipodi:type="arc"
          transform="matrix(0.61016949,0,0,0.56521739,234.11864,90.635732)" />
       <path
-         d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+         d="m 244,662.36218 c 0,3.31371 -2.46243,6 -5.5,6 -3.03757,0 -5.5,-2.68629 -5.5,-6 0,-3.31371 2.46243,-6 5.5,-6 3.03757,0 5.5,2.68629 5.5,6 z"
          sodipodi:ry="6"
          sodipodi:rx="5.5"
          sodipodi:cy="662.36218"
@@ -497,7 +497,7 @@
          sodipodi:type="arc"
          transform="matrix(0.61016949,0,0,0.56521739,234.11864,120.59225)" />
       <path
-         d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+         d="m 244,662.36218 c 0,3.31371 -2.46243,6 -5.5,6 -3.03757,0 -5.5,-2.68629 -5.5,-6 0,-3.31371 2.46243,-6 5.5,-6 3.03757,0 5.5,2.68629 5.5,6 z"
          sodipodi:ry="6"
          sodipodi:rx="5.5"
          sodipodi:cy="662.36218"
@@ -507,7 +507,7 @@
          sodipodi:type="arc"
          transform="matrix(0.61016949,0,0,0.56521739,132.83051,105.33138)" />
       <path
-         d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+         d="m 244,662.36218 c 0,3.31371 -2.46243,6 -5.5,6 -3.03757,0 -5.5,-2.68629 -5.5,-6 0,-3.31371 2.46243,-6 5.5,-6 3.03757,0 5.5,2.68629 5.5,6 z"
          sodipodi:ry="6"
          sodipodi:rx="5.5"
          sodipodi:cy="662.36218"
@@ -517,7 +517,7 @@
          sodipodi:type="arc"
          transform="matrix(0.61016949,0,0,0.56521739,158.59323,105.33138)" />
       <path
-         d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+         d="m 244,662.36218 c 0,3.31371 -2.46243,6 -5.5,6 -3.03757,0 -5.5,-2.68629 -5.5,-6 0,-3.31371 2.46243,-6 5.5,-6 3.03757,0 5.5,2.68629 5.5,6 z"
          sodipodi:ry="6"
          sodipodi:rx="5.5"
          sodipodi:cy="662.36218"
@@ -527,7 +527,7 @@
          sodipodi:type="arc"
          transform="matrix(0.61016949,0,0,0.56521739,206.35593,105.33138)" />
       <path
-         d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+         d="m 244,662.36218 c 0,3.31371 -2.46243,6 -5.5,6 -3.03757,0 -5.5,-2.68629 -5.5,-6 0,-3.31371 2.46243,-6 5.5,-6 3.03757,0 5.5,2.68629 5.5,6 z"
          sodipodi:ry="6"
          sodipodi:rx="5.5"
          sodipodi:cy="662.36218"
@@ -692,20 +692,20 @@
     <text
        sodipodi:linespacing="125%"
        id="text2995"
-       y="97.362183"
+       y="95.362183"
        x="367"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
        xml:space="preserve"
        inkscape:export-filename="/home/yky/latex/AGI-16/genifer-model-0.png"
        inkscape:export-xdpi="600"
        inkscape:export-ydpi="600"><tspan
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Serif;-inkscape-font-specification:Serif"
-         y="97.362183"
+         style="font-size:28px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Times New Roman;-inkscape-font-specification:Times New Roman"
+         y="95.362183"
          x="367"
          id="tspan2997"
-         sodipodi:role="line">X</tspan></text>
+         sodipodi:role="line">x</tspan></text>
     <flowRoot
-       transform="translate(139,-412)"
+       transform="translate(141,-418)"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
        id="flowRoot2999"
        xml:space="preserve"
@@ -718,8 +718,8 @@
            height="32"
            width="32"
            id="rect3003" /></flowRegion><flowPara
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Serif;-inkscape-font-specification:Serif"
-         id="flowPara3005">X'</flowPara></flowRoot>    <path
+         style="font-size:28px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Times New Roman;-inkscape-font-specification:Times New Roman"
+         id="flowPara3005">x'</flowPara></flowRoot>    <path
        sodipodi:nodetypes="cc"
        inkscape:connector-curvature="0"
        id="path3007"
@@ -1629,7 +1629,7 @@
          id="tspan2997-6-4"
          sodipodi:role="line">u</tspan></text>
     <flowRoot
-       transform="translate(131.26367,-230.38124)"
+       transform="translate(135.26367,-236.38124)"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
        id="flowRoot2999-5"
        xml:space="preserve"
@@ -1642,8 +1642,8 @@
            height="32"
            width="32"
            id="rect3003-9" /></flowRegion><flowPara
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Serif;-inkscape-font-specification:Serif"
-         id="flowPara3005-63">X'</flowPara></flowRoot>    <path
+         style="font-size:28px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Times New Roman;-inkscape-font-specification:Times New Roman"
+         id="flowPara3005-63">x'</flowPara></flowRoot>    <path
        sodipodi:nodetypes="cc"
        inkscape:connector-curvature="0"
        id="path3007-8"
@@ -2123,7 +2123,7 @@
            id="tspan2997-8-4"
            x="564.32227"
            y="535.65222"
-           style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Serif;-inkscape-font-specification:Serif">X, u, X'</tspan></text>
+           style="font-size:28px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Times New Roman;-inkscape-font-specification:Times New Roman">x, u, x'</tspan></text>
     </g>
     <text
        sodipodi:linespacing="125%"
@@ -2150,13 +2150,13 @@
        inkscape:export-filename="/home/yky/latex/AGI-16/model-Sayaka.png"
        inkscape:export-xdpi="600"
        inkscape:export-ydpi="600"><tspan
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Serif;-inkscape-font-specification:Serif"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Times New Roman;-inkscape-font-specification:Times New Roman;font-size:28px"
          y="544.54919"
          x="363.26367"
          id="tspan2997-8-91"
-         sodipodi:role="line">X</tspan></text>
+         sodipodi:role="line">x</tspan></text>
     <flowRoot
-       transform="translate(135.26367,33.18695)"
+       transform="translate(137.26367,25.18695)"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
        id="flowRoot2999-5-9"
        xml:space="preserve"
@@ -2169,8 +2169,8 @@
            height="32"
            width="32"
            id="rect3003-9-9" /></flowRegion><flowPara
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Serif;-inkscape-font-specification:Serif"
-         id="flowPara3005-63-3">X'</flowPara></flowRoot>    <path
+         style="font-size:28px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Times New Roman;-inkscape-font-specification:Times New Roman"
+         id="flowPara3005-63-3">x'</flowPara></flowRoot>    <path
        sodipodi:nodetypes="cc"
        inkscape:connector-curvature="0"
        id="path3007-8-3"
@@ -2276,11 +2276,11 @@
        inkscape:export-filename="/home/yky/latex/AGI-16/model-with-u.png"
        inkscape:export-xdpi="600"
        inkscape:export-ydpi="600"><tspan
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Serif;-inkscape-font-specification:Serif"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Times New Roman;-inkscape-font-specification:Times New Roman;font-size:28px"
          y="270.98096"
          x="359.26367"
          id="tspan2997-8"
-         sodipodi:role="line">X</tspan></text>
+         sodipodi:role="line">x</tspan></text>
     <g
        id="g5754"
        transform="translate(0,-1.9392097)"
