@@ -10,6 +10,8 @@
 \usepackage{amssymb}			% for \multimap, \updownarrow, \bigstar
 \usepackage{sectsty}			% change section color
 \usepackage{turnstile}		% longer turnstiles
+\usepackage{wasysym}			% smileys
+\usepackage{cancel}			% center "not" line for "broken heart"
 
 % *************** Delete when not using Chinese or colors **********************
 \usepackage{xeCJK}
@@ -47,12 +49,10 @@
 \newsavebox{\MyName}
 \savebox{\MyName}{\includegraphics[scale=0.6]{YKY.png}}
 
-\title{游荡在思考的迷宫中}
-\titlerunning{游荡在思考的迷宫中}
+\title{逻辑与神经网络之间的桥}
+\titlerunning{逻辑与神经网络之间的桥}
 \author{\usebox{\MyName} (King-Yin Yan)
 % \\ \footnotesize{General.Intelligence@Gmail.com}
-\and
-Juan Carlos Kuri Pinto
 }
 \institute{General.Intelligence@Gmail.com}
 
@@ -64,17 +64,30 @@ Juan Carlos Kuri Pinto
 \setlength{\parskip}{2.8ex}
 
 
-\begin{abstract}
-简单介绍笔者的强人工智能理论和强化学习、动态规划、最优控制、Hamiltonian 力学系统的关系。
+% \begin{abstract}
 % 假设 $x$ 是思维状态。 在经典逻辑智能中，$x$ 是一束命题，代表当下的思考状况。 思考的过程就是不断重复进行推导: $x \vdash x' \vdash ...$。 在经典 AI 中这个作用是靠无数的逻辑 rules 来达成的。 但现在我们的做法是将 $x$ 放到向量空间中，再用一个 recurrent 神经网络来取代整个 rules base。
-\end{abstract}
+% \end{abstract}
 
-\section{中心思想}
+有个问题希望数学专业的人帮手解决一下：
 
-The \textbf{metaphor} here is that of reinforcement learning controlling an autonomous agent to navigate the maze of ``thoughts space'':
+\textbf{人工智能}基本上分为两大阵营： \emp{逻辑 AI} (logic-based AI) 和 \emp{神经网络} (connectionism)。
+
+逻辑 AI 那边，「结构」很精细，但学习算法太慢；  我的目的是建立一道「桥」，将逻辑 AI 的某部分结构\textbf{转移}到神经网络那边，这样可以融合两边的好处。
+\begin{equation}
+\includegraphics[scale=0.6]{bridge.png}
+\end{equation}
+
+这个问题搞了很久都未能解决，因为逻辑 AI 那边的结构不是一般常见的数学结构，单是要要表述出来也有很大困难。 这表述个问题大概可以叫做 algebraization of logic，现在仍没有公认的答案，但有不少「部分成功」的理论（下述）。
+
+我首先解释 neural network 那边的结构，然后再解释 logic 那边的结构。
+
+\section{Neural architecture}
+
+打个比喻来说，就是用\emp{强化学习}去控制一隻智慧生物，在「思考空间」的迷宫中找最佳路径：
 \begin{equation}
 \includegraphics[scale=0.5]{maze-metaphor.png}
 \end{equation}
+强化学习特别适合解决这类问题，可以参看我写的 tutorial。
 
 关键是将「思考」看成是一个\emp{动态系统} (dynamical system)，它运行在\emp{思维状态} (mental states) 的空间中：
 \begin{equation}
@@ -83,15 +96,16 @@ The \textbf{metaphor} here is that of reinforcement learning controlling an auto
 \end{equation}
 
 举例来说，一个\emp{思维状态}可以是以下的一束命题：
+\renewcommand\labelitemi{\textbullet}
 \begin{itemize}
-\item 我在我的房间内，正在写一篇 AGI-16 的论文。
-\item 我正在写一句句子的开头：「举例来说，....」
-\item 我将会写一个 NP (noun phrase)：「一个思维状态....」
+\item 我在我的房间内，正在写一篇论文。
+\item 我正在写一句句子的开头：「我在我的房间内，....」
+\item 我将会写一个动词词组 (verb phrase)：「正在写....」
 \end{itemize}
 
 思考的过程就是从一个思维状态 \emp{过渡} (transition) 到另一个思维状态。 就算我现在说话，我的脑子也是靠思维状态记住我说话说到句子结构的哪部分，所以我才能组织句子的语法。
 
-思维状态是一支向量 $\vect{x} \in X$，$X$ 是全体思维空间，思考算子 (reasoning operator) $R$ 是一个 endomorphism 映射： $X \rightarrow X$。
+\textbf{思维状态}是一支向量 $\vect{x} \in X$，$X$ 是全体\emp{思维空间}，思考算子 (reasoning operator) $F: X \rightarrow X$ 是一个 endomorphism。
 
 %, we would have at disposal all the tools available in vector space such as:
 
@@ -105,15 +119,56 @@ The \textbf{metaphor} here is that of reinforcement learning controlling an auto
 %\item neural networks and deep learning ... etc.
 %\end{itemize}
 
-换句话说： 我们将逻辑 AI 的整套器材搬到向量空间中去处理。 这个做法，部分是受到 Google 的 PageRank 和 Word2Vec \cite{Mikolov2013} 算法的启发，因为它们都是在向量空间中运作，而且非常成功。 %, both exploit the efficiency of vector and matrix calculus.
+% 换句话说： 我们将逻辑 AI 的整套器材搬到向量空间中去处理。 这个做法，部分是受到 Google 的 PageRank 和 Word2Vec \cite{Mikolov2013} 算法的启发，因为它们都是在向量空间中运作，而且非常成功。 %, both exploit the efficiency of vector and matrix calculus.
 
-\section{经典逻辑 AI}
+一个\emp{动态系统 (dynamical system)} 可以用以下方法定义：
+\begin{eqnarray}
+\mbox{离散时间：} \quad \quad & \vect{x}_{n+1} = \vect{F}(\vect{x}_n) \\
+\mbox{连续时间：} \quad \quad & \dot{\vect{x}} = \vect{f}(\vect{x}) \label{eqn-dynsys}
+\end{eqnarray}
+其中 $f$ 也可以随时间改变。 如果 $f$ 不依赖时间，则系统是 time-invariant （定常的），形式上如(\ref{eqn-dynsys}) 那种微分方程叫作 autonomous （自主的）。 为方便起见，有时我会滥用 $F$ 和 $f$ 的表述（不区分连续和离散）。
 
-Strong AI 的问题在理论上已经被\emp{数理逻辑}完整地描述了，馀下的问题是\emp{学习算法}，因为在逻辑 AI 的架构下，学习算法很慢（复杂性很高），这就是我们要解决的。
+一个（连续时间的）\emp{控制系统 (control system)} 定义为：
+\begin{equation}
+\dot{\vect{x}}(t) = f(\vect{x}(t), \vect{u}(t), t) \label{eqn-ctrlsys}
+\end{equation}
+其中 $\vect{u}(t)$ 是\emp{控制向量}。 控制论的目的就是找出最好的 $\vect{u}^*(t)$，令系统由初始状态 $\vect{x}_0$ 去到终点状态 $\vect{x_\bot}$。
 
-我研究 logic-based AI 很多年，因此我的思路喜欢将新问题还原到逻辑 AI 那边去理解，但实际上我提倡的解决办法不是靠经典逻辑，甚至不是 symbolic 的。  但在这篇文章我还是会经常跳回到逻辑 AI 去方便理解。
+\textbf{动力系统} \ref{eqn-dynsys} 有标准的 Hamiltonian 力学解释，这可以看成是「思维动力学」。 系统的\textbf{相位空间}有 symplectic 结构，可以利用这结构更有效地解微分方程 \ref{eqn-dynsys}。
 
-用数理逻辑模拟人的思想是可行的，例如有 deduction, abduction, induction 等这些模式，详细可见《Computational logic and human thinking》by Robert Kowalski, 2011.  这些方面不影响本文的阅读。 值得一提的是，作者 Kowalski 是 logic programming，特别是 Prolog，的理论奠基人之一。
+而\textbf{控制系统} \ref{eqn-ctrlsys} 中，每次到达新状态 $x$，外部会给出一个奖励 $r(x)$，它对应於 Lagrangian，其单位是\textbf{能量}。 （换句话说，智能系统的欲望是用能量量度的； 详见 tutorial。）  
+
+\emp{动态规划} (dynamic programming) 的中心思想是
+
+注意： 人工智能中的 \emp{A* search}，是动态规划的一个特例。 换句话说，用动态规划在某个空间中「漫游」，可以模拟 best-first 搜寻的功能。
+
+我们的目标是学习 $F \in \{$ 无限维的算子空间 $\}$。 实践上 $F$ 可以用 deep learning network 代表，换句话说 $F$ 就是一个有很多 parameters 的非线性算子 (= 神经网络)。 
+
+一个\textbf{神经网络}基本上是：
+\begin{equation}
+F(\vect{x}) = \sigmoid(W_1 \sigmoid(W_2 ... \sigmoid(W_L \; \vect{x} )))
+\end{equation}
+其中 $L$ 是层数，W 是每层的权重\textbf{矩阵}，$\sigmoid$ 是对每个分量的 sigmoid function （其作用是赋予非线性）。
+
+所有 $W$ 的分量存在於一个\textbf{高维流形}之中，\textbf{学习}的目的就是在这流形中寻找最好的 $W^*$。 在这流形上可以定义一个\textbf{度量} (metric)（例如引入随机性之后，用 Kullback–Leibler divergence 定义），这是 information geometry 的做法，用 geodesic 可以令学习快点。 
+
+在这框架下，智能系统的运作可以分开成两方面： \emp{思考} 和 \emp{学习}。
+
+\emp{思考}即是根据已学得的知识（知识储存在 RNN 里），在思维空间中找寻 $\vect{x}$ 最优的轨迹，方法是用控制论计算 $\vect{u}^*$。 $\vect{x}$ 的轨迹受 RNN 约束（系统只能依据「正确」的知识去思考），但思考时 RNN 是不变的。
+
+\emp{学习}就是学习神经网络 RNN 的 weights $W$。 此时令 $u = 0$，即忽略控制论方面。
+
+而很明显，「自由」的 $F$ 算子没有「内部结构」，它能够学习的就像是曱甴那样的、简单的「条件反射」行为。 如果要达到人类的智慧，则要学习很久（到时我们都死了）。
+
+所以问题就是要赋予 $F$ 更多的\textbf{结构}，特别是逻辑结构。 直观地说，越多的结构令\textbf{搜寻空间}越小，学习会越快。 这是机器学习里面 inductive bias 的标准做法。
+
+\section{Logic-based AI}
+
+% Strong AI 的问题在理论上已经被\emp{数理逻辑}完整地描述了，馀下的问题是\emp{学习算法}，因为在逻辑 AI 的架构下，学习算法很慢（复杂性很高），这就是我们要解决的。
+
+% 我研究 logic-based AI 很多年，因此我的思路喜欢将新问题还原到逻辑 AI 那边去理解，但实际上我提倡的解决办法不是靠经典逻辑，甚至不是 symbolic 的。  但在这篇文章我还是会经常跳回到逻辑 AI 去方便理解。
+
+用数理逻辑 (mathematical logic) 模拟人的思想是可行的，例如有 deduction, abduction, induction 等这些模式，详细可见《Computational logic and human thinking》by Robert Kowalski, 2011.  这些方面不影响本文的阅读。 值得一提的是，作者 Kowalski 是 logic programming，特别是 Prolog，的理论奠基人之一。
 
 在经典逻辑 AI 中，「思考」是透过一些类似以下的步骤：
 \begin{eqnarray}
@@ -130,11 +185,102 @@ Strong AI 的问题在理论上已经被\emp{数理逻辑}完整地描述了，�
 
 注意： 命题里面的 x，好比是有「洞」的命题，它可以透过 substitution 代入一些实物 (objects)，而变成完整的命题。 这种「句子内部」(sub-propositional)的结构可以用 predicate logic （谓词逻辑）表达，但暂时不需要理会这些细节。
 
-Logic-based AI 可以看成是将世界的「模型」压缩成一个「知识库」(knowledge-base, KB)，里面装著大量逻辑式子：
+「所有人失恋了都会不开心」：
+\begin{equation}
+\forall z. \; \cancel\heartsuit(z) \rightarrow \frownie{}(z)
+\end{equation}
+在数理逻辑中这是一条 \emp{公理} (axiom)，但在 AI 中这些公理是从主体的经验中\textbf{学习}出来的，我们仍沿用「公理」这术语。 在 AI 术语中，公理的集合叫 knowledge base，记作 $\KB$。 注意 $\KB$ 是一堆 \textbf{formulas} 的集合。 
+
+Logic-based AI 可以看成是将世界的「模型」压缩成一个 $\KB$： %，里面装著大量逻辑式子
 \begin{equation}
 \includegraphics[scale=0.5]{world-model-compression.png}
 \end{equation}
-世界模型是由大量的逻辑式子经过组合而\emp{生成}的，有点像向量空间是由其「基底」生成； 但这生成过程在逻辑中特别复杂，所以符号逻辑具有很高的\emp{压缩比}，但要学习一套逻辑知识库，则相应地也有极高的\emp{复杂度}。
+世界模型是由大量的逻辑式子经过组合而\emp{生成}的，有点像向量空间是由其「基底」生成； 但这生成过程在逻辑中特别复杂，所以符号逻辑具有很高的\emp{压缩比}，但要学习一套逻辑 $\KB$，则相应地也有极高的\emp{复杂度}。
+
+\begin{equation}
+x \cup \KB \sststile{}{} x'
+\end{equation}
+
+逻辑 AI 的结构有两部分：
+\begin{itemize}
+\item 由一些命题推导出另一些命题
+% \item 命题的内部结构（命题由概念原子组合而成）
+\item 逻辑变量的处理
+\end{itemize}
+以下分别介绍。
+
+\subsection{由一些命题推导出另一些命题}
+
+命题也有内部结构（即命题可以由概念原子组合而成），但我们先从最简单情况谈起，即\textbf{命题逻辑}。
+
+最简单的经典命题逻辑，是 Boolean propositional logic，它的\textbf{代数形式}是我们熟悉的 Boolean algebra，二者几乎没有分别（纯粹逻辑符号和代数符号的对应）。 
+
+在 Boolean algebra 可以定义一种 ideal $I$：
+\begin{itemize}
+\item If $a, b \in I$ then $a \wedge b \in I$
+\item If $a \in I$ and $a \le b$ then $b \in I$
+\end{itemize}
+其中 $a \le b$ 表示 $a \Rightarrow b$（a 蕴涵 b）。
+
+由上面可以看出，这个 ideal 其实是由某些元素(命题)生成的 \emp{逻辑后果}(logical consequence)； 换句话说，给定一个命题集 $\Gamma$，问 $\Gamma \stackrel{?}{\vdash} a$（从 $\Gamma$ 可以推导出 $a$ 吗？） 就等於问 $a$ 是不是 $\Gamma$ 生成的 ideal membership 问题。 也可以说，代数 ideal $\equiv$ 逻辑 consequence。 （严格来说，consequence 对应的是 filter 的概念，而 filter 是 ideal 的 dual，因为 0 和 1 对应的倒错，但这不是重点。）
+
+\textbf{逻辑后果}可以记作 $\vdash$ 或 Cn，Tarski 定义了 $\vdash$ （很明显）的特性：
+\begin{itemize}
+\item (reflexivity): \quad $A \vdash A$ for every formula $A$
+\item (monotonicity): \quad $A \vdash Q$ implies $A, B \vdash Q$
+\item (`cut'): \quad \quad $A \vdash B$ and $A, B \vdash Q$ implies $A \vdash Q$
+\end{itemize}
+
+% 在 Boolean algebra 中有一些 inference rules，例如：
+
+以上是 Boolean logic 的代数化，但如果考虑 probabilistic logic 就更为复杂，需要用到 Bayesian networks，而 filter $\equiv$ consequence 的原理似乎不再适用。 
+
+Bayesian network 的细节很麻烦，可以花整个研究生课程来讲。
+
+重点是： Bayesian network 是由一些\emp{条件概率} (conditional probability) 的关系生成的。 每个\textbf{节点}是一个命题，每个\textbf{连结}是一个条件概率关系，例如：
+\begin{equation}
+P(A|B,C,D,...) = \vec{p}
+\end{equation}
+其中 $\vec{p}$ 是一个 conditional probability table (CPT)。
+
+对不起，用一个较粗俗的例子说明（在我多年的教学经验里，这是最易懂的例子）：
+\begin{equation}
+\includegraphics[scale=0.5]{farting.png}
+\end{equation}
+这个 Bayesian network 是由两个 CPT 生成的：
+\begin{eqnarray}
+P(\mbox{放屁} | \mbox{臭味}, \mbox{声音}) = \vec{p}_1 \nonumber \\
+P(\mbox{臭蛋} | \mbox{臭味}) = \vec{p}_2
+\end{eqnarray}
+如果有「声音」又有「臭味」，则「有人放屁」的机率很高，而「臭蛋」的机率却会减少。 换句话说，「臭蛋」的机率被扯到「放屁」那边去了； 这个现象叫 ``explaining away''，它说明 Bayesian network 中，所有节点都是 globally 相关的。 所以，当求解 Bayesian network 的某个节点时，它的概率会是一连串很复杂的 sum-product 形式。 看来用 Bayesian network 表示 $\vdash$ 的方法太复杂了。
+
+可幸的是，可以用 Monte Carlo 方法求解 Bayesian network： 开始时随机地指定节点的概率，然后随机地选取某些节点来作「\textbf{局部}」的 update； 当随机 update 的次数趋近无限，节点的机率会收敛到正确的值。 换句话说： 这是一个 \textit{local} 的计算 Bayesian network 的方法。
+
+Knowledge-based model construction (\emp{KBMC}) 这个术语较少人知道，但其实是最关键的结构； 换句话说，就是从 $\KB$ 中抽出一组命题 $\Gamma$，去\textbf{组合}一个 model 或 proof tree，而这个 proof tree 的某个节点，就是新的结论。 亦即 $\Gamma \vdash Q$。 KBMC 的概念适用於经典逻辑也适用於 Bayesian networks。
+
+\subsection{逻辑变量的处理}
+
+这可能是最辣手的部分。
+
+Alfred Tarski 提出了 cylindrical algebra 来解决「一阶谓词逻辑」的变量问题，但据说 Tarski 自己也觉得 cylindrical algebra 「不好用」。 我觉得它比较难明，从略。
+
+个人觉得比较好的做法是 Paul Halmos 的 algebraic logic。 其中最关键的建构是：
+\renewcommand\labelitemi{--}
+\begin{eqnarray}
+\mbox{谓词} : \mbox{物体} & \rightarrow & \mbox{命题空间} \nonumber \\
+\cancel\heartsuit : \cancel\heartsuit(\mbox{john}) & \mapsto & \mbox{「阿 John 失恋」} \nonumber \\
+\cancel\heartsuit : \cancel\heartsuit(\mbox{pete}) & \mapsto & \mbox{「阿 Pete 失恋」}
+\end{eqnarray}
+换句话说，predicate（谓词）就是一些将 object （逻辑中的物体，或「常项」，constants）映射到个别命题的\textbf{函数}。 这些谓词函数可以有一个或多个\textbf{参数}，分别叫 monadic 和 polyadic predicate calculus。
+
+最新的逻辑代数化方法来自\emp{範畴论}，William Lawvere 在 1960's 年代提出（也就是 \textit{Conceptual Mathematics} 这本书的作者之一）。  他发现了 $\forall$ 和 $\exists$ 是 adjoint functors 的关系； 这个 adjunction 比较难懂，有兴趣可以看 \cite{Lawvere2003}。
+
+\vspace{1cm} \hrule
+
+\bibliographystyle{plain} % or number or aaai ...
+\bibliography{AGI-book}
+
+\end{document}
 
 \section{控制论}
 
@@ -149,7 +295,7 @@ Logic-based AI 可以看成是将世界的「模型」压缩成一个「知识�
 一个\emp{动态系统 (dynamical system)} 可以用以下方法定义：
 \begin{eqnarray}
 \mbox{离散时间：} \quad \quad & \vect{x}_{t+1} = \vect{F}(\vect{x}_t) \\
-\mbox{连续时间：} \quad \quad & \dot{\vect{x}} = \vect{f}(\vect{x}) \label{eqn1}
+\mbox{连续时间：} \quad \quad & \dot{\vect{x}} = \vect{f}(\vect{x}) % \label{eqn1}
 \end{eqnarray}
 其中 $f$ 也可以随时间改变。 如果 $f$ 不依赖时间，则系统是 time-invariant （定常的），形式上如(\ref{eqn1}) 那种微分方程叫作 autonomous （自主的）。
 
@@ -166,9 +312,9 @@ Logic-based AI 可以看成是将世界的「模型」压缩成一个「知识�
 \begin{equation}
 \dot{\vect{x}}(t) = f(\vect{x}(t), \vect{u}(t), t)
 \end{equation}
-其中 $\vect{u}(t)$ 是\emp{控制向量}。 控制论的目的就是找出最好的 $\vect{u}(t)$ 函数，令系统由初始状态 $\vect{x}_0$ 去到终点状态 $\vect{x_\bot}$。
+其中 $\vect{u}(t)$ 是\emp{控制向量}。 控制论的目的就是找出最好的 $\vect{u}^*(t)$，令系统由初始状态 $\vect{x}_0$ 去到终点状态 $\vect{x_\bot}$。
 
-注意： 人工智能中的 \emp{A* search}，是动态规划的一个特例。 换句话说，用动态规划在某个空间中「漫游」，可以模拟到 best-first 搜寻的功能。
+注意： 人工智能中的 \emp{A* search}，是动态规划的一个特例。 换句话说，用动态规划在某个空间中「漫游」，可以模拟 best-first 搜寻的功能。
 
 在这框架下，智能系统的运作可以分开成两方面： \emp{思考} 和 \emp{学习}。
 

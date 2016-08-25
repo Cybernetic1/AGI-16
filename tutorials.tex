@@ -47,12 +47,10 @@
 \newsavebox{\MyName}
 \savebox{\MyName}{\includegraphics[scale=0.6]{YKY.png}}
 
-\title{游荡在思考的迷宫中}
-\titlerunning{游荡在思考的迷宫中}
+\title{Tutorials}
+\titlerunning{Tutorials}
 \author{\usebox{\MyName} (King-Yin Yan)
 % \\ \footnotesize{General.Intelligence@Gmail.com}
-\and
-Juan Carlos Kuri Pinto
 }
 \institute{General.Intelligence@Gmail.com}
 
@@ -65,47 +63,9 @@ Juan Carlos Kuri Pinto
 
 
 \begin{abstract}
-简单介绍笔者的强人工智能理论和强化学习、动态规划、最优控制、Hamiltonian 力学系统的关系。
+简单介绍强化学习、动态规划、最优控制、Hamiltonian 力学系统的关系。
 % 假设 $x$ 是思维状态。 在经典逻辑智能中，$x$ 是一束命题，代表当下的思考状况。 思考的过程就是不断重复进行推导: $x \vdash x' \vdash ...$。 在经典 AI 中这个作用是靠无数的逻辑 rules 来达成的。 但现在我们的做法是将 $x$ 放到向量空间中，再用一个 recurrent 神经网络来取代整个 rules base。
 \end{abstract}
-
-\section{中心思想}
-
-The \textbf{metaphor} here is that of reinforcement learning controlling an autonomous agent to navigate the maze of ``thoughts space'':
-\begin{equation}
-\includegraphics[scale=0.5]{maze-metaphor.png}
-\end{equation}
-
-关键是将「思考」看成是一个\emp{动态系统} (dynamical system)，它运行在\emp{思维状态} (mental states) 的空间中：
-\begin{equation}
-\label{fig:mental-state}
-\includegraphics[scale=0.5]{mental-state.png}
-\end{equation}
-
-举例来说，一个\emp{思维状态}可以是以下的一束命题：
-\begin{itemize}
-\item 我在我的房间内，正在写一篇 AGI-16 的论文。
-\item 我正在写一句句子的开头：「举例来说，....」
-\item 我将会写一个 NP (noun phrase)：「一个思维状态....」
-\end{itemize}
-
-思考的过程就是从一个思维状态 \emp{过渡} (transition) 到另一个思维状态。 就算我现在说话，我的脑子也是靠思维状态记住我说话说到句子结构的哪部分，所以我才能组织句子的语法。
-
-思维状态是一支向量 $\vect{x} \in X$，$X$ 是全体思维空间，思考算子 (reasoning operator) $R$ 是一个 endomorphism 映射： $X \rightarrow X$。
-
-%, we would have at disposal all the tools available in vector space such as:
-
-%\begin{itemize}
-%\item numerical optimization (including gradient descent)
-%\item differential equations governing time evolution
-%\item dynamical systems theory, control theory (eg. adaptive filters)
-%\item Lie algebra and $C^*$-algebra of continuous operators
-%\item matrix theory, iteration and fixed-point theory
-%\item dynamic programming (aka. reinforcement learning)
-%\item neural networks and deep learning ... etc.
-%\end{itemize}
-
-换句话说： 我们将逻辑 AI 的整套器材搬到向量空间中去处理。 这个做法，部分是受到 Google 的 PageRank 和 Word2Vec \cite{Mikolov2013} 算法的启发，因为它们都是在向量空间中运作，而且非常成功。 %, both exploit the efficiency of vector and matrix calculus.
 
 \section{经典逻辑 AI}
 
@@ -645,9 +605,7 @@ x \sststile{}{\KB} x'
 
 我们将逻辑推导中的\textbf{搜寻}纳入到 transition function 的功能之中。 换句话说，transition function 的功能并不只是推导； 它是一种类似 stochastic search 的「游荡」。   
 
-在逻辑 AI 这边，我们要计算的是分布在 $\sststile{}{\KB}$ 上的测度 $Q$； 换句话说，对於不同的 $\KB$，我们有不同的 $\vdash$。 这似乎等於分布在所有不同的 $\KB$ 上的测度。
-
-
+在逻辑 AI 这边，我们要计算的是分布在 $\sststile{}{\KB}$ 上的测度 $Q$； 换句话说，对於不同的 $\KB$，我们有不同的 $\vdash$。 这似乎等於分布在很多不同的 $\KB$ 上的测度。
 
 In LBAI the knowledge representation structure is built (\textit{fixed}) from the bottom up:
 %\begin{equation}
