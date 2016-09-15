@@ -250,17 +250,19 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
+     inkscape:zoom="0.80555556"
      inkscape:cx="352"
-     inkscape:cy="548"
+     inkscape:cy="295.58621"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1029"
-     inkscape:window-height="1223"
+     inkscape:window-height="949"
      inkscape:window-x="0"
      inkscape:window-y="2"
-     inkscape:window-maximized="0" />
+     inkscape:window-maximized="0"
+     showborder="false"
+     inkscape:showpageshadow="true" />
   <metadata
      id="metadata3173">
     <rdf:RDF>
@@ -269,7 +271,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -467,7 +469,7 @@
        inkscape:export-ydpi="300" />
     <g
        id="g5618"
-       transform="translate(-62,98)">
+       transform="translate(-118,8)">
       <path
          inkscape:export-ydpi="300"
          inkscape:export-xdpi="300"
@@ -503,7 +505,7 @@
     </g>
     <g
        id="g5624"
-       transform="translate(-166,371)">
+       transform="translate(-213,290)">
       <path
          inkscape:export-ydpi="300"
          inkscape:export-xdpi="300"
@@ -679,5 +681,15 @@
            y="688.26434" /></flowRegion><flowPara
          id="flowPara6815"><flowSpan
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:AR PL UKai CN;-inkscape-font-specification:AR PL UKai CN"
-           id="flowSpan6817">:=</flowSpan></flowPara></flowRoot>  </g>
+           id="flowSpan6817">:=</flowSpan></flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3098"
+       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"><flowRegion
+         id="flowRegion3100"><rect
+           id="rect3102"
+           width="758"
+           height="445"
+           x="11"
+           y="908.36218" /></flowRegion><flowPara
+         id="flowPara3104">How to construct the memory?  </flowPara></flowRoot>  </g>
 </svg>

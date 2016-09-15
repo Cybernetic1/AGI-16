@@ -49,8 +49,8 @@
 \newsavebox{\MyName}
 \savebox{\MyName}{\includegraphics[scale=0.6]{YKY.png}}
 
-\title{逻辑与神经网络之间的桥}
-\titlerunning{逻辑与神经网络之间的桥}
+\title{逻辑与神经之间的桥}
+\titlerunning{逻辑与神经之间的桥}
 \author{\usebox{\MyName} (King-Yin Yan)
 % \\ \footnotesize{General.Intelligence@Gmail.com}
 }
@@ -64,30 +64,33 @@
 \setlength{\parskip}{2.8ex}
 
 
-% \begin{abstract}
+\begin{abstract}
+Logic-based AI 和 connectionist AI 长久分裂，但笔者最近发现了可以统一两者的理论。
 % 假设 $x$ 是思维状态。 在经典逻辑智能中，$x$ 是一束命题，代表当下的思考状况。 思考的过程就是不断重复进行推导: $x \vdash x' \vdash ...$。 在经典 AI 中这个作用是靠无数的逻辑 rules 来达成的。 但现在我们的做法是将 $x$ 放到向量空间中，再用一个 recurrent 神经网络来取代整个 rules base。
-% \end{abstract}
+\end{abstract}
 
-有个问题希望数学专业的人帮手解决一下：
+% 有个问题希望数学专业的人帮手解决一下：
 
-\textbf{人工智能}基本上分为两大阵营： \emp{逻辑 AI} (logic-based AI) 和 \emp{神经网络} (connectionism)。
+% \textbf{人工智能}基本上分为两大阵营： \emp{逻辑 AI} (logic-based AI) 和 \emp{神经网络} (connectionism)。
 
 逻辑 AI 那边，「结构」很精细，但学习算法太慢；  我的目的是建立一道「桥」，将逻辑 AI 的某部分结构\textbf{转移}到神经网络那边，这样可以融合两边的好处。
+
+这个问题搞了很久都未能解决，因为逻辑 AI 那边的结构不是一般常见的数学结构，单是要要表述出来也有很大困难。 直到我应用了 model theory 的观点，才找到满意的解决方法：
 \begin{equation}
 \includegraphics[scale=0.6]{bridge.png}
 \end{equation}
-
-这个问题搞了很久都未能解决，因为逻辑 AI 那边的结构不是一般常见的数学结构，单是要要表述出来也有很大困难。 这表述个问题大概可以叫做 algebraization of logic，现在仍没有公认的答案，但有不少「部分成功」的理论（下述）。
 
 我首先解释 neural network 那边的结构，然后再解释 logic 那边的结构。
 
 \section{Neural architecture}
 
-打个比喻来说，就是用\emp{强化学习}去控制一隻智慧生物，在「思考空间」的迷宫中找最佳路径：
+Itamar Arel 在 2012 年 \cite{Arel2012}、和我在 2016 年 \cite{Yan2017}、独立地提出了同样的 cognitive architecture： 合并 \textbf{增强学习}和\textbf{深度学习}。
+
+打个比喻来说，就是用\emp{增强学习}去控制一隻智慧生物，在「思考空间」的迷宫中找最佳路径：
 \begin{equation}
 \includegraphics[scale=0.5]{maze-metaphor.png}
 \end{equation}
-强化学习特别适合解决这类问题，可以参看我写的 tutorial。
+增强学习特别适合解决这类问题，可以参看我写的 tutorial。
 
 关键是将「思考」看成是一个\emp{动态系统} (dynamical system)，它运行在\emp{思维状态} (mental states) 的空间中：
 \begin{equation}
@@ -126,7 +129,8 @@
 \mbox{离散时间：} \quad \quad & \vect{x}_{n+1} = \vect{F}(\vect{x}_n) \\
 \mbox{连续时间：} \quad \quad & \dot{\vect{x}} = \vect{f}(\vect{x}) \label{eqn-dynsys}
 \end{eqnarray}
-其中 $f$ 也可以随时间改变。 如果 $f$ 不依赖时间，则系统是 time-invariant （定常的），形式上如(\ref{eqn-dynsys}) 那种微分方程叫作 autonomous （自主的）。 为方便起见，有时我会滥用 $F$ 和 $f$ 的表述（不区分连续和离散）。
+% 其中 $f$ 也可以随时间改变。 如果 $f$ 不依赖时间，则系统是 time-invariant （定常的），形式上如(\ref{eqn-dynsys}) 那种微分方程叫作 autonomous （自主的）。
+为方便起见，有时我会滥用 $F$ 和 $f$ 的表述（不区分连续和离散）。
 
 一个（连续时间的）\emp{控制系统 (control system)} 定义为：
 \begin{equation}
@@ -134,15 +138,15 @@
 \end{equation}
 其中 $\vect{u}(t)$ 是\emp{控制向量}。 控制论的目的就是找出最好的 $\vect{u}^*(t)$，令系统由初始状态 $\vect{x}_0$ 去到终点状态 $\vect{x_\bot}$。
 
-\textbf{动力系统} \ref{eqn-dynsys} 有标准的 Hamiltonian 力学解释，这可以看成是「思维动力学」。 系统的\textbf{相位空间}有 symplectic 结构，可以利用这结构更有效地解微分方程 \ref{eqn-dynsys}。
+% \textbf{动力系统} (\ref{eqn-dynsys}) 有标准的 Hamiltonian 力学解释，这可以看成是「思维动力学」。 系统的\textbf{相位空间}有 symplectic 结构，可以利用这结构更有效地解微分方程 (\ref{eqn-dynsys})。
 
-而\textbf{控制系统} \ref{eqn-ctrlsys} 中，每次到达新状态 $x$，外部会给出一个奖励 $r(x)$，它对应於 Lagrangian，其单位是\textbf{能量}。 （换句话说，智能系统的欲望是用能量量度的； 详见 tutorial。）  
+% 而\textbf{控制系统} \ref{eqn-ctrlsys} 中，每次到达新状态 $x$，外部会给出一个奖励 $r(x)$，它对应於 Lagrangian，其单位是\textbf{能量}。 （换句话说，智能系统的欲望是用能量量度的； 详见 tutorial。）  
 
-\emp{动态规划} (dynamic programming) 的中心思想是
+\emp{动态规划} (dynamic programming) 的中心思想是 Bellman equation； 我们根据 Bellman update 寻找状态空间中的\emp{最优路径}。
 
 注意： 人工智能中的 \emp{A* search}，是动态规划的一个特例。 换句话说，用动态规划在某个空间中「漫游」，可以模拟 best-first 搜寻的功能。
 
-我们的目标是学习 $F \in \{$ 无限维的算子空间 $\}$。 实践上 $F$ 可以用 deep learning network 代表，换句话说 $F$ 就是一个有很多 parameters 的非线性算子 (= 神经网络)。 
+我们的目标是学习 $F \in \{$ 无限维的算子空间 $\}$。 实践上 $F$ 可以用 deep learning network (dNN) 代表，换句话说 $F$ 就是一个有很多 parameters 的非线性算子 (= 神经网络)。 
 
 一个\textbf{神经网络}基本上是：
 \begin{equation}
@@ -150,13 +154,13 @@ F(\vect{x}) = \sigmoid(W_1 \sigmoid(W_2 ... \sigmoid(W_L \; \vect{x} )))
 \end{equation}
 其中 $L$ 是层数，W 是每层的权重\textbf{矩阵}，$\sigmoid$ 是对每个分量的 sigmoid function （其作用是赋予非线性）。
 
-所有 $W$ 的分量存在於一个\textbf{高维流形}之中，\textbf{学习}的目的就是在这流形中寻找最好的 $W^*$。 在这流形上可以定义一个\textbf{度量} (metric)（例如引入随机性之后，用 Kullback–Leibler divergence 定义），这是 information geometry 的做法，用 geodesic 可以令学习快点。 
+% 所有 $W$ 的分量存在於一个\textbf{高维流形}之中，\textbf{学习}的目的就是在这流形中寻找最好的 $W^*$。 在这流形上可以定义一个\textbf{度量} (metric)（例如引入随机性之后，用 Kullback–Leibler divergence 定义），这是 information geometry 的做法，用 geodesic 可以令学习快点。 
 
 在这框架下，智能系统的运作可以分开成两方面： \emp{思考} 和 \emp{学习}。
 
-\emp{思考}即是根据已学得的知识（知识储存在 RNN 里），在思维空间中找寻 $\vect{x}$ 最优的轨迹，方法是用控制论计算 $\vect{u}^*$。 $\vect{x}$ 的轨迹受 RNN 约束（系统只能依据「正确」的知识去思考），但思考时 RNN 是不变的。
+\emp{思考}即是根据已学得的知识（知识储存在 dNN 里），在思维空间中找寻 $\vect{x}$ 最优的轨迹，方法是用控制论计算 $\vect{u}^*$。 $\vect{x}$ 的轨迹受 dNN 约束（系统只能依据「正确」的知识去思考），但思考时 dNN 是不变的。
 
-\emp{学习}就是学习神经网络 RNN 的 weights $W$。 此时令 $u = 0$，即忽略控制论方面。
+\emp{学习}就是学习神经网络 dNN 的 weights $W$。 此时令 $u = 0$，即忽略控制论方面。
 
 而很明显，「自由」的 $F$ 算子没有「内部结构」，它能够学习的就像是曱甴那样的、简单的「条件反射」行为。 如果要达到人类的智慧，则要学习很久（到时我们都死了）。
 
@@ -189,7 +193,7 @@ F(\vect{x}) = \sigmoid(W_1 \sigmoid(W_2 ... \sigmoid(W_L \; \vect{x} )))
 \begin{equation}
 \forall z. \; \cancel\heartsuit(z) \rightarrow \frownie{}(z)
 \end{equation}
-在数理逻辑中这是一条 \emp{公理} (axiom)，但在 AI 中这些公理是从主体的经验中\textbf{学习}出来的，我们仍沿用「公理」这术语。 在 AI 术语中，公理的集合叫 knowledge base，记作 $\KB$。 注意 $\KB$ 是一堆 \textbf{formulas} 的集合。 
+在数理逻辑中这算是一条 \emp{公理} (axiom)，但在 AI 中这些公理是从主体的经验中\textbf{学习}出来的，我们仍沿用「公理」这术语。 在 AI 术语中，公理的集合叫 knowledge base，记作 $\KB$。 注意 $\KB$ 是一堆 \textbf{formulas} 的集合。 
 
 Logic-based AI 可以看成是将世界的「模型」压缩成一个 $\KB$： %，里面装著大量逻辑式子
 \begin{equation}
@@ -197,18 +201,44 @@ Logic-based AI 可以看成是将世界的「模型」压缩成一个 $\KB$： %
 \end{equation}
 世界模型是由大量的逻辑式子经过组合而\emp{生成}的，有点像向量空间是由其「基底」生成； 但这生成过程在逻辑中特别复杂，所以符号逻辑具有很高的\emp{压缩比}，但要学习一套逻辑 $\KB$，则相应地也有极高的\emp{复杂度}。
 
+\begin{comment}
 \begin{equation}
-x \cup \KB \sststile{}{} x'
+x \cup \KB \sdtstile{}{} x'
 \end{equation}
 
-逻辑 AI 的结构有两部分：
-\begin{itemize}
-\item 由一些命题推导出另一些命题
-% \item 命题的内部结构（命题由概念原子组合而成）
-\item 逻辑变量的处理
-\end{itemize}
-以下分别介绍。
+\begin{equation}
+\KB \, , \, \Gamma \sststile{}{} \Delta
+\end{equation}
+\end{comment}
 
+\section{逻辑的结构}
+
+一个逻辑系统可以这样定义：
+\begin{itemize}
+\item 一些 constant symbols，predicate symbols，和 function symbols
+\item 由上述的原子建立 \emp{命题} (propositions)
+\item 命题之间可以有连接词： $\neg, \wedge, \vee$ 等
+\item 建立 \emp{逻辑后果} (consequence) 关系： $\Gamma \vdash \Delta$
+% \item 命题的内部结构（命题由概念原子组合而成）
+\end{itemize}
+
+我个人认为 relation algebra 比较接近人类自然语言，但在数理逻辑研究中最通用的逻辑是 first-order logic (FOL)。 然而这并不是重点，因为各种逻辑基本上是等效的，而且相互之间可以很容易地转换。 以下集中讨论 FOL。  
+
+我以前花了很多时间思考怎样将逻辑的 $\vdash$ 关系过渡到神经网络去，但发觉这个目标非常 elusive。
+
+在认知科学里，有很多人相信大脑的内部的 representation 是一些所谓 ``mental models''，而很少人会相信大脑使用一些像命题那样的符号结构做 representation，甚至用 $\lambda$-calculus 那样的符号 manipulation 去思考。
+
+另一方面，逻辑是几百年来发展起来的关於人类思考的规律； 逻辑的描述是正确的； 逻辑和神经之间必然有一个 correspondence，因为它们都在做同样的事： 智能。 
+
+所以我终於发现到，logic-neuro correspondence 必须透过 model theory \cite{Doets1996} \cite{Manzano1999} 才能达成：
+\begin{equation}
+\includegraphics[scale=0.75]{model-theory.png}
+\end{equation}
+
+% \footnote{Knowledge-based model construction (\emp{KBMC}) 这个术语较少人知道，但其实是最关键的结构； 换句话说，就是从 $\KB$ 中抽出一组命题 $\Gamma$，去\textbf{组合}一个 model 或 proof tree，而这个 proof tree 的某个节点，就是新的结论。 亦即 $\Gamma \vdash Q$。 KBMC 的概念适用於经典逻辑也适用於 Bayesian networks。}
+
+% ====================================================================================
+\begin{comment}
 \subsection{由一些命题推导出另一些命题}
 
 命题也有内部结构（即命题可以由概念原子组合而成），但我们先从最简单情况谈起，即\textbf{命题逻辑}。
@@ -256,9 +286,73 @@ P(\mbox{臭蛋} | \mbox{臭味}) = \vec{p}_2
 
 可幸的是，可以用 Monte Carlo 方法求解 Bayesian network： 开始时随机地指定节点的概率，然后随机地选取某些节点来作「\textbf{局部}」的 update； 当随机 update 的次数趋近无限，节点的机率会收敛到正确的值。 换句话说： 这是一个 \textit{local} 的计算 Bayesian network 的方法。
 
-Knowledge-based model construction (\emp{KBMC}) 这个术语较少人知道，但其实是最关键的结构； 换句话说，就是从 $\KB$ 中抽出一组命题 $\Gamma$，去\textbf{组合}一个 model 或 proof tree，而这个 proof tree 的某个节点，就是新的结论。 亦即 $\Gamma \vdash Q$。 KBMC 的概念适用於经典逻辑也适用於 Bayesian networks。
+% ==================================================================================
+\end{comment}
 
-\subsection{逻辑变量的处理}
+\section{Model theory}
+
+如果用範畴论的方法表示：
+\begin{equation}
+\begin{tikzcd}[]
+\mathcal{L} \arrow[d, "i"] \\
+\mathcal{M}_1 \arrow[r, phantom, "\simeq"] & \mathcal{M}_2 \\
+& \arrow[u, "\mbox{dNN}" swap] \mathcal{S}
+\end{tikzcd}
+\end{equation}
+\begin{itemize}
+\item $\mathcal{L}$ = category of logic theories (= sets of formulas)
+\item $i$ = interpretation maps
+\item $\mathcal{M}_1$ = category of models (from logic)
+\item $\mathcal{M}_2$ = category of models (from deep NNs)
+\item $\mathcal{S}$ = sensory input
+\end{itemize}
+
+上图等同於下面的卡通解释：
+\begin{equation}
+\includegraphics[scale=0.7]{model-theory-cartoon.png}
+\end{equation}
+
+换句话说，$\mathcal{M}_2 = \vcenter{\hbox{\includegraphics{cloud.png}}}$ 是由深度学习 induce 出来的结构； 但它的结构对我们来说是不透明的（这是神经网络的弱点）。
+
+而 $\mathcal{M}_1 = \vcenter{\hbox{\includegraphics{algebraic-model.png}}}$ 的结构是 free 的； 换句话说，那 $i$ map 的 source domain 是固定的，但 target domain 是自由的。 这导致 $i$ map 的学习很困难，因为 $\mathcal{M}_1$ 和 $\mathcal{M}_2$ 的结构都不清楚。 必须更详细分析 $\mathcal{M}_1, \mathcal{M}_2$ 的结构。
+
+\section{Model 和 interpretation 的结构}
+
+在模型论中，$\mathcal{L}$ 是逻辑句子的範畴，$\mathcal{M}_1 = \vcenter{\hbox{\includegraphics{algebraic-model.png}}}$ 可以是任何抽象代数结构。 只需把 $\mathcal{L}$ 中的 constants, predicates, relations, functions 映射到 $\mathcal{M}_1$ 就行。 为简化讨论，我们只考虑 constants 和 relations，因为二者是逻辑中最\textbf{本质}的东西。 
+\begin{eqnarray}
+\mathcal{L} & \quad \stackrel{i}{\rightarrow} \quad & \mathcal{M}_1 \nonumber \\
+\mbox{constant symbol} & \quad \stackrel{i}{\mapsto} \quad & \; \includegraphics[scale=0.5]{node.png} \\
+\mbox{relation symbol} & \quad \stackrel{i}{\mapsto} \quad & \; \includegraphics[scale=0.5]{link.png} \nonumber
+\end{eqnarray}
+
+问题是在神经那边缺乏 $\vcenter{\hbox{\includegraphics{algebraic-model.png}}}$ 的结构。 一直以来，人们习惯把神经网络看成是 ``black box''，但如果我们不知道 $\mathcal{M}_2 =  \vcenter{\hbox{\includegraphics{cloud.png}}}$ 的结构，就无法建立 $\mathcal{M}_1 \simeq \mathcal{M}_2$ 的 isomorphism。
+
+那么，神经网络的 representation 究竟是什么结构？  
+
+考虑最简单的情况，例如提取 digit ``9'' 的特徵的一层网络。 这层网络可以有很多神经元（左图），每个神经元局部地覆盖输入层，即所谓视觉神经元的 local receptive field（右图）。
+\begin{equation}
+\includegraphics[scale=0.5]{feature-recognition.png}
+\end{equation}
+假设红色的神经元专门负责辨识「对角线」这一特徵。 它的方程式是 $\vect{y} = \sigmoid (W \vect{x})$。  矩阵 $W$ 的作用是 affine「旋转」特徵空间，令我们想要的特徵集中在某一方向。 然后再用 $\sigmoid$ 「\textbf{扯开}」想要的特徵和不想要的特徵\footnote{所谓「扯」(stretch) 的意思是说，将本来邻近的两点的距离非线性地拉远。 看看以下各种常见的激活函数，它们全都是相对於 identity $y = x$ 的非线性 distortion：
+\begin{equation}
+\includegraphics[scale=0.25]{activation-functions.png}
+\end{equation}
+这和 Steven Smale 提出的「马蹄」\cite{Smale1967} 非常类似，它是制造混沌的处方之一。 换句话说，「拉扯」然后放回原空间，如此不断重复，就会产生混沌 \cite{Gilmore2011} \cite{Tel2006}。 其作用类似於「搓面粉」，所以另一个变种也叫做 baker map。}。 Sigmoid 之后的输出，代表某类特徵的\textbf{存在与否}。
+
+换句话说： \underline{每个神经元的输出其实代表某个 feature 的存在与否}。\\
+而，\underline{更高层的神经元代表下层 features 之间的\textbf{关系}}。
+
+凭这个思路推广，可以推测这样的 correspondence：
+\begin{eqnarray}
+\mathcal{M}_1 & \quad \simeq \quad & \mathcal{M}_2 \nonumber \\
+\mbox{constant} \quad \includegraphics[scale=0.5]{node.png} & \quad \Leftrightarrow \quad & \mbox{neuron} \\
+\mbox{relation} \quad \includegraphics[scale=0.5]{link.png} & \quad \Leftrightarrow \quad & \mbox{relation between higher and lower neurons} \nonumber
+\end{eqnarray}
+但要注意的是这对应未必是一对一的，可能是一个 constant 对应几个 neurons 的\textbf{线性组合}。
+
+% =====================================================================================
+\begin{comment}
+\section{逻辑变量的处理}
 
 这可能是最辣手的部分。
 
@@ -274,13 +368,14 @@ Alfred Tarski 提出了 cylindrical algebra 来解决「一阶谓词逻辑」的
 换句话说，predicate（谓词）就是一些将 object （逻辑中的物体，或「常项」，constants）映射到个别命题的\textbf{函数}。 这些谓词函数可以有一个或多个\textbf{参数}，分别叫 monadic 和 polyadic predicate calculus。
 
 最新的逻辑代数化方法来自\emp{範畴论}，William Lawvere 在 1960's 年代提出（也就是 \textit{Conceptual Mathematics} 这本书的作者之一）。  他发现了 $\forall$ 和 $\exists$ 是 adjoint functors 的关系； 这个 adjunction 比较难懂，有兴趣可以看 \cite{Lawvere2003}。
-
-\vspace{1cm} \hrule
+\end{comment}
+% =====================================================================================
 
 \bibliographystyle{plain} % or number or aaai ...
 \bibliography{AGI-book}
 
 \end{document}
+% ***************************************************************************************
 
 \section{控制论}
 
