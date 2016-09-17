@@ -317,8 +317,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="636.7539"
-     inkscape:cy="25.301714"
+     inkscape:cx="786.29023"
+     inkscape:cy="-506.78218"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -346,6 +346,18 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1">
+    <rect
+       style="fill:#ffd5d5;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="rect4176-9"
+       width="41.109524"
+       height="19.652573"
+       x="661.87164"
+       y="1800.9244"
+       ry="9.5254841"
+       rx="8.4224291"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
     <path
        sodipodi:nodetypes="cssc"
        inkscape:connector-curvature="0"
@@ -1763,7 +1775,7 @@
          style="fill:none;stroke:#000000;stroke-width:1.25;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
       <path
          transform="matrix(0.5,0,0,0.5,491,927.18109)"
-         d="m 415,1397.3622 a 10.5,10 0 1 1 -21,0 10.5,10 0 1 1 21,0 z"
+         d="m 415,1397.3622 c 0,5.5228 -4.70101,10 -10.5,10 -5.79899,0 -10.5,-4.4772 -10.5,-10 0,-5.5229 4.70101,-10 10.5,-10 5.79899,0 10.5,4.4771 10.5,10 z"
          sodipodi:ry="10"
          sodipodi:rx="10.5"
          sodipodi:cy="1397.3622"
@@ -1772,7 +1784,7 @@
          style="fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none"
          sodipodi:type="arc" />
       <path
-         d="m 415,1397.3622 a 10.5,10 0 1 1 -21,0 10.5,10 0 1 1 21,0 z"
+         d="m 415,1397.3622 c 0,5.5228 -4.70101,10 -10.5,10 -5.79899,0 -10.5,-4.4772 -10.5,-10 0,-5.5229 4.70101,-10 10.5,-10 5.79899,0 10.5,4.4771 10.5,10 z"
          sodipodi:ry="10"
          sodipodi:rx="10.5"
          sodipodi:cy="1397.3622"
@@ -1940,122 +1952,7 @@
       <image
          width="46.799999"
          height="60.75"
-         xlink:href="data:image/png;base64,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
-rkJggg==
-"
+         xlink:href="data:image/png;base64,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 rkJggg== "
          id="image4562"
          x="447.60001"
          y="1257.9872" />
@@ -2090,5 +1987,1120 @@ rkJggg==
          id="rect4565-6"
          style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" />
     </g>
+    <path
+       sodipodi:type="arc"
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path3111-6-4-6"
+       sodipodi:cx="238.5"
+       sodipodi:cy="662.36218"
+       sodipodi:rx="5.5"
+       sodipodi:ry="6"
+       d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+       transform="matrix(0,-0.91525423,0.84782609,0,109.43261,2181.2733)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       transform="matrix(0,-0.91525423,0.84782609,0,132.32392,2181.2733)"
+       sodipodi:type="arc"
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path3111-2-7-8-7"
+       sodipodi:cx="238.5"
+       sodipodi:cy="662.36218"
+       sodipodi:rx="5.5"
+       sodipodi:ry="6"
+       d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       transform="matrix(0,-0.91525423,0.84782609,0,177.2587,2181.2733)"
+       sodipodi:type="arc"
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path3111-3-5-0-5"
+       sodipodi:cx="238.5"
+       sodipodi:cy="662.36218"
+       sodipodi:rx="5.5"
+       sodipodi:ry="6"
+       d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path3111-1-3-8-3"
+       sodipodi:cx="238.5"
+       sodipodi:cy="662.36218"
+       sodipodi:rx="5.5"
+       sodipodi:ry="6"
+       d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+       transform="matrix(0,-0.91525423,0.84782609,0,109.43261,2142.6293)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       transform="matrix(0,-0.91525423,0.84782609,0,132.32392,2142.6293)"
+       sodipodi:type="arc"
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path3111-2-1-5-1-5"
+       sodipodi:cx="238.5"
+       sodipodi:cy="662.36218"
+       sodipodi:rx="5.5"
+       sodipodi:ry="6"
+       d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       transform="matrix(0,-0.91525423,0.84782609,0,177.2587,2142.6293)"
+       sodipodi:type="arc"
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path3111-3-0-6-0-6"
+       sodipodi:cx="238.5"
+       sodipodi:cy="662.36218"
+       sodipodi:rx="5.5"
+       sodipodi:ry="6"
+       d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path3111-34-2-2-2"
+       sodipodi:cx="238.5"
+       sodipodi:cy="662.36218"
+       sodipodi:rx="5.5"
+       sodipodi:ry="6"
+       d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+       transform="matrix(0,-0.91525423,0.84782609,0,109.43261,2070.9852)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       transform="matrix(0,-0.91525423,0.84782609,0,132.32392,2070.9852)"
+       sodipodi:type="arc"
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path3111-2-0-9-2-9"
+       sodipodi:cx="238.5"
+       sodipodi:cy="662.36218"
+       sodipodi:rx="5.5"
+       sodipodi:ry="6"
+       d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       transform="matrix(0,-0.91525423,0.84782609,0,177.2587,2070.9852)"
+       sodipodi:type="arc"
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path3111-3-7-1-9-1"
+       sodipodi:cx="238.5"
+       sodipodi:cy="662.36218"
+       sodipodi:rx="5.5"
+       sodipodi:ry="6"
+       d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       transform="matrix(0,-0.91525423,0.84782609,0,154.36739,2181.2733)"
+       sodipodi:type="arc"
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path3111-8-3-4-9"
+       sodipodi:cx="238.5"
+       sodipodi:cy="662.36218"
+       sodipodi:rx="5.5"
+       sodipodi:ry="6"
+       d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       transform="matrix(0,-0.91525423,0.84782609,0,154.36739,2142.6293)"
+       sodipodi:type="arc"
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path3111-8-4-6-6-3"
+       sodipodi:cx="238.5"
+       sodipodi:cy="662.36218"
+       sodipodi:rx="5.5"
+       sodipodi:ry="6"
+       d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       transform="matrix(0,-0.91525423,0.84782609,0,154.36739,2070.9852)"
+       sodipodi:type="arc"
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path3111-8-42-0-3-6"
+       sodipodi:cx="238.5"
+       sodipodi:cy="662.36218"
+       sodipodi:rx="5.5"
+       sodipodi:ry="6"
+       d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 672.27229,1962.0699 22.04347,-38.3389"
+       id="path3295-26-9-6"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 670.57664,1922.358 22.04348,38.3391"
+       id="path3295-1-3-1-7-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 693.46795,1960.4682 23.73912,-38.3389"
+       id="path3295-0-879-4-6"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 691.77229,1920.7563 23.73913,38.3391"
+       id="path3295-1-3-2-20-9-1"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 716.35925,1961.3835 23.73912,-38.3389"
+       id="path3295-2-2-1-8"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 714.66359,1921.6716 23.73914,38.339"
+       id="path3295-1-3-8-3-7-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 671.42446,1923.8454 22.04349,-71.3391"
+       id="path3295-7-7-0-9"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 669.72881,1851.1335 22.04348,71.339"
+       id="path3295-1-3-0-5-6-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 692.62012,1922.2437 23.73913,-71.3391"
+       id="path3295-0-8-9-0-0"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 690.92446,1849.5318 23.73913,71.339"
+       id="path3295-1-3-2-2-2-8-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 715.51142,1923.1589 23.73914,-71.339"
+       id="path3295-2-6-2-5-3"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 713.81576,1850.4471 23.73914,71.339"
+       id="path3295-1-3-8-5-8-3-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 673.12012,1854.5912 22.04347,-44.3391"
+       id="path3295-4-9-9-5"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 671.42446,1808.8793 22.04349,44.3389"
+       id="path3295-1-3-3-7-4-9"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <rect
+       style="fill:#d5e5ff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="rect4176-9-5-5-9"
+       width="67.320236"
+       height="18.469227"
+       x="-1916.7612"
+       y="138.74716"
+       ry="8.9519234"
+       rx="13.792421"
+       transform="matrix(-0.46352889,-0.88608181,-0.83636834,0.54816785,0,0)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:#ffd5d5;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       d="m 717.62027,1761.4193 18.85013,0 c 5.6659,0 10.22727,3.6669 10.22727,8.2219 l 0,42.1122 c 0,4.5551 -2.55605,8.4225 -5.8155,8.4225 l -4.81269,0 c -10.54628,0 -3.08523,-23.8369 -6.93998,-35.6059 -1.078,-3.2913 -21.31161,-4.7313 -21.53596,-10.116 l -0.20054,-4.8128 c -0.18963,-4.551 4.56137,-8.2219 10.22727,-8.2219 z"
+       id="rect4176"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ssssssssss"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 694.31576,1852.9895 23.73914,-44.3391"
+       id="path3295-0-87-3-1-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 692.62012,1807.2776 23.73913,44.3389"
+       id="path3295-1-3-2-8-6-5-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 717.20707,1853.9046 23.73913,-44.3389"
+       id="path3295-2-9-1-4-8"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       transform="matrix(0,-0.91525423,0.84782609,0,198.92527,2181.75)"
+       sodipodi:type="arc"
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path3111-2-7-8-7-1"
+       sodipodi:cx="238.5"
+       sodipodi:cy="662.36218"
+       sodipodi:rx="5.5"
+       sodipodi:ry="6"
+       d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       transform="matrix(0,-0.91525423,0.84782609,0,198.92527,2143.106)"
+       sodipodi:type="arc"
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path3111-2-1-5-1-5-2"
+       sodipodi:cx="238.5"
+       sodipodi:cy="662.36218"
+       sodipodi:rx="5.5"
+       sodipodi:ry="6"
+       d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       transform="matrix(0,-0.91525423,0.84782609,0,198.92527,2071.4619)"
+       sodipodi:type="arc"
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path3111-2-0-9-2-9-9"
+       sodipodi:cx="238.5"
+       sodipodi:cy="662.36218"
+       sodipodi:rx="5.5"
+       sodipodi:ry="6"
+       d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 738.87364,1962.5466 22.0435,-38.3389"
+       id="path3295-26-9-6-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 737.178,1922.8347 22.04344,38.3391"
+       id="path3295-1-3-1-7-2-8"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 738.02584,1924.3221 22.0435,-71.3391"
+       id="path3295-7-7-0-9-1"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 736.33017,1851.6102 22.04347,71.339"
+       id="path3295-1-3-0-5-6-2-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 739.72144,1855.0679 22.0435,-44.3391"
+       id="path3295-4-9-9-5-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 738.02584,1809.356 22.0435,44.3389"
+       id="path3295-1-3-3-7-4-9-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 760.49324,1963.4619 -0.4239,-109.8813"
+       id="path3922-3"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 760.06924,1853.5806 -0.4239,-43.8814"
+       id="path3485-3-3-5-3-7"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 739.46104,1814.1659 22.0435,-44.3391"
+       id="path3295-4-9-9-5-6-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 737.7654,1768.454 22.04354,44.3389"
+       id="path3295-1-3-3-7-4-9-3-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 759.80884,1812.6786 -0.4239,-43.8814"
+       id="path3485-3-3-5-3-5-37"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       transform="matrix(0,-0.91525423,0.84782609,0,198.28922,1946.6934)"
+       sodipodi:type="arc"
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path3111-2-8-7-5-7-8-1-8"
+       sodipodi:cx="238.5"
+       sodipodi:cy="662.36218"
+       sodipodi:rx="5.5"
+       sodipodi:ry="6"
+       d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <rect
+       style="fill:#d5e5ff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="rect4176-9-5"
+       width="41.109524"
+       height="19.652573"
+       x="706.28607"
+       y="1718.4812"
+       ry="9.5254841"
+       rx="8.4224291"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 739.08544,1771.9434 22.0435,-44.3391"
+       id="path3295-4-9-9-5-6-0-1"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 737.38977,1726.2315 22.04347,44.339"
+       id="path3295-1-3-3-7-4-9-3-4-3"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 759.43324,1770.4562 -0.4239,-43.8815"
+       id="path3485-3-3-5-3-5-3-4"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       transform="matrix(0,-0.91525423,0.84782609,0,198.92527,2029.8179)"
+       sodipodi:type="arc"
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path3111-2-8-7-5-7-0"
+       sodipodi:cx="238.5"
+       sodipodi:cy="662.36218"
+       sodipodi:rx="5.5"
+       sodipodi:ry="6"
+       d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 715.51142,1808.1929 23.73914,44.3389"
+       id="path3295-1-3-8-4-2-1-9"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 672.27229,1963.9004 -0.42392,-112.8813"
+       id="path3713"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 671.84837,1851.0191 -0.42391,-40.8813"
+       id="path3485-9-5-7"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 693.89185,1962.9852 -0.42392,-109.8813"
+       id="path3922"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 693.46793,1853.1039 -0.4239,-43.8814"
+       id="path3485-3-3-5-3"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 716.78315,1961.1546 -0.4239,-109.1301"
+       id="path3926"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 716.35925,1852.0245 -0.42391,-44.6325"
+       id="path3485-4-1-4-6"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 739.67446,1963.9004 -0.4239,-112.1301"
+       id="path3709"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 739.25056,1851.7703 -0.42392,-41.6325"
+       id="path3485-7-9-9-1"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 766.33104,1898.526 c -55.69509,-46.8908 -44.04867,7.2994 -102.37232,-27.4376 l -0.46113,9.5685 c 58.32365,34.7372 46.67723,-19.453 102.37232,27.4377 z"
+       id="path3268-4-8-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="rect4140-3-9"
+       width="24.209671"
+       height="10.375572"
+       x="-1886.4237"
+       y="655.38751"
+       transform="matrix(0,-1,1,0,0,0)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="rect4140-7-8-3"
+       width="24.209671"
+       height="10.375572"
+       x="-1914.1947"
+       y="764.80237"
+       transform="matrix(0,-1,1,0,0,0)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <rect
+       style="fill:#d5e5ff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="rect4176-9-5-8"
+       width="41.109524"
+       height="19.652573"
+       x="662.75366"
+       y="1760.2722"
+       ry="9.5254841"
+       rx="8.4224291"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 672.8597,1813.6892 22.04348,-44.3391"
+       id="path3295-4-9-9-5-6"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 671.16404,1767.9773 22.04349,44.3389"
+       id="path3295-1-3-3-7-4-9-3"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 694.05535,1812.0875 23.73913,-44.3391"
+       id="path3295-0-87-3-1-2-8"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 692.3597,1766.3756 23.73914,44.3389"
+       id="path3295-1-3-2-8-6-5-2-5"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 716.94665,1813.0026 23.73914,-44.3389"
+       id="path3295-2-9-1-4-8-6"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 715.25101,1767.2909 23.73913,44.3389"
+       id="path3295-1-3-8-4-2-1-9-1"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 671.58796,1810.1171 -0.42392,-40.8813"
+       id="path3485-9-5-7-1"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 693.20752,1812.2019 -0.4239,-43.8814"
+       id="path3485-3-3-5-3-5"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 716.09884,1811.1225 715.67492,1766.49"
+       id="path3485-4-1-4-6-9"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 738.99014,1810.8683 -0.42391,-41.6325"
+       id="path3485-7-9-9-1-8"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path3111-4-2-7-2-8-8"
+       sodipodi:cx="238.5"
+       sodipodi:cy="662.36218"
+       sodipodi:rx="5.5"
+       sodipodi:ry="6"
+       d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+       transform="matrix(0,-0.91525423,0.84782609,0,108.79657,1946.2167)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <rect
+       style="fill:#d5e5ff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="rect4176-9-5-5"
+       width="55.78614"
+       height="16.169985"
+       x="-1178.858"
+       y="1482.6212"
+       ry="7.8374949"
+       rx="11.429342"
+       transform="matrix(0.50529365,-0.86294746,0.86294746,0.50529365,0,0)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       transform="matrix(0,-0.91525423,0.84782609,0,131.68787,1946.2167)"
+       sodipodi:type="arc"
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path3111-2-8-7-5-7-8-1"
+       sodipodi:cx="238.5"
+       sodipodi:cy="662.36218"
+       sodipodi:rx="5.5"
+       sodipodi:ry="6"
+       d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 672.48407,1771.4667 22.04348,-44.3391"
+       id="path3295-4-9-9-5-6-0"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 670.78841,1725.7548 22.04349,44.339"
+       id="path3295-1-3-3-7-4-9-3-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 693.67972,1769.865 23.73913,-44.3391"
+       id="path3295-0-87-3-1-2-8-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 691.98407,1724.1531 23.73914,44.339"
+       id="path3295-1-3-2-8-6-5-2-5-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 716.57102,1770.7802 23.73914,-44.339"
+       id="path3295-2-9-1-4-8-6-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 714.87538,1725.0684 23.73913,44.339"
+       id="path3295-1-3-8-4-2-1-9-1-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 671.21233,1767.8946 -0.42392,-40.8813"
+       id="path3485-9-5-7-1-6"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#0055d4;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path3111-4-2-7-2-8"
+       sodipodi:cx="238.5"
+       sodipodi:cy="662.36218"
+       sodipodi:rx="5.5"
+       sodipodi:ry="6"
+       d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+       transform="matrix(0,-0.91525423,0.84782609,0,109.1722,1988.4392)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 692.83189,1769.9795 -0.4239,-43.8815"
+       id="path3485-3-3-5-3-5-3"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       transform="matrix(0,-0.91525423,0.84782609,0,132.0635,1988.4392)"
+       sodipodi:type="arc"
+       style="fill:#0055d4;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path3111-2-8-7-5-7-8"
+       sodipodi:cx="238.5"
+       sodipodi:cy="662.36218"
+       sodipodi:rx="5.5"
+       sodipodi:ry="6"
+       d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 715.72321,1768.9001 -0.42392,-44.6325"
+       id="path3485-4-1-4-6-9-1"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       transform="matrix(0,-0.91525423,0.84782609,0,154.10698,1988.4392)"
+       sodipodi:type="arc"
+       style="fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path3111-8-0-6-7-0-9"
+       sodipodi:cx="238.5"
+       sodipodi:cy="662.36218"
+       sodipodi:rx="5.5"
+       sodipodi:ry="6"
+       d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:none;stroke:#000000;stroke-width:0.8808952px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 738.61451,1768.6458 -0.42391,-41.6325"
+       id="path3485-7-9-9-1-8-7"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       sodipodi:nodetypes="csscssccsscssc"
+       inkscape:connector-curvature="0"
+       id="path4125"
+       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Asana Math;-inkscape-font-specification:Asana Math"
+       d="m 531.46576,1780.5906 c 5.7173,-2.3073 8.31662,-6.5578 8.31662,-14.4515 l 0,-22.5885 c 0,-15.1803 3.76345,-17.9734 12.98489,-17.9734 -5.99394,2.3075 -9.94338,7.165 -9.94338,15.909 l 0,22.5883 c 0,8.9868 1.18301,14.2088 -5.17976,16.3947 l 0,0.243 c 6.63943,2.3073 5.50685,7.8937 5.50685,17.4877 l 0,21.0095 c 0,8.7439 3.80679,14.0873 9.61629,15.7876 -10.42021,0 -12.6578,-3.1576 -12.6578,-19.1879 l 0,-20.4024 c 0,-8.7439 -2.55757,-12.5086 -8.64371,-14.8161"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4127"
+       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       transform="translate(-17.33234,71.43187)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600"><flowRegion
+         id="flowRegion4129"><rect
+           id="rect4131"
+           width="127.53714"
+           height="74.719727"
+           x="420.19199"
+           y="1680.5208" /></flowRegion><flowPara
+         id="flowPara4133">highest levels of deep NN</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4135"
+       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#ff0000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       transform="translate(-41.516954,146.14521)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600"><flowRegion
+         id="flowRegion4137"><rect
+           id="rect4139"
+           width="193.77097"
+           height="75.237076"
+           x="508.20517"
+           y="1728.0763"
+           style="fill:#ff0000" /></flowRegion><flowPara
+         id="flowPara4141"><flowSpan
+           style="fill:#000000"
+           id="flowSpan5411">constant</flowSpan><flowSpan
+           style="font-size:24px;font-style:italic;fill:#ff0000;font-family:Times New Roman;-inkscape-font-specification:Times New Roman"
+           id="flowSpan4145">  a</flowSpan></flowPara></flowRoot>    <path
+       transform="matrix(0,-0.91525423,0.84782609,0,154.36739,2029.3412)"
+       sodipodi:type="arc"
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path3111-8-0-6-7-0"
+       sodipodi:cx="238.5"
+       sodipodi:cy="662.36218"
+       sodipodi:rx="5.5"
+       sodipodi:ry="6"
+       d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       transform="matrix(0,-0.91525423,0.84782609,0,132.32392,2029.3412)"
+       sodipodi:type="arc"
+       style="fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path3111-2-8-7-5-7"
+       sodipodi:cx="238.5"
+       sodipodi:cy="662.36218"
+       sodipodi:rx="5.5"
+       sodipodi:ry="6"
+       d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path3111-4-2-7-2"
+       sodipodi:cx="238.5"
+       sodipodi:cy="662.36218"
+       sodipodi:rx="5.5"
+       sodipodi:ry="6"
+       d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+       transform="matrix(0,-0.91525423,0.84782609,0,109.43261,2029.3412)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       transform="matrix(0,-0.91525423,0.84782609,0,176.99828,1988.4392)"
+       sodipodi:type="arc"
+       style="fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path3111-3-1-0-6-0-5"
+       sodipodi:cx="238.5"
+       sodipodi:cy="662.36218"
+       sodipodi:rx="5.5"
+       sodipodi:ry="6"
+       d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       transform="matrix(0,-0.91525423,0.84782609,0,177.2587,2029.3412)"
+       sodipodi:type="arc"
+       style="fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path3111-3-1-0-6-0"
+       sodipodi:cx="238.5"
+       sodipodi:cy="662.36218"
+       sodipodi:rx="5.5"
+       sodipodi:ry="6"
+       d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4135-4"
+       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#ff0000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       transform="translate(255.02763,106.19343)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600"><flowRegion
+         id="flowRegion4137-9"><rect
+           id="rect4139-8"
+           width="193.77097"
+           height="75.237076"
+           x="508.20517"
+           y="1728.0763"
+           style="fill:#ff0000" /></flowRegion><flowPara
+         id="flowPara4141-1"><flowSpan
+           style="fill:#000000"
+           id="flowSpan5413">constant</flowSpan><flowSpan
+           style="font-size:24px;font-style:italic;fill:#ff0000;font-family:Times New Roman;-inkscape-font-specification:Times New Roman"
+           id="flowSpan4145-6">  b</flowSpan></flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4135-3"
+       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#0055d4;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       transform="translate(300.88477,11.90772)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600"><flowRegion
+         id="flowRegion4137-93"><rect
+           id="rect4139-3"
+           width="193.77097"
+           height="75.237076"
+           x="508.20517"
+           y="1728.0763"
+           style="fill:#0055d4" /></flowRegion><flowPara
+         id="flowPara4141-4"><flowSpan
+           style="fill:#000000"
+           id="flowSpan5415">relation</flowSpan><flowSpan
+           style="font-size:24px;font-style:italic;fill:#0055d4;font-family:Times New Roman;-inkscape-font-specification:Times New Roman"
+           id="flowSpan4145-61">  R<flowSpan
+   style="font-style:normal;fill:#0055d4"
+   id="flowSpan4246">(</flowSpan><flowSpan
+   style="fill:#ff0000"
+   id="flowSpan5407">a</flowSpan>, <flowSpan
+   style="fill:#ff0000"
+   id="flowSpan5409">b</flowSpan><flowSpan
+   style="font-style:normal;fill:#0055d4"
+   id="flowSpan4244">)</flowSpan></flowSpan></flowPara></flowRoot>    <path
+       transform="matrix(0,-0.91525423,0.84782609,0,153.73135,1946.2167)"
+       sodipodi:type="arc"
+       style="fill:#0055d4;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path3111-8-0-6-7-0-9-3"
+       sodipodi:cx="238.5"
+       sodipodi:cy="662.36218"
+       sodipodi:rx="5.5"
+       sodipodi:ry="6"
+       d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       transform="matrix(0,-0.91525423,0.84782609,0,176.62265,1946.2167)"
+       sodipodi:type="arc"
+       style="fill:#0055d4;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path3111-3-1-0-6-0-5-0"
+       sodipodi:cx="238.5"
+       sodipodi:cy="662.36218"
+       sodipodi:rx="5.5"
+       sodipodi:ry="6"
+       d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       transform="matrix(0,-0.91525423,0.84782609,0,198.66485,1988.9159)"
+       sodipodi:type="arc"
+       style="fill:#0055d4;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path3111-2-8-7-5-7-8-3"
+       sodipodi:cx="238.5"
+       sodipodi:cy="662.36218"
+       sodipodi:rx="5.5"
+       sodipodi:ry="6"
+       d="m 244,662.36218 a 5.5,6 0 1 1 -11,0 5.5,6 0 1 1 11,0 z"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 567.5,1879.8622 c 17.5535,-32.9471 51.10941,-68.6957 94,-70"
+       id="path4679-9"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 748.95495,1791.2685 c 56.70072,3.7648 79.04908,24.3019 95.54466,46.3234"
+       id="path4679-9-8"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 758.62913,1751.8357 c 23.89059,-10.3131 51.97103,-0.8743 67.97103,4.7924"
+       id="path4679-9-0"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/actual-bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
   </g>
 </svg>
