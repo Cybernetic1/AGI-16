@@ -65,7 +65,7 @@
 
 
 \begin{abstract}
-Logic-based AI 和 connectionist AI 长久分裂，但笔者最近发现了可以统一两者的理论。
+Logic-based AI 和 connectionist AI 长久分裂，但作者最近发现可以建立两者之间的对应关系。逻辑的结构类似人类的自然语言，但大脑是用神经思考的。 机器学习的主要目标，是用 inductive bias 去加快学习速度，但这目标太空泛。 将逻辑结构加到神经结构之上，就增加了约束，亦即 inductive bias。
 % 假设 $x$ 是思维状态。 在经典逻辑智能中，$x$ 是一束命题，代表当下的思考状况。 思考的过程就是不断重复进行推导: $x \vdash x' \vdash ...$。 在经典 AI 中这个作用是靠无数的逻辑 rules 来达成的。 但现在我们的做法是将 $x$ 放到向量空间中，再用一个 recurrent 神经网络来取代整个 rules base。
 \end{abstract}
 
@@ -73,9 +73,9 @@ Logic-based AI 和 connectionist AI 长久分裂，但笔者最近发现了可�
 
 % \textbf{人工智能}基本上分为两大阵营： \emp{逻辑 AI} (logic-based AI) 和 \emp{神经网络} (connectionism)。
 
-逻辑 AI 那边，「结构」很精细，但学习算法太慢；  我的目的是建立一道「桥」，将逻辑 AI 的某部分结构\textbf{转移}到神经网络那边，这样可以融合两边的好处。
+逻辑 AI 那边，「结构」很精细，但\textbf{学习算法}太慢；  我的目的是建立一道「桥」，将逻辑 AI 的某部分结构\textbf{转移}到神经网络那边。
 
-这个问题搞了很久都未能解决，因为逻辑 AI 那边的结构不是一般常见的数学结构，单是要要表述出来也有很大困难。 直到我应用了 model theory 的观点，才找到满意的解决方法：
+这个问题搞了很久都未能解决，因为逻辑 AI 那边的结构不是一般常见的数学结构，单是要要表述出来也有很大困难。 直到我应用了 model theory 的观点，才找到满意的解决方案：
 \begin{equation}
 \includegraphics[scale=0.6]{bridge.png}
 \end{equation}
@@ -220,31 +220,43 @@ x \cup \KB \sdtstile{}{} x'
 
 \section{逻辑的结构}
 
-一个逻辑系统可以这样定义：
+一个\textbf{逻辑系统}可以这样定义：
 \begin{itemize}
 \item 一些 constant symbols，predicate symbols，和 function symbols
-\item 由上述的原子建立 \emp{命题} (propositions)
+\item 由上述的原子建立 \textbf{命题} (propositions)
 \item 命题之间可以有连接词： $\neg, \wedge, \vee$ 等
-\item 建立 \emp{逻辑后果} (consequence) 关系： $\Gamma \vdash \Delta$
+\item 建立 \textbf{逻辑后果} (consequence) 关系： $\Gamma \vdash \Delta$
 % \item 命题的内部结构（命题由概念原子组合而成）
 \end{itemize}
 
-我个人认为 relation algebra \cite{Schmidt2010} \cite{Maddux2006} 比较接近人类自然语言，但在数理逻辑研究中最通用的逻辑是 first-order logic (FOL)。 然而这并不是重点，因为各种逻辑基本上是等效的，而且相互之间可以很容易地转换。 以下集中讨论 FOL。  
+个人认为 relation algebra \cite{Schmidt2010} \cite{Maddux2006} 比较接近人类自然语言，但在数理逻辑研究中最通用的逻辑是 first-order logic (FOL)。 然而这并不是重点，因为各种逻辑基本上是等效的，而且相互之间可以很容易地转换。 以下集中讨论 FOL。  
 
-我以前花了很多时间思考怎样将逻辑的 $\vdash$ 关系过渡到神经网络去，但发觉这个目标非常 elusive。
+由一些原始的 sensory data，可以透过逻辑学习出一些 logic formulas，即知识库 (knowledge base) $\KB$。 这个过程叫逻辑\textbf{诱导学习} (inductive logic programming, ILP)。 学经典 AI 的人都知道 ILP，但近数十年来，注意力集中在统计学习，这种符号逻辑的学习法被忽视。 
 
-一方面，逻辑是几百年来发展起来的关於人类思考的规律； 逻辑的描述是正确的； 逻辑和神经之间必然有一个 correspondence，因为它们都在做同样的事： 智能。 
+原始的 sensory data 可以透过神经网络进行模式识别，也可以透过 ILP 进行模式识别，两条路径的结果很明显应该是（近似地） isomorphic 的：
+\begin{equation}
+\begin{tikzcd}[]
+\mbox{Logic representation} \arrow[rr, phantom, "\simeq"] & & \mbox{Neural representation} \\
+& \arrow[ul, "\mbox{inductive logic learning}"] \arrow[ur, "\mbox{deep NN learning}" swap] \includegraphics[scale=0.5]{sensory-data.png} &
+\end{tikzcd}
+\end{equation}
 
-在认知科学里，有很多人相信大脑的内部的 representation 是一些所谓 ``mental models''，而很少人会相信大脑使用一些像命题那样的符号结构做 representation，甚至用 $\lambda$-calculus 那样的符号 manipulation 去思考。
+我以前花了很多时间思考怎样将逻辑的 representation 过渡到神经网络去，但发觉这个目标非常 elusive。
 
-举例来说，用文字描述一起凶杀案，读者心目中会建立一个「模型」，它类似於真实经验但又不是真实的。 人脑似乎是用这样的 mental models 思考，而不是一些命题的集合。 
+一方面，逻辑是几百年来发展起来的关於人类思考的规律； 逻辑的描述是正确的； 逻辑和神经之间必然有一个 correspondence，因为它们都在做同样的事（智能）。 
 
-所以我终於发现到，logic-neuro correspondence 必须透过 model theory \cite{Doets1996} \cite{Manzano1999} 才能达成：
+在\textbf{认知科学}里，有很多人相信大脑的内部的 representation 是一些所谓 ``mental models''，而很少人会相信大脑使用一些像命题那样的符号结构做 representation，甚至用 $\lambda$-calculus 那样的符号 manipulation 去思考。
+
+举例来说，用文字描述一起凶杀案，读者心目中会建立一个「模型」，它类似於真实经验但又不是真实的。 人脑似乎是用这样的 mental models 思考，而不是一些命题的集合。 %至於 mental models 是什么，目前认知科学还未有定论。
+
+我终於发现到，logic-neuro correspondence 必须透过 model theory才能达成：
 \begin{equation}
 \includegraphics[scale=0.75]{model-theory.png}
 \end{equation}
 
-% \footnote{Knowledge-based model construction (\emp{KBMC}) 这个术语较少人知道，但其实是最关键的结构； 换句话说，就是从 $\KB$ 中抽出一组命题 $\Gamma$，去\textbf{组合}一个 model 或 proof tree，而这个 proof tree 的某个节点，就是新的结论。 亦即 $\Gamma \vdash Q$。 KBMC 的概念适用於经典逻辑也适用於 Bayesian networks。}
+$\vdash$ 是指由一些（符号逻辑的）\textbf{命题集合}推导出新的命题集合。 $\vDash$ 指的是，由一个\textbf{模型}推导出另一个模型必然为真。
+
+% \footnote{Knowledge-based model construction (\textbf{KBMC}) 这个术语较少人知道，但其实是最关键的结构； 换句话说，就是从 $\KB$ 中抽出一组命题 $\Gamma$，去\textbf{组合}一个 model 或 proof tree，而这个 proof tree 的某个节点，就是新的结论。 亦即 $\Gamma \vdash Q$。 KBMC 的概念适用於经典逻辑也适用於 Bayesian networks。}
 
 % ====================================================================================
 \begin{comment}
@@ -261,7 +273,7 @@ x \cup \KB \sdtstile{}{} x'
 \end{itemize}
 其中 $a \le b$ 表示 $a \Rightarrow b$（a 蕴涵 b）。
 
-由上面可以看出，这个 ideal 其实是由某些元素(命题)生成的 \emp{逻辑后果}(logical consequence)； 换句话说，给定一个命题集 $\Gamma$，问 $\Gamma \stackrel{?}{\vdash} a$（从 $\Gamma$ 可以推导出 $a$ 吗？） 就等於问 $a$ 是不是 $\Gamma$ 生成的 ideal membership 问题。 也可以说，代数 ideal $\equiv$ 逻辑 consequence。 （严格来说，consequence 对应的是 filter 的概念，而 filter 是 ideal 的 dual，因为 0 和 1 对应的倒错，但这不是重点。）
+由上面可以看出，这个 ideal 其实是由某些元素(命题)生成的 \textbf{逻辑后果}(logical consequence)； 换句话说，给定一个命题集 $\Gamma$，问 $\Gamma \stackrel{?}{\vdash} a$（从 $\Gamma$ 可以推导出 $a$ 吗？） 就等於问 $a$ 是不是 $\Gamma$ 生成的 ideal membership 问题。 也可以说，代数 ideal $\equiv$ 逻辑 consequence。 （严格来说，consequence 对应的是 filter 的概念，而 filter 是 ideal 的 dual，因为 0 和 1 对应的倒错，但这不是重点。）
 
 \textbf{逻辑后果}可以记作 $\vdash$ 或 Cn，Tarski 定义了 $\vdash$ （很明显）的特性：
 \begin{itemize}
@@ -276,7 +288,7 @@ x \cup \KB \sdtstile{}{} x'
 
 Bayesian network 的细节很麻烦，可以花整个研究生课程来讲。
 
-重点是： Bayesian network 是由一些\emp{条件概率} (conditional probability) 的关系生成的。 每个\textbf{节点}是一个命题，每个\textbf{连结}是一个条件概率关系，例如：
+重点是： Bayesian network 是由一些\textbf{条件概率} (conditional probability) 的关系生成的。 每个\textbf{节点}是一个命题，每个\textbf{连结}是一个条件概率关系，例如：
 \begin{equation}
 P(A|B,C,D,...) = \vec{p}
 \end{equation}
@@ -298,21 +310,33 @@ P(\mbox{臭蛋} | \mbox{臭味}) = \vec{p}_2
 % ==================================================================================
 \end{comment}
 
-\section{Model theory}
+\section{模型论}
 
-如果用範畴论的方法表示：
+模型论基础可参看 \cite{Doets1996} \cite{Manzano1999}。 模型论的做法是将逻辑的符号\textbf{语言} (language $\mathcal{L}$) 和它所指涉的\textbf{结构} $\mathcal{L}$-structure 分割，中间用 interpretation map 关联起来。
+
+$\mathcal{L}$ 就是符号的集合 (predicates, relations, functions, constants)，递归地生成出句子和复合句子。 这些都是 symbolic 的东西。
+
+$\mathcal{L}$-structure 可以是任何抽象代数结构，它通常包含一个 base 集合，然后在集合上定义一些函数和关系。 
+
+模型论的中心思想是透过 interpretation $i$ 去「保存」一些关系，例如：
+\begin{equation}
+R(a,b) \stackrel{i}{\mapsto} R^\mathcal{M}(a^\mathcal{M}, b^\mathcal{M})
+\end{equation}
+$R$ 是一个关系，$x^\mathcal{M}$ 代表在结构 $\mathcal{M}$ 之上，$x$ 所对应的物体。 左边是符号逻辑，右边是实体的结构。 模型论应用在 first-order logic，得出 $\vdash$ 和 $\vDash$ 等价的结论（看起来就好像同语反覆），这在数理逻辑教科书中都有，例如 \cite{Hedman2004}。 
+
+如果用範畴论的方法表示逻辑结构和神经结构之间的对应：
 \begin{equation}
 \begin{tikzcd}[]
 \mathcal{L} \arrow[d, "i"] \\
-\mathcal{M}_1 \arrow[r, phantom, "\simeq"] & \mathcal{M}_2 \\
-& \arrow[u, "\mbox{dNN}" swap] \mathcal{S}
+\mathcal{M} \arrow[r, phantom, "\simeq"] & \mathcal{X} \\
+& \arrow[u, "\mbox{deep NN}" swap] \mathcal{S}
 \end{tikzcd}
 \end{equation}
 \begin{itemize}
 \item $\mathcal{L}$ = category of logic theories (= sets of formulas)
 \item $i$ = interpretation maps
-\item $\mathcal{M}_1$ = category of models (from logic)
-\item $\mathcal{M}_2$ = category of models (from deep NNs)
+\item $\mathcal{M}$ = category of models (from logic)
+\item $\mathcal{X}$ = category of models (from deep NNs)
 \item $\mathcal{S}$ = sensory input
 \end{itemize}
 
@@ -321,20 +345,21 @@ P(\mbox{臭蛋} | \mbox{臭味}) = \vec{p}_2
 \includegraphics[scale=0.7]{model-theory-cartoon.png}
 \end{equation}
 
-换句话说，$\mathcal{M}_2 = \vcenter{\hbox{\includegraphics{cloud.png}}}$ 是由深度学习 induce 出来的结构； 但它的结构对我们来说是不透明的（这是神经网络的弱点）。
+换句话说，$\mathcal{X} = \vcenter{\hbox{\includegraphics{cloud.png}}}$ 是由深度学习 induce 出来的结构； 但它的结构对我们来说是不透明的（这是神经网络的弱点）。
 
-而 $\mathcal{M}_1 = \vcenter{\hbox{\includegraphics{algebraic-model.png}}}$ 的结构是 free 的； 换句话说，那 $i$ map 的 source domain 是固定的，但 target domain 是自由的。 这导致 $i$ map 的学习很困难，因为 $\mathcal{M}_1$ 和 $\mathcal{M}_2$ 的结构都不清楚。 必须更详细分析 $\mathcal{M}_1, \mathcal{M}_2$ 的结构。
+而 $\mathcal{M} = \vcenter{\hbox{\includegraphics{algebraic-model.png}}}$ 的结构就是模型论研究的对象。
+%是 free 的； 换句话说，那 $i$ map 的 source domain 是固定的，但 target domain 是自由的。 这导致 $i$ map 的学习很困难，因为 $\mathcal{M}$ 和 $\mathcal{X}$ 的结构都不清楚。 必须更详细分析 $\mathcal{M}, \mathcal{X}$ 的结构。
 
-\section{Model 和 interpretation 的结构}
+%\section{模型论和 interpretation 的结构}
 
-在模型论中，$\mathcal{L}$ 是逻辑句子的範畴，$\mathcal{M}_1 = \vcenter{\hbox{\includegraphics{algebraic-model.png}}}$ 可以是任何抽象代数结构。 只需把 $\mathcal{L}$ 中的 constants, predicates, relations, functions 映射到 $\mathcal{M}_1$ 就行。 为简化讨论，我们只考虑 constants 和 relations，因为二者是逻辑中最\textbf{本质}的东西。 
+在模型论中，$\mathcal{L}$ 是逻辑句子的範畴，$\mathcal{M} = \vcenter{\hbox{\includegraphics{algebraic-model.png}}}$ 可以是任何抽象代数结构。 只需把 $\mathcal{L}$ 中的 constants, predicates, relations, functions 映射到 $\mathcal{M}$ 就行。 为简化讨论，我们只考虑 constants 和 relations，因为二者是逻辑中最\textbf{本质}的东西。 
 \begin{eqnarray}
-\mathcal{L} & \quad \stackrel{i}{\rightarrow} \quad & \mathcal{M}_1 \nonumber \\
+\mathcal{L} & \quad \stackrel{i}{\rightarrow} \quad & \mathcal{M} \nonumber \\
 \mbox{constant symbol} & \quad \stackrel{i}{\mapsto} \quad & \; \includegraphics[scale=0.5]{node.png} \\
 \mbox{relation symbol} & \quad \stackrel{i}{\mapsto} \quad & \; \includegraphics[scale=0.5]{link.png} \nonumber
 \end{eqnarray}
 
-问题是在神经那边缺乏 $\vcenter{\hbox{\includegraphics{algebraic-model.png}}}$ 的结构。 一直以来，人们习惯把神经网络看成是 ``black box''，但如果我们不知道 $\mathcal{M}_2 =  \vcenter{\hbox{\includegraphics{cloud.png}}}$ 的结构，就无法建立 $\mathcal{M}_1 \simeq \mathcal{M}_2$ 的 isomorphism。
+问题是在神经那边缺乏 $\vcenter{\hbox{\includegraphics{algebraic-model.png}}}$ 的结构。 一直以来，人们习惯把神经网络看成是 ``black box''，但如果我们不知道 $\mathcal{X} =  \vcenter{\hbox{\includegraphics{cloud.png}}}$ 的结构，就无法建立 $\mathcal{M} \simeq \mathcal{X}$ 的 isomorphism。
 
 \section{神经网络的结构}
 
@@ -344,42 +369,79 @@ P(\mbox{臭蛋} | \mbox{臭味}) = \vec{p}_2
 \begin{equation}
 F(\vect{x}) = \sigmoid(W_1 \sigmoid(W_2 ... \sigmoid(W_L \; \vect{x} )))
 \end{equation}
-其中 $L$ 是层数，W 是每层的权重\textbf{矩阵}，$\sigmoid$ 是对每个分量的 sigmoid function （其作用是赋予非线性）。
+其中 $L$ 是层数，$W_\ell$ 是每层的权重\textbf{矩阵}，$\sigmoid$ 是对每个分量的 sigmoid function （其作用是赋予非线性）。
+
+$\sigmoid$ 作用在 $\vect{x}$ 的每个分量上，它的作用在座标变换下\textbf{没有不变性}。 所以 $\sigmoid$ 不是一个向量运算，从而 \underline{$\mathcal{X}$ 的结构也不是\textbf{向量空间}的结构}。 通常习惯把 $\vec{x}$ 写成向量形式，但这是误导的。
+
+如果将神经网络\textbf{首尾相接}造成迴路，这是一种智能系统的最简单形式，它的状态方程是 $\vect{x}_{n+1} = F(\vect{x}_n)$ （或连续时间的 $\dot{\vect{x}} = f(\vect{x})$），由此可以看出，$\vect{x} \in \mathcal{X}$ 是一个\textbf{微分流形}。 更深入地讲，它是一个力学上的 Hamiltonian 系统，具有 symplectic（辛流形）结构。 换句话说，它是微分流形，而且有一个辛度量 (metric)。 但这超出了本文範围，详见作者的 \cite{Yan2017}。
 
 % 所以问题就是要赋予 $F$ 更多的\textbf{结构}，特别是逻辑结构。 直观地说，越多的结构令\textbf{搜寻空间}越小，学习会越快。 这是机器学习里面 inductive bias 的标准做法。
+
+现在思考一下，神经网络怎样识别模式，或许会有帮助：
 
 考虑最简单的情况，例如提取 digit ``9'' 的特徵的一层网络。 这层网络可以有很多神经元（左图），每个神经元局部地覆盖输入层，即所谓视觉神经元的 local receptive field（右图）。
 \begin{equation}
 \includegraphics[scale=0.5]{feature-recognition.png}
 \end{equation}
-假设红色的神经元专门负责辨识「对角线」这一特徵。 它的方程式是 $\vect{y} = \sigmoid (W \vect{x})$。  矩阵 $W$ 的作用是 affine「旋转」特徵空间，令我们想要的特徵指向某一方向。 然后再用 $\sigmoid$ 「\textbf{挤压}」想要的特徵和不想要的特徵\footnote{$\sigmoid^{-1}$ 的作用是「扯」(stretch)，将本来邻近的两点的距离非线性地拉远。 看看以下各种常见的激活函数，它们全都是相对於 identity $y = x$ 的非线性 deformation：
+假设红色的神经元专门负责辨识「对角线」这一特徵。 它的方程式是 $\vect{y} = \sigmoid (W \vect{x})$。  矩阵 $W$ 的作用是 affine「旋转」特徵空间，令我们想要的特徵指向某一方向。 然后再用 $\sigmoid$ 「\textbf{挤压}」想要的特徵和不想要的特徵。 Sigmoid 之后的输出，代表某类特徵的\textbf{存在与否}，即 $\{0, 1\}$。 这是一种资讯的\textbf{压缩}。
+
+%更准确地说，特徵被挤压到 $[0,1]$ 区间内，资讯没有消失，但如果计算的\textbf{解析度} (resolution) 有限，资讯确实会损失的。 如果输出层有 $n$ 个神经元，它们能够代表的 distributive features 个数是 $[0,1]^n$。 这是连续统的 $n$ 次幂，但解析度令它变成是有限的。
+
+讲一点 chaos theory： $\sigmoid^{-1}$ 的作用是「扯」(stretch)，将本来邻近的两点的距离非线性地拉远。 看看以下各种常见的激活函数，它们全都是相对於 identity $y = x$ 的非线性 deformation：
 \begin{equation}
 \includegraphics[scale=0.25]{activation-functions.png}
 \end{equation}
-这和 Steven Smale 提出的「马蹄」\cite{Smale1967} 非常类似，它是制造混沌的处方之一。 换句话说，「拉扯」然后放回原空间，如此不断重复，就会产生混沌 \cite{Gilmore2011} \cite{Tel2006}。 其作用类似於「搓面粉」，所以另一个变种也叫做 baker map。}。 Sigmoid 之后的输出，代表某类特徵的\textbf{存在与否}。
+这和 Steven Smale 提出的「马蹄」\cite{Smale1967} 非常类似，它是制造混沌的处方之一。 换句话说，「拉扯」然后放回原空间，如此不断重复，就会产生混沌 \cite{Gilmore2011} \cite{Tel2006}。 （神经网络的时间逆向就是 $\sigmoid^{-1}$，所以时间向前也是混沌。） Smale 马蹄的另一个变种叫做 baker map，其作用类似於「搓面粉」。
 
-换句话说： \underline{每个神经元的输出代表某个 feature 的存在与否}。\\
+总结来说： \underline{每个神经元的输出代表某个 feature 的存在与否}。\\
 而，\underline{更高层的神经元代表下层 features 之间的\textbf{关系}}。
 
 凭这个思路推广，可以推测这样的 correspondence：
 \begin{eqnarray}
-\mathcal{M}_1 & \quad \simeq \quad & \mathcal{M}_2 \nonumber \\
+\label{conclusion1}
+\mathcal{M} & \quad \simeq \quad & \mathcal{X} \nonumber \\
 \mbox{constant} \quad \includegraphics[scale=0.5]{node.png} & \quad \Leftrightarrow \quad & \mbox{neuron} \\
 \mbox{relation} \quad \includegraphics[scale=0.5]{link.png} & \quad \Leftrightarrow \quad & \mbox{relation between higher and lower neurons} \nonumber
 \end{eqnarray}
 但要注意的是这对应未必是一对一的，可能是一个 constant 对应几个 neurons 的\textbf{线性组合}。 具体情况可能像以下的示意图（实际上每层神经网络可能有很多神经元）：
 \begin{equation}
+\label{conclusion2}
 \includegraphics[scale=0.5]{actual-bridge.png}
 \end{equation}
 $R(a,b)$ 可以在 $a, b$ 的 common parents 中寻找（例如那些蓝色神经元，$R(a, b)$ 的值 = 蓝色神经元的某个线性组合）。  验证的方法是： 当 $a$ 和 $b$ 的信号都是「有」时，$R(a, b)$ 的值也应该是 true。 
 
-看上去颇复杂，但这样已经可以直接由逻辑式子 $\mathcal{L}$ 映射到深度网络的输出层。  在未有这理论之前，完全不知道这个 map 的结构；  但现在假如理论是正确的话，只需要简单的组合搜索 (combinatorial search) 就可以找到对应。  举例来说，对於用深度学习做 natural language understanding 的人，这理论或许会很有用。 
+\section{结论}
+
+这篇论文并不太成功，因为跳到 (\ref{conclusion1}) 和 (\ref{conclusion2}) 的结论没有严谨的根据，只是直观上觉得有可能。 理论上来说，既然知道了 $\mathcal{M}$ 那边是怎样生成的、$\mathcal{X}$ 那边是怎样生成的，则要在两边建立「高速公路」应该是可行的。 实际上，似乎只要建立一个深度网络就可以，因为神经网路是 universal function approximator，根本不用考虑 $\mathcal{M}$ 和 $\mathcal{X}$ 这两个结构之间的关系。
+
+进一步的研究，希望数学专业的人能帮助一下：
+\begin{enumerate}
+\item 在逻辑那边，可不可以转换成 algebraic geometry 的结构？ 即是说： 逻辑式子 $\simeq$ 代数方程。 这种代数逻辑的做法，我暂时只知道有 \cite{Andreka2001}，是很偏门的研究。
+\item 能不能根据 $\mathcal{M}$ 和 $\mathcal{X}$ 的结构，找出它们之间的桥的最简单形式？  可以用数学归纳法，逐步考虑 $\mathcal{M}$ 和 $\mathcal{X}$ 生成的方式，或许有帮助？
+\end{enumerate}
+
+%看上去颇复杂，但这样已经可以直接由逻辑式子 $\mathcal{L}$ 映射到深度网络的输出层。  在未有这理论之前，完全不知道这个 map 的结构；  但现在假如理论是正确的话，只需要简单的组合搜索 (combinatorial search) 就可以找到对应。  
+
+应用： 对於用深度学习做 natural language understanding 的人，这理论或许会很有用。 
 
 % Armed with this theory, we may construct an actual neuro-logic bridge.
 
 \section{Prior art}
 
-Bader, Hitzler, H\"{o}lldobler and Witzel 在 2007 年提出了一个 neural-symbolic integration 的做法 \cite{Bader2007}。 他们首先由 logic theory 生成抽象的 Herbrand model，再将 Herbrand model 映射到某个 fractal 空间，然后直接用神经网络学习那空间。  虽然用了 model theory，但他们没有利用到本文所说的 $\mathcal{M}_1$ 和 $\mathcal{M}_2$ 之间的关系。 
+\begin{itemize}
+\renewcommand\labelitemi{\textbullet}
+
+\interfootnotelinepenalty=10000
+
+\item Bader, Hitzler, H\"{o}lldobler and Witzel 在 2007 年提出了一个 neural-symbolic integration 的做法 \cite{Bader2007}。 他们首先由 logic theory 生成抽象的 Herbrand model\footnote{Herbrand model 是邏輯 AI 中常用的概念，大意是用邏輯語言 $\mathcal{L}$ 生成「所有可以代入的東西」(instantiating whatever that can be instantiated)，由此產生的不含變量的句子 (sentence) 的集合。 換句話說，Herbrand model 的特點是它只靠 $\mathcal{L}$ 自身產生它的模型，而不依賴任何外在結構。 每个邏輯 theory 都必然至少有一个 Herbrand model。}，再将 Herbrand model 映射到某个 fractal 空间，然后直接用神经网络学习那 fractal 空间。  虽然用了 model theory，但他们没有利用到本文所说的 $\mathcal{M}$ 和 $\mathcal{X}$ 之间的关系。 
+
+\item Khrennikov 在 1997 年开始的多篇论文中提出了用 $p$-adic 代数来模拟思维空间 $\mathcal{X}$ 的结构，详见\cite{Anashin2009} 一书。 一个 $p$-adic 数可以看成是一个 $p$ 进制的小数，$p$ 是任何质数。
+
+\item 经典逻辑是二元逻辑，近代已经有无数将它扩充到 fuzzy 或 probablistic 的尝试（作者也提出过 \cite{Yan2012}），但仍未有统一的理论。 与此不同的另一个方向，如果将点看成是 first-order objects，谓词是点空间上的函数，直接得到 metric structures 上的连续逻辑 (continuous first-order logic) ~ \cite{Yaacov2008}，这可以看成是一种 $\mathcal{M}$ 的结构。
+
+\item 模型论中有（超滤子）ultra-filter 和 ultra-product 这些建构，它们起源於泛函分析，最近有很多横跨模型论和 Banach 空间的新研究 \cite{Iovino2002}。 简单地说 ultra-product 用来将一些 models 构造出新的乘积 models。 但我粗略地看过一下之后发现 ultra-product 通常涉及无穷集合，而且是很大的物体，在计算机上应用似乎不太实际。
+
+\end{itemize}
 
 \section*{Acknowledgement}
 
@@ -402,7 +464,7 @@ Alfred Tarski 提出了 cylindrical algebra 来解决「一阶谓词逻辑」的
 \end{eqnarray}
 换句话说，predicate（谓词）就是一些将 object （逻辑中的物体，或「常项」，constants）映射到个别命题的\textbf{函数}。 这些谓词函数可以有一个或多个\textbf{参数}，分别叫 monadic 和 polyadic predicate calculus。
 
-最新的逻辑代数化方法来自\emp{範畴论}，William Lawvere 在 1960's 年代提出（也就是 \textit{Conceptual Mathematics} 这本书的作者之一）。  他发现了 $\forall$ 和 $\exists$ 是 adjoint functors 的关系； 这个 adjunction 比较难懂，有兴趣可以看 \cite{Lawvere2003}。
+最新的逻辑代数化方法来自\textbf{範畴论}，William Lawvere 在 1960's 年代提出（也就是 \textit{Conceptual Mathematics} 这本书的作者之一）。  他发现了 $\forall$ 和 $\exists$ 是 adjoint functors 的关系； 这个 adjunction 比较难懂，有兴趣可以看 \cite{Lawvere2003}。
 \end{comment}
 % =====================================================================================
 
@@ -422,7 +484,7 @@ Alfred Tarski 提出了 cylindrical algebra 来解决「一阶谓词逻辑」的
 \item 张洪钺、王青 2005： 《最优控制理论与应用》
 \end{itemize}
 
-一个\emp{动态系统 (dynamical system)} 可以用以下方法定义：
+一个\textbf{动态系统 (dynamical system)} 可以用以下方法定义：
 \begin{eqnarray}
 \mbox{离散时间：} \quad \quad & \vect{x}_{t+1} = \vect{F}(\vect{x}_t) \\
 \mbox{连续时间：} \quad \quad & \dot{\vect{x}} = \vect{f}(\vect{x}) % \label{eqn1}
@@ -436,31 +498,31 @@ Alfred Tarski 提出了 cylindrical algebra 来解决「一阶谓词逻辑」的
 \end{eqnarray}
 这里 recurrent 指的是它不断重复作用在 $\vect{x}$ 之上，但实际上它是一个普通的前馈式 (feed-forward) 神经网络。 注意： 在抽象理论中，$f$ 和 $F$ 可以是任意函数，我把它们设计成 NN 只是众多可能的想法之一。 之所以选用 NN，是因为它有 universal function approximator 的功能，而且是我们所知的最「聪明」的学习机器之一。
 
-在我提出的智能系统里，$\dot{x}$ 是由\emp{學習機器}給出的，換句話說，$\dot{x}$ 是思維狀態在梯度下降至最佳狀態時的\emp{方向導數}。
+在我提出的智能系统里，$\dot{x}$ 是由\textbf{學習機器}給出的，換句話說，$\dot{x}$ 是思維狀態在梯度下降至最佳狀態時的\textbf{方向導數}。
 
-一个（连续时间的）\emp{控制系统 (control system)} 定义为：
+一个（连续时间的）\textbf{控制系统 (control system)} 定义为：
 \begin{equation}
 \dot{\vect{x}}(t) = f(\vect{x}(t), \vect{u}(t), t)
 \end{equation}
-其中 $\vect{u}(t)$ 是\emp{控制向量}。 控制论的目的就是找出最好的 $\vect{u}^*(t)$，令系统由初始状态 $\vect{x}_0$ 去到终点状态 $\vect{x_\bot}$。
+其中 $\vect{u}(t)$ 是\textbf{控制向量}。 控制论的目的就是找出最好的 $\vect{u}^*(t)$，令系统由初始状态 $\vect{x}_0$ 去到终点状态 $\vect{x_\bot}$。
 
-注意： 人工智能中的 \emp{A* search}，是动态规划的一个特例。 换句话说，用动态规划在某个空间中「漫游」，可以模拟 best-first 搜寻的功能。
+注意： 人工智能中的 \textbf{A* search}，是动态规划的一个特例。 换句话说，用动态规划在某个空间中「漫游」，可以模拟 best-first 搜寻的功能。
 
-在这框架下，智能系统的运作可以分开成两方面： \emp{思考} 和 \emp{学习}。
+在这框架下，智能系统的运作可以分开成两方面： \textbf{思考} 和 \textbf{学习}。
 
-\emp{思考}即是根据已学得的知识（知识储存在 RNN 里），在思维空间中找寻 $\vect{x}$ 最优的轨迹，方法是用控制论计算 $\vect{u}^*$。 $\vect{x}$ 的轨迹受 RNN 约束（系统只能依据「正确」的知识去思考），但思考时 RNN 是不变的。
+\textbf{思考}即是根据已学得的知识（知识储存在 RNN 里），在思维空间中找寻 $\vect{x}$ 最优的轨迹，方法是用控制论计算 $\vect{u}^*$。 $\vect{x}$ 的轨迹受 RNN 约束（系统只能依据「正确」的知识去思考），但思考时 RNN 是不变的。
 
-\emp{学习}就是学习神经网络 RNN 的 weights $W$。 此时令 $u = 0$，即忽略控制论方面。
+\textbf{学习}就是学习神经网络 RNN 的 weights $W$。 此时令 $u = 0$，即忽略控制论方面。
 
 以上两者是两个独立的方面，但不排除它们可以在实际中同时进行。
 
 \subsection{控制论与强化学习的关系}
 
-在\emp{强化学习}中，我们关注两个数量：
+在\textbf{强化学习}中，我们关注两个数量：
 \let\labelitemi\labelitemii
 \begin{itemize}
-\item $R(\vect{x},a)$ = 在状态 $\vect{x}$ 做动作 a 所获得的\emp{奖励}(reward)
-\item $U(\vect{x})$ = 状态 $\vect{x}$ 的\emp{效用}(utility) 或 \emp{价值} (value) % 或 $V(\vect{x})$
+\item $R(\vect{x},a)$ = 在状态 $\vect{x}$ 做动作 a 所获得的\textbf{奖励}(reward)
+\item $U(\vect{x})$ = 状态 $\vect{x}$ 的\textbf{效用}(utility) 或 \textbf{价值} (value) % 或 $V(\vect{x})$
 \end{itemize}
 简单来说，「价值」就是每个瞬时「奖励」对时间的积分：
 \begin{equation}
@@ -468,7 +530,7 @@ Alfred Tarski 提出了 cylindrical algebra 来解决「一阶谓词逻辑」的
 \end{equation}
 （价值有时用 $V$ 表示，但为避免和势能 $V$ 混淆故不用。）
 
-用\emp{控制论}的术语，通常定义 cost functional：
+用\textbf{控制论}的术语，通常定义 cost functional：
 \begin{equation}
 J = \int L dt + \Phi(\vect{x}_\bot)
 \end{equation}
@@ -478,23 +540,23 @@ J = \int L dt + \Phi(\vect{x}_\bot)
 %\begin{equation}
 %V(x,t) = \min_u \{ \int_t^{t_\bot} C(x,u)dt + \Phi(x_\bot,t_\bot) \} 
 %\end{equation}
-%where $t$ is time, $u$ is a set of control parameters, $C$ is the \emp{cost-rate} function:
+%where $t$ is time, $u$ is a set of control parameters, $C$ is the \textbf{cost-rate} function:
 %\begin{equation}
 %\int C dt = R = \mbox{reward}
 %\end{equation}
 %This integral expresses the ``cost of the path'', whereas $\Phi(x_\bot,t_\bot)$ is the ``cost at termination''.
 
-在\emp{分析力学}里 $L$ 又叫 Lagrangian，而 L 对时间的积分叫「作用量」：
+在\textbf{分析力学}里 $L$ 又叫 Lagrangian，而 L 对时间的积分叫「作用量」：
 \begin{equation}
 \boxed{\mbox{作用量 (Action)}} \; S = \int L dt
 \end{equation}
-Hamilton 的\emp{最小作用量原理} (principle of least action) 说，在自然界的运动轨迹里，$S$ 的值总是取稳定值 (stationary value)，即比起邻近的轨迹它的 $S$ 值最小。
+Hamilton 的\textbf{最小作用量原理} (principle of least action) 说，在自然界的运动轨迹里，$S$ 的值总是取稳定值 (stationary value)，即比起邻近的轨迹它的 $S$ 值最小。
 
 所以有这些对应：\\
 \begin{center}
 \begin{tabular}{|c|c|c|}
 \hline 
-\emp{强化学习} & \emp{最优控制} & \emp{分析力学} \\ 
+\textbf{强化学习} & \textbf{最优控制} & \textbf{分析力学} \\ 
 \hline
 效用/价值 $U$ & 价钱 $J$ & 作用量 $S$ \\ 
 \hline 
@@ -517,9 +579,9 @@ action $a$ & control $u$ & （外力？） \\
 
 \subsubsection{Lagrange 方程}
 
-Lagrange 引入了 Lagrangian $L = T - V$，可以分拆成\emp{動能} $T$ 和\emp{勢能} $V$ 兩部分。
+Lagrange 引入了 Lagrangian $L = T - V$，可以分拆成\textbf{動能} $T$ 和\textbf{勢能} $V$ 兩部分。
 
-重點是： \emp{動能} $T$ 是速度 $\dot{\vect{x}}$ 的函數，\emp{勢能} $V$ 是位置 $\vect{x}$ 的函數。
+重點是： \textbf{動能} $T$ 是速度 $\dot{\vect{x}}$ 的函數，\textbf{勢能} $V$ 是位置 $\vect{x}$ 的函數。
 
 问题： 如果在强化学习中的「快感／奖励」对应於 Lagrangian $L$，如何在奖励之中分拆出「动能」和「势能」的分量？ 
 
@@ -527,11 +589,11 @@ Lagrange 引入了 Lagrangian $L = T - V$，可以分拆成\emp{動能} $T$ 和\
 \boxed{\mbox{Lagrange equation}} \quad
 \frac{d}{dt} \frac{\partial L}{\partial \dot{x}_i} - \frac{\partial L}{\partial x_i} = 0
 \end{equation}
-这些方程的座标是 $(\vect{x}, \dot{\vect{x}})$，可以了解成\emp{位置空间 (configuration space)}上的 tangent bundle （下述）。
+这些方程的座标是 $(\vect{x}, \dot{\vect{x}})$，可以了解成\textbf{位置空间 (configuration space)}上的 tangent bundle （下述）。
 
 \subsubsection{Hamilton 方程}
 
-\emp{Hamiltonian} $H = T + V$，亦即总能量，但它表示成位置 $\vect{x}$ 和动量 $\vect{p}$ 的函数。
+\textbf{Hamiltonian} $H = T + V$，亦即总能量，但它表示成位置 $\vect{x}$ 和动量 $\vect{p}$ 的函数。
 
 \begin{equation}
 \label{Hamilton-eqns}
@@ -541,9 +603,9 @@ Lagrange 引入了 Lagrangian $L = T - V$，可以分拆成\emp{動能} $T$ 和\
       \dot{\vect{p}} & = - \displaystyle \frac{\partial H}{\partial x}
   \end{cases}
 \end{equation}
-这些方程的座标是\emp{相位空间 (phase space)} $(\vect{x}, \vect{p})$。
+这些方程的座标是\textbf{相位空间 (phase space)} $(\vect{x}, \vect{p})$。
 
-位置空间和相位空间之间的变换是 \emp{Legendre transformation}：
+位置空间和相位空间之间的变换是 \textbf{Legendre transformation}：
 \begin{eqnarray}
 \boxed{\mbox{tangent bundle}} \; T X & \rightarrow & T^* X \; \boxed{\mbox{cotangent bundle}} \\
 (\vect{x}, \dot{\vect{x}}) & \mapsto & (\vect{x}, \vect{p})
@@ -594,7 +656,7 @@ H(q, \frac{\partial S}{\partial q}, t) + \frac{\partial S}{\partial t} = 0
 \Delta \vect{X} \Delta \vect{P} \ge \frac{\hbar}{2}
 \end{equation}
 
-如果在某一流形上，「广义」Poisson 括号是 nondegenerate （非退化）的，则它变成了\emp{辛流形}结构的 $\omega = \{ \cdot, \cdot \}$ 括号 （下述）。
+如果在某一流形上，「广义」Poisson 括号是 nondegenerate （非退化）的，则它变成了\textbf{辛流形}结构的 $\omega = \{ \cdot, \cdot \}$ 括号 （下述）。
 
 \subsection{Hamiltonian 的出现}
 
@@ -610,7 +672,7 @@ H(q, \frac{\partial S}{\partial q}, t) + \frac{\partial S}{\partial t} = 0
 \begin{center}
 \colorbox{grey}{\parbox{0.95\textwidth}{\setlength{\parskip}{2.5ex}
 
-\emp{Lagrange multiplier} 是找极大/小值的常用方法： 如果我们要找：
+\textbf{Lagrange multiplier} 是找极大/小值的常用方法： 如果我们要找：
 \begin{equation}
 \max \; f(x) \quad \mbox{ subject to } \quad g(x) = 0
 \end{equation}
@@ -634,11 +696,11 @@ J = \int_{t_0}^{t_\bot} \{ L + \vect{\lambda}^T(t) \left[ f(\vect{x}, \vect{u}, 
 \begin{equation}
 H(\vect{x}, \vect{u}, t) = L(\vect{x}, \vect{u}, t) + \vect{\lambda}^T(t) f(\vect{x}, \vect{u}, t)
 \end{equation}
-物理学上，$\vect{f}$ 的单位是速度，而 $L$ 的单位是能量，所以 $\vect{\lambda}$ 应该具有 \emp{动量} 的单位。
+物理学上，$\vect{f}$ 的单位是速度，而 $L$ 的单位是能量，所以 $\vect{\lambda}$ 应该具有 \textbf{动量} 的单位。
 
 \subsubsection{极小值原理}
 
-Lev Pontryagin (1908-1988) 提出了 \emp{极小值原理}，是经典变分法的推广。 经典变分法的最优条件是：
+Lev Pontryagin (1908-1988) 提出了 \textbf{极小值原理}，是经典变分法的推广。 经典变分法的最优条件是：
 \begin{equation}
 \frac{\partial H}{\partial \vect{u}} = \vect{0}
 \end{equation}
@@ -658,7 +720,7 @@ Lev Pontryagin (1908-1988) 提出了 \emp{极小值原理}，是经典变分法�
 
 % \S 5.4.3 Zak.
 
-用动态规划的 \emp{Bellman optimality condition} 可以推导出微分形式的 Hamilton-Jacobi-Bellman 方程。  重温一下，Bellman 最优条件说的是： 「从最优路径末端切去一小截之后，馀下的还是最优路径。」  它通常写成如下的 recursive 形式：
+用动态规划的 \textbf{Bellman optimality condition} 可以推导出微分形式的 Hamilton-Jacobi-Bellman 方程。  重温一下，Bellman 最优条件说的是： 「从最优路径末端切去一小截之后，馀下的还是最优路径。」  它通常写成如下的 recursive 形式：
 \begin{eqnarray}
 \boxed{\mbox{最优路径}} & = & \mbox{在小段上选取最大奖励} + \boxed{\mbox{馀下的最优路径}} \\
 J^*_t & = & \max_{u} \{ \boxed{\mbox{奖励}(u, t)} + J^*_{t-1} \}
@@ -711,7 +773,7 @@ J^* + \frac{\partial J^*}{\partial t} \Delta t + \frac{\partial J^*}{\partial \v
 % \dot{x}(t) = f(x(t),u(t)).
 % \end{equation}
 
-这个方程和量子力学中的 \emp{Schr\"{o}dinger equation} 很相似：
+这个方程和量子力学中的 \textbf{Schr\"{o}dinger equation} 很相似：
 \begin{equation}
 i \hbar \frac{\partial}{\partial t} \Psi(x,t) = \left[ V(x,t) + \frac{-\hbar^2}{2\mu} \nabla^2 \right] \Psi(x,t).
 \end{equation}
@@ -728,7 +790,7 @@ Symplectic 的拉丁文意思是「互相交错 (intertwined)」，它用来描�
 
 在数值计算上，处理 Hamilton 系统时，如果算法尊重 symplectic 结构（叫 symplectic integrators），会比一般的算法更准确； 而一般解微分方程的算法，例如 Euler 算法和 Runge-Kutta 算法，有时会给出错误的结果。
 
-举例来说，从 Hamiltonian 的角度来看，动量 $p$ (momentum) 和 速度 $v$ (velocity) 是成\emp{对偶}的，$p$ 总是伴随 $v$ 出现，因为 $p \cdot v = mv^2$ 的单位是能量。
+举例来说，从 Hamiltonian 的角度来看，动量 $p$ (momentum) 和 速度 $v$ (velocity) 是成\textbf{对偶}的，$p$ 总是伴随 $v$ 出现，因为 $p \cdot v = mv^2$ 的单位是能量。
 
 举另一个例子，假设我们有两个用来定义系统状态的向量：
 \begin{equation}
@@ -800,11 +862,11 @@ Vector 和 co-vector 之间的关系，可以看成是「$d$ 别人的东西」�
 \begin{equation}
 \frac{d}{dt} = \frac{\partial H}{\partial \vect{p}} \frac{\partial}{\partial \vect{x}} - \frac{\partial H}{\partial \vect{x}} \frac{\partial}{\partial \vect{p}}
 \end{equation}
-它是一个微分算子，亦即是\emp{向量场}； 它有个特别的名字叫 Hamiltonian flow $\vec{H}$ （很多书记作 $X_H$）：
+它是一个微分算子，亦即是\textbf{向量场}； 它有个特别的名字叫 Hamiltonian flow $\vec{H}$ （很多书记作 $X_H$）：
 \begin{equation}
 \vec{H} := \frac{d}{dt} = \{ \cdot, H \}
 \end{equation}
-可以看出 $\vec{H} H = \{ H, H \} = \frac{dH}{dt} = 0$ 就是\emp{能量守恒}的形式。
+可以看出 $\vec{H} H = \{ H, H \} = \frac{dH}{dt} = 0$ 就是\textbf{能量守恒}的形式。
 
 Hamilton 系统的动态方程就是：
 \begin{equation}
@@ -818,7 +880,7 @@ Hamilton 系统的动态方程就是：
 \end{eqnarray}
 我暂时不很明白它的意义。
 
-我们说 Hamiltonian flow 保持 (preserve) 辛结构。 假设 $\Gamma_t(\vect{x}_0) = \vect{x}(t)$ 描述 Hamiltonian flow 的轨迹； $\Gamma_0(\vect{x}) \equiv \vect{x}$。 The \emp{pullback} of $\omega$ along $\Gamma$ is still $\omega$:
+我们说 Hamiltonian flow 保持 (preserve) 辛结构。 假设 $\Gamma_t(\vect{x}_0) = \vect{x}(t)$ 描述 Hamiltonian flow 的轨迹； $\Gamma_0(\vect{x}) \equiv \vect{x}$。 The \textbf{pullback} of $\omega$ along $\Gamma$ is still $\omega$:
 \begin{equation}
 \Gamma^*_t \omega = \omega
 \end{equation}
@@ -839,7 +901,7 @@ TM := \bigcup_{x \in M} T_x M
 \includegraphics[scale=0.5]{tangent-bundle-2.png}
 \end{equation}
 
-粗略地，tangent bundle 可以看成是 $M \times T_x M$，而 $M$ 和 $T_x M$ 的维数都是 $n$，所以 tangent bundle 的维数是 $2n$。 在力学上，\emp{cotangent bundle} 就是相位空间 $(\vect{x}. \vect{p})$ 的空间 (The phase space of a mechanical system is the cotangent bundle of its configuration space)。
+粗略地，tangent bundle 可以看成是 $M \times T_x M$，而 $M$ 和 $T_x M$ 的维数都是 $n$，所以 tangent bundle 的维数是 $2n$。 在力学上，\textbf{cotangent bundle} 就是相位空间 $(\vect{x}. \vect{p})$ 的空间 (The phase space of a mechanical system is the cotangent bundle of its configuration space)。
 
 \subsubsection{Push forward, pull back}
 
@@ -861,7 +923,7 @@ $V$ 是向量空间。 在 $V$ 上的 symplectic 变换的全体记作 $Sp(V)$�
 
 \subsubsection{Floer homology}
 
-\emp{Homology （同调论）} 研究的是空间中「有没有穿洞」的樸拓结构。 最简单的 \emp{singular homology} 是将空间用三角形剖分 (triangulation)，然后透过著名的 Euler formula $V + F = E + 2$ 及其扩充，让我们可以计算 Euler characteristic $\chi$，此即空间穿洞的个数。
+\textbf{Homology （同调论）} 研究的是空间中「有没有穿洞」的樸拓结构。 最简单的 \textbf{singular homology} 是将空间用三角形剖分 (triangulation)，然后透过著名的 Euler formula $V + F = E + 2$ 及其扩充，让我们可以计算 Euler characteristic $\chi$，此即空间穿洞的个数。
 \begin{equation}
 \includegraphics[scale=0.5]{manifolds-with-holes.png}
 \end{equation}
@@ -869,17 +931,17 @@ $V$ 是向量空间。 在 $V$ 上的 symplectic 变换的全体记作 $Sp(V)$�
 \begin{equation}
 \includegraphics[scale=0.25]{torus-triangulation.jpg}
 \end{equation}
-当这些三角形剖分趋於无穷小时，我们得到用微分形式 (differential forms) 描述的 homology，即 \emp{de Rham homology}。 
+当这些三角形剖分趋於无穷小时，我们得到用微分形式 (differential forms) 描述的 homology，即 \textbf{de Rham homology}。 
 
 \begin{equation}
 \includegraphics[scale=0.5]{height-function.png}
 \end{equation}
-在流形上定义一个 potential function，例如简单的 height function，就可以做 Morse theory，这时每个点可以根据势能函数向下流 (gradient flow)，流到一些最低位置，它们是临界点 (critical points)。 Morse decomposition 将空间用这些临界点分割（流到同一临界点的 flows 认作同一 equivalent class），得到的是 \emp{Morse homology}。
+在流形上定义一个 potential function，例如简单的 height function，就可以做 Morse theory，这时每个点可以根据势能函数向下流 (gradient flow)，流到一些最低位置，它们是临界点 (critical points)。 Morse decomposition 将空间用这些临界点分割（流到同一临界点的 flows 认作同一 equivalent class），得到的是 \textbf{Morse homology}。
 \begin{equation}
 \includegraphics[scale=0.5]{gradient-flow.png}
 \end{equation}
 
-\emp{Floer homology} 是 Morse homology 的\textbf{无限维空间}版本，比较难计算。
+\textbf{Floer homology} 是 Morse homology 的\textbf{无限维空间}版本，比较难计算。
 
 \subsubsection{Conley theory}
 
@@ -941,7 +1003,7 @@ In LBAI the knowledge representation structure is built (\textit{fixed}) from th
 but is it valid (or profitable) to assume that our mental representations are \textit{isomorphic} to such logical structures?  Or drastically different?
 
 Humans are good at designing symbolic structures, but we don't know how to design \textit{neural} representations which are more or less opaque to us.
-Perhaps we could use a neural network acting recurrently on the state vector to \emp{induce} an internal representation of mental space.  ``\textit{Induced by what},'' you ask?  By the very structure of the neural network itself.  In other words, forcing a neural network to \textit{approximate} the ideal operator $R^*$.
+Perhaps we could use a neural network acting recurrently on the state vector to \textbf{induce} an internal representation of mental space.  ``\textit{Induced by what},'' you ask?  By the very structure of the neural network itself.  In other words, forcing a neural network to \textit{approximate} the ideal operator $R^*$.
 
 From an abstract point of view, we require:
 \begin{itemize}
@@ -949,7 +1011,7 @@ From an abstract point of view, we require:
 \item $R$ has a learning algorithm: $R \stackrel{A}{\longmapsto} R^*$
 \end{itemize}
 
-$R$ would contain all the knowledge of the KB, so we expect it to be ``large'' (eg. having a huge number of parameters).  We also desire $R$ to possess a \emp{hierarchical} structure because hierarchies are computationally very efficient.  A multi-layer perceptron (MLP) seems to be a good candidate, as it is just a bunch of numbers (weight matrices $W$) interleaved by non-linear activation functions:
+$R$ would contain all the knowledge of the KB, so we expect it to be ``large'' (eg. having a huge number of parameters).  We also desire $R$ to possess a \textbf{hierarchical} structure because hierarchies are computationally very efficient.  A multi-layer perceptron (MLP) seems to be a good candidate, as it is just a bunch of numbers (weight matrices $W$) interleaved by non-linear activation functions:
 \begin{equation}
 R(\vect{x}) = \sigmoid(W_1 \sigmoid(W_2 ... \sigmoid(W_L \vect{x} )))
 \end{equation}
@@ -963,12 +1025,12 @@ The idea of $R$ as an operator acting on the state is inspired by the ``conseque
 \end{equation}
 but the function of $R$ can be broader than logical entailment.  We could use $R$ to perform the following functions which are central to LBAI:
 \begin{itemize}
-\item \emp{deduction} -- forward- and backward-chaining
-\item \emp{abduction} -- finding explanations
-\item \emp{inductive learning}
+\item \textbf{deduction} -- forward- and backward-chaining
+\item \textbf{abduction} -- finding explanations
+\item \textbf{inductive learning}
 \end{itemize}
 
-\begin{tcolorbox}[width=\textwidth,colback={white},title={\centering \emp{Example 1: } primary-school arithmetic},colbacktitle=white,coltitle=black]
+\begin{tcolorbox}[width=\textwidth,colback={white},title={\centering \textbf{Example 1: } primary-school arithmetic},colbacktitle=white,coltitle=black]
 
 A recurrent neural network is a \textit{much more powerful} learning machine than a feed-forward network, even if they look the same superficially.
 
@@ -980,11 +1042,11 @@ As an example, consider the way we perform 2-digit subtraction in primary school
 
 The use of the paper is analogous to the ``tape'' in a Turing machine -- the ability to use short-term memory allows us to perform much more complex mental tasks.
 
-We did a simple experiment to train a neural network to perform primary-school subtraction.  The operator is learned easily if we train the two steps \textit{separately}.  The challenge is to find an algorithm that can learn \emp{multi-step} operations by itself.
+We did a simple experiment to train a neural network to perform primary-school subtraction.  The operator is learned easily if we train the two steps \textit{separately}.  The challenge is to find an algorithm that can learn \textbf{multi-step} operations by itself.
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[width=\textwidth,colback={white},title={\centering \emp{Example 2: } variable binding in predicate logic},colbacktitle=white,coltitle=black]
+\begin{tcolorbox}[width=\textwidth,colback={white},title={\centering \textbf{Example 2: } variable binding in predicate logic},colbacktitle=white,coltitle=black]
 
 The following formula in predicate logic defines the ``grandfather'' relation:
 
@@ -993,22 +1055,22 @@ The following formula in predicate logic defines the ``grandfather'' relation:
 \end{equation}
 
 
-We did a simple experiment to train a neural network to perform primary-school subtraction.  The operator is learned easily if we train the two steps \textit{separately}.  The challenge is to find an algorithm that can learn \emp{multi-step} operations by itself.
+We did a simple experiment to train a neural network to perform primary-school subtraction.  The operator is learned easily if we train the two steps \textit{separately}.  The challenge is to find an algorithm that can learn \textbf{multi-step} operations by itself.
 
 \end{tcolorbox}  
 
 In LBAI, logic possesses additional structure:
 \begin{itemize}
-\item \emp{truth values} (eg. P(rain tomorrow) = 0.7)
-\item \emp{propositional structure} (eg. conjunction: $A \wedge B$) 
-\item \emp{sub-propositional structure} (eg. predication: loves(john, mary) )
-\item \emp{subsumption structure} (eg. $\mbox{dog} \subseteq \mbox{animal}$)
+\item \textbf{truth values} (eg. P(rain tomorrow) = 0.7)
+\item \textbf{propositional structure} (eg. conjunction: $A \wedge B$) 
+\item \textbf{sub-propositional structure} (eg. predication: loves(john, mary) )
+\item \textbf{subsumption structure} (eg. $\mbox{dog} \subseteq \mbox{animal}$)
 \end{itemize}
 
 These structures can be ``transplanted'' to the vector space $X$ via:
 \begin{itemize}
-\item \emp{truth values: } an extra dimension conveying the ``strength'' of states
-\item \emp{propositional structure: } eg. conjunction as vector addition,
+\item \textbf{truth values: } an extra dimension conveying the ``strength'' of states
+\item \textbf{propositional structure: } eg. conjunction as vector addition,
 \begin{equation}
 A \wedge B = \vect{x}_A + \vect{x}_B + ...
 \end{equation}
@@ -1017,11 +1079,11 @@ but we have to avoid linear dependencies (``clashing'') such as:
 \vect{x}_3 = a_1 \vect{x}_1 + a_2 \vect{x}_2
 \end{equation}
 This would force the vector space dimension to become very high.
-\item \emp{sub-propositional structure: } eg. tensor products as composition of concept atoms:
+\item \textbf{sub-propositional structure: } eg. tensor products as composition of concept atoms:
 \begin{equation}
 \mbox{loves(john, pete)} = \overrightarrow{john} \otimes \overrightarrow{love} \otimes \overrightarrow{pete}
 \end{equation}
-\item \emp{subsumption structure: } eg. define the positive cone $C$ such that
+\item \textbf{subsumption structure: } eg. define the positive cone $C$ such that
 \begin{equation}
 \mbox{animal} \supseteq \mbox{dog} \quad \Leftrightarrow \quad \overrightarrow{animal} - \overrightarrow{dog} \in C
 \end{equation}
@@ -1032,13 +1094,13 @@ But the more logical structure we add to $X$, the more it will resemble logic, a
 
 \section{Unifying RL and RNN}
 
-From the viewpoint of reinforcement learning, we aim to learn the \emp{policy} function: \par
+From the viewpoint of reinforcement learning, we aim to learn the \textbf{policy} function: \par
 \begin{equation}
 \begin{tikzcd}[]
 \mbox{policy : ~~state} \arrow[r, mapsto, "\scalebox{0.8}{action}"] & \mbox{state'}
 \end{tikzcd}
 \end{equation}
-Where $K$ can be regarded as the \emp{mental state}, and thus an \emp{action} in RL turns $K$ into $K'$.
+Where $K$ can be regarded as the \textbf{mental state}, and thus an \textbf{action} in RL turns $K$ into $K'$.
 
 In our system, there are 2 pathways that act on $K$, via RNN and RL respectively: \par
 \begin{equation}
@@ -1050,7 +1112,7 @@ K \arrow[ur, "\mbox{RL}"] \arrow[dr, "\mbox{RNN}"'] & \\
 \end{equation}
 In RL, the action $a$ acts on $K$, whereas in RNN, $R$ acts on $K$.
 
-\emp{Note}： RNN and RL are learning algorithms, and if they are both applied to the same problem, conflicts will necessarily arise, unless there is a way to combine them.
+\textbf{Note}： RNN and RL are learning algorithms, and if they are both applied to the same problem, conflicts will necessarily arise, unless there is a way to combine them.
 
 At state $K$, we estimate the Q-value $Q(K \stackrel{a}{\mapsto} K')$.  The action that would be chosen at state $K$ is $\displaystyle \arg\max_a Q(K \stackrel{a}{\mapsto} K')$.  This could be used to train the RNN via $\displaystyle K \vdash_W ...^n K'$.
 
@@ -1065,19 +1127,19 @@ RNN 的 ``$n$-fold'' 学习可以通过以下方式实现：
 
 RNN 的本质是什么？  它似乎是一个 recurrent hetero-associative memory。  但其实它还需要将 input 作类似於 Word2vec 的 encoding。  这个 encoding 将「相似」的思维状态 $K$ 归到同类。  利用空间中的相似度，RL 可以用一些连续函数来近似 Q 值（详细情况还有待分析）。
 
-另一个问题是： 虽然用函数的近似可以做到 generalization，但另一个方法是利用状态 $K$ 中的空位作暂时储存。 这两者似乎很不同。  问题似乎在於： 状态转换 $K \mapsto K'$ 是不是对应於逻辑中的\emp{一条} rule？  答案似乎是 yes。  这个共识是很重要的。  如果用 decision tree，需要的是向量空间中的相似度。
+另一个问题是： 虽然用函数的近似可以做到 generalization，但另一个方法是利用状态 $K$ 中的空位作暂时储存。 这两者似乎很不同。  问题似乎在於： 状态转换 $K \mapsto K'$ 是不是对应於逻辑中的\textbf{一条} rule？  答案似乎是 yes。  这个共识是很重要的。  如果用 decision tree，需要的是向量空间中的相似度。
 
-现在的关键是「状态变量」。  因为它可以做到符号逻辑中靠变量的 generalization，这是前所未有的。  这种 generalization 似乎不需要相似度，因为它是符号的！  会不会在向量空间中的状态变量 能够做到之前逻辑变量做不到的动作？  不管怎样，用 RNN 学习这些变量的动作似乎是很难的，因为这些动作似乎不是对\emp{误差}的梯度下降。  除非这些动作本身也近似於其他动作，但那是怎样的近似？  学习 multi-step logic 其实和以前的 forward / backward chaining 没有分别！  唯一分别是命题的 representation 改变了，它未必像符号的 concatenation。  所以问题仍然是 ``$n$-fold'' 学习法。 
+现在的关键是「状态变量」。  因为它可以做到符号逻辑中靠变量的 generalization，这是前所未有的。  这种 generalization 似乎不需要相似度，因为它是符号的！  会不会在向量空间中的状态变量 能够做到之前逻辑变量做不到的动作？  不管怎样，用 RNN 学习这些变量的动作似乎是很难的，因为这些动作似乎不是对\textbf{误差}的梯度下降。  除非这些动作本身也近似於其他动作，但那是怎样的近似？  学习 multi-step logic 其实和以前的 forward / backward chaining 没有分别！  唯一分别是命题的 representation 改变了，它未必像符号的 concatenation。  所以问题仍然是 ``$n$-fold'' 学习法。 
 
 而且注意： RL 的 generalization 根本上不同於 rules 空间中的 generalization。 前者是思维空间 $K$ 中的一般化，后者也可以是 $K$ 空间的一般化，但也可以是依赖「状态变量」的一般化。
 
 一般来说，RL 和 RNN 的行动和学习，是可以互相独立的。  
 
-还有 heterarchical 的分类法。  想用 decision tree 或什么，达到不同网络的\emp{分工}。  在组织知识这方面，深度网络有没有用？  可以想像，在视觉识别中，在网络的最上层有很多 objects，而它们都可以还原到底层的 features。  网络有更多层，可以识别的事物更抽象。  但现在我们要的不是\emp{模式识别}，而是 mapping。 特别是抽象模式的 mapping。  想要的是： 大量的 rules，将不同的 $K$ 映射到新的 $K'$。
+还有 heterarchical 的分类法。  想用 decision tree 或什么，达到不同网络的\textbf{分工}。  在组织知识这方面，深度网络有没有用？  可以想像，在视觉识别中，在网络的最上层有很多 objects，而它们都可以还原到底层的 features。  网络有更多层，可以识别的事物更抽象。  但现在我们要的不是\textbf{模式识别}，而是 mapping。 特别是抽象模式的 mapping。  想要的是： 大量的 rules，将不同的 $K$ 映射到新的 $K'$。
 
-还有一点要澄清的是： 究竟每一个「思元素」在向量空间中是不是\emp{一点}？  如果有了这个「思元素 = 点」假设，则每次 iteration 应该会删除一个思元素，而用另一个（全新的）思元素取代之。  这样，$K \mapsto K'$ mapping 就有了更确定的结构。  这样的 setup 已经很接近 logic 系统，但其学习算法仍然很有 combinatorial 的 ``feel''。 （因为只有当两个 rules 串连之后，才能达到某个结论，而这个串连有没有中间的 continuous 状态？）  这种串连通常是怎样找到的？  
+还有一点要澄清的是： 究竟每一个「思元素」在向量空间中是不是\textbf{一点}？  如果有了这个「思元素 = 点」假设，则每次 iteration 应该会删除一个思元素，而用另一个（全新的）思元素取代之。  这样，$K \mapsto K'$ mapping 就有了更确定的结构。  这样的 setup 已经很接近 logic 系统，但其学习算法仍然很有 combinatorial 的 ``feel''。 （因为只有当两个 rules 串连之后，才能达到某个结论，而这个串连有没有中间的 continuous 状态？）  这种串连通常是怎样找到的？  
 
-现在有一转机： 如果「思元素 = 点」，则「状态变量」的形成似乎会很普遍，而我们可以集中研究如何学习 single-step rules。 RL 的 rewards 可以指导学习，但这些「终极 rewards」对学习的细节没有指导作用。  我们似乎可以用「\emp{时间延迟}」来达到「状态变量」的效果，这个做法无形中增加了使用状态变量的机会。  
+现在有一转机： 如果「思元素 = 点」，则「状态变量」的形成似乎会很普遍，而我们可以集中研究如何学习 single-step rules。 RL 的 rewards 可以指导学习，但这些「终极 rewards」对学习的细节没有指导作用。  我们似乎可以用「\textbf{时间延迟}」来达到「状态变量」的效果，这个做法无形中增加了使用状态变量的机会。  
 
 现在总结一下仍然有待回答的问题：
 \begin{itemize}
@@ -1088,7 +1150,7 @@ RNN 的本质是什么？  它似乎是一个 recurrent hetero-associative memor
 
 Hebbian 的情况是： 有某一 I/O pattern； 我想 strengthen 这 pattern。 
 
-Assuming the learning is correct, $K'_1$ and $K'_2$ should be roughly the same \textemdash~ but this ignored the possibility that one path may take multiple steps to converge with the other path.  \footnote{This situation has been encountered in term rewriting systems (TRS):  If in a TRS any 2 different rewriting paths always converge to the same result, it is said to have the \emp{Church-Rosser property}.  For example the $\lambda$-calculus invented by Church has this property.} 
+Assuming the learning is correct, $K'_1$ and $K'_2$ should be roughly the same \textemdash~ but this ignored the possibility that one path may take multiple steps to converge with the other path.  \footnote{This situation has been encountered in term rewriting systems (TRS):  If in a TRS any 2 different rewriting paths always converge to the same result, it is said to have the \textbf{Church-Rosser property}.  For example the $\lambda$-calculus invented by Church has this property.} 
 
 Now I stipulate that $R$ be more ``refined'', that is to say, applying $D^n$ times may be equivalent to applying $a$ once:
 \begin{equation}
@@ -1098,14 +1160,14 @@ K \arrow[ur, "\scalebox{1.3}{$a$}"] \arrow[dr, "{\scalebox{1.3}{$D^n$}}"'] & \\
 & K'_2
 \end{tikzcd}
 \end{equation}
-Using a different notation, $a$ is the \emp{restriction} or \emp{section} of $D^n$ at point $K$: $a = D^n|_K$.
+Using a different notation, $a$ is the \textbf{restriction} or \textbf{section} of $D^n$ at point $K$: $a = D^n|_K$.
 
 Now the question is, do the RNN and RL paths have any \textit{essential} difference?
 \begin{itemize}
-\item Their internal \emp{representations} are different:\par
+\item Their internal \textbf{representations} are different:\par
 \dashh RNN is a multi-layer neural network\par
 \dashh RL's representation is $Q(\mbox{state},\mbox{action})$, usually stored as a \textit{look-up table}, although $Q$ could be approximated by a neural network as well.
-\item RL learns through \emp{rewards}, RNN learns from \emp{errors}.  Thus RL has broader applicability, because not all questions have ``correct answers'' that could be measured by errors.  In RL we just need to praise Genifer whenever she displays good behavior.
+\item RL learns through \textbf{rewards}, RNN learns from \textbf{errors}.  Thus RL has broader applicability, because not all questions have ``correct answers'' that could be measured by errors.  In RL we just need to praise Genifer whenever she displays good behavior.
 \item The internal cognitive state $K$ exists because of RNN:  it is simply the vector input and output of the RNN.  Without this $K$, RL would be clueless as to what are its internal states.  It can be said that the RNN provides a \textit{machinery} for RL to control.
 \end{itemize}
 
@@ -1130,15 +1192,15 @@ From the perspective of reinforcement learning, we could reward some results of 
 x_0 \arrow[r, mapsto, "a"] & x_\vdash \quad \updownarrow \bigstar
 \end{tikzcd}
 \end{equation}
-$\updownarrow \bigstar$ means ``to give positive or negative rewards''.  We want to learn $a$ which is the action to be taken at state $K$.  The learning algorithm is based on the famous \emp{Bellman optimality condition} (see next section).
+$\updownarrow \bigstar$ means ``to give positive or negative rewards''.  We want to learn $a$ which is the action to be taken at state $K$.  The learning algorithm is based on the famous \textbf{Bellman optimality condition} (see next section).
 
 Perhaps we should use RL to \textit{guide} the learning in RNN, as RNN is more fine-grained....
 
-To combine the 2 learning approaches, we could use the technique of \emp{interleaving}: for each step apply RL once, apply RNN $n$ times.
+To combine the 2 learning approaches, we could use the technique of \textbf{interleaving}: for each step apply RL once, apply RNN $n$ times.
 
 % 但 $R$ 本身是 RNN，它还可以透过 back-prop 进行学习，两者似乎是不同的。  Back-prop 是透过 $\frac{\partial}{\partial D}(\mbox{error})$ 的梯度来学习。
 
-The learning in RNN may also involve \emp{neurogenesis} (adding new neurons and connections), but I have not considered this aspect yet.
+The learning in RNN may also involve \textbf{neurogenesis} (adding new neurons and connections), but I have not considered this aspect yet.
 
 % RNN 的 $R$ 也是将 $K$ 变成 $K'$ 的作用：\par
 %\begin{figure}[h]
@@ -1189,7 +1251,7 @@ First, cartoon version:
 \includegraphics[scale=0.5]{RNN-topology.png}
 \end{equation}
 
-TO-DO:  The state space $X$ may be too large and we may need an \emp{attention mechanism} to select some parts of $X$ for processing by $R$.  This is the notion of \emp{working memory} in cognitive science.
+TO-DO:  The state space $X$ may be too large and we may need an \textbf{attention mechanism} to select some parts of $X$ for processing by $R$.  This is the notion of \textbf{working memory} in cognitive science.
 \begin{equation}
 \includegraphics[scale=0.4]{working-memory.png}
 \end{equation}
@@ -1223,7 +1285,7 @@ where $\vect{x}^*$ is the target value which is independent of time.
 &=& - \frac{\partial}{\partial\vect{W}} \int_0^T \sigmoid(W_1 \sigmoid(W_2 ... \sigmoid(W_L \vect{x}(t))) dt
 \end{eqnarray}
 
-When there are many layers or if the recurrence is too long, back-prop learning becomes ineffective due to the \emp{vanishing gradient} problem.  One solution is to use the \emp{rectifier} activation function:
+When there are many layers or if the recurrence is too long, back-prop learning becomes ineffective due to the \textbf{vanishing gradient} problem.  One solution is to use the \textbf{rectifier} activation function:
 \begin{equation}
 \rectifier (x) = 
 \begin{cases}
@@ -1235,7 +1297,7 @@ Since its derivative is piecewise constant, it does not suffer from the vanishin
 
 \subsection{Forward-backward Algorithm}
 
-This is inspired by forward- and backward-chaining in LBAI.  We propagate the state vector from both the initial state $\vect{x}_0$ as well as the final state $\vect{x}^*$.  This bi-directional propagation is added with noise and repeated many times, thus implementing a \emp{stochastic local search}:
+This is inspired by forward- and backward-chaining in LBAI.  We propagate the state vector from both the initial state $\vect{x}_0$ as well as the final state $\vect{x}^*$.  This bi-directional propagation is added with noise and repeated many times, thus implementing a \textbf{stochastic local search}:
 
 \begin{equation}
 \includegraphics[scale=0.6]{forward-backward-algorithm.png}
@@ -1245,11 +1307,11 @@ When the forward and backward states get close enough, a successful path is foun
 
 % One key question is how to deal with "don't care" bits?  One answer is that their errors are zero.  But then this is the same as the error for "correct" weights, which seems not well.  There's got to be a way to alter weights when the answer is correct...
 
-% For \# Iteration = 0, output is immediately known, so potentially the training can be done.  But how to convey that all these alterations of weights are \emp{optional}?
+% For \# Iteration = 0, output is immediately known, so potentially the training can be done.  But how to convey that all these alterations of weights are \textbf{optional}?
 
 \section*{Acknowledgements}
 
-\footnotesize{In a forum discussion with Ben Goertzel dated 25 June 2014 on the AGI mailing-list: (artificial-general-intelligence @googlegroups.com), YKY asked: Why bother with neural networks, which typically require many neurons to encode data, when logic-based AI can represent a proposition with just a few symbols?  Ben's insight is that neural networks are capable of learning its own representations, and their learning algorithms are relatively fast.  We have been working on "neo-classical" logic-based AI for a long time, and begin to realize that inductive learning in logic (based on combinatorial search in a symbolic space) is perhaps \textit{the bottleneck} in the entire logic-based paradigm.  So we try to look for alternatives that might enable learning to be faster, though we would still emphasize that logic-based AI remains a viable approach to AGI. %, provided that the right search heuristics be found (most probably in the form of \emp{hierarchical organization} of the learning space).
+\footnotesize{In a forum discussion with Ben Goertzel dated 25 June 2014 on the AGI mailing-list: (artificial-general-intelligence @googlegroups.com), YKY asked: Why bother with neural networks, which typically require many neurons to encode data, when logic-based AI can represent a proposition with just a few symbols?  Ben's insight is that neural networks are capable of learning its own representations, and their learning algorithms are relatively fast.  We have been working on "neo-classical" logic-based AI for a long time, and begin to realize that inductive learning in logic (based on combinatorial search in a symbolic space) is perhaps \textit{the bottleneck} in the entire logic-based paradigm.  So we try to look for alternatives that might enable learning to be faster, though we would still emphasize that logic-based AI remains a viable approach to AGI. %, provided that the right search heuristics be found (most probably in the form of \textbf{hierarchical organization} of the learning space).
 }
 
 \bibliographystyle{plain} % or number or aaai ...
