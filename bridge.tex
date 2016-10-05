@@ -73,7 +73,7 @@ Logic-based AI 和 connectionist AI 长久分裂，但作者最近发现可以�
 
 % \textbf{人工智能}基本上分为两大阵营： \emp{逻辑 AI} (logic-based AI) 和 \emp{神经网络} (connectionism)。
 
-逻辑 AI 那边，「结构」很精细，但\textbf{学习算法}太慢；  我的目的是建立一道「桥」，将逻辑 AI 的某部分结构\textbf{转移}到神经网络那边。
+逻辑 AI 那边，「结构」很抽象符号化，但\textbf{学习算法}太慢；  我的目的是建立一道「桥」，将逻辑 AI 的某部分结构\textbf{转移}到神经网络那边。
 
 这个问题搞了很久都未能解决，因为逻辑 AI 那边的结构不是一般常见的数学结构，单是要要表述出来也有很大困难。 直到我应用了 model theory 的观点，才找到满意的解决方案：
 \begin{equation}
@@ -247,7 +247,8 @@ x \cup \KB \sdtstile{}{} x'
 
 在\textbf{认知科学}里，有很多人相信大脑的内部的 representation 是一些所谓 ``mental models''，而很少人会相信大脑使用一些像命题那样的符号结构做 representation，甚至用 $\lambda$-calculus 那样的符号 manipulation 去思考。
 
-举例来说，用文字描述一起凶杀案，读者心目中会建立一个「模型」，它类似於真实经验但又不是真实的。 人脑似乎是用这样的 mental models 思考，而不是一些命题的集合。 %至於 mental models 是什么，目前认知科学还未有定论。
+举例来说，用文字描述一起凶杀案，读者心目中会建立一个「模型」，它类似於真实经验但又不是真实的。 人脑似乎是用这样的 mental models 思考，而不是一些命题的集合。 有两本论文集关於 model-based reasoning，基於逻辑的： \cite{Magnani1999} \cite{Magnani2002}。
+%至於 mental models 是什么，目前认知科学还未有定论。
 
 我终於发现到，logic-neuro correspondence 必须透过 model theory才能达成：
 \begin{equation}
@@ -403,7 +404,7 @@ $\sigmoid$ 作用在 $\vect{x}$ 的每个分量上，它的作用在座标变换
 \mbox{constant} \quad \includegraphics[scale=0.5]{node.png} & \quad \Leftrightarrow \quad & \mbox{neuron} \\
 \mbox{relation} \quad \includegraphics[scale=0.5]{link.png} & \quad \Leftrightarrow \quad & \mbox{relation between higher and lower neurons} \nonumber
 \end{eqnarray}
-但要注意的是这对应未必是一对一的，可能是一个 constant 对应几个 neurons 的\textbf{线性组合}。 具体情况可能像以下的示意图（实际上每层神经网络可能有很多神经元）：
+但要注意的是这对应未必是一对一的，可能是一个 constant 对应几个 neurons 的（线性？）\textbf{组合}。 具体情况可能像以下的示意图（实际上每层神经网络可能有很多神经元）：
 \begin{equation}
 \label{conclusion2}
 \includegraphics[scale=0.5]{actual-bridge.png}
