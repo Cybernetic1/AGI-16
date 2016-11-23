@@ -10,6 +10,18 @@
 \usepackage{amssymb}			% for \multimap, \updownarrow, \bigstar
 \usepackage{sectsty}			% change section color
 \usepackage{turnstile}		% longer turnstiles
+\usepackage{hyperref}		% include web link for RL sample code
+
+\usepackage{geometry}		% change paper size
+\geometry{
+  a4paper,         % or letterpaper
+  textwidth=18cm,  % llncs has 12.2cm
+  textheight=27cm, % llncs has 19.3cm
+  heightrounded,   % integer number of lines
+  hratio=1:1,      % horizontally centered
+  vratio=2:3,      % not vertically centered
+}
+\usepackage[fontsize=13pt]{scrextend}
 
 % *************** Delete when not using Chinese or colors **********************
 \usepackage{xeCJK}
@@ -32,6 +44,8 @@
 \newcommand{\invw}{\, \rotatebox[origin=c]{90}{w}}
 \newcommand*\rectifier{\vcenter{\hbox{\includegraphics{rectifier.png}}}}
 \newcommand{\dashh}{\textemdash~}
+\newcommand{\code}[1]{{\footnotesize{\ttfamily #1}}}
+\newcommand{\tab}{\hspace*{1cm} }
 
 % ***** Boxed variables inside math equations
 % \newcommand*{\boxedcolor}{black}
@@ -64,27 +78,28 @@
 \setlength{\parskip}{2.8ex}
 
 \begin{abstract}
-介绍 Itamar Arel 在 2012 年提出的一个基於增强学习和深度学习的 cognitive architecture \cite{Arel2012}，及其与控制论、 Hamiltonian 系统的关系。
+介绍一个基於 \textbf{增强学习} 和 \textbf{深度学习} 的极简约的 cognitive architecture，它在数学上是一个Hamiltonian 系统，而其 Lagrangian 对应於智能系统的「奖励」或「desire 的价值」。 经典逻辑 AI 的技巧可以搬到这个 setting 之下，而连续时间化之后，可以用上微分几何的技巧。 
 % 简单介绍笔者的强人工智能理论和强化学习、动态规划、最优控制、
 % 假设 $x$ 是思维状态。 在经典逻辑智能中，$x$ 是一束命题，代表当下的思考状况。 思考的过程就是不断重复进行推导: $x \vdash x' \vdash ...$。 在经典 AI 中这个作用是靠无数的逻辑 rules 来达成的。 但现在我们的做法是将 $x$ 放到向量空间中，再用一个 recurrent 神经网络来取代整个 rules base。
 \end{abstract}
 
-本文并没有原创内容，只是以 tutorial 的形式介绍一些已知的理论，及提供一个新的观点，或许对 AGI 的发展有帮助。
+本文较少原创内容，主要介绍一些已知的理论，及提供一个新的观点，或许对 strong AI 的发展有帮助。
 
 \section{中心思想}
 
 标题中的\textbf{比喻}是指用增强学习的方法控制一隻自主的智能系统 (autonomous agent)，在「思维空间」中寻找最优路径：
 \begin{equation}
-\includegraphics[scale=0.5]{maze-metaphor.png}
+\includegraphics[scale=0.65]{maze-metaphor.png}
 \end{equation}
 
 关键是将「思考」看成是一个\emp{动态系统} (dynamical system)，它运行在\emp{思维状态} (mental states) 的空间中：
 \begin{equation}
 \label{fig:mental-state}
-\includegraphics[scale=0.5]{mental-state.png}
+\includegraphics[scale=0.65]{mental-state.png}
 \end{equation}
 
 举例来说，一个\emp{思维状态}可以是以下的一束命题：
+\let\labelitemi\labelitemii
 \begin{itemize}
 \item 我在我的房间内，正在写一篇 AGI-16 的论文。
 \item 我正在写一句句子的开头：「举例来说，....」
@@ -93,7 +108,15 @@
 
 思考的过程就是从一个思维状态 \emp{过渡} (transition) 到另一个思维状态。 就算我现在说话，我的脑子也是靠思维状态记住我说话说到句子结构的哪部分，所以我才能组织句子的语法。
 
-思维状态是一支向量 $\vect{x} \in X$，$X$ 是所有可能的思维状态，思考算子 (reasoning operator) $R$ 是一个 endomorphism 映射： $X \rightarrow X$。
+思维状态是一支向量 $\vect{x} \in X$，$X$ 是所有可能的思维状态，思考算子 (reasoning operator) $\vect{F}$ 是一个 endomorphism 映射： $X \rightarrow X$。
+
+在数学上这是一个标准的\emp{动态系统 (dynamical system)}，它可以用以下方法定义：
+\begin{eqnarray}
+\mbox{离散时间：} \quad \quad & \vect{x}_{t+1} = \vect{F}(\vect{x}_t) \\
+\mbox{连续时间：} \quad \quad & \dot{\vect{x}} = \vect{f}(\vect{x}) \label{eqn1}
+\end{eqnarray}
+
+强化学习 (reinforcement learning)、动态规划 (dynamic programming)、控制论 (control theory) 的状态空间表述 ~ 三者其实是同义词； 在人工智能里习惯叫 RL。
 
 %, we would have at disposal all the tools available in vector space such as:
 
@@ -107,46 +130,17 @@
 %\item neural networks and deep learning ... etc.
 %\end{itemize}
 
-换句话说： 我们将逻辑 AI 的整套器材搬到向量空间中去处理。 这个做法，部分是受到 Google 的 PageRank \cite{Page1999} 和 Word2Vec \cite{Mikolov2013} 算法的启发，因为它们都是在向量空间中运作，而且非常成功。 %, both exploit the efficiency of vector and matrix calculus.
-
-\section{经典逻辑 AI}
-
-Strong AI 的问题在理论上已经被\emp{数理逻辑}完整地描述了，馀下的问题是\emp{学习算法}，因为在逻辑 AI 的架构下，学习算法很慢（复杂性很高），这就是我们要解决的。
-
-我研究 logic-based AI 很多年，因此我的思路喜欢将新问题还原到逻辑 AI 那边去理解，但实际上我提倡的解决办法不是靠经典逻辑，甚至不是 symbolic 的。  但在这篇文章我还是会经常跳回到逻辑 AI 去方便理解。
-
-用数理逻辑模拟人的思想是可行的，例如有 deduction, abduction, induction 等这些模式，详细可见《Computational logic and human thinking》by Robert Kowalski, 2011.  这些方面不影响本文的阅读。 值得一提的是，作者 Kowalski 是 logic programming，特别是 Prolog，的理论奠基人之一。
-
-在经典逻辑 AI 中，「思考」是透过一些类似以下的步骤：
-\begin{eqnarray}
-\mbox{前提} & \vdash & \mbox{结论} \\
-\boxed{\mbox{今天早上下雨}} & \vdash & \boxed{\mbox{草地是湿的}}
-\end{eqnarray}
-亦即由一些\emp{命题}(propositions)推导到另一些命题。
-
-推导必须依靠一些逻辑的法则命题 (rule propositions)，所谓「法则」是指命题里面带有 x 这样的\emp{变量}(variables)：
-\begin{equation}
-\boxed{\mbox{地方 x 下雨}} \wedge \boxed{\mbox{x 是露天的}} \vdash \boxed{\mbox{地方 x 是湿的}}
-\end{equation}
-这些法则好比「逻辑引擎」的燃料，没有燃料引擎是不能推动的。
-
-注意： 命题里面的 x，好比是有「洞」的命题，它可以透过 substitution 代入一些实物 (objects)，而变成完整的命题。 这种「句子内部」(sub-propositional)的结构可以用 predicate logic （谓词逻辑）表达，但暂时不需要理会这些细节。
-
-Logic-based AI 可以看成是将世界的「模型」压缩成一个「知识库」(knowledge-base, KB)，里面装著大量逻辑式子：
-\begin{equation}
-\includegraphics[scale=0.5]{world-model-compression.png}
-\end{equation}
-世界模型是由大量的逻辑式子经过组合而\emp{生成}的，有点像向量空间是由其「基底」生成； 但这生成过程在逻辑中特别复杂，所以符号逻辑具有很高的\emp{压缩比}，但要学习一套逻辑知识库，则相应地也有极高的\emp{复杂度}。
+换句话说： 我们将逻辑 AI 的整套器材搬到向量空间中去实现。 这个做法，部分是受到 Google 的 PageRank \cite{Page1999} 和 Word2Vec \cite{Mikolov2013} 算法的启发，因为它们都是在向量空间中运作，而且非常成功。 %, both exploit the efficiency of vector and matrix calculus.
 
 \section{控制论}
 
-以下内容可以在一般「现代控制论」教科书中找到，例如：
+%以下内容可以在一般「现代控制论」教科书中找到，例如：
 \let\labelitemi\labelitemii
-\begin{itemize}
-\item Daniel Liberzon 2012: \textit{Calculus of variations and optimal control theory -- a concise introduction}
-\item 李国勇 2008： 《最优控制理论与应用》
-\item 张洪钺、王青 2005： 《最优控制理论与应用》
-\end{itemize}
+%\begin{itemize}
+%\item Daniel Liberzon 2012: \textit{Calculus of variations and optimal control theory -- a concise introduction}
+%\item 李国勇 2008： 《最优控制理论与应用》
+%\item 张洪钺、王青 2005： 《最优控制理论与应用》
+%\end{itemize}
 
 一个\emp{动态系统 (dynamical system)} 可以用以下方法定义：
 \begin{eqnarray}
@@ -161,6 +155,8 @@ Logic-based AI 可以看成是将世界的「模型」压缩成一个「知识�
 \mbox{连续时间：} \quad \quad & \dot{\vect{x}} = \boxed{\mbox{RNN}}(\vect{x})
 \end{eqnarray}
 这里 recurrent 指的是它不断重复作用在 $\vect{x}$ 之上，但实际上它是一个普通的前馈式 (feed-forward) 神经网络。 注意： 在抽象理论中，$f$ 和 $F$ 可以是任意函数，我把它们设计成 NN 只是众多可能的想法之一。 之所以选用 NN，是因为它有 universal function approximator 的功能，而且是我们所知的最「聪明」的学习机器之一。
+
+% Itamar Arel 在 2012 年提出的 \cite{Arel2012}
 
 在我提出的智能系统里，$\dot{x}$ 是由\emp{學習機器}給出的，換句話說，$\dot{x}$ 是思維狀態在梯度下降至最佳狀態時的\emp{方向導數}。
 
@@ -186,12 +182,12 @@ Reinforcement learning 是机器学习里面的一个分支，特别善於控制
 
 听到强化学习，你脑里应该浮现一只曱甴那样的小昆虫，那就是 autonomous agent 的形象：
 \begin{equation}
-\includegraphics[scale=0.15]{cockroach.png}
+\includegraphics[scale=0.2]{cockroach.png}
 \end{equation}
 
 对「环境」(environment) 这概念，你应该想到像以下这经典游戏的迷宫：
 \begin{equation}
-\includegraphics[scale=0.3]{pacman-0.png}
+\includegraphics[scale=0.8]{pacman-0.png}
 \end{equation}
 
 包括有追捕你的怪物、和吃了会加分的食物 （这些代表负值和正值的 rewards）。  当然，实际应用的「环境」和「奖励」可以是抽象的，这游戏是一个很具体的例子。
@@ -227,19 +223,19 @@ $(S, A, R)$ 是使用者设定的， $P$ 是算法自动计算出来的。
 
 强化学习的领导研究者 Richard Sutton 认为，只有这种学习法才考虑到 自主个体、环境、奖励 等因素，所以它是人工智能中最 top-level 的 architecture，而其他人工智能的子系统，例如 logic 或 pattern recognition，都应该在它的控制之下，我觉得颇合理。
 \begin{equation}
-\includegraphics[scale=0.4]{Richard-Sutton.jpg}
+\includegraphics[scale=0.5]{Richard-Sutton.jpg}
 \end{equation}
 
 所以要制造 strong AI，一个可能的方案就是结合强化学习和某种处理复杂 world model 的能力：
 \begin{equation}
-\includegraphics[scale=0.3]{cockroach-KB-person.png}
+\includegraphics[scale=0.6]{cockroach-KB-person.png}
 \end{equation}
 
-\noindent 「你们已经由虫进化成人，但在你们之内大部份仍是虫。」
+\noindent 「\textit{你们已经由虫进化成人，但在你们之内大部份仍是虫。}」
 
 \hfill --- 尼采, Thus spoke Zarathustra
 
-\noindent 「如果人类不相信他们有一天会变成神，他们就肯定会变成虫。」
+\noindent 「\textit{如果人类不相信他们有一天会变成神，他们就肯定会变成虫。}」
 
 \hfill --- Henry Miller
 
@@ -249,25 +245,28 @@ $(S, A, R)$ 是使用者设定的， $P$ 是算法自动计算出来的。
 
 学 AI 最紧要有 program，不然就会很枯燥。  这是我在网上找到的一个特别简单的 demo，作者是 Travis DeWolf：
 
-https://studywolf.wordpress.com/2012/11/25/reinforcement-learning-q-learning-and-exploration/
+\href{https://studywolf.wordpress.com/2012/11/25/reinforcement-learning-q-learning-and-exploration/}{Reinforcement learning demo}
 
 只要 Python 便可运行，但你可能要 install PyGame。
 
 猫、老鼠、芝士：
-
-
+\begin{equation}
+\includegraphics[scale=0.25]{RL-demo.png}
+\end{equation}
 
 猫的行动是简单地朝着老鼠追（没有智能），老鼠的行动是学习出来的。
 
 注意，在 main program 和 cellular.py 这两部分，纯粹是定义了迷宫世界如何运作，基本上是一个 game，里面完全没有智能，你可以用｛上、下、左、右｝ 控制各 agent 的活动，如此而已。
 
 强化学习的程式在 qlearn.py，很短，而真正学习的程式基本上只有一句，就是：
-def learnQ(self, state, action, reward, value):
-oldv = self.q.get((state, action), None)
-if oldv is None:
-       self.q[(state, action)] = reward
-else:
-       self.q[(state, action)] = oldv + self.alpha * (value - oldv)
+
+\tab \code{def learnQ(self, state, action, reward, value): }\\
+\tab \code{oldv = self.q.get((state, action), None) }\\
+\tab \code{if oldv is None:} \\
+\tab \code{\tab self.q[(state, action)] = reward }\\
+\tab \code{else: }\\
+\tab \code{\tab \textcolor{red}{self.q[(state, action)] = oldv + self.alpha * (value - oldv) }}
+
 单是这一句程式，就能令老鼠学到避开猫、吃芝士。  以下再解释....
 
 % ===========================================================================
@@ -290,24 +289,29 @@ $$ U(S_0) = \mathbb{E}[ \; \sum_{t=0}^{\infty} \; \gamma^t \; R(S_t) \; ] $$
 其中 $\mathbb{E[\;]}$ 代表期望值，$\gamma$ 是 discount factor，例如 0.9 或什么。
 
 实例： 考虑这简单的迷宫：
-
-
+\begin{equation}
+\includegraphics[scale=0.4]{RL-simple-maze.png}
+\end{equation}
 
 那些箭咀表示的是众多可能方案中的其中一个。
 
 根据这个方案，由 $(1, 1)$ 开始的运行可能是这个结果：
-
+\begin{equation}
+\includegraphics[scale=0.7]{RL-state-transition-eg-1.png}
+\end{equation}
 
 下面橙色的值是每个 state 的 reward。  在这例子中，每个不是终点的格，也会扣 0.04 分。
 
 但从同一起点，同一方案，也可以出现不同结果，例如在 (1,3) 企图向右爬，但实际结果是向下跌一格； 这些 state transitions 是由外在世界的机率决定的。  （例如某人读了大学文凭，但遇上经济不景，他的薪水未必能达到行动的预期效果。）
 
 同一方案的运行结果可以是：
-
+\begin{equation}
+\includegraphics[scale=0.7]{RL-state-transition-eg-2.png}
+\end{equation}
 或者：
-
-
-
+\begin{equation}
+\includegraphics[scale=0.7]{RL-state-transition-eg-3.png}
+\end{equation}
 
 \subsection{Bellman condition}
 
@@ -317,7 +321,7 @@ $$ U(S_0) = \mathbb{E}[ \; \sum_{t=0}^{\infty} \; \gamma^t \; R(S_t) \; ] $$
 
 考虑的问题是： 要做一连串的 sequential decisions。
 
-Bellman equation 说的是： 「如果从最佳选择的路径的末端截除一小部分，馀下的路径仍然是最佳路径。」
+Bellman equation 说的是： 「\textbf{如果从最佳选择的路径的末端截除一小部分，馀下的路径仍然是最佳路径。}」
 
 换句话说，如果一系列的选择 A B C D E.... 是最优的，那么这系列除去开始的 A，那 B C D E.... 系列应用在后继的状态上也是最优的。
 
@@ -342,6 +346,10 @@ $$ \mbox{当前状态} := \mbox{当前状态} + \alpha ( \mbox{理想} - \mbox{�
 
 （Delta rule 的微分形式就是我们熟悉的「梯度下降」： $x \mbox{ += } \eta \cdot \frac{dy}{dx}$）
 
+将 delta rule 应用到 Bellman condition 上，去寻找最优路径，这就是 Temporal Difference (TD) learning。
+
+\begin{comment}
+% ===========================================================================
 \subsection{Temporal difference (TD) learning}
 
 将 delta rule 应用到 Bellman condition 上，去寻找最优路径，这就是 temporal difference learning。
@@ -369,6 +377,9 @@ $\alpha$ 是 learning rate，它决定学习的速度（但它不能太大，避
 
 $P$ 是 state transitions 的机率，换句话是关於世界的一个 model。 TD learning 不需要学习 $P$，所以叫 model-free learning。  但正如开篇时说过，model-free 并不一定是好事，人的智慧就是基於我们对外在世界有一些很好的 models。
 
+\end{comment}
+% ===========================================================================
+
 \subsection{Q value}
 
 $Q$ 值只是 $U$ 值的一个变种 ;   $U$ 是对每个 state 而言的，$Q$ 把 $U$ 值分拆成每个 state 中的每个 action 的份量。  换句话说，$Q$ 就是在 state $S$ 做 action $A$ 的 utility。
@@ -381,6 +392,8 @@ $Q$ 的好处是什么？  下面将会介绍 active learning，而 $Q$ value  �
 上面的 update rule 只要用这个关系改写就行：
 $$ U(S) \mbox{  +=  } \alpha ( \; R(S) + \gamma \max_{A'}  Q(A', S') - Q(A, S) \; ) $$
 
+\begin{comment}
+% ===========================================================================
 \subsection{Active learning}
 
 在 passive learning 中，方案不变，我们已经能够计算每个 state $S$ 的效用 $U(S)$，或者每个 state $S$ 之下行动 $A$ 的效用 $Q(S, A)$。
@@ -398,8 +411,10 @@ $$ U(S) = R(S) + \gamma \max_A \mathcal{F}[ \; \sum_{S'} P(S \rightarrow S') U(S
 % 结语
 
 % 本来想写一篇人人能读懂的 RL 简介，但发觉写到长篇大论才勉强解释完。  希望女朋友能读懂 :)
+\end{comment}
+% ===========================================================================
 
-\subsection{控制论与强化学习的关系}
+\section{控制论}
 
 在\emp{强化学习}中，我们关注两个数量：
 \let\labelitemi\labelitemii
@@ -431,7 +446,7 @@ J = \int L dt + \Phi(\vect{x}_\bot)
 
 在\emp{分析力学}里 $L$ 又叫 Lagrangian，而 L 对时间的积分叫「作用量」：
 \begin{equation}
-\boxed{\mbox{作用量 (Action)}} \; S = \int L dt
+\boxed{\mbox{作用量 (Action) \; S}} = \int L dt
 \end{equation}
 Hamilton 的\emp{最小作用量原理} (principle of least action) 说，在自然界的运动轨迹里，$S$ 的值总是取稳定值 (stationary value)，即比起邻近的轨迹它的 $S$ 值最小。
 
@@ -456,6 +471,8 @@ action $a$ & control $u$ & （外力？） \\
 
 一个智能系统，它有「智慧」的条件，就是每时每刻都不断追求「开心能量」或奖励 $R$ 的最大值，但它必需权衡轻重，有计划地找到长远的效用 $U$ 的最大值。
 
+\begin{comment}
+% ===========================================================================
 \subsection{经典分析力学(analytical mechanics)}
 
 分析力学的物理内容，完全是牛顿力学的 $F = ma$，但在表述上引入了能量和 Hamiltonian 等概念，再使用微积分和变分法。
@@ -720,25 +737,6 @@ f_2\\
 
 在微分几何里，研究抽象的 Hamiltonian systems，会发现 symplectic 结构。 这结构用微分流形 $M$ 及其上的一个 微分形式 (differential form) $\omega$ 来定义。 需要一些微分几何的基础.....
 
-\subsubsection{Vectors and co-vectors}
-
-Vector 和 co-vector 之间的关系，可以看成是「$d$ 别人的东西」和「被别人 $d$ 的东西」，这里 $d$ 表示微分。
-
-「$d$ 别人的东西」是线性的 differential operators，记作 $\displaystyle \frac{\partial}{\partial x_1}$、$\displaystyle \frac{\partial}{\partial x_2}$ 等；它们很自然地组成一个 vector space $T_x M$。
-
-「被别人 $d$ 的东西」是一些线性的微分形式，记作 $dx_1$、$dx_2$ 等； 它们属於 $T_x M$ 的 dual space。
-
-\subsubsection{Manifolds}
-
-基本上「流形」的意思是「弯曲的空间」，它们局部地近似於 Euclidean 空间 $\mathbb{R}^n$，局部的座标可以分段用一组微分映射来描述，这些 maps 叫 charts。
-\begin{equation}
-\includegraphics[scale=0.5]{smooth-manifolds.png}
-\end{equation}
-
-\subsubsection{Phase space}
-
-「相位空间」指的是力学系统里，$i$ 个粒子的位置 $x_i$ 和动量 $p_i$ 合并而成的 $(\vect{x}, \vect{p})$ 空间。 但 configuration space 指的是所有可容许的位置 $\vect{x}$ 的空间。
-
 \subsubsection{Vector fields, differential forms, Hamiltonian flow}
 
 根据 Hamilton 方程，再用微分的 chain rule 可以得到：
@@ -770,433 +768,45 @@ Hamilton 系统的动态方程就是：
 \begin{equation}
 \vec{H} H = 0 \quad \mbox{is equivalent to} \quad \Gamma^*_t \omega = \omega
 \end{equation}
-
-\subsubsection{Tangent and co-tangent bundle}
-
-在流形上每点有一个 tangent space，所谓 tangent bundle 是指流形上每点 $x$ 的 tangent space $T_x M$ 的总和：
-\begin{equation}
-TM := \bigcup_{x \in M} T_x M
-\end{equation}
-\begin{equation}
-\includegraphics[scale=0.5]{tangent-bundle.png}
-\end{equation}
-\begin{equation}
-\includegraphics[scale=0.5]{tangent-bundle-2.png}
-\end{equation}
-
-粗略地，tangent bundle 可以看成是 $M \times T_x M$，而 $M$ 和 $T_x M$ 的维数都是 $n$，所以 tangent bundle 的维数是 $2n$。 在力学上，\emp{cotangent bundle} 就是相位空间 $(\vect{x}. \vect{p})$ 的空间 (The phase space of a mechanical system is the cotangent bundle of its configuration space)。
-
-\subsubsection{Push forward, pull back}
-
-\subsubsection{Energy conservation, area form}
-
-(Stephanie \S 4.4)
-
-\subsubsection{Symmetry of Hamiltonian system, Lie groups}
-
-Symplectic groups 是一些保存辛结构的变换 $T$ 的群：
-\begin{equation}
-\omega(T x, T y) = \omega(x, y) \quad \forall x, y \in V
-\end{equation}
-$V$ 是向量空间。 在 $V$ 上的 symplectic 变换的全体记作 $Sp(V)$。
-
-\subsubsection{Momentum maps}
-
-\subsection{动态系统理论}
-
-\subsubsection{Floer homology}
-
-\emp{Homology （同调论）} 研究的是空间中「有没有穿洞」的樸拓结构。 最简单的 \emp{singular homology} 是将空间用三角形剖分 (triangulation)，然后透过著名的 Euler formula $V + F = E + 2$ 及其扩充，让我们可以计算 Euler characteristic $\chi$，此即空间穿洞的个数。
-\begin{equation}
-\includegraphics[scale=0.5]{manifolds-with-holes.png}
-\end{equation}
-
-\begin{equation}
-\includegraphics[scale=0.25]{torus-triangulation.jpg}
-\end{equation}
-当这些三角形剖分趋於无穷小时，我们得到用微分形式 (differential forms) 描述的 homology，即 \emp{de Rham homology}。 
-
-\begin{equation}
-\includegraphics[scale=0.5]{height-function.png}
-\end{equation}
-在流形上定义一个 potential function，例如简单的 height function，就可以做 Morse theory，这时每个点可以根据势能函数向下流 (gradient flow)，流到一些最低位置，它们是临界点 (critical points)。 Morse decomposition 将空间用这些临界点分割（流到同一临界点的 flows 认作同一 equivalent class），得到的是 \emp{Morse homology}。
-\begin{equation}
-\includegraphics[scale=0.5]{gradient-flow.png}
-\end{equation}
-
-\emp{Floer homology} 是 Morse homology 的\textbf{无限维空间}版本，比较难计算。
-
-\subsubsection{Conley theory}
-
-\subsubsection{Entropy, ergodicity}
-
-\subsubsection{Lie algebra 的另一应用}
-
-例如一架车可以有两个基本动作： (A) 绕中心旋转、或 (B) 前后行驶，它们的 Lie 括号 $[A,B]$，产生出的动作是左右方向行驶，这类似於「平行泊车」的时候，车子的移动方向：
-\begin{equation}
-\includegraphics[scale=0.5]{Lie-bracket-car.png}
-\end{equation}
-
-（可控性与 ``reachable'' 概念。）
-
-\subsubsection{Stable, unstable, and center manifold}
-
-\subsubsection{Smale horseshoe}
-
-\section{最优控制的计算方法}
-
-\subsubsection{直接法}
-
-\subsubsection{间接法}
-
-\subsubsection{Lyapunov 函数第一方法}
-
-\subsubsection{Lyapunov 函数第二方法}
-
-\section{关於逻辑....}
-
-由初始状态 $x$ 过渡到 $x'$：
-% \mathrm{L}
-\begin{equation}
-x \sststile{}{\KB} x'
-\end{equation}
-注意 $x, x'$ 是命题的\textbf{集合}，$x, x' \subset \mathcal{P}(\mathcal{L})$，the power set of all logic formulas。
-
-所谓 $Q$-value 其实是在 $X \times U$ 空间上的\textbf{能量分布}； $(x,u) \mapsto Q$。 意思是说： 在状态 $x$ 执行动作 $u$，其价值是多少？ （因为我们等同了价值和能量。）  也可以说，$Q$ 是 $X \times U$ 上的一个\textbf{测度} (measure)。
-
-我们将逻辑推导中的\textbf{搜寻}纳入到 transition function 的功能之中。 换句话说，transition function 的功能并不只是推导； 它是一种类似 stochastic search 的「游荡」。   
-
-在逻辑 AI 这边，我们要计算的是分布在 $\sststile{}{\KB}$ 上的测度 $Q$； 换句话说，对於不同的 $\KB$，我们有不同的 $\vdash$。 这似乎等於分布在所有不同的 $\KB$ 上的测度。
-
-
-
-In LBAI the knowledge representation structure is built (\textit{fixed}) from the bottom up:
-%\begin{equation}
-%\mbox{words } \triangleright \mbox{ sentences } \triangleright \mbox{ logical form } \triangleright \mbox{ logical KB}
-%\end{equation}
-%Thus the structure of the KB is \textit{fixed} by the human designer. % This rigidity is perhaps why learning in logic-based systems is slow.
-
-% In natural language, an idea can be expressed as a concatenation of words, for example:\\
-% And it is just a short jump from word concatenations to symbolic logic.  But this jump may land us into a logic-based ``tar pit'', in which everything is theoretically possible, but often too slow in practice.
-
-%It is just a short jump from the expression of ideas as word concatenations to logical form as linear (or tree-like, or graph-like) compositions of symbols:
-\begin{equation}
-\includegraphics[scale=0.5]{ideas-vs-logical-form.png}
-\end{equation}
-but is it valid (or profitable) to assume that our mental representations are \textit{isomorphic} to such logical structures?  Or drastically different?
-
-Humans are good at designing symbolic structures, but we don't know how to design \textit{neural} representations which are more or less opaque to us.
-Perhaps we could use a neural network acting recurrently on the state vector to \emp{induce} an internal representation of mental space.  ``\textit{Induced by what},'' you ask?  By the very structure of the neural network itself.  In other words, forcing a neural network to \textit{approximate} the ideal operator $R^*$.
-
-From an abstract point of view, we require:
-\begin{itemize}
-\item $R$ be an endomorphism: $X \rightarrow X$
-\item $R$ has a learning algorithm: $R \stackrel{A}{\longmapsto} R^*$
-\end{itemize}
-
-$R$ would contain all the knowledge of the KB, so we expect it to be ``large'' (eg. having a huge number of parameters).  We also desire $R$ to possess a \emp{hierarchical} structure because hierarchies are computationally very efficient.  A multi-layer perceptron (MLP) seems to be a good candidate, as it is just a bunch of numbers (weight matrices $W$) interleaved by non-linear activation functions:
-\begin{equation}
-R(\vect{x}) = \sigmoid(W_1 \sigmoid(W_2 ... \sigmoid(W_L \vect{x} )))
-\end{equation}
-where $L$ is the number of layers.  MLPs would be our starting point to explore more design options.
-
-In 1991 Siegelmann and Sontag \cite{Siegelmann1991} proved that recurrent neural networks (RNNs) can emulate any Turing machine.  In 1993 James Lo \cite{Lo1993} proved that RNNs can universally approximate any non-linear dynamical system.
-
-The idea of $R$ as an operator acting on the state is inspired by the ``consequence operator'' in logic, usually denoted as $\mbox{Cn}$:
-\begin{equation}
-\mbox{Cn}(\Gamma) = \{ \mbox{ set of propositions that entails from } \Gamma \; \}
-\end{equation}
-but the function of $R$ can be broader than logical entailment.  We could use $R$ to perform the following functions which are central to LBAI:
-\begin{itemize}
-\item \emp{deduction} -- forward- and backward-chaining
-\item \emp{abduction} -- finding explanations
-\item \emp{inductive learning}
-\end{itemize}
-
-\begin{tcolorbox}[width=\textwidth,colback={white},title={\centering \emp{Example 1: } primary-school arithmetic},colbacktitle=white,coltitle=black]
-
-A recurrent neural network is a \textit{much more powerful} learning machine than a feed-forward network, even if they look the same superficially.
-
-\begin{wrapfigure}{l}{2cm}
-\includegraphics[scale=0.6]{elementary-arithmetic.png}
-\end{wrapfigure} 
-
-As an example, consider the way we perform 2-digit subtraction in primary school.  This is done in two steps, and we put a dot on paper to mark ``carry-over''.
-
-The use of the paper is analogous to the ``tape'' in a Turing machine -- the ability to use short-term memory allows us to perform much more complex mental tasks.
-
-We did a simple experiment to train a neural network to perform primary-school subtraction.  The operator is learned easily if we train the two steps \textit{separately}.  The challenge is to find an algorithm that can learn \emp{multi-step} operations by itself.
-
-\end{tcolorbox}
-
-\begin{tcolorbox}[width=\textwidth,colback={white},title={\centering \emp{Example 2: } variable binding in predicate logic},colbacktitle=white,coltitle=black]
-
-The following formula in predicate logic defines the ``grandfather'' relation:
-
-\begin{equation}
-\includegraphics[scale=0.75]{linkage-in-logic-variables.png}
-\end{equation}
-
-
-We did a simple experiment to train a neural network to perform primary-school subtraction.  The operator is learned easily if we train the two steps \textit{separately}.  The challenge is to find an algorithm that can learn \emp{multi-step} operations by itself.
-
-\end{tcolorbox}  
-
-In LBAI, logic possesses additional structure:
-\begin{itemize}
-\item \emp{truth values} (eg. P(rain tomorrow) = 0.7)
-\item \emp{propositional structure} (eg. conjunction: $A \wedge B$) 
-\item \emp{sub-propositional structure} (eg. predication: loves(john, mary) )
-\item \emp{subsumption structure} (eg. $\mbox{dog} \subseteq \mbox{animal}$)
-\end{itemize}
-
-These structures can be ``transplanted'' to the vector space $X$ via:
-\begin{itemize}
-\item \emp{truth values: } an extra dimension conveying the ``strength'' of states
-\item \emp{propositional structure: } eg. conjunction as vector addition,
-\begin{equation}
-A \wedge B = \vect{x}_A + \vect{x}_B + ...
-\end{equation}
-but we have to avoid linear dependencies (``clashing'') such as:
-\begin{equation}
-\vect{x}_3 = a_1 \vect{x}_1 + a_2 \vect{x}_2
-\end{equation}
-This would force the vector space dimension to become very high.
-\item \emp{sub-propositional structure: } eg. tensor products as composition of concept atoms:
-\begin{equation}
-\mbox{loves(john, pete)} = \overrightarrow{john} \otimes \overrightarrow{love} \otimes \overrightarrow{pete}
-\end{equation}
-\item \emp{subsumption structure: } eg. define the positive cone $C$ such that
-\begin{equation}
-\mbox{animal} \supseteq \mbox{dog} \quad \Leftrightarrow \quad \overrightarrow{animal} - \overrightarrow{dog} \in C
-\end{equation}
-\end{itemize}
-
-But the more logical structure we add to $X$, the more it will resemble logic, and this whole exercise becomes pointless.  Remember our original goal is to try something different from logic, by \textit{relaxing} what defines a logical structure.  So we would selectively add features to $X$.
-
-
-\section{Unifying RL and RNN}
-
-From the viewpoint of reinforcement learning, we aim to learn the \emp{policy} function: \par
-\begin{equation}
-\begin{tikzcd}[]
-\mbox{policy : ~~state} \arrow[r, mapsto, "\scalebox{0.8}{action}"] & \mbox{state'}
-\end{tikzcd}
-\end{equation}
-Where $K$ can be regarded as the \emp{mental state}, and thus an \emp{action} in RL turns $K$ into $K'$.
-
-In our system, there are 2 pathways that act on $K$, via RNN and RL respectively: \par
-\begin{equation}
-\begin{tikzcd}[column sep=huge]
-& K'_1 \arrow[dd, dashed, no head, "\scalebox{1.3}{$\approx$}"] \\
-K \arrow[ur, "\mbox{RL}"] \arrow[dr, "\mbox{RNN}"'] & \\
-& K'_2
-\end{tikzcd}
-\end{equation}
-In RL, the action $a$ acts on $K$, whereas in RNN, $R$ acts on $K$.
-
-\emp{Note}： RNN and RL are learning algorithms, and if they are both applied to the same problem, conflicts will necessarily arise, unless there is a way to combine them.
-
-At state $K$, we estimate the Q-value $Q(K \stackrel{a}{\mapsto} K')$.  The action that would be chosen at state $K$ is $\displaystyle \arg\max_a Q(K \stackrel{a}{\mapsto} K')$.  This could be used to train the RNN via $\displaystyle K \vdash_W ...^n K'$.
-
-RL 在众多状态 $K$ 之间游荡，学习 $Q(K \mapsto K')$。  因为 RL 独有奖励讯息，我们必需用 RL 来教导 RNN 学习，反之不可。  第一个问题是： RL 如何在 $K$ 之间游荡？   游荡是随机的，但也可以借助 RNN 的随机性、或在 RNN 自身的游荡中注入更多随机性、或者根本就是 RL 自己产生的随机性。  接下来的问题是： RNN 如何用 $Q$ 值来诱发学习？
-
-RNN 的 ``$n$-fold'' 学习可以通过以下方式实现： 
-\begin{itemize}
-\item stochastic forward-backward propagation
-\item genetic?
-\item 最有趣的是 Hebbian learning，因为它似乎特别适合这情况。  
-\end{itemize}
-
-RNN 的本质是什么？  它似乎是一个 recurrent hetero-associative memory。  但其实它还需要将 input 作类似於 Word2vec 的 encoding。  这个 encoding 将「相似」的思维状态 $K$ 归到同类。  利用空间中的相似度，RL 可以用一些连续函数来近似 Q 值（详细情况还有待分析）。
-
-另一个问题是： 虽然用函数的近似可以做到 generalization，但另一个方法是利用状态 $K$ 中的空位作暂时储存。 这两者似乎很不同。  问题似乎在於： 状态转换 $K \mapsto K'$ 是不是对应於逻辑中的\emp{一条} rule？  答案似乎是 yes。  这个共识是很重要的。  如果用 decision tree，需要的是向量空间中的相似度。
-
-现在的关键是「状态变量」。  因为它可以做到符号逻辑中靠变量的 generalization，这是前所未有的。  这种 generalization 似乎不需要相似度，因为它是符号的！  会不会在向量空间中的状态变量 能够做到之前逻辑变量做不到的动作？  不管怎样，用 RNN 学习这些变量的动作似乎是很难的，因为这些动作似乎不是对\emp{误差}的梯度下降。  除非这些动作本身也近似於其他动作，但那是怎样的近似？  学习 multi-step logic 其实和以前的 forward / backward chaining 没有分别！  唯一分别是命题的 representation 改变了，它未必像符号的 concatenation。  所以问题仍然是 ``$n$-fold'' 学习法。 
-
-而且注意： RL 的 generalization 根本上不同於 rules 空间中的 generalization。 前者是思维空间 $K$ 中的一般化，后者也可以是 $K$ 空间的一般化，但也可以是依赖「状态变量」的一般化。
-
-一般来说，RL 和 RNN 的行动和学习，是可以互相独立的。  
-
-还有 heterarchical 的分类法。  想用 decision tree 或什么，达到不同网络的\emp{分工}。  在组织知识这方面，深度网络有没有用？  可以想像，在视觉识别中，在网络的最上层有很多 objects，而它们都可以还原到底层的 features。  网络有更多层，可以识别的事物更抽象。  但现在我们要的不是\emp{模式识别}，而是 mapping。 特别是抽象模式的 mapping。  想要的是： 大量的 rules，将不同的 $K$ 映射到新的 $K'$。
-
-还有一点要澄清的是： 究竟每一个「思元素」在向量空间中是不是\emp{一点}？  如果有了这个「思元素 = 点」假设，则每次 iteration 应该会删除一个思元素，而用另一个（全新的）思元素取代之。  这样，$K \mapsto K'$ mapping 就有了更确定的结构。  这样的 setup 已经很接近 logic 系统，但其学习算法仍然很有 combinatorial 的 ``feel''。 （因为只有当两个 rules 串连之后，才能达到某个结论，而这个串连有没有中间的 continuous 状态？）  这种串连通常是怎样找到的？  
-
-现在有一转机： 如果「思元素 = 点」，则「状态变量」的形成似乎会很普遍，而我们可以集中研究如何学习 single-step rules。 RL 的 rewards 可以指导学习，但这些「终极 rewards」对学习的细节没有指导作用。  我们似乎可以用「\emp{时间延迟}」来达到「状态变量」的效果，这个做法无形中增加了使用状态变量的机会。  
-
-现在总结一下仍然有待回答的问题：
-\begin{itemize}
-\item RL 的 generalization 如何做？
-\item iterative thinking map 如何 learn？
-\item 
-\end{itemize}
-
-Hebbian 的情况是： 有某一 I/O pattern； 我想 strengthen 这 pattern。 
-
-Assuming the learning is correct, $K'_1$ and $K'_2$ should be roughly the same \textemdash~ but this ignored the possibility that one path may take multiple steps to converge with the other path.  \footnote{This situation has been encountered in term rewriting systems (TRS):  If in a TRS any 2 different rewriting paths always converge to the same result, it is said to have the \emp{Church-Rosser property}.  For example the $\lambda$-calculus invented by Church has this property.} 
-
-Now I stipulate that $R$ be more ``refined'', that is to say, applying $D^n$ times may be equivalent to applying $a$ once:
-\begin{equation}
-\begin{tikzcd}[column sep=huge]
-& K'_1 \arrow[dd, dashed, no head, "\scalebox{1.3}{$\approx$}"] \\
-K \arrow[ur, "\scalebox{1.3}{$a$}"] \arrow[dr, "{\scalebox{1.3}{$D^n$}}"'] & \\
-& K'_2
-\end{tikzcd}
-\end{equation}
-Using a different notation, $a$ is the \emp{restriction} or \emp{section} of $D^n$ at point $K$: $a = D^n|_K$.
-
-Now the question is, do the RNN and RL paths have any \textit{essential} difference?
-\begin{itemize}
-\item Their internal \emp{representations} are different:\par
-\dashh RNN is a multi-layer neural network\par
-\dashh RL's representation is $Q(\mbox{state},\mbox{action})$, usually stored as a \textit{look-up table}, although $Q$ could be approximated by a neural network as well.
-\item RL learns through \emp{rewards}, RNN learns from \emp{errors}.  Thus RL has broader applicability, because not all questions have ``correct answers'' that could be measured by errors.  In RL we just need to praise Genifer whenever she displays good behavior.
-\item The internal cognitive state $K$ exists because of RNN:  it is simply the vector input and output of the RNN.  Without this $K$, RL would be clueless as to what are its internal states.  It can be said that the RNN provides a \textit{machinery} for RL to control.
-\end{itemize}
-
-% programming needed:
-% RNN: with special back-prop
-% RL: approximate Q(K,a), using special NN that can find max also
-
-% 整体来说，RL 可以操控的 actions 包括：
-% \begin{enumerate}[\tab (A)]
-% \item apply $K \stackrel{D}{\mapsto} K'$ \par
-% 但注意： $K$ 是认知状态，$R$ 是对 $K$ 进行「合乎逻辑的推论」。 所以，无论发生什么事，我们都会将 $R$ 作用在 $K$ 上几次。 换句话说，$R$ 是\ds{必然}进行的动作，或者可以看成是在\ds{背景}下进行的运作，所以不需要用 RL 学习。 %RL 的用处是学习如何在很多 actions 之间选择最好的一个，所以 $R$ 不是 RL 需要学习的 action，它只是。
-
-% \item 改写认知状态 $K \mapsto K'$ \par
-% RL 的 actions (A) 是
-% 在思考过程中改变 $K$ 的值。 例如我们得到一个局部结论，这个局部结论的状态不是最终答案，但也比什么都没有的效用更高。 改写 $K$ 的方法可以是： 例如 将 $K \mbox{ += } \delta K$，或者 「if $K \in$ 某 region，then $K \mbox{ += } \delta K $」。
-
-% \item 学习： change $R$ \par
-
-From the perspective of reinforcement learning, we could reward some results of multi-step inference: \par
-\begin{equation}
-\begin{tikzcd}[row sep=tiny]
-x_0 \arrow[r, mapsto, "a"] & x_\vdash \quad \updownarrow \bigstar
-\end{tikzcd}
-\end{equation}
-$\updownarrow \bigstar$ means ``to give positive or negative rewards''.  We want to learn $a$ which is the action to be taken at state $K$.  The learning algorithm is based on the famous \emp{Bellman optimality condition} (see next section).
-
-Perhaps we should use RL to \textit{guide} the learning in RNN, as RNN is more fine-grained....
-
-To combine the 2 learning approaches, we could use the technique of \emp{interleaving}: for each step apply RL once, apply RNN $n$ times.
-
-% 但 $R$ 本身是 RNN，它还可以透过 back-prop 进行学习，两者似乎是不同的。  Back-prop 是透过 $\frac{\partial}{\partial D}(\mbox{error})$ 的梯度来学习。
-
-The learning in RNN may also involve \emp{neurogenesis} (adding new neurons and connections), but I have not considered this aspect yet.
-
-% RNN 的 $R$ 也是将 $K$ 变成 $K'$ 的作用：\par
-%\begin{figure}[h]
-%\centering
-%\begin{tikzcd}[row sep=tiny]
-%K \arrow[r, mapsto, "\scalebox{1.3}{$R$}"] & K'
-%\end{tikzcd}
-%\end{figure}
-% $R$ 和 RL 的 actions 是不一样的。
-
-There are 4 learning modes:
-\begin{itemize}
-\item learning to listen/talk
-\item RL-based learning
-\item inductive learning
-\end{itemize}
-
-\section{Misc points}
-
-\begin{itemize}
-\item If sigmoid is replaced by polynomial, universal approximating property may be retained.
-
-\item Banach fixed point theorem does not apply because $R$ in general need not be contractive.  Question is whether $R$ necessarily converges to fixed points and the answer is no.
-
-\item If reasoning operator $R$ is continuous, the flow of the dynamical system is governed by an autonomous differential equation.  Poincare-Bendixson only applies to dynamical systems on the plane, and is irrelevant to systems whose phase space has dimension $\geq 3$, or to discrete dynamical systems.
-
-\item Time can be discrete or continuous.
-
-\item Goal is to find minimizer of error (ie, to approximate a function given some input-output data points).  The (finite) set of local minima can be solved via setting $\frac{\partial R}{\partial W} = 0$.  The number of local minima can be calculated as: ?  McClelland paper.
-
-\item If operator is discontinuous, what advantages can be gained?
-\end{itemize}
-
-What I want to do now is to determine if $R$ implemented as a deep network is sufficient to model human-level reasoning.
-
-One principle seems to be that logical conclusions must not proliferate indefinitely.  But we are not sure what kind of structural constraints this would impose on the vector space.  Or whether we should impose such constraints manually.
-
-What other properties are desired for the implementation of $R$?
-
-\section{Architecture}
-
-First, cartoon version:
-\begin{equation}
-\includegraphics[scale=0.5]{architecture-cartoon.png}
-\end{equation}
-
-\begin{equation}
-\includegraphics[scale=0.5]{RNN-topology.png}
-\end{equation}
-
-TO-DO:  The state space $X$ may be too large and we may need an \emp{attention mechanism} to select some parts of $X$ for processing by $R$.  This is the notion of \emp{working memory} in cognitive science.
-\begin{equation}
-\includegraphics[scale=0.4]{working-memory.png}
-\end{equation}
-
-\section{Deep Recurrent Learning}
-
-The learning algorithm for $R$ is central to our system.  $R$ learns to recognize input-output pairs $( \vect{x}_0, \vect{x}^* )$.  What makes it special is that $R$ is allowed to iterate a \textit{flexible} number of times before outputting an answer.  In feed-forward learning we simply learn single-pass recognition, whereas in common recurrent learning we train against a \textit{fixed} time sequence.  Here, the time delay between input and output is allowed to stretch arbitrarily.
-
-Suppose the recurrent network $R$ iterates $n$ times:
-\begin{equation}
-\vect{x}_{t+1} = \overbrace{R \circ R \circ ...}^{n} (\vect{x})
-\end{equation}
-
-As $n \rightarrow \infty$, we get the continuous-time version (a differential equation):
-\begin{equation}
-\frac{d\vect{x}(t)}{dt} = \mathfrak{R}(\vect{x}(t))
-\end{equation}
-
-We could run the network $R$ for a long enough time $T$ such that it is highly likely to reach an equilibrium point.  Then:
-\begin{equation}
-\vect{x}_{T} = \int_0^T \mathfrak{R}(\vect{x}(t)) dt
-\end{equation}
-and the error:
-\begin{equation}
-% \mathscr{E} = \vect{x}^* - \vect{x}_{T}
-\boxed{误差} = \vect{x}^* - \vect{x}_{T}
-\end{equation}
-where $\vect{x}^*$ is the target value which is independent of time.
-\begin{eqnarray}
-\frac{\partial\mathscr{E}}{\partial\vect{W}} &=& - \frac{\partial}{\partial\vect{W}} \int_0^T \mathfrak{R}(\vect{x}(t)) dt \nonumber \\
-&=& - \frac{\partial}{\partial\vect{W}} \int_0^T \sigmoid(W_1 \sigmoid(W_2 ... \sigmoid(W_L \vect{x}(t))) dt
-\end{eqnarray}
-
-When there are many layers or if the recurrence is too long, back-prop learning becomes ineffective due to the \emp{vanishing gradient} problem.  One solution is to use the \emp{rectifier} activation function:
-\begin{equation}
-\rectifier (x) = 
-\begin{cases}
-x, & \mbox{if } x \geq 0 \\
-0, & \mbox{otherwise}
-\end{cases}
-\end{equation}
-Since its derivative is piecewise constant, it does not suffer from the vanishing gradient problem.
-
-% ================================================================================
-\begin{comment}
-
-\subsection{Forward-backward Algorithm}
-
-This is inspired by forward- and backward-chaining in LBAI.  We propagate the state vector from both the initial state $\vect{x}_0$ as well as the final state $\vect{x}^*$.  This bi-directional propagation is added with noise and repeated many times, thus implementing a \emp{stochastic local search}:
-
-\begin{equation}
-\includegraphics[scale=0.6]{forward-backward-algorithm.png}
-\end{equation}
-
-When the forward and backward states get close enough, a successful path is found, and we record the gap and the noises along the path, and use them to train $R$ so that this new path would be recognized.
-
-% One key question is how to deal with "don't care" bits?  One answer is that their errors are zero.  But then this is the same as the error for "correct" weights, which seems not well.  There's got to be a way to alter weights when the answer is correct...
-
-% For \# Iteration = 0, output is immediately known, so potentially the training can be done.  But how to convey that all these alterations of weights are \emp{optional}?
-
 \end{comment}
-% ================================================================================
+% ===========================================================================
+
+\section{Episodic memory}
+
+设计了这个 minimalist architecture 之后，发现比较起人脑有个严重缺陷，就是没有「事件记忆」（换句话说，只能留意当下发生的事件，但不能记住一段故事）。
+
+这牵涉到甚么是「记忆」的问题。 在 minimal architecture 里，$\vect{F}$ 代表 ``static knowledge''，亦即（相对地）永恒不变的规律，而 $\vect{x}$ 代表当下的状态，亦即 ``dynamic knowledge''。
+
+Episodic memory 介乎「动态」与「静态」之间，我估计和信息处理理论中的 $z$-transform 或许有关。 Episodic memory 的问题仍有待研究，但没有 episodic memory 也可以制造一种颇为有用的智能系统了。 
+
+\section{经典逻辑 AI}
+
+Strong AI 的问题在理论上已经被\emp{数理逻辑}完整地描述了，馀下的问题是\emp{学习算法}，因为在逻辑 AI 的架构下，学习算法很慢（复杂性很高），这就是我们要解决的。
+
+我研究 logic-based AI 很多年，因此我的思路喜欢将新问题还原到逻辑 AI 那边去理解，但实际上我提倡的解决办法不是靠经典逻辑，甚至不是 symbolic 的。  但在这篇文章我还是会经常跳回到逻辑 AI 去方便理解。
+
+用数理逻辑模拟人的思想是可行的，例如有 deduction, abduction, induction 等这些模式，详细可见《Computational logic and human thinking》by Robert Kowalski, 2011.  这些方面不影响本文的阅读。 值得一提的是，作者 Kowalski 是 logic programming，特别是 Prolog，的理论奠基人之一。
+
+在经典逻辑 AI 中，「思考」是透过一些类似以下的步骤：
+\begin{eqnarray}
+\mbox{前提} & \vdash & \mbox{结论} \\
+\boxed{\mbox{今天早上下雨}} & \vdash & \boxed{\mbox{草地是湿的}}
+\end{eqnarray}
+亦即由一些\emp{命题}(propositions)推导到另一些命题。
+
+推导必须依靠一些逻辑的法则命题 (rule propositions)，所谓「法则」是指命题里面带有 x 这样的\emp{变量}(variables)：
+\begin{equation}
+\boxed{\mbox{地方 x 下雨}} \wedge \boxed{\mbox{x 是露天的}} \vdash \boxed{\mbox{地方 x 是湿的}}
+\end{equation}
+这些法则好比「逻辑引擎」的燃料，没有燃料引擎是不能推动的。
+
+注意： 命题里面的 x，好比是有「洞」的命题，它可以透过 substitution 代入一些实物 (objects)，而变成完整的命题。 这种「句子内部」(sub-propositional)的结构可以用 predicate logic （谓词逻辑）表达，但暂时不需要理会这些细节。
+
+Logic-based AI 可以看成是将世界的「模型」压缩成一个「知识库」(knowledge-base, KB)，里面装著大量逻辑式子：
+\begin{equation}
+\includegraphics[scale=0.5]{world-model-compression.png}
+\end{equation}
+世界模型是由大量的逻辑式子经过组合而\emp{生成}的，有点像向量空间是由其「基底」生成； 但这生成过程在逻辑中特别复杂，所以符号逻辑具有很高的\emp{压缩比}，但要学习一套逻辑知识库，则相应地也有极高的\emp{复杂度}。
 
 \section*{Acknowledgements}
 
