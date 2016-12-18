@@ -65,8 +65,8 @@
 \newsavebox{\MyName}
 \savebox{\MyName}{\includegraphics[scale=0.6]{YKY.png}}
 
-\title{逻辑与神经之间的桥}
-\titlerunning{逻辑与神经之间的桥}
+\title{My problem \# 1: bridge between logic and neural}
+%\titlerunning{逻辑与神经之间的桥}
 \author{\usebox{\MyName} (King-Yin Yan)
 % \\ \footnotesize{General.Intelligence@Gmail.com}
 }
@@ -80,44 +80,95 @@
 \setlength{\parskip}{2.8ex}
 
 
-\begin{abstract}
-Logic-based AI 和 connectionist AI 长久分裂，但作者最近发现可以建立两者之间的对应关系。逻辑的结构类似人类的自然语言，但大脑是用神经思考的。 机器学习的主要目标，是用 inductive bias 去加快学习速度，但这目标太空泛。 将逻辑结构加到神经结构之上，就增加了约束，亦即 inductive bias。
+%\begin{abstract}
+%Logic-based AI 和 connectionist AI 长久分裂，但作者最近发现可以建立两者之间的对应关系。逻辑的结构类似人类的自然语言，但大脑是用神经思考的。 机器学习的主要目标，是用 inductive bias 去加快学习速度，但这目标太空泛。 将逻辑结构加到神经结构之上，就增加了约束，亦即 inductive bias。
 % 假设 $x$ 是思维状态。 在经典逻辑智能中，$x$ 是一束命题，代表当下的思考状况。 思考的过程就是不断重复进行推导: $x \vdash x' \vdash ...$。 在经典 AI 中这个作用是靠无数的逻辑 rules 来达成的。 但现在我们的做法是将 $x$ 放到向量空间中，再用一个 recurrent 神经网络来取代整个 rules base。
-\end{abstract}
+%\end{abstract}
 
 % 有个问题希望数学专业的人帮手解决一下：
 
 % \textbf{人工智能}基本上分为两大阵营： \emp{逻辑 AI} (logic-based AI) 和 \emp{神经网络} (connectionism)。
 
-逻辑 AI 那边，「结构」很抽象符号化，但\textbf{学习算法}太慢；  我的目的是建立一道「桥」，将逻辑 AI 的某部分结构\textbf{转移}到神经网络那边。
-
-这个问题搞了很久都未能解决，因为逻辑 AI 那边的结构不是一般常见的数学结构，单是要要表述出来也有很大困难。 直到我应用了 model theory 的观点，才找到满意的解决方案：
-\begin{equation}
-\includegraphics[scale=0.6]{bridge.png}
-\end{equation}
-
-首先解释 neural network 那边的结构，然后再解释 logic 那边的结构。
-
 \section{神经网络的结构}
 
-一个 \emp{神经网络} 基本上是：
+一个 \emp{神经网络} $F$ 基本上是：
+\begin{equation}
+\vect{y = } \quad \vcenter{\hbox{\includegraphics[scale=1.0]{neural-network.png}}} \quad (\vect{x}) \nonumber
+\end{equation}
 \begin{equation}
 F(\vect{x}) = \sigmoid(W_1 \sigmoid(W_2 ... \sigmoid(W_L \; \vect{x} )))
 \end{equation}
-其中 $L$ 是层数，$W_\ell$ 是每层的\textbf{权重}矩阵，$\sigmoid$ 是对每个分量的 sigmoid function （其作用是赋予非线性）。
-
-$\sigmoid$ 作用在 $\vect{x}$ 的每个分量上，它的作用在座标变换下\textbf{没有不变性}。 所以 $\sigmoid$ 不是一个向量运算，从而 \underline{$\mathbb{X} \ni \vect{x}$ 的结构也不是\textbf{向量空间}的结构}。 通常习惯把 $\vec{x}$ 写成向量形式，但这有点误导。
-
-如果将神经网络\textbf{首尾相接}造成迴路，这是一种智能系统的最简单形式。 举例来说，如果要识别「白猫追黑猫」的视像，「猫」这物体要被识别两次，很明显我们不应浪费两个神经网络去做这件事，所以 \emp{迴路} 是必须的：
+为简单起见，输入 $\vect{x}$ 和输出 $\vect{y}$ 都是 dim-$n$ vector。\\
+$L$ 是层数，$W_\ell$ 是每层的\textbf{权重}矩阵 (= $n \times n$ matrix)。\\
+$\sigmoid$ 是 sigmoid function （其作用是赋予非线性）：
 \begin{equation}
-\includegraphics[scale=0.6]{genifer-model-00.png}
+\sigmoid (\xi) = \frac{1}{1 + e^{-\xi}}
 \end{equation}
-它的状态方程是：
+applied \textbf{component-wise}。  必要时 $\sigmoid$ 可以换成 $\mathbb{C}$ 上的 polynomials。
+
+%$\sigmoid$ 作用在 $\vect{x}$ 的每个分量上，它的作用在座标变换下\textbf{没有不变性}。 所以 $\sigmoid$ 不是一个向量运算，从而 \underline{$\mathbb{X} \ni \vect{x}$ 的结构也不是\textbf{向量空间}的结构}。 通常习惯把 $\vec{x}$ 写成向量形式，但这有点误导。
+
+可以证明，如果层数和 neuron 个数足够多，这些 $F$ functions 的 family $\mathcal{F}$ 在某个 function space 上是 dense 的。
+
+Machine learning 的目的是在这 function space 上「计分」 (ie, distribute scores over functions $F$).
+
+可以将 $\mathcal{F}$ 看成是由 $\sigmoid$ 和 $W$'s generate 出来的 Banach algebra （乘法是 composition）。  但我不懂计算 $\mathcal{F}$ 的 basis（也不知计出来有没有用）。
+
+\section{逻辑结构}
+
+重点是想在 $\mathcal{F}$ 的结构上「加入」逻辑 rules 的结构。  逻辑是指由一些命题推导出另一些命题：
+\begin{equation}
+A, B, C, ... \vdash D
+\end{equation}
+这里的 $\vdash$ 的作用 corresponds to $F$。
+
+逻辑结构有两部分：
+\renewcommand\labelitemi{\textbullet}
+\begin{itemize}
+\item \textbf{Matching} structure:  the state variable $\vect{x}$ is the Cartesian product of a number of smaller states $\vect{x}_i$.  ``Matching'' means to check if $\vect{x}_i$ resides in certain polytope regions:
 \begin{eqnarray}
-\boxed{\mbox{离散时间}} \quad \quad & \vect{x}_{t+1} = \vect{F}(\vect{x}_t) \label{eqn0}\\
-\boxed{\mbox{连续时间}} \quad \quad & \dot{\vect{x}} = \vect{f}(\vect{x}) 
+\mbox{if } A \vect{x}_i \ge \vect{b} & \mbox{ then } & \vect{1} \nonumber \\
+						            & \mbox{ else } & \vect{0}
 \end{eqnarray}
-由此可以看出，$\mathbb{X}$ 是一个\textbf{微分流形}。 更深入地讲，它是一个力学上的 Hamiltonian 系统，具有 symplectic（辛流形）结构。 但这超出了本文範围，详见本篇的姊妹作 \cite{Yan2017}。
+这个 matching 的结果要 multiply with 下面的 linkage function。
+
+\item \textbf{Linkage} structure:  Consider this logic formula and notice the linkages between variables on the left and right sides:
+\begin{equation}
+\includegraphics[scale=0.3]{linkage-in-logic-variables.jpg}
+\label{Linkage}
+\end{equation}
+In the state space $\mathbb{X} \ni \vect{x}$, linkage means that $F$ projects the $i$-th coordinate of $\vect{x}$ directly to the $j$-th coordinate of $\vect{y}$.  In other words,
+\begin{equation}
+f: (x_1, ... x_i, ... x_n) \mapsto (y_1, ... , (y_j = x_i), ... y_n)
+\end{equation}
+I use the notation $F_{(i,j)}$ to denote that $F$ contains the linkage from coordinate $i$ to coordinate $j$.
+\end{itemize}
+
+我的问题是： 怎样将以上的两种 logic structure 「添加」到 神经网络的 $F$ 里。 
+
+神经网络的 $F$'s 已经在 function space 是 dense 的。  但全体的有 linkage 的函数不是 dense 的。  但它是不是一个 simply connected subset？
+
+注意： 如果 $F$ 有 linkage，那就变成一些 equational constraints over $W$.   但我不懂怎样将 神经网络的 $F$ 表示成有 linkage 的。
+
+%逻辑 AI 那边，「结构」很抽象符号化，但\textbf{学习算法}太慢；  我的目的是建立一道「桥」，将逻辑 AI 的某部分结构\textbf{转移}到神经网络那边。
+
+%这个问题搞了很久都未能解决，因为逻辑 AI 那边的结构不是一般常见的数学结构，单是要要表述出来也有很大困难。 直到我应用了 model theory 的观点，才找到满意的解决方案：
+%\begin{equation}
+%\includegraphics[scale=0.6]{bridge.png}
+%\end{equation}
+
+%首先解释 neural network 那边的结构，然后再解释 logic 那边的结构。
+
+%如果将神经网络\textbf{首尾相接}造成迴路，这是一种智能系统的最简单形式。 举例来说，如果要识别「白猫追黑猫」的视像，「猫」这物体要被识别两次，很明显我们不应浪费两个神经网络去做这件事，所以 \emp{迴路} 是必须的：
+%\begin{equation}
+%\includegraphics[scale=0.6]{genifer-model-00.png}
+%\end{equation}
+%它的状态方程是：
+%\begin{eqnarray}
+%\boxed{\mbox{离散时间}} \quad \quad & \vect{x}_{t+1} = \vect{F}(\vect{x}_t) \label{eqn0}\\
+%\boxed{\mbox{连续时间}} \quad \quad & \dot{\vect{x}} = \vect{f}(\vect{x}) 
+%\end{eqnarray}
+%由此可以看出，$\mathbb{X}$ 是一个\textbf{微分流形}。 更深入地讲，它是一个力学上的 Hamiltonian 系统，具有 symplectic（辛流形）结构。 但这超出了本文範围，详见本篇的姊妹作 \cite{Yan2017}。
 %换句话说，它是微分流形，而且有一个辛度量 (metric)。
 
 % 所以问题就是要赋予 $F$ 更多的\textbf{结构}，特别是逻辑结构。 直观地说，越多的结构令\textbf{搜寻空间}越小，学习会越快。 这是机器学习里面 inductive bias 的标准做法。
@@ -498,10 +549,6 @@ $R(a,b)$ 可以在 $a, b$ 的 common parents 中寻找（例如那些蓝色神�
 
 \end{itemize}
 
-\section*{Acknowledgement}
-
-\footnotesize{谢谢 Ben Goertzel（OpenCog 人工智能的创始人）在 AGI mailing list 上和我的讨论。 Ben 初次指出神经网络学习和逻辑 inductive 学习的不同，引起我研究两者之间的关系。}
-
 % =====================================================================================
 \begin{comment}
 \section{逻辑变量的处理}
@@ -865,11 +912,6 @@ When the forward and backward states get close enough, a successful path is foun
 % One key question is how to deal with "don't care" bits?  One answer is that their errors are zero.  But then this is the same as the error for "correct" weights, which seems not well.  There's got to be a way to alter weights when the answer is correct...
 
 % For \# Iteration = 0, output is immediately known, so potentially the training can be done.  But how to convey that all these alterations of weights are \textbf{optional}?
-
-\section*{Acknowledgements}
-
-\footnotesize{In a forum discussion with Ben Goertzel dated 25 June 2014 on the AGI mailing-list: (artificial-general-intelligence @googlegroups.com), YKY asked: Why bother with neural networks, which typically require many neurons to encode data, when logic-based AI can represent a proposition with just a few symbols?  Ben's insight is that neural networks are capable of learning its own representations, and their learning algorithms are relatively fast.  We have been working on "neo-classical" logic-based AI for a long time, and begin to realize that inductive learning in logic (based on combinatorial search in a symbolic space) is perhaps \textit{the bottleneck} in the entire logic-based paradigm.  So we try to look for alternatives that might enable learning to be faster, though we would still emphasize that logic-based AI remains a viable approach to AGI. %, provided that the right search heuristics be found (most probably in the form of \textbf{hierarchical organization} of the learning space).
-}
 
 \bibliographystyle{plain} % or number or aaai ...
 \bibliography{AGI-book}

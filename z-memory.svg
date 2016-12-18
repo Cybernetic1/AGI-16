@@ -253,6 +253,188 @@
          style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
          transform="matrix(-0.4,0,0,-0.4,-4,0)" />
     </marker>
+    <marker
+       inkscape:stockid="Arrow1Mstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mstart-8"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3897-7"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(0.4,0,0,0.4,4,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mend-92"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3900-02"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mstart-3"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3897-6"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(0.4,0,0,0.4,4,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mstart-2"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3897-9"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(0.4,0,0,0.4,4,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker3597"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3599"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(0.4,0,0,0.4,4,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mend-610"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3900-63"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mend-0"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3900-61"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mstart-5"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3897-4"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(0.4,0,0,0.4,4,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker3701"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3703"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(0.4,0,0,0.4,4,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mend-25"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3900-47"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mstart-7"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3897-8"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(0.4,0,0,0.4,4,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker3805"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3807"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(0.4,0,0,0.4,4,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mend-06"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3900-89"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
+    </marker>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -262,16 +444,16 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="430.14604"
-     inkscape:cy="399.33183"
+     inkscape:cx="375.97004"
+     inkscape:cy="505.54965"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1041"
-     inkscape:window-height="1271"
-     inkscape:window-x="1"
-     inkscape:window-y="198"
-     inkscape:window-maximized="0" />
+     inkscape:window-width="1050"
+     inkscape:window-height="1652"
+     inkscape:window-x="0"
+     inkscape:window-y="2"
+     inkscape:window-maximized="1" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -290,20 +472,20 @@
      id="layer1">
     <g
        id="g2997"
-       transform="translate(-18.251507,45.70808)"
+       transform="translate(-42.251507,56.70808)"
        inkscape:export-filename="/home/yky/latex/AGI-17/z-memory-1.png"
        inkscape:export-xdpi="600"
        inkscape:export-ydpi="600">
       <rect
          ry="0"
          y="531.88025"
-         x="328.51407"
+         x="326.51407"
          height="26.50601"
          width="28.514051"
          id="rect2985"
          style="fill:none;stroke:#000000" />
       <flowRoot
-         transform="translate(44.578313,-11.24498)"
+         transform="translate(42.578313,-11.24498)"
          style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
          id="flowRoot2987"
          xml:space="preserve"><flowRegion
@@ -706,7 +888,7 @@
        inkscape:export-ydpi="600" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
-       d="m 278.55271,553.86218 80.14458,0"
+       d="m 278.55271,553.86218 98.14458,0"
        id="path3117-6-1"
        inkscape:connector-curvature="0"
        inkscape:export-filename="/home/yky/latex/AGI-17/z-memory-1.png"
@@ -731,7 +913,7 @@
        xml:space="preserve"
        id="flowRoot4692-2"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
-       transform="translate(152.0332,1.529287)"
+       transform="translate(168.0332,1.529287)"
        inkscape:export-filename="/home/yky/latex/AGI-17/z-memory-1.png"
        inkscape:export-xdpi="600"
        inkscape:export-ydpi="600"><flowRegion
@@ -742,23 +924,14 @@
            x="206.79593"
            y="538.02356" /></flowRegion><flowPara
          id="flowPara4698-0">out</flowPara></flowRoot>    <path
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
-       d="m 324,553.91489 0,22.14458"
-       id="path3117-9-9-3-4"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/yky/latex/AGI-17/z-memory-1.png"
-       inkscape:export-xdpi="600"
-       inkscape:export-ydpi="600" />
-    <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Mstart);marker-end:none"
-       d="m 264,569.66489 0,52.14458 59,0.0527 0,-17.49999"
+       d="m 264,569.66489 0,32.64458 20.25,0.0527"
        id="path3117-6-3-0-9"
        inkscape:connector-curvature="0"
        inkscape:export-filename="/home/yky/latex/AGI-17/z-memory-1.png"
        inkscape:export-xdpi="600"
        inkscape:export-ydpi="600"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="ccc" />
     <g
        id="g5563"
        inkscape:export-filename="/home/yky/latex/AGI-17/z-memory-2.png"
@@ -1124,7 +1297,7 @@
            id="flowPara4663-8-8">... </flowPara></flowRoot>    </g>
     <g
        id="g6630"
-       transform="translate(191.44708,-139.61123)">
+       transform="translate(242.44708,-139.11123)">
       <g
          inkscape:export-ydpi="600"
          inkscape:export-xdpi="600"
@@ -2576,5 +2749,292 @@
            height="35.893574"
            x="219.44026"
            y="543.73395" /></flowRegion><flowPara
-         id="flowPara4663-2-6">. . . .</flowPara></flowRoot>  </g>
+         id="flowPara4663-2-6">. . . .</flowPara></flowRoot>    <g
+       id="g2997-9-3"
+       transform="translate(-193.77109,-259.77107)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/z-memory-3.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600">
+      <rect
+         ry="28.502991"
+         y="531.88025"
+         x="320.51407"
+         height="57.005981"
+         width="106.01404"
+         id="rect2985-2-6"
+         style="fill:none;stroke:#000000"
+         rx="26.5" />
+      <flowRoot
+         transform="translate(44.578313,-7.24498)"
+         style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+         id="flowRoot2987-0-7"
+         xml:space="preserve"><flowRegion
+           id="flowRegion2989-23-5"><rect
+             y="544.33008"
+             x="277.51004"
+             height="54.710815"
+             width="102.27512"
+             id="rect2991-75-3" /></flowRegion><flowPara
+           id="flowPara2993-9-5"
+           style="font-size:18px">short-term</flowPara><flowPara
+           id="flowPara3450"
+           style="font-size:18px">memory</flowPara></flowRoot>    </g>
+    <g
+       id="g2997-9-3-2"
+       transform="translate(-39.021087,-259.02106)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/z-memory-3.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600">
+      <rect
+         ry="28.002991"
+         y="531.88025"
+         x="320.51407"
+         height="56.005981"
+         width="130.01404"
+         id="rect2985-2-6-9"
+         style="fill:none;stroke:#000000"
+         rx="23.5" />
+      <flowRoot
+         transform="translate(46.578313,-7.24498)"
+         style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+         id="flowRoot2987-0-7-1"
+         xml:space="preserve"><flowRegion
+           id="flowRegion2989-23-5-2"><rect
+             y="544.33008"
+             x="277.51004"
+             height="58.710815"
+             width="126.27512"
+             id="rect2991-75-3-7" /></flowRegion><flowPara
+           id="flowPara2993-9-5-0"
+           style="font-size:18px">medium-term</flowPara><flowPara
+           id="flowPara3450-9"
+           style="font-size:18px">memory</flowPara></flowRoot>    </g>
+    <g
+       id="g2997-9-3-3"
+       transform="translate(138.97891,-259.02106)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/z-memory-3.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600">
+      <rect
+         ry="27.502991"
+         y="531.88025"
+         x="323.01407"
+         height="55.005981"
+         width="101.01404"
+         id="rect2985-2-6-6"
+         style="fill:none;stroke:#000000"
+         rx="24.5" />
+      <flowRoot
+         transform="translate(47.078313,-7.24498)"
+         style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+         id="flowRoot2987-0-7-0"
+         xml:space="preserve"><flowRegion
+           id="flowRegion2989-23-5-6"><rect
+             y="544.33008"
+             x="277.51004"
+             height="54.710815"
+             width="102.27512"
+             id="rect2991-75-3-2" /></flowRegion><flowPara
+           id="flowPara2993-9-5-6"
+           style="font-size:18px">long-term</flowPara><flowPara
+           id="flowPara3450-1"
+           style="font-size:18px">memory</flowPara></flowRoot>    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Mstart);marker-end:none"
+       d="m 315.4224,602.28035 22.64458,0 0.0527,-48.75"
+       id="path3117-6-3-0-9-1"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/yky/latex/AGI-17/z-memory-1.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600"
+       sodipodi:nodetypes="ccc" />
+    <g
+       id="g2997-3"
+       transform="translate(-127.92816,-181.71639)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/z-memory-3.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600">
+      <rect
+         ry="0"
+         y="531.88025"
+         x="326.51407"
+         height="26.50601"
+         width="28.514051"
+         id="rect2985-1"
+         style="fill:none;stroke:#000000" />
+      <flowRoot
+         transform="translate(42.578313,-11.24498)"
+         style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+         id="flowRoot2987-9"
+         xml:space="preserve"><flowRegion
+           id="flowRegion2989-4"><rect
+             y="544.33008"
+             x="277.51004"
+             height="27.710844"
+             width="43.775101"
+             id="rect2991-78" /></flowRegion><flowPara
+           id="flowPara2993-4">z<flowSpan
+   id="flowSpan2995-5"
+   style="font-size:65.00091553%;baseline-shift:super">-1</flowSpan></flowPara></flowRoot>    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Mstart);marker-end:none"
+       d="m 174.32335,331.24042 0,32.64458 24.25,0.0527"
+       id="path3117-6-3-0-9-0"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/yky/latex/AGI-17/z-memory-3.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600"
+       sodipodi:nodetypes="ccc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Mstart);marker-end:none"
+       d="m 229.74575,363.85588 22.64458,0 0.0527,-64.04289"
+       id="path3117-6-3-0-9-1-3"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/yky/latex/AGI-17/z-memory-3.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600"
+       sodipodi:nodetypes="ccc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
+       d="m 232.38323,299.90542 48.14458,0"
+       id="path3117-6-2"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/yky/latex/AGI-17/z-memory-3.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
+       d="m 411.21523,299.80461 48.14458,0"
+       id="path3117-6-2-5"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/yky/latex/AGI-17/z-memory-3.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600"
+       sodipodi:nodetypes="cc" />
+    <g
+       id="g2997-3-7"
+       transform="translate(44.70609,-181.94863)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/z-memory-3.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600">
+      <rect
+         ry="0"
+         y="531.88025"
+         x="326.51407"
+         height="26.50601"
+         width="28.514051"
+         id="rect2985-1-6"
+         style="fill:none;stroke:#000000" />
+      <flowRoot
+         transform="translate(42.578313,-11.24498)"
+         style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+         id="flowRoot2987-9-5"
+         xml:space="preserve"><flowRegion
+           id="flowRegion2989-4-6"><rect
+             y="544.33008"
+             x="277.51004"
+             height="27.710844"
+             width="43.775101"
+             id="rect2991-78-9" /></flowRegion><flowPara
+           id="flowPara2993-4-3">z<flowSpan
+   id="flowSpan2995-5-7"
+   style="font-size:65.00091553%;baseline-shift:super">-1</flowSpan></flowPara></flowRoot>    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Mstart);marker-end:none"
+       d="m 342.9576,331.00818 0,32.64458 28.25,0.0527"
+       id="path3117-6-3-0-9-0-4"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/yky/latex/AGI-17/z-memory-3.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600"
+       sodipodi:nodetypes="ccc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Mstart);marker-end:none"
+       d="m 402.38,363.62364 28.64458,0 0.0527,-64.04289"
+       id="path3117-6-3-0-9-1-3-5"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/yky/latex/AGI-17/z-memory-3.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600"
+       sodipodi:nodetypes="ccc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
+       d="m 96.55271,300.36218 28.14458,0"
+       id="path3117-6-2-4"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/yky/latex/AGI-17/z-memory-3.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600"
+       sodipodi:nodetypes="cc" />
+    <g
+       id="g2997-3-6"
+       transform="translate(204.04419,-181.99709)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/z-memory-3.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600">
+      <rect
+         ry="0"
+         y="531.88025"
+         x="326.51407"
+         height="26.50601"
+         width="28.514051"
+         id="rect2985-1-8"
+         style="fill:none;stroke:#000000" />
+      <flowRoot
+         transform="translate(42.578313,-11.24498)"
+         style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+         id="flowRoot2987-9-8"
+         xml:space="preserve"><flowRegion
+           id="flowRegion2989-4-4"><rect
+             y="544.33008"
+             x="277.51004"
+             height="27.710844"
+             width="43.775101"
+             id="rect2991-78-3" /></flowRegion><flowPara
+           id="flowPara2993-4-1">z<flowSpan
+   id="flowSpan2995-5-4"
+   style="font-size:65.00091553%;baseline-shift:super">-1</flowSpan></flowPara></flowRoot>    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Mstart);marker-end:none"
+       d="m 508.2957,330.95972 0,32.64458 22.25,0.0527"
+       id="path3117-6-3-0-9-0-9"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/yky/latex/AGI-17/z-memory-3.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600"
+       sodipodi:nodetypes="ccc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Mstart);marker-end:none"
+       d="m 561.7181,363.57518 20.64458,0 0.0527,-64.04289"
+       id="path3117-6-3-0-9-1-3-2"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/yky/latex/AGI-17/z-memory-3.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600"
+       sodipodi:nodetypes="ccc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
+       d="m 563.27441,299.34014 36.14458,0"
+       id="path3117-6-2-5-2"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/yky/latex/AGI-17/z-memory-3.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600"
+       sodipodi:nodetypes="cc" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4657-1-8-3"
+       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       transform="translate(364.14355,-263.03712)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/z-memory-3.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600"><flowRegion
+         id="flowRegion4659-4-7-6"><rect
+           id="rect4661-9-9-7"
+           width="80.760544"
+           height="35.893574"
+           x="219.44026"
+           y="543.73395" /></flowRegion><flowPara
+         id="flowPara4663-2-6-5">. . . .</flowPara></flowRoot>  </g>
 </svg>

@@ -11,6 +11,17 @@
 \usepackage{sectsty}			% change section color
 \usepackage{turnstile}		% longer turnstiles
 
+\usepackage{geometry}		% change paper size
+\geometry{
+  a4paper,         % or letterpaper
+  textwidth=18cm,  % llncs has 12.2cm
+  textheight=27cm, % llncs has 19.3cm
+  heightrounded,   % integer number of lines
+  hratio=1:1,      % horizontally centered
+  vratio=2:3,      % not vertically centered
+}
+\usepackage[fontsize=13pt]{scrextend}
+
 % *************** Delete when not using Chinese or colors **********************
 \usepackage{xeCJK}
 \setCJKmainfont[BoldFont=SimHei,ItalicFont=KaiTi]{SimSun}
@@ -62,9 +73,9 @@
 \setlength{\parskip}{2.8ex}
 
 
-\begin{abstract}
+%\begin{abstract}
 % 假设 $x$ 是思维状态。 在经典逻辑智能中，$x$ 是一束命题，代表当下的思考状况。 思考的过程就是不断重复进行推导: $x \vdash x' \vdash ...$。 在经典 AI 中这个作用是靠无数的逻辑 rules 来达成的。 但现在我们的做法是将 $x$ 放到向量空间中，再用一个 recurrent 神经网络来取代整个 rules base。
-\end{abstract}
+%\end{abstract}
 
 经典的神经网络 Back Prop 学习算法，它是一个 error-driven 算法，但在很多人工智能的实际应用中，不存在唯一的「理想答案」，而是根据正或负的奖励 (reward) 学习。  当答案正确时，奖励 $> 0, \mbox{error} = 0$； 当答案不正确时，奖励 $< 0$，但 $\mbox{error}$ 仍是不知道的（因为不知道理想答案）。  简言之，就是不能用 error-driven 学习。 
 

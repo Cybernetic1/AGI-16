@@ -1,3 +1,7 @@
+% White cat chases black cat --> mental space should be propositionalized
+% Explain Boolean space
+% How to speed up learning with metric?
+
 \documentclass[orivec]{llncs}
 \usepackage{graphicx}
 \usepackage{amsmath}			% for "cases"
@@ -26,6 +30,17 @@
 \sectionfont{\color{blue}} 
 \subsectionfont{\color{blue}} 
 \subsubsectionfont{\color{blue}} 
+
+\usepackage{geometry}		% change paper size
+\geometry{
+  a4paper,         % or letterpaper
+  textwidth=18cm,  % llncs has 12.2cm
+  textheight=27cm, % llncs has 19.3cm
+  heightrounded,   % integer number of lines
+  hratio=1:1,      % horizontally centered
+  vratio=2:3,      % not vertically centered
+}
+\usepackage[fontsize=13pt]{scrextend}
 
 \newcommand{\vect}[1]{\boldsymbol{#1}}
 \newcommand*\sigmoid{\vcenter{\hbox{\includegraphics{sigmoid.png}}}}

@@ -20,8 +20,18 @@
 \sectionfont{\color{blue}} 
 \subsectionfont{\color{blue}} 
 \subsubsectionfont{\color{blue}} 
-
 \definecolor{green}{rgb}{0,0.7,0}
+
+\usepackage{geometry}		% change paper size
+\geometry{
+  a4paper,         % or letterpaper
+  textwidth=18cm,  % llncs has 12.2cm
+  textheight=27cm, % llncs has 19.3cm
+  heightrounded,   % integer number of lines
+  hratio=1:1,      % horizontally centered
+  vratio=2:3,      % not vertically centered
+}
+\usepackage[fontsize=13pt]{scrextend}
 
 \newcommand{\vect}[1]{\boldsymbol{#1}}
 \newcommand*\sigmoid{\vcenter{\hbox{\includegraphics{sigmoid.png}}}}
@@ -50,6 +60,8 @@ and deep learning}}
 \author{\usebox{\MyName} (King-Yin Yan)
 % \\ \footnotesize{General.Intelligence@Gmail.com}
 \and
+Ben Goertzel
+\and
 Juan Carlos Kuri Pinto
 }
 \institute{General.Intelligence@Gmail.com}
@@ -63,8 +75,13 @@ Juan Carlos Kuri Pinto
 % \setlength{\parskip}{2.8ex}
 
 \begin{abstract}
-The problem of general intelligence can be described and solved in the logic-based AI paradigm, but the main obstacle is that learning is too slow.  The logic-based knowledge representation with discrete propositions is abandoned in favor of a neural-based ``amorphous'' representation induced from the top down, using a deep neural network (DNN).  The DNN acts iteratively on a state space (the ``mental state''), forming a dynamical system.  This system is in turn controlled by reinforcement learning, ``navigating'' the space of mental states as in a maze.
+% 介绍一个基於 \textbf{增强学习} 和 \textbf{深度学习} 的极简约的 cognitive architecture，它在数学上是一个Hamiltonian 系统，而其 Lagrangian 对应於智能系统的「奖励」或「欲望」的价值。 经典逻辑 AI 的技巧可以搬到这个 setting 之下，而连续时间化之后，可以用上微分几何的技巧。 
+Introducing a minimalist cognitive architecture based on DRL (deep reinforcement learning).  Mathematically it is a Hamiltonian system, whose Lagrangian corresponds to the value of ``desires'' or ``rewards'' in the intelligent system.  Techniques of classical logic-based AI can be transferred to this setting.  Its continuous limit can be described by differential geometry.  The old-fashioned logic-based knowledge representation with discrete propositions is abandoned in favor of a representation induced by deep neural learning.
+% The problem of general intelligence can be described and solved in the logic-based AI paradigm, but the main obstacle is that learning is too slow.  The logic-based knowledge representation with discrete propositions is abandoned in favor of a neural-based ``amorphous'' representation induced from the top down, using a deep neural network (DNN).  The DNN acts iteratively on a state space (the ``mental state''), forming a dynamical system.  This system is in turn controlled by reinforcement learning, ``navigating'' the space of mental states as in a maze.
 \end{abstract}
+
+%本文介绍一些（非原创的）已知理论，然后指出一些新的研究方向。
+The first part of this paper introduces some existing theory, and then speculates on new research directions.
 
 \section{Main idea}
 
@@ -80,8 +97,9 @@ The main idea is to regard ``thinking'' as a \emp{dynamical system} operating on
 \end{equation}
 
 For example, a mental state could be the following set of propositions:
+\let\labelitemi\labelitemii
 \begin{itemize}
-\item I am in my room, writing a paper for AGI-16.
+\item I am in my room, writing a paper for AGI-17.
 \item I am in the midst of writing the sentence, ``I am in my room, ...''
 \item I am about to write a gerund phrase ``writing a paper...''
 \end{itemize}

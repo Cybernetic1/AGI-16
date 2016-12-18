@@ -80,12 +80,12 @@ Juan Carlos Kuri Pinto
 \setlength{\parskip}{2.8ex}
 
 \begin{abstract}
-介绍一个基於 \textbf{增强学习} 和 \textbf{深度学习} 的极简约的 cognitive architecture，它在数学上是一个Hamiltonian 系统，而其 Lagrangian 对应於智能系统的「奖励」或「欲望」的价值。 经典逻辑 AI 的技巧可以搬到这个 setting 之下，而连续时间化之后，可以用上微分几何的技巧。 
+介绍一个基於 \textbf{增强学习} 和 \textbf{深度学习} 的极简约的 cognitive architecture，它在数学上是一个Hamiltonian 系统，而其 Lagrangian 对应於智能系统的「奖励」或「欲望」的价值。 经典逻辑 AI 的技巧可以搬到这个 setting 之下，而连续时间化之后，可以用上微分几何的技巧。 传统的「逻辑 AI 知识表述」被新的表述法取代，后者的结构是由神经网络的深度学习「诱导」出来的。
 % 简单介绍笔者的强人工智能理论和强化学习、动态规划、最优控制、
 % 假设 $x$ 是思维状态。 在经典逻辑智能中，$x$ 是一束命题，代表当下的思考状况。 思考的过程就是不断重复进行推导: $x \vdash x' \vdash ...$。 在经典 AI 中这个作用是靠无数的逻辑 rules 来达成的。 但现在我们的做法是将 $x$ 放到向量空间中，再用一个 recurrent 神经网络来取代整个 rules base。
 \end{abstract}
 
-本文较少原创内容，主要介绍一些已知的理论，及提供一个新的观点，或许对 strong AI 的发展有帮助。
+本文介绍一些（非原创的）已知理论，然后指出一些新的研究方向。
 
 \setcounter{section}{-1}
 \section{中心思想}
@@ -197,7 +197,7 @@ Juan Carlos Kuri Pinto
 
 \section{强化学习／动态规划}
 
-\textbf{Reinforcement learning} 是机器学习里面的一个分支，特别善於控制一只能够在某个环境下 \emp{自主行动} 的个体 (autonomous agent)，透过和 \emp{环境} 之间的互动，例如 sensory perception 和 rewards，而不断改进它的 \emp{行为}。  强化学习最典型的比喻是一隻在迷宫中寻找食物和避开敌人的小昆虫。
+\textbf{Reinforcement learning} 是机器学习里面的一个分支，特别善於控制一只能够在某个环境下 \emp{自主行动} 的个体 (autonomous agent)，透过和 \emp{环境} 之间的互动，例如 sensory perception 和 rewards，而不断改进它的 \emp{行为}。  强化学习最典型的比喻是一隻在迷宫中寻找食物和避开敌人的小昆虫：  $\vcenter{\hbox{\includegraphics[scale=0.5]{cockroach.png}}}$
 
 一个强化学习的系统由 4 个元素的 tuple 构成
 \begin{equation}
@@ -291,7 +291,7 @@ Hamilton 的\emp{最小作用量原理} (principle of least action) 说，在自
 \textbf{Hamiltonian} 的定义是 $\displaystyle H = L + \frac{\partial J^*}{\partial \vect{x}} \vect{f}$，它是由 Lagrange multiplier 的方法走出来的。 详细可参看我写的《控制论 tutorial》。
 
 其实它们讲的是同一样东西，所以有如下的对应：
-\begin{center}
+\begin{equation}
 \begin{tabular}{|c|c|c|}
 \hline 
 \emp{强化学习} & \emp{最优控制} & \emp{分析力学} \\ 
@@ -303,7 +303,7 @@ Hamilton 的\emp{最小作用量原理} (principle of least action) 说，在自
 action $a$ & control $u$ & （外力？） \\
 \hline
 \end{tabular} 
-\end{center}
+\end{equation}
 
 %用比较浅显的例子： 和美女做爱能带来即时的快感 (= 奖励 $R$)，但如果强奸的话会坐牢，之后很长时间很苦闷，所以这个做法的长远价值 $U$ 比其他做法较低，正常人不会选择它。
 
@@ -376,13 +376,19 @@ Logic-based AI 可以看成是将世界的「模型」压缩成一个「知识�
 \begin{equation}
 \includegraphics[scale=0.9]{z-memory-1.png}
 \end{equation}
-多层的 hierarchical 记忆可以这样实现：
+多层的 hierarchical 记忆或许可以这样实现：
 \begin{equation}
-\includegraphics[scale=1.0]{z-memory-2.png}
+\includegraphics[scale=0.9]{z-memory-3.png}
 \end{equation}
+%用神经网络实现，可能是这样的：
+%\begin{equation}
+%\includegraphics[scale=1.0]{z-memory-2.png}
+%\end{equation}
 Z-transform 的\textbf{连续时间}版本就是 Laplace transform。
 
 信号处理的资深研究者 Simon Haykin 最近也用 RL + 记忆~ 的设计，详见他的 2012 新书 《Cognitive dynamic systems》。 
+
+Itamar Arel 在 2012 年 \cite{Arel2012}、和我在 2016 年 \cite{Yan2017}、独立地提出了同样的 cognitive architecture： 合并 \textbf{增强学习}和\textbf{深度学习}。
 
 %\section*{Acknowledgements}
 

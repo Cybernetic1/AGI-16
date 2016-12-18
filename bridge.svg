@@ -317,8 +317,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="774.40434"
-     inkscape:cy="-346.78218"
+     inkscape:cx="715.94591"
+     inkscape:cy="453.21782"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -411,19 +411,14 @@
            id="flowRegion3139"><rect
              y="275.36218"
              x="337"
-             height="178"
-             width="250"
+             height="37"
+             width="240"
              id="rect3141" /></flowRegion><flowPara
-           id="flowPara3143"
-           style="font-size:24px;font-style:italic;font-family:Times New Roman;-inkscape-font-specification:Times New Roman"><flowSpan
-             style="-inkscape-font-specification:Latin Modern Roman;font-family:Latin Modern Roman"
-             id="flowSpan3501">x</flowSpan><flowSpan
-             style="font-style:normal;-inkscape-font-specification:Arial;font-family:Arial;font-weight:normal;font-stretch:normal;font-variant:normal;font-size:20px"
-             id="flowSpan3184"> = mental state</flowSpan></flowPara><flowPara
-           id="flowPara3180"><flowSpan
-   style="font-size:24px;font-style:italic;font-family:Latin Modern Roman;-inkscape-font-specification:Latin Modern Roman"
-   id="flowSpan3182">F</flowSpan> = recurrent deep NN </flowPara><flowPara
-           id="flowPara3085" /></flowRoot>    </g>
+           id="flowPara3085"><flowSpan
+             id="flowSpan3508"
+             style="font-size:24px;font-style:italic;font-family:Latin Modern Roman;-inkscape-font-specification:Latin Modern Roman">x</flowSpan><flowSpan
+             id="flowSpan3512"
+             style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial"> = mental state</flowSpan></flowPara></flowRoot>    </g>
     <g
        id="g5650"
        transform="translate(75,-669)"
@@ -818,25 +813,25 @@
        inkscape:export-ydpi="600"
        inkscape:export-xdpi="600"
        inkscape:export-filename="/home/yky/latex/AGI-17/bridge.png"
-       transform="translate(42.39024,167.90967)"
+       transform="translate(112.39024,160.90967)"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
        id="flowRoot3137-3"
        xml:space="preserve"><flowRegion
          id="flowRegion3139-2"><rect
            y="275.36218"
            x="337"
-           height="178"
-           width="250"
+           height="39"
+           width="132"
            id="rect3141-4" /></flowRegion><flowPara
          id="flowPara3143-3"
          style="font-size:24px;font-style:italic;font-family:Times New Roman;-inkscape-font-specification:Times New Roman"><flowSpan
-           style="-inkscape-font-specification:Latin Modern Roman;font-family:Latin Modern Roman"
+           style="font-family:Latin Modern Roman;-inkscape-font-specification:Latin Modern Roman"
            id="flowSpan3511">x</flowSpan><flowSpan
            style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial"
            id="flowSpan3184-7"> = model</flowSpan></flowPara><flowPara
          id="flowPara3085-20"><flowSpan
-   style="font-size:24px;font-style:italic;font-family:Latin Modern Roman;-inkscape-font-specification:Latin Modern Roman"
-   id="flowSpan3182-2">F</flowSpan> = logic system </flowPara></flowRoot>    <image
+           style="font-size:24px;font-style:italic;font-family:Latin Modern Roman;-inkscape-font-specification:Latin Modern Roman"
+           id="flowSpan3182-2" /></flowPara></flowRoot>    <image
        y="389.36218"
        x="445.75"
        id="image3297"
@@ -3085,5 +3080,54 @@
            x="349"
            y="1197.3622" /></flowRegion><flowPara
          id="flowPara3459-1"
-         style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:cmsy10;-inkscape-font-specification:cmsy10">M</flowPara></flowRoot>  </g>
+         style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:cmsy10;-inkscape-font-specification:cmsy10">M</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3441"
+       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Arial;font-style:normal;font-weight:normal;font-size:20px;line-height:125%;letter-spacing:0px;word-spacing:0px;-inkscape-font-specification:Arial;font-stretch:normal;font-variant:normal;text-anchor:middle;text-align:center;writing-mode:lr"><flowRegion
+         id="flowRegion3443"><rect
+           id="rect3445"
+           width="263"
+           height="57"
+           x="742"
+           y="546.36218" /></flowRegion><flowPara
+         id="flowPara3447"></flowPara></flowRoot>    <g
+       id="g5658-3"
+       transform="translate(646.91713,-119.66789)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/bridge.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600">
+      <flowRoot
+         inkscape:export-ydpi="600"
+         inkscape:export-xdpi="600"
+         inkscape:export-filename="/home/yky/latex/AGI-16/genifer-model-0.png"
+         transform="translate(-244.66113,145.61876)"
+         style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+         id="flowRoot3137-6"
+         xml:space="preserve"><flowRegion
+           id="flowRegion3139-7"><rect
+             y="275.36218"
+             x="337"
+             height="52"
+             width="231"
+             id="rect3141-5" /></flowRegion><flowPara
+           id="flowPara3085-9"><flowSpan
+   style="font-size:24px;font-style:italic;font-family:Latin Modern Roman;-inkscape-font-specification:Latin Modern Roman"
+   id="flowSpan3182-1">F</flowSpan> = recurrent deep NN </flowPara></flowRoot>    </g>
+    <flowRoot
+       inkscape:export-ydpi="600"
+       inkscape:export-xdpi="600"
+       inkscape:export-filename="/home/yky/latex/AGI-17/bridge.png"
+       transform="translate(71.256,29.83368)"
+       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       id="flowRoot3137-3-2"
+       xml:space="preserve"><flowRegion
+         id="flowRegion3139-2-7"><rect
+           y="275.36218"
+           x="337"
+           height="38"
+           width="198"
+           id="rect3141-4-0" /></flowRegion><flowPara
+         id="flowPara3085-20-0"><flowSpan
+   style="font-size:24px;font-style:italic;font-family:Latin Modern Roman;-inkscape-font-specification:Latin Modern Roman"
+   id="flowSpan3182-2-6">F</flowSpan> = logic system </flowPara></flowRoot>  </g>
 </svg>
