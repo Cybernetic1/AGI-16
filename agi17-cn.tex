@@ -247,10 +247,12 @@ $Q$ 的好处是方便学习，只需要学习在每一个状态下选择哪个�
 在强化学习的框架下，智能系统的运作可以分开成两方面： \emp{思考} 和 \emp{学习}。
 \begin{itemize}
 \item \emp{思考}即是根据已学得的\textbf{知识}（知识储存在 deep NN 里），在思维空间中找寻 $\vect{x}$ 最优的轨迹，方法是根据 Bellman 方程计算 $\vect{u}^*$。 $\vect{x}$ 的轨迹受 deep NN 约束（亦即是说，系统只能依据\textbf{正确的知识}去思考），思考时 deep NN 是\textbf{不变}的。
-\item \emp{学习}就是学习神经网络 deep NN 的 weights $W_\ell$，改变 $W$ 即改变 $\vect{F}$，而$\vect{F}$ 决定\textbf{状态方程} (\ref{eqn0})，所以整个系统变了另一个系统。 换句话说，deep NN 的学习是一种 \textbf{second-order learning}： 考虑两个系统 $\vect{F}$ 和 $\vect{F} + \epsilon \vect{F}_0$，经过很多次思考过程，如果奖励的平均值在后者有所增加，则 $\vect{F}$ 向 $\vect{F}_0$ 方向学习。
+\item \emp{学习}就是学习神经网络 deep NN 的 weights $W_\ell$，改变 $W$ 即改变 $\vect{F}$，而$\vect{F}$ 决定\textbf{状态方程} (\ref{eqn0})，所以整个系统变了另一个系统。 换句话说，deep NN 的学习是一种 \textbf{second-order learning}： 考虑两个系统 $\vect{F}$ 和 $\vect{F} + \epsilon \hat{\vect{F}}$，经过很多次思考过程，如果奖励的平均值在后者有所增加，则 $\vect{F}$ 向 $\hat{\vect{F}}$ 方向学习。
 \end{itemize}
 
 %以上两者是两个独立的方面，但不排除它们可以在实际中同时进行。
+
+基於强化学习的智能系统 minimalist architecture，以色列的 Itimar Ariel 在 2012 年提出过 \cite{Arel2012}，而我也独立地在 2016 年提出 \cite{Yan2017}。 Vladimir Anashin 在 1990's 年代也提出过这种 cognitive architecture \cite{Anashin2009}。 可能还有更多的先例 \cite{Ivancevic2006} \cite{Haykin2012}。
 
 \section{控制论与强化学习的关系}
 
@@ -311,9 +313,11 @@ action $a$ & control $u$ & （外力？） \\
 
 %一个智能系统，它有「智慧」的条件，就是每时每刻都不断追求「开心能量」或奖励 $R$ 的最大值，但它必需权衡轻重，有计划地找到长远的效用 $U$ 的最大值。
 
+这三者的对应关系，在 Daniel Liberzon 的书中 \cite{Liberzon2012} 有很详细的解释。 这个对应在哲学上很有启发意味，但实践上的用处似乎不大： 传统 AI 是离散时间系统，转换成连续时间之后可能增加了计算量，暂时不清楚这样做能带来什么好处？
+
 \section{经典逻辑 AI}
 
-在系统的状态方程 (\ref{eqn0}) 中，$\vect{F}$ 是可以自由变动的（$\vect{F}$ 代表被学习的知识），换句话说，整个系统几乎没有结构。 在无限维的泛函空间搜寻 $\vect{F}$ 是不切实际的，所以要引入逻辑 AI 的结构，令 $\vect{F}$ 的搜寻範围缩小。 在机器学习中这种做法叫 inductive bias，是加快学习的必经之路。 这个问题会在我的论文《神经与逻辑之间的桥》探讨（先前发表了初稿，但那里有不少漏洞）。
+在系统的状态方程 (\ref{eqn0}) 中，$\vect{F}$ 是可以自由变动的（$\vect{F}$ 代表学习得来的知识），换句话说，整个系统几乎没有结构。 在无限维的泛函空间搜寻 $\vect{F}$ 是不切实际的，所以要引入逻辑 AI 的结构，令 $\vect{F}$ 的搜寻範围缩小。 在机器学习中这种做法叫 inductive bias，是加快学习的必经之路。 这个问题会在我的论文《神经与逻辑之间的桥》\cite{Yan2017b} 探讨。
 
 换句话说： 我们的目的是想将整套逻辑 AI 的器材搬到 \emp{连续} 的微分流形上去实现。  这个做法，是受了 Google 的 Word2Vec \cite{Mikolov2013} 算法的启发，它可以将自然语言的词语 embed 到度量空间中，而且词语之间的距离是 \emp{semantic distance} （\textbf{语义学上的距离}）：
 \begin{equation}
@@ -321,9 +325,9 @@ action $a$ & control $u$ & （外力？） \\
 \end{equation}
 当然，word2vec 一经发表之后，很多人开始构思怎样把「句子」也 embed 到度量空间上。 第一个想法当然是用 \textbf{tensor product}，例如 ``he loves her'' 这句子就变成了 $\mbox{he} \otimes \mbox{loves} \otimes \mbox{her}$。 但这个做法很有问题； 例如『人不可貌相』和『金玉其外~ 败絮其中』这两句句子意义相近，但表面上 (syntax) 却很不同。 用 tensor product 的做法，得出的空间结构是 syntactic 而不是 semantic 的，但神经网络学习的重点是 \emp{泛化} (generalization)，它基於「邻近的点的意义相近」才能成功，所以一定要 semantic distance。
 
-有一个新的想法是： 不要看状态空间 $\mathbb{X}$ 的结构，因为这牵涉到逻辑原子概念怎样组合成逻辑句子的 composition 问题，这 composition 如果是 algebraic 的就会产生上面的 syntactic 问题。 解决办法是： 考虑 $\mathbb{X} \rightarrow \mathbb{X}$ 之间的\textbf{函数}。 这些函数的 \emp{环} 反过来决定 $\mathbb{X}$ 的结构。 Nestruev 2003 的书《Smooth Manifolds and Observables》有讲述类似的观点。
+%有一个新的想法是： 不要看状态空间 $\mathbb{X}$ 的结构，因为这牵涉到逻辑原子概念怎样组合成逻辑句子的 composition 问题，这 composition 如果是 algebraic 的就会产生上面的 syntactic 问题。 解决办法是： 考虑 $\mathbb{X} \rightarrow \mathbb{X}$ 之间的\textbf{函数}。 这些函数的 \emp{环} 反过来决定 $\mathbb{X}$ 的结构。 Nestruev 2003 的书《Smooth Manifolds and Observables》有讲述类似的观点。
 
-换句话说，$\vect{F}: \mathbb{X} \rightarrow \mathbb{X}$ 应该由两个\textbf{家族合并}而成： 一个是根据 Bellman 的学习算子，另一个是逻辑的学习算子。
+%换句话说，$\vect{F}: \mathbb{X} \rightarrow \mathbb{X}$ 应该由两个\textbf{家族合并}而成： 一个是根据 Bellman 的学习算子，另一个是逻辑的学习算子。
 
 \begin{comment}
 % ===========================================================================
@@ -386,9 +390,9 @@ Logic-based AI 可以看成是将世界的「模型」压缩成一个「知识�
 %\end{equation}
 Z-transform 的\textbf{连续时间}版本就是 Laplace transform。
 
-信号处理的资深研究者 Simon Haykin 最近也用 RL + 记忆~ 的设计，详见他的 2012 新书 《Cognitive dynamic systems》。 
+信号处理的资深研究者 Simon Haykin 最近也用 RL + 记忆~ 的设计，详见他的 2012 新书 《Cognitive dynamic systems》\cite{Haykin2012}。 上面的记忆结构来自 Haykin 的经典著作 《Signals and Systems》\cite{Haykin2003}。
 
-Itamar Arel 在 2012 年 \cite{Arel2012}、和我在 2016 年 \cite{Yan2017}、独立地提出了同样的 cognitive architecture： 合并 \textbf{增强学习}和\textbf{深度学习}。
+%Itamar Arel 在 2012 年 \cite{Arel2012}、和我在 2016 年 \cite{Yan2017}、独立地提出了同样的 cognitive architecture： 合并 \textbf{增强学习}和\textbf{深度学习}。
 
 %\section*{Acknowledgements}
 

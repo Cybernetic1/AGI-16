@@ -15,7 +15,7 @@
 \usepackage{sectsty}			% change section color
 % \usepackage{turnstile}		% longer turnstiles
 \usepackage{wasysym}			% smileys
-% \usepackage[normalem]{ulem}	% underline with line breaks: /uline
+\usepackage[normalem]{ulem}	% underline with line breaks: /uline, and strike-out
 % \usepackage{cancel}			% center "not" line for "broken heart"
 
 \usepackage{geometry}		% change paper size
@@ -49,6 +49,7 @@
 \newcommand{\invW}{\, \rotatebox[origin=c]{90}{W}}
 \newcommand{\invw}{\, \rotatebox[origin=c]{90}{w}}
 \newcommand*\rectifier{\vcenter{\hbox{\includegraphics{rectifier.png}}}}
+\newcommand*\stepfunc{\vcenter{\hbox{\includegraphics{step-function.png}}}}
 \newcommand{\dashh}{\textemdash~}
 
 % ***** Boxed variables inside math equations
@@ -80,10 +81,11 @@
 \setlength{\parskip}{2.8ex}
 
 
-%\begin{abstract}
+\begin{abstract}
+如何将\textbf{神经网络}和\textbf{逻辑规则}的结构结合，在混合的泛函空间上做 gradient descent？
 %Logic-based AI 和 connectionist AI 长久分裂，但作者最近发现可以建立两者之间的对应关系。逻辑的结构类似人类的自然语言，但大脑是用神经思考的。 机器学习的主要目标，是用 inductive bias 去加快学习速度，但这目标太空泛。 将逻辑结构加到神经结构之上，就增加了约束，亦即 inductive bias。
 % 假设 $x$ 是思维状态。 在经典逻辑智能中，$x$ 是一束命题，代表当下的思考状况。 思考的过程就是不断重复进行推导: $x \vdash x' \vdash ...$。 在经典 AI 中这个作用是靠无数的逻辑 rules 来达成的。 但现在我们的做法是将 $x$ 放到向量空间中，再用一个 recurrent 神经网络来取代整个 rules base。
-%\end{abstract}
+\end{abstract}
 
 % 有个问题希望数学专业的人帮手解决一下：
 
@@ -97,9 +99,10 @@
 \end{equation}
 \begin{equation}
 F(\vect{x}) = \sigmoid(W_1 \sigmoid(W_2 ... \sigmoid(W_L \; \vect{x} )))
+\label{eqn-NN}
 \end{equation}
-为简单起见，输入 $\vect{x}$ 和输出 $\vect{y}$ 都是 dim-$n$ vector。\\
-$L$ 是层数，$W_\ell$ 是每层的\textbf{权重}矩阵 (= $n \times n$ matrix)。\\
+为简单起见，输入 $\vect{x}$ 和输出 $\vect{y}$ 都是 $n$-dim vector。\\
+$L$ 是层数，$W_\ell$ 是每层的\textbf{权重}矩阵 (= $n \times n$ square matrices)。\\
 $\sigmoid$ 是 sigmoid function （其作用是赋予非线性）：
 \begin{equation}
 \sigmoid (\xi) = \frac{1}{1 + e^{-\xi}}
@@ -110,9 +113,19 @@ applied \textbf{component-wise}。  必要时 $\sigmoid$ 可以换成 $\mathbb{C
 
 可以证明，如果层数和 neuron 个数足够多，这些 $F$ functions 的 family $\mathcal{F}$ 在某个 function space 上是 dense 的。
 
-Machine learning 的目的是在这 function space 上「计分」 (ie, distribute scores over functions $F$).
+Machine learning 的目的是在这 function space 上「计分」 (ie, distribute scores $\in \mathbb{R}$ over functions $F \in \mathcal{F}$):
+\begin{equation}
+\includegraphics[scale=0.8]{gradient-descent.png}
+\end{equation}
 
-可以将 $\mathcal{F}$ 看成是由 $\sigmoid$ 和 $W$'s generate 出来的 Banach algebra （乘法是 composition）。  但我不懂计算 $\mathcal{F}$ 的 basis（也不知计出来有没有用）。
+学习是透过 gradient descent 找出 分数 $J$ 最优的 $F^*$。 方法是：
+\begin{equation}
+w \; += \; \eta \; \nabla_w \, J
+\end{equation}
+其中 $w = W^\ell_{ij}$ 是第 $\ell$ 层的第 $i,j$ 个权重，$\nabla_w J = \frac{\partial J}{\partial w} $ 就是 gradient，$\eta \ll 1$ 是控制学习速度的 learning rate。
+
+\sout{可以将 $\mathcal{F}$ 看成是由 $\sigmoid$ 和 $W$'s generate 出来的 Banach algebra （乘法是 composition）}。  %但我不懂计算 $\mathcal{F}$ 的 basis（也不知计出来有没有用）。
+Banach algebra 和 $C^*$-algebra 在此处不能应用，因为 $\sigmoid$ 不是线性算子。 
 
 \section{逻辑结构}
 
@@ -130,25 +143,55 @@ A, B, C, ... \vdash D
 \mbox{if } A \vect{x}_i \ge \vect{b} & \mbox{ then } & \vect{1} \nonumber \\
 						            & \mbox{ else } & \vect{0}
 \end{eqnarray}
-这个 matching 的结果要 multiply with 下面的 linkage function。
-
-\item \textbf{Linkage} structure:  Consider this logic formula and notice the linkages between variables on the left and right sides:
+This is the same as applying the step function after a matrix:
 \begin{equation}
-\includegraphics[scale=0.3]{linkage-in-logic-variables.jpg}
+\vect{y} = \stepfunc (W \; \vect{x})
+\end{equation}
+and this can be easily incorporated in the 神经网络's $F$ if we allow $\stepfunc$ to replace $\sigmoid$. \\
+Finally, 这个 matching 的结果要 multiply with 下面的 linkage function。
+
+\item \textbf{Linkage} structure:  Consider this logic formula and notice the linkages between variables on the left and right sides:  （爸爸的爸爸是爷爷）
+\begin{equation}
+\forall X \; \forall Y \; \forall Z.  \quad \vcenter{\hbox{\includegraphics[scale=0.3]{linkage-in-logic-variables.jpg}}}
 \label{Linkage}
 \end{equation}
 In the state space $\mathbb{X} \ni \vect{x}$, linkage means that $F$ projects the $i$-th coordinate of $\vect{x}$ directly to the $j$-th coordinate of $\vect{y}$.  In other words,
 \begin{equation}
 f: (x_1, ... x_i, ... x_n) \mapsto (y_1, ... , (y_j = x_i), ... y_n)
 \end{equation}
-I use the notation $F_{(i,j)}$ to denote that $F$ contains the linkage from coordinate $i$ to coordinate $j$.
+I use the notation $F_{(i,j) ...}$ to denote that $F$ contains the linkage from coordinate $i$ to coordinate $j$, and so on.
 \end{itemize}
 
-我的问题是： 怎样将以上的两种 logic structure 「添加」到 神经网络的 $F$ 里。 
+\section{我的问题}
 
-神经网络的 $F$'s 已经在 function space 是 dense 的。  但全体的有 linkage 的函数不是 dense 的。  但它是不是一个 simply connected subset？
+怎样将以上的两种结构 ``combine'' 在一起？
+\begin{itemize}
+\item $F \in \mathcal{F}$ = 所有神经网络函数的 family
+\item $L \in \mathcal{L}$ = 所有逻辑函数的 family （例如那些具有 linkage structure 的 functions）
+\end{itemize}
+\uline{目的是在这 ``combined family'' 上做 gradient descent}。
 
-注意： 如果 $F$ 有 linkage，那就变成一些 equational constraints over $W$.   但我不懂怎样将 神经网络的 $F$ 表示成有 linkage 的。
+$\mathcal{F}$ 的 closure 是 dense 的，所以 $\overline{\mathcal{F}} \supset \mathcal{L}$。 
+
+但 $\mathcal{F} \not\supseteq \mathcal{L}$。  例如只要目测就可以看到 $\mathcal{F} \not\ni$ identity function，只能\textbf{近似}它。
+
+%神经网络的 $F$'s 已经在 function space 是 dense 的。  但全体的有 linkage 的函数不是 dense 的。  但它是不是一个 simply connected subset？
+
+形象化地看，$\mathcal{L}$ 是 $\mathcal{F}$ 的子集（注意 $x$-axis 代表 function space）：
+\begin{equation}
+\includegraphics[scale=0.8]{gradient-descent-2.png}
+\end{equation}
+我想做的是： 在 function space 中搜寻时，将 $\mathcal{L}$ 中的元素加高 priority，换句话说 $L \in \mathcal{L}$ 的分数 $J(L)$ 较高（图中的蓝色虚线）。
+
+注意： 如果 $F$ 有 linkage，那就变成一些 equational constraints over $W$.  每个 $F$ 用参数 $W^\ell_{i j}$ 表示，$W \in \mathbb{R}^{\ell \times n \times n} = \mathbb{R}^m$ 。 Linkage constraints 造成了 $\mathbb{R}^m$ 里的 \textbf{variety}。 %但这不方便用 (\ref{eqn-NN}) 式表示。 但我不懂怎样将 神经网络的 $F$ 表示成有 linkage 的形式。
+
+有朋友建议用 Lagrangian multiplier，换句话说，maximize $J(x)$ subject to $g(x) = 0$.  但注意这个 $x \in \mathcal{F}$ 是函数空间，而且，对於每个 linkage，$g(x) = 0$ 的 constraint 是不同的。  这个办法似乎不可行。
+
+有个 algebra 的想法是： 将 $\mathcal{F}$ 和 $\mathcal{L}$ 分解成一些 decompositions，然后将这些 factors 混合？  但这个 idea 很含糊，我不知是不是这样做的。 
+
+\end{document}
+
+\newpage
 
 %逻辑 AI 那边，「结构」很抽象符号化，但\textbf{学习算法}太慢；  我的目的是建立一道「桥」，将逻辑 AI 的某部分结构\textbf{转移}到神经网络那边。
 
