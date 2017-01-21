@@ -275,10 +275,10 @@ x \cup \KB \sdtstile{}{} x'
 
 我们的目的是将逻辑的结构 transfer 到神经网络。 逻辑的结构有两方面：
 \begin{itemize}
-\item 命题的内部结构
+\item 命题的内部结构 (sub-propositional structure)
 \item 多个命题的集合（= 记忆的结构）
 \end{itemize}
-以下分述之。 谓词逻辑的命题结构比较特别，所以我初时专注於分析它，但后来发现它的影响是次要的； 最重要的似乎是《记忆的结构》\cite{YanMemory}，这是我们的第3篇论文的题目。
+以下分述之。 {\color{red} 谓词逻辑的命题结构比较特别，所以我初时专注於分析它，但后来发现它的影响是次要的； 最重要的似乎是《记忆的结构》\cite{YanMemory}，这是我们的第3篇论文的题目。}
 
 % 在系统的状态方程 (\ref{eqn0}) 中，$\vect{F}$ 是可以自由变动的（$\vect{F}$ 代表被学习的知识），换句话说，整个系统几乎没有结构。 在无限维的泛函空间搜寻 $\vect{F}$ 是不切实际的，所以要引入逻辑 AI 的结构，令 $\vect{F}$ 的搜寻範围缩小。 在机器学习中这种做法叫 inductive bias，是加快学习的必经之路。
 
@@ -382,7 +382,7 @@ x \; (1 - y) = 0
 
 一个 linkage 的几何图像如下：
 \begin{equation}
-\includegraphics[scale=0.75]{linkage-geometric-view.png}
+\includegraphics[scale=0.7]{linkage-geometric-view.png}
 \label{fig:diagonals}
 \end{equation}
 
@@ -399,6 +399,15 @@ x \; (1 - y) = 0
 实际应用中 $\mbox{dim } \vect{x}$ 可能达到成千上万，其中可以有很多 linkages，很难 visualize。
 
 Now，我们关心的是怎样 ``combine'' 逻辑结构和神经网络结构。  在这里我再选择一个特别简单的方法：  在 (\ref{linkages}) 中的那些等式，构成了一些约束在神经网络的 $W$ 之上的 equational constraints。 只需要用这些 constraints 去训练神经网络，就可以实现 linkages。 
+
+传统的 back-prop 搜寻 $\vect{F}$ 的最优值 $\vect{F}^*$，$J$ 是 score-function，注意底下的 domain 是 \emp{泛函空间} (function space)：
+\begin{equation}
+\includegraphics[scale=0.8]{gradient-descent.png}
+\end{equation}
+而我们需要的是新的 back-prop，它在「混合」的 function space 上 optimize（至於 exactly 怎样混合我还不清楚），$J$ 在 logic 的 sub-space 上分数较高：
+\begin{equation}
+\includegraphics[scale=0.8]{gradient-descent-2.png}
+\end{equation}
 
 根据神经网络的 \emp{universal approximation theorem} \cite{wikiUniversalApprox}，$L > 1$ 层神经网络的函数 $\vect{F}$ 在函数空间中是 dense 的。  换句话说，如果神经元的个数充分多，必然可以学习有任意 linkages 的函数。 
 
@@ -430,7 +439,7 @@ Now，我们关心的是怎样 ``combine'' 逻辑结构和神经网络结构。 
 
 \subsubsection{逻辑结构 summary}
 
-逻辑命题的\textbf{内部}结构，传统上有两种方法表达： 一是 predicate logic，二是 relation algebra。 无论是哪种方式，它的本质都是想处理 \emp{variable substitution}。 有趣的是，「代数」的本质其实也是「代入」，但代数中的代入法则是 implicit 的，所以用代数来 explicitly 表达代入的概念反而很难。
+逻辑命题的\textbf{内部} (sub-propositional) 结构，传统上有两种方法表达： 一是 predicate logic，二是 relation algebra。 无论是哪种方式，它的本质都是想处理 \emp{variable substitution}。 有趣的是，「代数」的本质其实也是「代入」，但代数中的代入法则是 implicit 的，所以用代数来 explicitly 表达代入的概念反而很难。
 
 至於 \emp{$\lambda$-calculus}，它本质上就是一种处理 substitution 的方案。 而 \emp{combinatory logic} 和 $\lambda$-calculus 是等效的，后者消除了「变量」这概念，但取而代之的是式子的长度更复杂（比 relation algebra 更复杂）。
 
