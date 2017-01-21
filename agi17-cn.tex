@@ -47,6 +47,8 @@
 \newcommand{\code}[1]{{\footnotesize{\ttfamily #1}}}
 \newcommand{\tab}{\hspace*{1cm} }
 
+\newcommand{\tikzmark}[1]{\tikz[overlay,remember picture] \node (#1) {};}
+
 % ***** Boxed variables inside math equations
 % \newcommand*{\boxedcolor}{black}
 \makeatletter
@@ -133,10 +135,23 @@ Juan Carlos Kuri Pinto
 \includegraphics[scale=0.7]{genifer-model-00.png}
 \end{equation}
 一个\textbf{神经网络}是一个有很多参数的非线性算子：
-\begin{equation}
-\boxed{\mbox{神经网络} $\; F(\vect{x})$} = \sigmoid(W_1 \sigmoid(W_2 ... \sigmoid(W_L \; \vect{x} )))
-\end{equation}
-其中 $W_\ell$ 是每一层的\textbf{权重}矩阵，$\sigmoid$ 是一个 sigmoid 形状的非线性函数。 
+\begin{eqnarray}
+\mbox{\footnotesize 每层的} \tikzmark{ww} \mbox{\footnotesize \textbf{权重}矩阵} \quad \quad \mbox{\footnotesize 总层数} \tikzmark{LL} \nonumber \\
+\nonumber \\
+F(\vect{x}) = \sigmoid(W_1 \tikzmark{wa} \sigmoid(W_2 \tikzmark{wb} ... \sigmoid( W_L \tikzmark{wc} \tikzmark{L} \; \vect{x} )))
+\begin{tikzpicture}[overlay,remember picture]
+  \draw[-, shorten <=12pt, transform canvas={shift={(-10pt,10pt)}}] (ww.center) to (wa.center);
+  \draw[-, shorten <=16pt, transform canvas={shift={(-10pt,10pt)}}] (ww.center) to (wb.center);
+  \draw[-, shorten <=28pt, transform canvas={shift={(-10pt,10pt)}}] (ww.center) to (wc.center);
+  \draw (LL.center) +(-15pt,-3pt) -- ([shift={(-2pt,6pt)}]L.center);
+\end{tikzpicture}
+\end{eqnarray}
+$\sigmoid$ 是一个 sigmoid 形状的非线性函数。 
+
+%\begin{equation}
+%\boxed{\mbox{神经网络} $\; F(\vect{x})$} = \sigmoid(W_1 \sigmoid(W_2 ... \sigmoid(W_L \; \vect{x} )))
+%\end{equation}
+%其中 $W_\ell$ 是每一层的\textbf{权重}矩阵，
 
 如果连续时间的话 $\vect{f}$ 也可以用深度神经网络表示，不过这两个 $\vect{F}$ 和 $\vect{f}$ 的性质是不同的，它们之间由这个关系决定： $\vect{x}(t + 1) = \vect{F}(\vect{x}(t))$。 为方便起见，我会随意使用连续或离散时间的表述。
 
@@ -252,7 +267,7 @@ $Q$ 的好处是方便学习，只需要学习在每一个状态下选择哪个�
 
 %以上两者是两个独立的方面，但不排除它们可以在实际中同时进行。
 
-\textbf{Prior art:}  基於强化学习的智能系统 minimalist architecture，以色列的 Itimar Ariel 在 2012 年提出过 \cite{Arel2012}，而我也独立地在 2016 年提出 \cite{Yan2017}。 Vladimir Anashin 在 1990's 年代也提出过这种 cognitive architecture \cite{Anashin2009}。 可能还有更多的先例 \cite{Ivancevic2006} \cite{Haykin2012}。
+\textbf{Prior art:}  基於强化学习的智能系统 minimalist architecture，以色列的 Itimar Ariel 在 2012 年提出过 \cite{Arel2012}，而我也独立地在 2016 年提出 \cite{Yan2017}。 信号处理的资深研究者 Simon Haykin 最近也用 RL + 记忆~ 的设计，详见他的 2012 新书 《Cognitive dynamic systems》\cite{Haykin2012}。 Vladimir Anashin 在 1990's 年代也提出过这种 cognitive architecture \cite{Anashin2009}。 可能还有更多的先例，eg: \cite{Ivancevic2006}。
 
 \section{控制论与强化学习的关系}
 
@@ -313,17 +328,16 @@ action $a$ & control $u$ & （外力？） \\
 
 %一个智能系统，它有「智慧」的条件，就是每时每刻都不断追求「开心能量」或奖励 $R$ 的最大值，但它必需权衡轻重，有计划地找到长远的效用 $U$ 的最大值。
 
-这三者的对应关系，在 Daniel Liberzon 的书中 \cite{Liberzon2012} 有很详细的解释。 这个对应在哲学上很有启发意味，但实践上的用处似乎不大： 传统 AI 是离散时间系统，转换成连续时间之后可能增加了计算量，暂时不清楚这样做能带来什么好处？
+这三者的对应关系，在 Daniel Liberzon 的书中 \cite{Liberzon2012} 有很详细的解释。 这个对应在哲学上很有启发意味，但实践上的用处似乎不大： 传统 AI 是离散时间系统，转换成连续时间之后可能增加了计算量，暂时不清楚这样做能带来什么好处....？
 
-\section{经典逻辑 AI}
+\section{研究方向}
 
-在系统的状态方程 (\ref{eqn0}) 中，$\vect{F}$ 是可以自由变动的（$\vect{F}$ 代表学习得来的知识），换句话说，整个系统几乎没有结构。 在无限维的泛函空间搜寻 $\vect{F}$ 是不切实际的，所以要引入逻辑 AI 的结构，令 $\vect{F}$ 的搜寻範围缩小。 在机器学习中这种做法叫 inductive bias，是加快学习的必经之路。 这个问题会在我的论文《神经与逻辑之间的桥》\cite{Yan2017b} 探讨。
+\begin{itemize}
+\item \textbf{与经典逻辑 AI 的关系：} 在系统的状态方程 (\ref{eqn0}) 中，$\vect{F}$ 是可以自由变动的（$\vect{F}$ 代表学习得来的知识），换句话说，整个系统几乎没有结构。 在无限维的泛函空间搜寻 $\vect{F}$ 是不切实际的，所以要引入逻辑 AI 的结构，令 $\vect{F}$ 的搜寻範围缩小。 在机器学习中这种做法叫 inductive bias，是加快学习的必经之路。 这个问题会在我们的论文《神经与逻辑之间的桥》\cite{YanBridge} 探讨。
 
-换句话说： 我们的目的是想将整套逻辑 AI 的器材搬到 \emp{连续} 的微分流形上去实现。  这个做法，是受了 Google 的 Word2Vec \cite{Mikolov2013} 算法的启发，它可以将自然语言的词语 embed 到度量空间中，而且词语之间的距离是 \emp{semantic distance} （\textbf{语义学上的距离}）：
-\begin{equation}
-\includegraphics[scale=0.3]{word2vec-relations.png}
-\end{equation}
-当然，word2vec 一经发表之后，很多人开始构思怎样把「句子」也 embed 到度量空间上。 第一个想法当然是用 \textbf{tensor product}，例如 ``he loves her'' 这句子就变成了 $\mbox{he} \otimes \mbox{loves} \otimes \mbox{her}$。 但这个做法很有问题； 例如『人不可貌相』和『金玉其外~ 败絮其中』这两句句子意义相近，但表面上 (syntax) 却很不同。 用 tensor product 的做法，得出的空间结构是 syntactic 而不是 semantic 的，但神经网络学习的重点是 \emp{泛化} (generalization)，它基於「邻近的点的意义相近」才能成功，所以一定要 semantic distance。
+\item \textbf{记忆：}  这 minimal architecture 里面没有 episodic memory，这会在第3篇论文《记忆的结构》\cite{YanMemory}中探讨。
+
+\end{itemize}
 
 %有一个新的想法是： 不要看状态空间 $\mathbb{X}$ 的结构，因为这牵涉到逻辑原子概念怎样组合成逻辑句子的 composition 问题，这 composition 如果是 algebraic 的就会产生上面的 syntactic 问题。 解决办法是： 考虑 $\mathbb{X} \rightarrow \mathbb{X}$ 之间的\textbf{函数}。 这些函数的 \emp{环} 反过来决定 $\mathbb{X}$ 的结构。 Nestruev 2003 的书《Smooth Manifolds and Observables》有讲述类似的观点。
 
@@ -363,34 +377,6 @@ Logic-based AI 可以看成是将世界的「模型」压缩成一个「知识�
 
 \end{comment}
 % ===========================================================================
-
-\section{Episodic memory}
-
-设计了这个 minimalist architecture 之后，发现比较起人脑有个严重缺陷： 没有 \emp{事件记忆} (episodic memory)。 换句话说，只能留意\textbf{当下}发生的事件，但不能记住一段\textbf{故事}。
-
-这牵涉到「什么是记忆?」的问题。 在 minimal architecture 里，$\vect{F}$ 代表 ``static knowledge''，亦即（相对地）\textbf{永恒不变}的知识／规律，而 $\vect{x}$ 代表当下的\textbf{状态}／短期记忆，亦即 ``dynamic knowledge''。  Episodic memory 介乎「长期」与「短期」记忆之间。
-
-\textbf{深度学习} 在近年很厉害，但 deep NN 的缺点是没有\textbf{记忆}。 有限自动机 (finite state machines) 不是\textbf{全能}的计算器，它和 Turing machine 的分别就是缺少了那条「记忆磁带」。 所以，深度神经网络 + 记忆~ 就可以变成 universal 的计算器。 如何设计「可微分」的记忆是一重要课题，因为可微分的记忆可以用 gradient descent 学习。 
-
-在 \textbf{信息处理} (signal processing) 理论中，$z$-transform 以 $z^{-1}$ 可以代表 \textbf{时间延迟} 1 步 (1-step time delay unit)。 用一连串的 $z^{-1}$ 可以组成长度为 $k$ 单位的记忆：
-\begin{equation}
-\includegraphics[scale=0.9]{z-memory-0.png}
-\end{equation}
-以上的无穷串列可以用这个 recursive 结构代替：
-\begin{equation}
-\includegraphics[scale=0.9]{z-memory-1.png}
-\end{equation}
-多层的 hierarchical 记忆或许可以这样实现：
-\begin{equation}
-\includegraphics[scale=0.9]{z-memory-3.png}
-\end{equation}
-%用神经网络实现，可能是这样的：
-%\begin{equation}
-%\includegraphics[scale=1.0]{z-memory-2.png}
-%\end{equation}
-Z-transform 的\textbf{连续时间}版本就是 Laplace transform。
-
-信号处理的资深研究者 Simon Haykin 最近也用 RL + 记忆~ 的设计，详见他的 2012 新书 《Cognitive dynamic systems》\cite{Haykin2012}。 上面的记忆结构来自 Haykin 的经典著作 《Signals and Systems》\cite{Haykin2003}。
 
 %Itamar Arel 在 2012 年 \cite{Arel2012}、和我在 2016 年 \cite{Yan2017}、独立地提出了同样的 cognitive architecture： 合并 \textbf{增强学习}和\textbf{深度学习}。
 
