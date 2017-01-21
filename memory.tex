@@ -90,9 +90,14 @@
 \setlength{\parskip}{2.8ex}
 
 \begin{abstract}
-%Logic-based AI 和 connectionist AI 长久分裂，但作者最近发现可以建立两者之间的对应关系。逻辑的结构类似人类的自然语言，但大脑是用神经思考的。 机器学习的主要目标，是用 inductive bias 去加快学习速度，但这目标太空泛。 将逻辑结构加到神经结构之上，就增加了约束，亦即 inductive bias。
-% 假设 $x$ 是思维状态。 在经典逻辑智能中，$x$ 是一束命题，代表当下的思考状况。 思考的过程就是不断重复进行推导: $x \vdash x' \vdash ...$。 在经典 AI 中这个作用是靠无数的逻辑 rules 来达成的。 但现在我们的做法是将 $x$ 放到向量空间中，再用一个 recurrent 神经网络来取代整个 rules base。
+(Draft...) 智能系统中记忆的设计似乎是一个比较 open-ended question。
 \end{abstract}
+
+\textbf{深度学习} 在近年很火，但 deep NN 的缺点是没有\textbf{记忆}。 有限自动机 (finite state machines) 不是\textbf{全能}的计算器，它和 Turing machine 的分别就是缺少了那条「记忆磁带」：
+\begin{equation}
+\includegraphics[scale=0.75]{Turing-machine.png}
+\end{equation}
+所以，深度神经网络 + 记忆~ 就可以变成 universal 的计算器。 如何设计「可微分」的记忆是一个重要课题，因为可微分的记忆可以用 gradient descent 学习。 
 
 % =====================================================================================
 \begin{comment}
@@ -147,13 +152,11 @@ x \cup \KB \sdtstile{}{} x'
 \end{comment}
 % ======================================================================================
 
-\section{Episodic memory}
+\section{什么是 episodic memory？}
 
-设计了这个 minimalist architecture 之后，发现比较起人脑有个严重缺陷： 没有 \emp{事件记忆} (episodic memory)。 换句话说，只能留意\textbf{当下}发生的事件，但不能记住一段\textbf{故事}。
+在 \cite{Yan2017} 中我们提出了智能系统的 minimal architecture，但这它没有对\textbf{历史}的记忆。 换句话说，只能留意\textbf{当下}发生的事件，但不能记住一段\textbf{故事}。
 
 这牵涉到「什么是记忆?」的问题。 在 minimal architecture 里，$\vect{F}$ 代表 ``static knowledge''，亦即（相对地）\textbf{永恒不变}的知识／规律，而 $\vect{x}$ 代表当下的\textbf{状态}／短期记忆，亦即 ``dynamic knowledge''。  Episodic memory 介乎「长期」与「短期」记忆之间。
-
-\textbf{深度学习} 在近年很厉害，但 deep NN 的缺点是没有\textbf{记忆}。 有限自动机 (finite state machines) 不是\textbf{全能}的计算器，它和 Turing machine 的分别就是缺少了那条「记忆磁带」。 所以，深度神经网络 + 记忆~ 就可以变成 universal 的计算器。 如何设计「可微分」的记忆是一重要课题，因为可微分的记忆可以用 gradient descent 学习。 
 
 在 \textbf{信息处理} (signal processing) 理论中，$z$-transform 以 $z^{-1}$ 可以代表 \textbf{时间延迟} 1 步 (1-step time delay unit)。 用一连串的 $z^{-1}$ 可以组成长度为 $k$ 单位的记忆：
 \begin{equation}
@@ -173,7 +176,7 @@ x \cup \KB \sdtstile{}{} x'
 %\end{equation}
 Z-transform 的\textbf{连续时间}版本就是 Laplace transform。
 
- 上面的记忆结构来自 Haykin 的经典著作 《Signals and Systems》\cite{Haykin2003}。
+上面的记忆结构来自 Simon Haykin 的经典著作 《Signals and Systems》\cite{Haykin2003}。
 
 \section{Mental state $\vect{x}$ = working memory = 命题的集合}
 
@@ -185,11 +188,11 @@ Z-transform 的\textbf{连续时间}版本就是 Laplace transform。
 \begin{equation}
 \vect{x}_2 = \mbox{ 我正在搭地铁 } \wedge \mbox{ 我很肚饿 } \wedge ....
 \end{equation}
-Thoughts 独立的好处是表述的 economy（状态 $\vect{x}$ 分拆成若干独立的 thoughts）。 $\vect{x}$ 是 $M$ 个 thoughts 的集合，$M$ 是 working memory 的大小。 认知科学里有个说法：
+Thoughts 独立的好处是表述的 economy（状态 $\vect{x}$ 分拆成若干独立的 thoughts）。 $\vect{x}$ 是 $M$ 个 thoughts 的集合，$M$ 是 working memory 的大小。 认知科学里有个说法 \cite{}：
 \begin{equation}
 \mbox{the size of human working memory } \approx 7 \pm 2 \mbox{ items}
 \end{equation}
-但这些 items 可以有 \emp{chunking}，例如去超级市场买东西，「意大利粉、茄汁、芝士、香肠」这 4 件东西可以聚合成一个 chunk，这样可以记住的 items 数目多很多。
+但这些 items 可以有 \emp{chunking} \cite{}，例如去超级市场买东西，「意大利粉、茄汁、芝士、香肠」这 4 件东西可以聚合成一个 chunk，这样可以记住的 items 数目多很多。
 
 %思维空间是 $M$ 个 hypercube 的卡积。
 
@@ -209,10 +212,19 @@ $\dot{\vect{x}}$ 是状态 $\vect{x}$ 的改变方向，换句话说，这是描
 \end{tikzpicture}
 \end{eqnarray}
 $\vect{f}$ 就是我们的神经网络。 $\vect{f}$ 的输入是：
+\let\labelitemi\labelitemii
 \begin{itemize}
 \item $\vect{x}|_t$ = 当下的状态 = 一些命题的集合； 命题没有 time stamp
 \item $\vect{x}(t \in \mathbb{T})$ = 状态的历史； 要考虑每个状态的 time stamp
 \end{itemize}
+
+\section{联想记忆 = associative / content-addressable memory}
+
+如果用 content-addressable 的方法，似乎可以不用 time stamps，只要每个记忆 items 之间用「时间先后-link」 连接就可以。 人脑的记忆似乎是这样的。
+
+\section{结论}
+
+
 
 % ====================================================================================
 \begin{comment}
