@@ -81,9 +81,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.2783203"
-     inkscape:cx="412.13656"
-     inkscape:cy="524.76311"
+     inkscape:zoom="1"
+     inkscape:cx="410.63725"
+     inkscape:cy="358.63466"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -111,8 +111,8 @@
      inkscape:groupmode="layer"
      id="layer1">
     <path
-       style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 179.48816,325.96392 c 111.86554,82.13903 108.47386,-247.148764 150.1971,-79.79221 70.40488,282.40183 134.55156,69.62261 134.55156,69.62261"
+       style="fill:none;stroke:#ff0000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 139.67991,361.21933 c 67.11932,49.28342 65.08431,-148.28926 90.11826,-47.87533 42.24292,169.4411 80.73093,41.77357 80.73093,41.77357"
        id="path2985"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="csc"
@@ -120,8 +120,8 @@
        inkscape:export-xdpi="400"
        inkscape:export-ydpi="400" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m 179.9236,427.71436 305.08785,0"
+       style="fill:none;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 139.94117,422.26959 183.05271,0"
        id="path2987"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc"
@@ -130,7 +130,7 @@
        inkscape:export-ydpi="400" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:4, 4;stroke-dashoffset:0"
-       d="m 307.91291,182.32857 0,259.31856"
+       d="m 216.73476,275.03812 0,155.59113"
        id="path3757"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc"
@@ -139,7 +139,7 @@
        inkscape:export-ydpi="400" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker-start:url(#Arrow1Lstart);marker-end:none"
-       d="m 233.12605,216.55775 0,239.31856"
+       d="m 171.86264,273.57563 0,165.59113"
        id="path3757-3"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc"
@@ -150,7 +150,7 @@
        xml:space="preserve"
        id="flowRoot4777"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
-       transform="translate(32,42)"
+       transform="translate(-48.707107,134.24264)"
        inkscape:export-filename="/home/yky/latex/AGI-17/gradient-descent.png"
        inkscape:export-xdpi="400"
        inkscape:export-ydpi="400"><flowRegion
@@ -165,7 +165,7 @@
        xml:space="preserve"
        id="flowRoot4777-1"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
-       transform="translate(108.8024,308.42568)"
+       transform="translate(15.8024,303.42568)"
        inkscape:export-filename="/home/yky/latex/AGI-17/gradient-descent.png"
        inkscape:export-xdpi="400"
        inkscape:export-ydpi="400"><flowRegion
@@ -180,7 +180,7 @@
        xml:space="preserve"
        id="flowRoot4820"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#ff0000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
-       transform="translate(66.435443,361.21772)"
+       transform="matrix(0.6,0,0,0.6,71.84828,382.37161)"
        inkscape:export-filename="/home/yky/latex/AGI-17/gradient-descent.png"
        inkscape:export-xdpi="400"
        inkscape:export-ydpi="400"><flowRegion
@@ -195,20 +195,20 @@
        xml:space="preserve"
        id="flowRoot4828"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
-       transform="translate(37.637891,-24.250573)"
+       transform="translate(-129.12304,-27.969873)"
        inkscape:export-filename="/home/yky/latex/AGI-17/gradient-descent.png"
        inkscape:export-xdpi="400"
        inkscape:export-ydpi="400"><flowRegion
          id="flowRegion4830"><rect
            id="rect4832"
-           width="166.62486"
-           height="97.784569"
+           width="240.62488"
+           height="95.784576"
            x="516.30255"
            y="366.30566" /></flowRegion><flowPara
-         id="flowPara4834"
-         style="font-size:18px;text-align:start;text-anchor:start">= family of</flowPara><flowPara
          id="flowPara4836"
-         style="font-size:18px;text-align:start;text-anchor:start">neural-network functions</flowPara></flowRoot>    <flowRoot
+         style="font-size:18px;text-align:start;text-anchor:start">= space of neural-network</flowPara><flowPara
+         style="font-size:18px;text-align:start;text-anchor:start"
+         id="flowPara3933">   functions</flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot4838"
        style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Arial;font-style:normal;font-weight:normal;font-size:20px;line-height:125%;letter-spacing:0px;word-spacing:0px;-inkscape-font-specification:Arial;font-stretch:normal;font-variant:normal;text-anchor:middle;text-align:center;writing-mode:lr"><flowRegion
@@ -218,11 +218,11 @@
            height="74.316269"
            x="518.64935"
            y="271.65018" /></flowRegion><flowPara
-         id="flowPara4844"></flowPara></flowRoot>    <flowRoot
+         id="flowPara4844" /></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot4846"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
-       transform="translate(17.99236,84.139039)"
+       transform="translate(-143.11172,81.126846)"
        inkscape:export-filename="/home/yky/latex/AGI-17/gradient-descent.png"
        inkscape:export-xdpi="400"
        inkscape:export-ydpi="400"><flowRegion
@@ -236,7 +236,7 @@
    style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Latin Modern Math;-inkscape-font-specification:Latin Modern Math Italic"
    id="flowSpan5203">F</flowSpan> ∈ 𝓕  </flowPara></flowRoot>    <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 486.57601,427.32322 c 43.02521,-17.99236 21.90375,-79.7922 53.97709,-94.65546"
+       d="m 325.47193,421.4826 c 43.02521,-17.99236 21.90375,-79.7922 53.97709,-94.65546"
        id="path4858"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc"
@@ -244,8 +244,8 @@
        inkscape:export-xdpi="400"
        inkscape:export-ydpi="400" />
     <path
-       style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 184.46342,671.22326 c 111.86554,82.13903 108.47386,-247.14876 150.1971,-79.7922 70.40488,282.40182 134.55156,69.6226 134.55156,69.6226"
+       style="fill:none;stroke:#ff0000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:2, 2;stroke-dashoffset:0"
+       d="m 142.65517,640.11251 c 67.11932,49.28342 65.08431,-148.28925 90.11826,-47.87532 42.24292,169.4411 80.73093,41.77356 80.73093,41.77356"
        id="path2985-4"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="csc"
@@ -253,8 +253,8 @@
        inkscape:export-xdpi="400"
        inkscape:export-ydpi="400" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m 184.89886,772.9737 305.08785,0"
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 142.91643,701.16278 183.05271,0"
        id="path2987-2"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc"
@@ -263,7 +263,7 @@
        inkscape:export-ydpi="400" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker-start:url(#Arrow1Lstart);marker-end:none"
-       d="m 238.10131,561.8171 0,239.31855"
+       d="m 174.8379,528.46882 0,189.59113"
        id="path3757-3-4"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc"
@@ -274,7 +274,7 @@
        xml:space="preserve"
        id="flowRoot4777-0"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
-       transform="translate(36.975262,387.25934)"
+       transform="translate(-44.462292,385.98117)"
        inkscape:export-filename="/home/yky/latex/AGI-17/gradient-descent-2.png"
        inkscape:export-xdpi="400"
        inkscape:export-ydpi="400"><flowRegion
@@ -289,7 +289,7 @@
        xml:space="preserve"
        id="flowRoot4846-2"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
-       transform="translate(53.476408,500.58554)"
+       transform="translate(-115.52359,428.58554)"
        inkscape:export-filename="/home/yky/latex/AGI-17/gradient-descent-2.png"
        inkscape:export-xdpi="400"
        inkscape:export-ydpi="400"><flowRegion
@@ -303,7 +303,7 @@
    style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Latin Modern Math;-inkscape-font-specification:Latin Modern Math"
    id="flowSpan4854-8" /></flowPara></flowRoot>    <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 496.24493,772.58256 c 28.94423,-2.34683 28.94423,-17.21008 54.75936,-26.5974"
+       d="m 327.24493,700.58256 c 28.94423,-2.34683 28.94423,-17.21008 54.75936,-26.5974"
        id="path4858-6"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc"
@@ -311,8 +311,8 @@
        inkscape:export-xdpi="400"
        inkscape:export-ydpi="400" />
     <path
-       style="fill:none;stroke:#0000ff;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m 220.59435,765.70978 83.08785,0"
+       style="fill:none;stroke:#0000ff;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 164.87121,696.80443 40.92768,0"
        id="path2987-2-0"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc"
@@ -320,8 +320,8 @@
        inkscape:export-xdpi="400"
        inkscape:export-ydpi="400" />
     <path
-       style="fill:none;stroke:#0000ff;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m 391.37433,765.70978 49.08785,0"
+       style="fill:none;stroke:#0000ff;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 266.80171,696.80443 29.45271,0"
        id="path2987-2-0-8"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc"
@@ -329,17 +329,17 @@
        inkscape:export-xdpi="400"
        inkscape:export-ydpi="400" />
     <path
-       style="fill:none;stroke:#0000ff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:4, 4;stroke-dashoffset:0"
-       d="m 185.15543,670.88317 c 32.75783,22.00153 31.31117,11.30364 40.7715,6.24959 16.17057,-8.6389 20.77249,-20.80366 24.89364,-28.37387 5.54066,-10.17775 3.85011,-6.6345 9.84698,-18.9762 5.99687,-12.3417 13.47936,-28.92031 18.06703,-41.70406 4.58767,-12.78375 9.40163,-25.39889 14.7791,-33.45129 6.24428,-9.35039 10.50419,-13.00657 16.49965,-12.12159 4.6896,0.69223 7.37573,0.16013 11.49452,7.33314 4.11879,7.17301 8.62927,20.33251 13.84468,41.25208 8.80061,35.30023 17.50344,62.86325 25.99541,84.07181 8.49198,21.20855 14.51028,34.42642 24.73033,41.94499 13.43316,9.88235 15.59053,6.79297 22.78686,8.11459 7.19633,1.32162 13.95569,1.05424 20.16501,-3.41941 6.20932,-4.47364 11.8686,-5.15355 16.86478,-12.65699 4.99618,-7.50344 9.32926,-11.8304 12.88618,-19.59817 3.55691,-7.76776 6.33766,-14.97631 8.22918,-20.24293 1.89152,-5.26661 2.89381,-8.59129 2.89381,-8.59129"
+       style="opacity:0.70860931;fill:none;stroke:#33aaff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 141.99539,639.90845 c 9.85491,4.87735 11.01182,7.9635 22.60039,8.69348 m 0.53749,-27.74372 c 6.74615,-4.64585 13.23111,-11.66701 18.28614,-18.7992 4.23929,-5.98126 7.06079,-12.88982 9.79562,-19.69186 2.50188,-6.22263 4.25941,-12.72773 6.00284,-19.20392 2.4852,-9.23159 4.6105,-22.42511 6.34243,-27.97069 m 0.0708,54.31339 c 7.89079,-20.21314 9.81723,-26.94764 13.9548,-26.37031 3.10581,0.43337 5.13527,5.12086 6.37091,8.44618 1.72864,4.65207 4.10259,9.24332 7.23183,21.79506 5.28037,21.18014 10.50207,36.37423 15.59725,49.09937 5.09519,12.72513 12.30617,27.85585 18.4382,32.36699 m 0,-28.8 c 3.89623,7.13315 5.7331,11.15103 11.14709,12.33749 3.90471,0.85571 8.02939,-2.07253 11.02403,-4.72038 3.23484,-2.86023 4.32739,-5.61715 6.51887,-11.1942 m 0,27.6 c 2.9977,-4.50206 9.19755,-14.29824 11.3317,-18.9589 2.13415,-4.66065 3.8026,-8.98578 4.93751,-12.14576 1.13491,-3.15996 1.73629,-5.15477 1.73629,-5.15477"
        id="path2985-4-9"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="csssssssssssssssc"
+       sodipodi:nodetypes="cccaaaccssssccaaccssc"
        inkscape:export-filename="/home/yky/latex/AGI-17/gradient-descent-2.png"
        inkscape:export-xdpi="400"
        inkscape:export-ydpi="400" />
     <path
-       style="fill:none;stroke:#0000ff;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:4, 4;stroke-dashoffset:0"
-       d="m 303.08786,533.75714 0,251.31856"
+       style="fill:#666666;stroke:#666666;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:4, 4;stroke-dashoffset:0"
+       d="m 205.82983,534.83284 0,173.59114"
        id="path3757-2"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc"
@@ -347,8 +347,8 @@
        inkscape:export-xdpi="400"
        inkscape:export-ydpi="400" />
     <path
-       style="fill:none;stroke:#0000ff;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:4, 4;stroke-dashoffset:0"
-       d="m 221.17647,641.42788 0,145.31856"
+       style="fill:#666666;stroke:#666666;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:4, 4;stroke-dashoffset:0"
+       d="m 164.683,614.5165 0,93.02871"
        id="path3757-2-2"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc"
@@ -356,8 +356,8 @@
        inkscape:export-xdpi="400"
        inkscape:export-ydpi="400" />
     <path
-       style="fill:none;stroke:#0000ff;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:4, 4;stroke-dashoffset:0"
-       d="m 391.92055,693.60512 0,95.31856"
+       style="fill:#666666;stroke:#666666;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:4, 4;stroke-dashoffset:0"
+       d="m 267.12944,622.19791 0,84.53486"
        id="path3757-2-2-3"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc"
@@ -365,8 +365,8 @@
        inkscape:export-xdpi="400"
        inkscape:export-ydpi="400" />
     <path
-       style="fill:none;stroke:#0000ff;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:4, 4;stroke-dashoffset:0"
-       d="m 440.07487,687.43552 0,101.31856"
+       style="fill:#666666;stroke:#666666;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:4, 4;stroke-dashoffset:0"
+       d="m 296.02204,614.62741 0,96.0036"
        id="path3757-2-2-1"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc"
@@ -377,7 +377,7 @@
        xml:space="preserve"
        id="flowRoot4846-2-8"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
-       transform="translate(46.466481,449.8185)"
+       transform="translate(-100.53352,367.8185)"
        inkscape:export-filename="/home/yky/latex/AGI-17/gradient-descent-2.png"
        inkscape:export-xdpi="400"
        inkscape:export-ydpi="400"><flowRegion
@@ -389,7 +389,7 @@
            y="230.9718" /></flowRegion><flowPara
          id="flowPara4852-3-2">𝓛  </flowPara></flowRoot>    <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 446.67991,765.26669 c 35.20244,-6.25821 57.10618,-73.53399 101.69595,-73.53399"
+       d="m 297.67991,697.26669 c 35.20244,-6.25821 57.10618,-85.53399 101.69595,-85.53399"
        id="path4858-6-4"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc"
@@ -400,33 +400,37 @@
        xml:space="preserve"
        id="flowRoot4828-5"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
-       transform="translate(59.881812,366.14031)"
+       transform="translate(-109.11819,294.14031)"
        inkscape:export-filename="/home/yky/latex/AGI-17/gradient-descent-2.png"
        inkscape:export-xdpi="400"
        inkscape:export-ydpi="400"><flowRegion
          id="flowRegion4830-1"><rect
            id="rect4832-7"
-           width="166.62486"
-           height="97.784569"
+           width="213.12488"
+           height="61.784576"
            x="516.30255"
            y="366.30566" /></flowRegion><flowPara
          id="flowPara4836-7"
-         style="font-size:18px;text-align:start;text-anchor:start">= neural-network functions</flowPara></flowRoot>    <flowRoot
+         style="font-size:18px;text-align:start;text-anchor:start">= space of neural-network </flowPara><flowPara
+         style="font-size:18px;text-align:start;text-anchor:start"
+         id="flowPara3935">   functions</flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot4828-5-1"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
-       transform="translate(54.253039,313.7456)"
+       transform="translate(-94.746961,233.7456)"
        inkscape:export-filename="/home/yky/latex/AGI-17/gradient-descent-2.png"
        inkscape:export-xdpi="400"
        inkscape:export-ydpi="400"><flowRegion
          id="flowRegion4830-1-6"><rect
            id="rect4832-7-9"
-           width="166.62486"
-           height="97.784569"
+           width="217.62488"
+           height="53.284576"
            x="516.30255"
            y="366.30566" /></flowRegion><flowPara
          id="flowPara4836-7-8"
-         style="font-size:18px;text-align:start;text-anchor:start">= logic functions</flowPara></flowRoot>    <flowRoot
+         style="font-size:18px;text-align:start;text-anchor:start">= space of logic functions</flowPara><flowPara
+         style="font-size:18px;text-align:start;text-anchor:start"
+         id="flowPara3858">   (with linkages)</flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot5207"
        style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Arial;font-style:normal;font-weight:normal;font-size:20px;line-height:125%;letter-spacing:0px;word-spacing:0px;-inkscape-font-specification:Arial;font-stretch:normal;font-variant:normal;text-anchor:middle;text-align:center;writing-mode:lr"><flowRegion
@@ -436,5 +440,43 @@
            height="34.42017"
            x="82.92131"
            y="-39.695877" /></flowRegion><flowPara
-         id="flowPara5213"></flowPara></flowRoot>  </g>
+         id="flowPara5213" /></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4777-1-3"
+       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       transform="translate(96.682813,580.61086)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/gradient-descent-2.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400"><flowRegion
+         id="flowRegion4779-7-6"><rect
+           id="rect4781-0-7"
+           width="54.759357"
+           height="46.154316"
+           x="172.10085"
+           y="137.88091" /></flowRegion><flowPara
+         id="flowPara4783-4-5"
+         style="font-style:italic;font-family:Latin Modern Roman;-inkscape-font-specification:Latin Modern Roman">F*</flowPara></flowRoot>    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 238.87968,732.16088 c -6.94423,-1.84683 -31.44423,-8.21008 -33.75936,-21.0974"
+       id="path4858-6-5"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/gradient-descent-2.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3923"
+       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       transform="translate(18,-18.5)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/gradient-descent-2.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400"><flowRegion
+         id="flowRegion3925"><rect
+           id="rect3927"
+           width="81.5"
+           height="45"
+           x="203"
+           y="735.86218" /></flowRegion><flowPara
+         id="flowPara3929">new</flowPara></flowRoot>  </g>
 </svg>

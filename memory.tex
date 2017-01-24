@@ -40,6 +40,8 @@
 \subsectionfont{\color{blue}} 
 \subsubsectionfont{\color{blue}} 
 
+\let\labelitemi\labelitemii
+
 \newcommand{\vect}[1]{\boldsymbol{#1}}
 \newcommand*\sigmoid{\vcenter{\hbox{\includegraphics{sigmoid.png}}}}
 \newcommand*\KB{\vcenter{\hbox{\includegraphics{KB-symbol.png}}}}
@@ -78,6 +80,7 @@
 \title{记忆的结构}
 \titlerunning{记忆的结构}
 \author{\usebox{\MyName} (King-Yin Yan)
+\and Joseph Cheng
 % \\ \footnotesize{General.Intelligence@Gmail.com}
 }
 \institute{General.Intelligence@Gmail.com}
@@ -90,12 +93,17 @@
 \setlength{\parskip}{2.8ex}
 
 \begin{abstract}
-(Draft...) 智能系统中记忆的设计似乎是一个比较 open-ended question。
+(This is a draft...) 
 \end{abstract}
+
+智能系统中记忆的设计似乎是一个比较 open-ended question。 暂时我列出一些关於记忆的点子，但仍未综合成一个系统的理论....
+
+\setcounter{section}{-1}
+\section{Turing machine 的启示}
 
 \textbf{深度学习} 在近年很火，但 deep NN 的缺点是没有\textbf{记忆}。 有限自动机 (finite state machines) 不是\textbf{全能}的计算器，它和 Turing machine 的分别就是缺少了那条「记忆磁带」：
 \begin{equation}
-\includegraphics[scale=0.75]{Turing-machine.png}
+\includegraphics[scale=0.7]{Turing-machine.png}
 \end{equation}
 所以，深度神经网络 + 记忆~ 就可以变成 universal 的计算器。 如何设计「可微分」的记忆是一个重要课题，因为可微分的记忆可以用 gradient descent 学习。 
 
@@ -154,9 +162,13 @@ x \cup \KB \sdtstile{}{} x'
 
 \section{什么是 episodic memory？}
 
-在 \cite{Yan2017} 中我们提出了智能系统的 minimal architecture，但这它没有对\textbf{历史}的记忆。 换句话说，只能留意\textbf{当下}发生的事件，但不能记住一段\textbf{故事}。
+在 \cite{Yan2017} 中我们提出了智能系统的 minimal architecture，但是它没有对\textbf{历史}的记忆。 换句话说，只能留意\textbf{当下}发生的事件，但不能记住一段\textbf{故事}。
 
 这牵涉到「什么是记忆?」的问题。 在 minimal architecture 里，$\vect{F}$ 代表 ``static knowledge''，亦即（相对地）\textbf{永恒不变}的知识／规律，而 $\vect{x}$ 代表当下的\textbf{状态}／短期记忆，亦即 ``dynamic knowledge''。  Episodic memory 介乎「长期」与「短期」记忆之间。
+
+换句话说，最简单的 \emp{reactive system} 其实是一个只有\textbf{瞬时记忆}和\textbf{永恒记忆}的系统。 例如无人驾驶车，它的瞬时记忆就是路面状态，而永恒记忆是「转弯、打灯、泊车」等动作。 它根据路面状况（例如有没有撞车等奖励／惩罚），学习永恒记忆中的 responses。 
+
+我们的目标是要设计有 \emp{limited memory} 的系统，令系统能够根据 episodic memory 来学习。
 
 在 \textbf{信息处理} (signal processing) 理论中，$z$-transform 以 $z^{-1}$ 可以代表 \textbf{时间延迟} 1 步 (1-step time delay unit)。 用一连串的 $z^{-1}$ 可以组成长度为 $k$ 单位的记忆：
 \begin{equation}
@@ -174,7 +186,7 @@ x \cup \KB \sdtstile{}{} x'
 %\begin{equation}
 %\includegraphics[scale=1.0]{z-memory-2.png}
 %\end{equation}
-Z-transform 的\textbf{连续时间}版本就是 Laplace transform。
+Z-transform 的\textbf{连续时间}版本是 Laplace transform （不知有没有用？）
 
 上面的记忆结构来自 Simon Haykin 的经典著作 《Signals and Systems》\cite{Haykin2003}。
 
@@ -190,7 +202,7 @@ Z-transform 的\textbf{连续时间}版本就是 Laplace transform。
 \end{equation}
 Thoughts 独立的好处是表述的 economy（状态 $\vect{x}$ 分拆成若干独立的 thoughts）。 $\vect{x}$ 是 $M$ 个 thoughts 的集合，$M$ 是 working memory 的大小。 认知科学里有个说法 \cite{}：
 \begin{equation}
-\mbox{the size of human working memory } \approx 7 \pm 2 \mbox{ items}
+\mbox{size of human working memory } \approx 7 \pm 2 \mbox{ items}
 \end{equation}
 但这些 items 可以有 \emp{chunking} \cite{}，例如去超级市场买东西，「意大利粉、茄汁、芝士、香肠」这 4 件东西可以聚合成一个 chunk，这样可以记住的 items 数目多很多。
 
@@ -212,7 +224,6 @@ $\dot{\vect{x}}$ 是状态 $\vect{x}$ 的改变方向，换句话说，这是描
 \end{tikzpicture}
 \end{eqnarray}
 $\vect{f}$ 就是我们的神经网络。 $\vect{f}$ 的输入是：
-\let\labelitemi\labelitemii
 \begin{itemize}
 \item $\vect{x}|_t$ = 当下的状态 = 一些命题的集合； 命题没有 time stamp
 \item $\vect{x}(t \in \mathbb{T})$ = 状态的历史； 要考虑每个状态的 time stamp
@@ -222,7 +233,41 @@ $\vect{f}$ 就是我们的神经网络。 $\vect{f}$ 的输入是：
 
 如果用 content-addressable 的方法，似乎可以不用 time stamps，只要每个记忆 items 之间用「时间先后-link」 连接就可以。 人脑的记忆似乎是这样的。
 
-\section{结论}
+\section{Convolution and Fourier transform}
+
+\uline{爱因斯坦}说时间是第4度空间，从物理学的角度看，时空问题可以 reduce 成类似 3 度空间的处理，亦即是机器视觉的问题，这问题基本上已经解决了。 
+
+对 3D 图像处理的方法，是用 convolution，亦即是用一个\emp{内核} (kernel) 不断重复辨认空间中的某一局部、到另一局部、and so on.... 。  这种做法能做到\textbf{资讯压缩}，其原因是 weight-sharing，亦即是说，用一个内核的 weights，代表了原本要用很多神经元的 weights，这就达到压缩的效果。
+
+「4维时空」的做法应该是类似的。
+
+根据 \emp{convolution theorem}\cite{wikiConvolutionTheorem}：
+\begin{equation}
+\mbox{convolution in time domain} = \mbox{multiplication in frequency domain}
+\end{equation}
+换句话说，如果在空间上做了 Fourier transform（或许包括 wavelet transform？）其作用等於在时间上做 convolution。 
+
+在一个智能系统里，「时间」的地位和「空间」可能有不平等，因为智能系统是在时间上做行动的，它的记忆结构可能是根据时间而 organize，这样导致分析的不方便。 在我现时的 design 中，时间有特殊地位。
+
+或许将时空看成 4D 会带来理论上的简洁，也就是处理上更方便....？
+
+如果 sensory data 就是一大块 4D 资料，智能的问题就是 unsupervised pattern recognition in 4D，在理论上这很简单。
+
+但是这种做法忽略了智能系统和环境之间的互动，包括奖励等。 例如智能系统可以「玩弄」某些物件去了解它的特性，或者和人类交谈、问问题等。  所以有必要使用 reinforcement learning (RL) 的框架。
+
+在 RL 框架内，「当下的状态」$\vect{x}$ 是时间的函数。 RL 理论是相对於 state space trajectory 而发展的。  但 「4D 影片」是状态 $\vect{x}$ 在时间上累积而成的。
+
+\section{Desiderata}
+
+\begin{itemize}
+\item able to recognize patterns within time and across time
+\item hierarchical organization (of time or other attributes)
+\item cue-based retrieval
+\item mental state 分拆为一束命题的集合
+\item 
+\end{itemize}
+
+\section{简单设计}
 
 
 
