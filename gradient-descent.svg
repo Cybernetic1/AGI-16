@@ -82,8 +82,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="410.63725"
-     inkscape:cy="358.63466"
+     inkscape:cx="247.46066"
+     inkscape:cy="336.16444"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -456,8 +456,8 @@
            y="137.88091" /></flowRegion><flowPara
          id="flowPara4783-4-5"
          style="font-style:italic;font-family:Latin Modern Roman;-inkscape-font-specification:Latin Modern Roman">F*</flowPara></flowRoot>    <path
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 238.87968,732.16088 c -6.94423,-1.84683 -31.44423,-8.21008 -33.75936,-21.0974"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
+       d="m 238.87968,732.16088 c 0.0108,-3.45185 -25.29167,16.66766 -33.75936,-21.0974"
        id="path4858-6-5"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc"

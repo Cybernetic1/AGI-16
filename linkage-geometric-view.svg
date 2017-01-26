@@ -120,8 +120,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="355.21137"
-     inkscape:cy="388.3706"
+     inkscape:cx="405.62256"
+     inkscape:cy="412.3706"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -152,7 +152,10 @@
        xml:space="preserve"
        id="flowRoot4166"
        style="font-size:144px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#4d4d4d;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
-       transform="matrix(-0.21339412,-0.35787437,0.94895587,-0.56584549,-274.02942,1076.6888)"><flowRegion
+       transform="matrix(-0.21339412,-0.35787437,0.94895587,-0.56584549,-274.02942,1076.6888)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/linkage-geometric-view.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400"><flowRegion
          id="flowRegion4168"><rect
            id="rect4170"
            width="203"
@@ -165,7 +168,10 @@
        xml:space="preserve"
        id="flowRoot4695"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
-       transform="translate(260,-8)"><flowRegion
+       transform="translate(260,-8)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/linkage-geometric-view.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400"><flowRegion
          id="flowRegion4697"><rect
            id="rect4699"
            width="87"
@@ -179,7 +185,10 @@
        xml:space="preserve"
        id="flowRoot4695-6"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
-       transform="translate(445.49511,-432.45167)"><flowRegion
+       transform="translate(445.49511,-432.45167)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/linkage-geometric-view.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400"><flowRegion
          id="flowRegion4697-4"><rect
            id="rect4699-8"
            width="87"
@@ -193,7 +202,10 @@
        xml:space="preserve"
        id="flowRoot4695-1"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
-       transform="translate(638.49511,-220.45167)"><flowRegion
+       transform="translate(638.49511,-220.45167)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/linkage-geometric-view.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400"><flowRegion
          id="flowRegion4697-0"><rect
            id="rect4699-2"
            width="87"
@@ -208,12 +220,18 @@
        d="m 390.5,350.36218 c 32.01165,56.32168 59.49774,24.16892 104,99"
        id="path4758-7"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/linkage-geometric-view.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
     <flowRoot
        xml:space="preserve"
        id="flowRoot4778"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
-       transform="translate(248,174)"><flowRegion
+       transform="translate(248,174)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/linkage-geometric-view.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400"><flowRegion
          id="flowRegion4780"><rect
            id="rect4782"
            width="209"
@@ -232,7 +250,10 @@
        xml:space="preserve"
        id="flowRoot4778-3"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
-       transform="translate(180.26074,318.08613)"><flowRegion
+       transform="translate(180.26074,318.08613)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/linkage-geometric-view.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400"><flowRegion
          id="flowRegion4780-4"><rect
            id="rect4782-2"
            width="209"
@@ -252,12 +273,18 @@
        d="m 354.5,466.36218 c 13.01165,16.32168 35.49774,21.16892 45,47"
        id="path4758-5"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/linkage-geometric-view.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
     <flowRoot
        xml:space="preserve"
        id="flowRoot4867"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
-       transform="translate(-6,47)"><flowRegion
+       transform="translate(-6,47)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/linkage-geometric-view.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400"><flowRegion
          id="flowRegion4869"><rect
            id="rect4871"
            width="295"
@@ -273,18 +300,27 @@
        d="m 575,348.36218 169,47"
        id="path3052"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/linkage-geometric-view.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
     <path
        style="fill:#ff5555;stroke:#ff8080;stroke-width:3;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        d="m 371,533.36218 341,-209"
        id="path4636"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/linkage-geometric-view.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
     <flowRoot
        xml:space="preserve"
        id="flowRoot4660-6"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
-       transform="translate(388.99512,336.9453)"><flowRegion
+       transform="translate(388.99512,336.9453)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/linkage-geometric-view.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400"><flowRegion
          id="flowRegion4662-7"><rect
            id="rect4664-5"
            width="78"
@@ -296,28 +332,34 @@
        d="m 574,210.36218 0,138 -174,247"
        id="path3050"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccc" />
+       sodipodi:nodetypes="ccc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/linkage-geometric-view.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 502,479.11993 c 17.01165,33.32168 44.49774,8.16892 64,54"
        id="path4758-5-3"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/linkage-geometric-view.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
     <path
        style="fill:none;stroke:#ff8080;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-       d="m -13.08581,428.13634 260,-164.99999"
+       d="m -43.08581,428.13634 260,-164.99999"
        id="path4658-9"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow1Mstart);marker-end:url(#Arrow1Mend)"
-       d="m 94.91419,220.13635 0,137.99999 -143,207.99996"
+       d="m 64.91419,220.13635 0,137.99999 -143,207.99996"
        id="path3050-6"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Mend)"
-       d="m 95.91419,358.13634 107,28"
+       d="m 65.91419,358.13634 107,28"
        id="path3052-2"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
@@ -325,7 +367,7 @@
        xml:space="preserve"
        id="flowRoot4660-1"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
-       transform="translate(-14.08581,240.77417)"><flowRegion
+       transform="translate(-44.08581,240.77417)"><flowRegion
          id="flowRegion4662-2"><rect
            id="rect4664-7"
            width="78"
@@ -336,7 +378,7 @@
        xml:space="preserve"
        id="flowRoot4695-62"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
-       transform="translate(-193.08581,-32.22584)"><flowRegion
+       transform="translate(-223.08581,-32.22584)"><flowRegion
          id="flowRegion4697-6"><rect
            id="rect4699-1"
            width="87"
@@ -350,7 +392,7 @@
        xml:space="preserve"
        id="flowRoot4695-6-9"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
-       transform="translate(-33.5907,-422.67751)"><flowRegion
+       transform="translate(-63.5907,-422.67751)"><flowRegion
          id="flowRegion4697-4-2"><rect
            id="rect4699-8-0"
            width="87"
@@ -364,7 +406,7 @@
        xml:space="preserve"
        id="flowRoot4695-1-7"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
-       transform="translate(95.4093,-231.67751)"><flowRegion
+       transform="translate(65.4093,-231.67751)"><flowRegion
          id="flowRegion4697-0-5"><rect
            id="rect4699-2-9"
            width="87"
@@ -376,7 +418,7 @@
    style="font-size:65.00091553%;font-style:normal;baseline-shift:sub"
    id="flowSpan4703-9-2">2</flowSpan></flowPara></flowRoot>    <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m -21.08581,255.13635 c 12.01165,44.32168 72.49774,84.16891 78,130.99999"
+       d="m -51.08581,255.13635 c 12.01165,44.32168 72.49774,84.16891 78,130.99999"
        id="path4758-1"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
@@ -384,7 +426,7 @@
        xml:space="preserve"
        id="flowRoot4867-5"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
-       transform="translate(-462.08581,58.77416)"><flowRegion
+       transform="translate(-492.08581,58.77416)"><flowRegion
          id="flowRegion4869-4"><rect
            id="rect4871-7"
            width="295"
@@ -394,13 +436,13 @@
          id="flowPara4879-9">&quot;cylindrification&quot;</flowPara><flowPara
          id="flowPara4095">of the diagonal</flowPara></flowRoot>    <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 53.91419,476.8941 c 20.01165,17.3217 31.49774,27.1689 42,62"
+       d="m 23.91419,476.8941 c 20.01165,17.3217 31.49774,27.1689 42,62"
        id="path4758-5-3-3"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
     <path
-       style="opacity:0.43377483;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0"
-       d="m 67,343.36218 202,-135 -168,240.00002 -178,103 z"
+       style="opacity:0.43377482;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       d="m 37,343.36218 202,-135 -168,240.00002 -178,103 z"
        id="rect3285"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccc" />
@@ -408,7 +450,7 @@
        xml:space="preserve"
        id="flowRoot4750-8"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
-       transform="translate(-449.08581,167.77417)"><flowRegion
+       transform="translate(-479.08581,167.77417)"><flowRegion
          id="flowRegion4752-9"><rect
            id="rect4754-7"
            width="217"
@@ -430,12 +472,18 @@
        d="m 445.67471,334.67566 c 71.89417,6.37748 73.70567,-113.3281 213.0218,-54.39458 -115.87532,17.12443 -40.64001,65.26827 -59.05212,83.66491 -25.91072,25.88895 -77.27009,50.41248 23.70899,130.60555 C 449.0559,429.50856 427.90403,599.34918 427.90403,599.34918 435.48523,512.8531 394.13498,531.19374 416.49745,497.64619 441.89901,460.0614 565.8878,384.05817 445.67471,334.67566 z"
        id="rect3285-7"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccscccc" />
+       sodipodi:nodetypes="ccscccc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/linkage-geometric-view.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
     <flowRoot
        xml:space="preserve"
        id="flowRoot4660"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
-       transform="translate(465,231)"><flowRegion
+       transform="translate(465,231)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/linkage-geometric-view.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400"><flowRegion
          id="flowRegion4662"><rect
            id="rect4664"
            width="78"
@@ -447,24 +495,36 @@
        d="m 445.43198,334.40367 c 71.89417,6.37748 73.70567,-113.3281 213.0218,-54.39458 -115.87532,17.12443 -40.64001,65.26827 -59.05212,83.6649 -25.91072,25.88895 -77.27009,50.41248 23.70899,130.60551 C 448.81317,429.23656 427.6613,599.0772 427.6613,599.0772 c 7.5812,-86.4961 -33.76905,-68.1555 -11.40658,-101.703 25.40156,-37.5848 149.39035,-113.58803 29.17726,-162.97053 z"
        id="rect3285-7-2"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccscccc" />
+       sodipodi:nodetypes="ccscccc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/linkage-geometric-view.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
     <path
        style="fill:none;stroke:#ff8080;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0"
        d="m 414,446.36218 291,-180"
        id="path4658"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/linkage-geometric-view.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 451.27344,250.67082 c 12.01165,44.32168 71.49773,75.16891 76.99999,121.99999"
        id="path4758-1-4"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/linkage-geometric-view.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
     <flowRoot
        xml:space="preserve"
        id="flowRoot4750-8-5"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
-       transform="translate(23.273442,163.30864)"><flowRegion
+       transform="translate(23.273442,163.30864)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/linkage-geometric-view.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400"><flowRegion
          id="flowRegion4752-9-2"><rect
            id="rect4754-7-5"
            width="217"
@@ -485,7 +545,10 @@
        xml:space="preserve"
        id="flowRoot4867-1"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
-       transform="translate(138.79297,-267.59872)"><flowRegion
+       transform="translate(138.79297,-267.59872)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/linkage-geometric-view.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400"><flowRegion
          id="flowRegion4869-9"><rect
            id="rect4871-1"
            width="295"
@@ -498,7 +561,10 @@
        xml:space="preserve"
        id="flowRoot4867-1-9"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
-       transform="translate(140.64306,-305.22005)"><flowRegion
+       transform="translate(140.64306,-305.22005)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/linkage-geometric-view.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400"><flowRegion
          id="flowRegion4869-9-3"><rect
            id="rect4871-1-1"
            width="295"
@@ -527,6 +593,9 @@
        d="m 621.27752,230.8575 c -20.75424,-2.2016 -32.43601,19.26203 -24.93375,53.09311"
        id="path4758-5-7"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/linkage-geometric-view.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
   </g>
 </svg>

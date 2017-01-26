@@ -91,7 +91,8 @@
 
 
 \begin{abstract}
-Logic-based AI 和 connectionist AI 长久分裂，但作者最近发现可以建立两者之间的对应关系。逻辑的结构类似人类的自然语言，但大脑是用神经思考的。 机器学习的主要目标，是用 inductive bias 去加快学习速度，但这目标太空泛。 将逻辑结构加到神经结构之上，就增加了约束，亦即 inductive bias。
+本篇讨论经典逻辑 AI 和神经网络之间的一个对应关系，探讨二者的数学结构。 逻辑规则 (rules) 可以利用变量表达，对应於空间中的一些 diagonals，这种泛化方式比神经网络的基於 smooth function 和邻域的泛化更强。 有可能结合二者的结构，亦即增加 inductive bias，达到加快学习的目的。
+% 逻辑的结构类似人类的自然语言，但大脑是用神经思考的。 机器学习的主要目标，是用 inductive bias 去加快学习速度，但这目标太空泛。 将逻辑结构加到神经结构之上，就增加了约束，亦即 inductive bias。
 % 假设 $x$ 是思维状态。 在经典逻辑智能中，$x$ 是一束命题，代表当下的思考状况。 思考的过程就是不断重复进行推导: $x \vdash x' \vdash ...$。 在经典 AI 中这个作用是靠无数的逻辑 rules 来达成的。 但现在我们的做法是将 $x$ 放到向量空间中，再用一个 recurrent 神经网络来取代整个 rules base。
 \end{abstract}
 
@@ -274,7 +275,7 @@ x \cup \KB \sdtstile{}{} x'
 \item 命题的内部结构 (sub-propositional structure)
 \item 多个命题的集合（= 记忆的结构）
 \end{itemize}
-以下分述之。 {\color{red} 谓词逻辑的命题结构比较特别，所以我初时专注於分析它，但后来发现它的影响是次要的； 最重要的似乎是《记忆的结构》\cite{YanMemory}，这是我们的第3篇论文的题目。}
+以下分述之。 {\color{red} 谓词逻辑的命题结构比较特别，所以我初时专注於分析它。 但后来发现《记忆的结构》\cite{YanMemory} 更为基本，这是我们第3篇论文的题目。}
 
 % 在系统的状态方程 (\ref{eqn0}) 中，$\vect{F}$ 是可以自由变动的（$\vect{F}$ 代表被学习的知识），换句话说，整个系统几乎没有结构。 在无限维的泛函空间搜寻 $\vect{F}$ 是不切实际的，所以要引入逻辑 AI 的结构，令 $\vect{F}$ 的搜寻範围缩小。 在机器学习中这种做法叫 inductive bias，是加快学习的必经之路。
 
@@ -433,7 +434,7 @@ Now，我们关心的是怎样 ``combine'' 逻辑结构和神经网络结构。 
 \end{equation}
 所以 linkage 的复杂性变成了代数 formula 长度的复杂性。 
 
-「长度」本身没有不妥，但我们的目的是将逻辑式子嵌入到状态空间 $\vect{x}$ 里，这时 variable length 令人很头痛，但 fixed length 没有此问题。 
+「长度」本身没有不妥，但我们的目的是将逻辑式子嵌入到状态空间 $\vect{x}$ 里，这时 variable length 令人很头痛，但 fixed length 没有此问题。 如果硬要将 variable length 的式子嵌入到（有限维）向量空间中，\uline{似乎必须用到 \emp{fractal} 结构}（因为它有自相似性），同时需要设计一种新的神经网络，它先天性地有 fractal 结构在里面； 但这比较复杂，我没有在这方向 explore。
 
 \subsubsection{逻辑结构 summary}
 
@@ -441,29 +442,45 @@ Now，我们关心的是怎样 ``combine'' 逻辑结构和神经网络结构。 
 
 至於 \emp{$\lambda$-calculus}，它本质上就是一种处理 substitution 的方案。 而 \emp{combinatory logic} 和 $\lambda$-calculus 是等效的，后者消除了「变量」这概念，但取而代之的是式子的长度更复杂（比 relation algebra 更复杂）。
 
-(First-order) predicate logic 的代数化，可以由 Alfred Tarski 的 \emp{cylindric algebra} 给出。 Higher-order logic (HOL) 的代数化可以用 \emp{topoi theory} 给出。  HOL 等效於 untyped $\lambda$-calculus，而 typed $\lambda$-calculus (= type theory) 较为弱一点。  HOL 这个家族的特点，是 ``substitution of equal by equals''，这会令逻辑式子的长度增加。 但 predicate logic 的做法是用\textbf{实物} (objects) 来做替换，它不会增加式子的长度； 但将它代数化的结果是引入了 cylindrification、diagonal set 等概念，例如在 fig. (\ref{fig:diagonals}) 有 $y_1 \equiv x_2$ 这个 diagonal。
+(First-order) predicate logic 的代数化，可以由 Alfred Tarski 的 \emp{cylindric algebra} 给出：
+\begin{equation}
+\frac{\mbox{propositional calculus}}{\mbox{Boolean algebra}} = \frac{\mbox{predicate calculus}}{\mbox{cylindric algebra}}
+\end{equation}
+Higher-order logic (HOL) 的代数化可以用 \emp{topoi theory} 给出 \cite{Lambek1988} \cite{MacLane1992}：
+\begin{equation}
+\frac{\mbox{intuitionistic propositional calculus}}{\mbox{Heyting algebra}} = \frac{\mbox{higher-order logic}}{\mbox{elementary topos}}
+\end{equation}
+HOL 等效於 untyped $\lambda$-calculus，而 typed $\lambda$-calculus (= type theory) 较为弱一点。  HOL 这个家族的特点，是 ``substitution of equal by equals''，这会令逻辑式子的长度增加。 但 predicate logic 的做法是用\textbf{实物} (objects) 来做替换，它不会增加式子的长度； 但将它代数化的结果是引入了 cylindrification、diagonal set 等概念，例如在 fig. (\ref{fig:diagonals}) 有 $y_1 \equiv x_2$ 这个 diagonal。
 
 所谓 \textbf{cylindrification} 的意思是这样的：
 \begin{equation}
 \includegraphics[scale=0.8]{cylindrification.png}
 \end{equation}
-$X,Y,Z$ 代表 domains，即所有「人」或「物体」(objects) 的集合。 物体之间的\textbf{关系}是一些 regions（如蓝色那块平面代表 ``father'' 关系）。 两个关系之间的 ``and'' 就是就是那两个 cylinders 的 intersection，所以叫 cylindric algebra。 注意： 这里的 $(X,Y,Z)$ 不同於 fig. (\ref{fig:diagonals}) 的 $(x_1,x_2,y_1)$，前者是：
+$X,Y,Z$ 代表 domains，即所有「人」或「物体」(objects) 的集合。 物体之间的\textbf{关系}是一些 regions（如蓝色那块平面代表 ``father'' 关系）。 两个关系之间的 ``and'' 就是就是那两个 cylinders 的 intersection，所以叫 cylindric algebra。 注意： 这里的 $(X,Y,Z)$ 不同於 fig. (\ref{fig:diagonals}) 的 $(x_1,x_2,y_1)$，前者是3 个 domain 上的 2 个关系的交集：
 \begin{equation}
 \mbox{father} \wedge \mbox{father}
 \end{equation}
-这个关系，后者是 $x_1 = $ ``father'' 这个 predicate，而有：
+，后者是 $x_1 = $ ``father'' 这个 predicate 的内部结构：
 \begin{equation}
-\mbox{father}(x_2, \cdot) \mapsto \mbox{grandfather}(y_1, \cdot)
+\mbox{father}({\color{red} x_2}, \cdot) \wedge .... \mapsto \mbox{grandfather}({\color{red} y_1}, \cdot)
 \end{equation}
 是个 diagonal (即 linkage: $x_2 \equiv y_1$)。
 
-First-order logic (FOL) 处理 higher-order 关系时不方便，但我选择了 FOL 是因为那 linkage 结构用神经网络似乎较易处理。 至於 higher-order relations 则可以用「时间」来搭救（即\textbf{分开数个步骤}进行），以下是示意图：
+（这段的 references 太多，我有空再补上....）
+
+\subsubsection{用时间换取空间}
+
+上面说的是 substitution 在空间中的 linkage 结构。 但也可以将 substitution \textbf{分拆}成若干个简单的步骤。 方法是： 将某些内容放进记忆体中的「盒子」中，\uline{这些盒子充当 variables 的角色，也就是很具体地实现 substitution 的动作}。 换句话说，将\textbf{空间复杂性}转换成\textbf{时间复习性}\footnote{人脑的脑电波由 0.5 Hz 到 40 Hz 都有，我们感觉上瞬间的动作可能已经过了若干次迴路。}； 以下是示意图：
 \begin{equation}
 \includegraphics[scale=0.4]{unification-cartoon-2.jpg}
 \end{equation}
-X，Y 是状态 $\vect{x}$ 里面的「盒子」，可以充当 variables 的作用。 换句话说： 适当地利用记忆体，可以将 substitution \textbf{分拆}成若干简单的动作，将\textbf{空间复杂性}转换成\textbf{时间复习性}。 人脑的脑电波由 0.5 Hz 到 40 Hz 都有，我们感觉上瞬间的动作可能已经过了若干次迴路。 
+X，Y 是状态空间 $\mathbb{X} \ni \vect{x}$ 里面的「盒子」 = variables。
 
-（这段的 references 太多，我有空再补上....）
+先前我说的 linkage 结构，放在有限维向量空间比较方便，但它是 first-order logic，处理 higher-order 关系时有很大困难。 Higher-order relations 似乎还是要用这种分拆步骤的方法解决。
+
+\subsection{结论}
+
+如上所述，适当地利用记忆体，可以不理会 linkage 的空间结构。 我在这篇论文中 elucidate 了逻辑的空间结构，先前仍是一个谜，妨碍思考，但现在有了比较清晰的理解，算是一种有益的贡献吧。 
 
 % ====================================================================================
 \begin{comment}
