@@ -14,7 +14,7 @@
 % \usepackage{turnstile}		% longer turnstiles
 \usepackage{wasysym}			% smileys
 \usepackage[normalem]{ulem}	% underline with line breaks: /uline
-% \usepackage{cancel}			% center "not" line for "broken heart"
+\usepackage{hyperref}		% refs, links become clickable
 
 \usepackage{geometry}		% change paper size
 \geometry{
@@ -270,6 +270,16 @@ $\vect{f}$ 就是我们的神经网络。 $\vect{f}$ 的输入是：
 
 \section{简单设计}
 
+\begin{equation}
+\includegraphics[scale=0.75]{memory-module.png}
+\end{equation}
+
+\begin{itemize}
+\item 记忆应该如何组织？
+\item retrieval 根据的是什么？ \\
+应该是 relevance。 注意： rules 在 $\KB$ 里，facts 在 memory 里。 这个 config 要保持吗？
+\item 
+\end{itemize}
 
 
 % ====================================================================================

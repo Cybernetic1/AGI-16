@@ -1,21 +1,24 @@
 \documentclass[orivec]{llncs}
 \usepackage{graphicx}
 \usepackage{amsmath}		% for "cases"
-\usepackage{amsfonts}		% for frakur fonts
-\usepackage{mathrsfs}		% for curly "E" error symbol
+\usepackage{amsfonts}	% for frakur fonts
+\usepackage{mathrsfs}	% for curly "E" error symbol
 \usepackage{float}
-\usepackage{tcolorbox}		% for wrapping example in color box
+\usepackage{tcolorbox}	% for wrapping example in color box
 \usepackage{wrapfig}		% wrap figure beside text, used in example
 \usepackage{tikz-cd}		% commutative diagrams
 % \usepackage{amsfonts}
 \usepackage{amssymb}		% for \multimap, \updownarrow, \bigstar
 \usepackage{sectsty}		% change section color
+\usepackage{hyperref}	% refs, links become clickable
+\usepackage[normalem]{ulem} 	% underline unbroken with \uline
 
 % *************** Delete when not using Chinese or colors **********************
-\usepackage{xeCJK}
-\setCJKmainfont[BoldFont=SimHei,ItalicFont=KaiTi]{SimSun}
+% \usepackage{xeCJK}
+% \setCJKmainfont[BoldFont=SimHei,ItalicFont=KaiTi]{SimSun}
 \usepackage{color}
-\newcommand{\emp}[1]{\textbf{\textcolor{blue}{#1}}}
+%\newcommand{\emp}[1]{\textbf{\textcolor{blue}{#1}}}
+\newcommand{\emp}[1]{\textbf{#1}}
 
 \sectionfont{\color{blue}} 
 \subsectionfont{\color{blue}} 
@@ -32,6 +35,8 @@
   vratio=2:3,      % not vertically centered
 }
 \usepackage[fontsize=13pt]{scrextend}
+
+\newcommand{\tikzmark}[1]{\tikz[overlay,remember picture] \node (#1) {};}
 
 \newcommand{\vect}[1]{\boldsymbol{#1}}
 \newcommand*\sigmoid{\vcenter{\hbox{\includegraphics{sigmoid.png}}}}
@@ -54,8 +59,8 @@
 \savebox{\MyName}{\includegraphics[scale=0.6]{YKY.png}}
 
 \title{Wandering in the Labyrinth of Thinking\\
-\normalsize{-- a cognitive architecture combining reinforcement learning\\
-and deep learning}}
+\normalsize{-- a minimalist cognitive architecture combining\\
+reinforcement learning and deep learning}}
 \titlerunning{Wandering in the Maze of Thinking}
 \author{\usebox{\MyName} (King-Yin Yan)
 % \\ \footnotesize{General.Intelligence@Gmail.com}
@@ -75,17 +80,21 @@ Juan Carlos Kuri Pinto
 % \setlength{\parskip}{2.8ex}
 
 \begin{abstract}
-% 介绍一个基於 \textbf{增强学习} 和 \textbf{深度学习} 的极简约的 cognitive architecture，它在数学上是一个Hamiltonian 系统，而其 Lagrangian 对应於智能系统的「奖励」或「欲望」的价值。 经典逻辑 AI 的技巧可以搬到这个 setting 之下，而连续时间化之后，可以用上微分几何的技巧。 
-Introducing a minimalist cognitive architecture based on DRL (deep reinforcement learning).  Mathematically it is a Hamiltonian system, whose Lagrangian corresponds to the value of ``desires'' or ``rewards'' in the intelligent system.  Techniques of classical logic-based AI can be transferred to this setting.  Its continuous limit can be described by differential geometry.  The old-fashioned logic-based knowledge representation with discrete propositions is abandoned in favor of a representation induced by deep neural learning.
+% 这篇是背景，介绍一个基於 \textbf{增强学习} 和 \textbf{深度学习} 的极简约的 cognitive architecture，它在数学上是一个Hamiltonian 系统，而其 Lagrangian 对应於智能系统的「奖励」或「欲望」的价值。 经典逻辑 AI 的技巧可以搬到这个 setting 之下，而连续时间化之后，可以用上微分几何的技巧。 传统的「逻辑 AI 知识表述」被新的表述法取代，后者的结构是由神经网络的深度学习「诱导」出来的。
+This is the first of a series of papers, introducing a minimalist cognitive architecture based on reinforcement learning and deep learning.  The system consists of an iterative function whose role is analogous to the consequence operator ($\vdash$) in logic.  Mathematically it is a Hamiltonian system, whose Lagrangian corresponds to the value of ``desires'' or ``rewards'' in the intelligent system.  Techniques of classical logic-based AI can be transferred to the neural setting, the topic of the 2nd paper.
+%Its continuous limit can be described by differential geometry.  The old-fashioned logic-based knowledge representation with discrete propositions is abandoned in favor of a representation induced by deep neural learning.
 % The problem of general intelligence can be described and solved in the logic-based AI paradigm, but the main obstacle is that learning is too slow.  The logic-based knowledge representation with discrete propositions is abandoned in favor of a neural-based ``amorphous'' representation induced from the top down, using a deep neural network (DNN).  The DNN acts iteratively on a state space (the ``mental state''), forming a dynamical system.  This system is in turn controlled by reinforcement learning, ``navigating'' the space of mental states as in a maze.
 \end{abstract}
 
 %本文介绍一些（非原创的）已知理论，然后指出一些新的研究方向。
-The first part of this paper introduces some existing theory, and then speculates on new research directions.
+We introduce the basic architecture in \S\ref{sec:0}, only this section and the basics of reinforcement learning (eg. see my tutorial \cite{YanRLtutorial}) are required to understand the rest of our theory.  The ``Hamiltonian stuff'' is knowledge from existing theory and not our original contribution.
+% The first part of this paper introduces some existing theory, and then speculates on new research directions.
 
+\setcounter{section}{-1}
 \section{Main idea}
+\label{sec:0}
 
-The \textbf{metaphor} here is that of reinforcement learning controlling an autonomous agent to navigate the maze of ``thoughts space'':
+The \textbf{metaphor} here is that of reinforcement learning controlling an autonomous agent to navigate the maze of ``thoughts space'', seeking the optimal path:
 \begin{equation}
 \includegraphics[scale=0.5]{maze-metaphor.png}
 \end{equation}
@@ -106,16 +115,24 @@ For example, a mental state could be the following set of propositions:
 
 Thinking is the process of \emp{transitioning} from one mental state to another.  Even as I am speaking now, I use my mental state to keep track of where I am at within the sentence's syntax, so that I can structure sentences grammatically.
 
-By representing a cognitive state as a vector $\vec{x} \in X$ where $X$ is the cognitive state-space, the reasoning operator $R$ as an \emp{iterative map} $X \rightarrow X$, we would have at disposal all the tools available in vector space such as:
-
+The following 3 theories are actually synonymous:
 \begin{itemize}
-\item numerical optimization (eg gradient descent)
-\item differential equations governing time evolution
-\item dynamical systems theory, control theory, dynamic programming, reinforcement learning
+\item in artificial intelligence, \textbf{reinforcement learning (RL)}
+\item in operations research, \textbf{dynamic programming}
+\item in modern control theory, the \textbf{state space} description
+\end{itemize}
+
+%\begin{itemize}
+%\item numerical optimization (eg gradient descent)
+%\item differential equations governing time evolution
+%\item dynamical systems theory, control theory, dynamic programming, reinforcement learning
 % \item Lie algebra and $C^*$-algebra of continuous operators
 % \item matrix theory, iteration and fixed-point theory
-\item neural networks and deep learning ... etc.
-\end{itemize}
+%\item neural networks and deep learning ... etc.
+%\end{itemize}
+
+%=======================================================================================
+\begin{comment}
 
 \subsection{Related work}
 
@@ -127,236 +144,106 @@ This is the cartoon version of our architecture:
 \includegraphics[scale=0.5]{architecture-cartoon.png}
 \end{equation}
 
-\section{Logic-based AI (LBAI)}
+%=======================================================================================
+\end{comment}
 
-Main points:
-\begin{itemize}
-\item We would not directly implment logic-based AI, but it serves as a \textit{backdrop} for understanding what are the problems of general AI.
-\item In this paper we would jump back and forth between the logic-based view and the dynamical state-space view.  Knowledge of LBAI is essential to understanding ideas in this paper.
-\end{itemize}
+\section{Control theory / dynamical systems theory}
 
-% Having worked on LBAI for many years, I tend to look back to LBAI to understand a problem when designing an AI system.   因此我的思路喜欢将新问题还原到逻辑 AI 那边去理解，但实际上我提倡的解决办法不是靠经典逻辑，甚至不是 symbolic 的。  但在这篇文章我还是会经常跳回到逻辑 AI 去方便理解。
+The cognitive state is a vector $\vect{x} \in \mathbb{X}$ where $\mathbb{X}$ is the space of all possible cognitive states, the reasoning operator $\vect{F}$ is an \textbf{endomorphism} (an \textbf{iterative map}) $\mathbb{X} \rightarrow \mathbb{X}$.
 
-It is feasible to use mathematical logic to emulate human thinking, an approach pioneered by John McCarthy (1927-2011).  We have 3 basic operations: deduction, abduction, induction;  For details one can refer to 《Computational logic and human thinking》by Robert Kowalski, 2011. We would not waste time to debate whether LBAI is an adequate model of human thinking;  This paper assumes it as the point of departure.  It is worth mentioning though, that Kowalski is one of the researchers who laid the theoretical foundations of logic programming, especially Prolog.
-
-In classical logic-based AI, ``thinking'' is achieved by steps like this:
+Mathematically this is a \emp{dynamical system} that can be defined by:
 \begin{eqnarray}
-\mbox{premise} & \vdash & \mbox{conclusion} \\
-\boxed{\mbox{it was raining this morning}} & \vdash & \boxed{\mbox{grass is wet}}
+\boxed{\mbox{discrete time}} \quad \quad & \vect{x}_{t+1} = \vect{F}(\vect{x}_t) \\
+\boxed{\mbox{continuous time}} \quad \quad & \dot{\vect{x}} = \vect{f}(\vect{x}) \label{eqn1}
 \end{eqnarray}
-That is to say: from some \emp{propositions} we deduce other propositions.
+%($\vect{F}$ is implemented as the deep learning network in our approach.)
 
-Deduction requires some special propositions known as \emp{rules}, these are propositions containing \emp{variables} such as ``$x$'':
+In our cognitive architecture design, $\vect{F}$ is implemented as a deep neural network (the word ``deep'' simply means ``many layers''):
 \begin{equation}
-\boxed{\mbox{it is raining at location $x$}} \wedge \boxed{\mbox{$x$ is uncovered}} \vdash \boxed{\mbox{location $x$ is wet}}
-\end{equation}
-Rules are like the ``fuel'' for an inference engine;  The engine cannot run without fuel.
-
-Note: The $x$ inside a proposition is like a ``hole'' in it.  We could use \emp{substitution} to place some concrete \emp{objects} into such holes, to make the proposition \textit{complete}.  This is a form of \emp{sub-propositional} structure, and one way to express it is via \emp{predicate logic}.  We don't need to concern with details right now.
-
-LBAI can be viewed as the compression of a world model into a knowledge-base (KB) of logic formulas (that consists of \textbf{facts} as well as \textbf{rules}):
-\begin{equation}
-\includegraphics[scale=0.5]{world-model-compression.png}
-\end{equation}
-The world model is \textit{generated} combinatorially from the set of logic formulas, vaguely reminiscent of a ``basis'' in vector space.  The generative process in logic is much more complicated, contributing to its high \textit{compressive} ability on the one hand, and the \textit{complexity} of learning such formulas on the other hand.
-
-\subsection{Bottom-up vs top-down representations}
-
-In LBAI the knowledge representation structure is built (\textit{fixed}) from the bottom up (For example, predicate symbols and constant symbols build up propositions, and sets of propositions form theories):
-%\begin{equation}
-%\mbox{words } \triangleright \mbox{ sentences } \triangleright \mbox{ logical form } \triangleright \mbox{ logical KB}
-%\end{equation}
-%Thus the structure of the KB is \textit{fixed} by the human designer. % This rigidity is perhaps why learning in logic-based systems is slow.
-
-% In natural language, an idea can be expressed as a concatenation of words, for example:\\
-% And it is just a short jump from word concatenations to symbolic logic.  But this jump may land us into a logic-based ``tar pit'', in which everything is theoretically possible, but often too slow in practice.
-
-%It is just a short jump from the expression of ideas as word concatenations to logical form as linear (or tree-like, or graph-like) compositions of symbols:
-\begin{equation}
-\includegraphics[scale=0.5]{ideas-vs-logical-form.png}
-\end{equation}
-but is it valid (or profitable) to assume that our mental representations are \textit{isomorphic} to such logical structures?  Or drastically different?
-
-The most serious disadvantage of bottom-up representations lies in the difference between \emp{syntactic distance} and \emp{semantic distance}.  Suppose propositions are built up from an ``alphabet'' of atomic concepts, through the use of a multiplication operation such as tensor product.  We embed atomic concepts into a vector space, in the manner of the Word2Vec algorithm.  Then, using the tensor product, propositions (ie sentences) will be mapped to positions in the tensor-product vector space.  Thus we can measure the \textbf{distance} between any two propositions.  However, this is a \textbf{syntactic} distance.  For example, \textit{``Don't judge a book by its cover''} and \textit{``Clothes do not make the man''} are superficially very different (syntactically distant) but are semantically close.  In a good learning system we need to \textbf{generalize} according to semantic distance.  The embedding of bottom-up representations usually gives us a discrete space with fractal structure, and the metric defined on such a space is always syntactic.
-
-Humans are good at designing symbolic structures, but we don't know how to design \textit{neural} representations which are more or less opaque to us.
-Perhaps we could use a neural network acting recurrently on the state vector to \emp{induce} an internal representation of mental space.  ``\textit{Induced by what},'' you ask?  By the very structure of the neural network itself.  In other words, forcing a neural network to \textit{approximate} the ideal operator $R^*$.
-
-From an abstract point of view, we require:
-\begin{itemize}
-\item $R$ be an endomorphism: $X \rightarrow X$
-\item $R$ has a learning algorithm: $R \stackrel{A}{\longmapsto} R^*$
-\end{itemize}
-
-$R$ would contain all the knowledge of the KB, so we expect it to be ``large'' (eg. having a huge number of parameters).  We also desire $R$ to possess a \emp{hierarchical} structure because hierarchies are computationally very efficient.  A multi-layer perceptron (MLP) seems to be a good candidate, as it is just a bunch of numbers (weight matrices $W$) interleaved by non-linear activation functions:
-\begin{equation}
-R(\vect{x}) = \sigmoid(W_1 \sigmoid(W_2 ... \sigmoid(W_L \vect{x} )))
-\end{equation}
-where $L$ is the number of layers.  MLPs would be our starting point to explore more design options.
-
-In 1991 Siegelmann and Sontag \cite{Siegelmann1991} proved that recurrent neural networks (RNNs) can emulate any Turing machine.  In 1993 James Lo \cite{Lo1993} proved that RNNs can universally approximate any non-linear dynamical system.
-
-The idea of $R$ as an operator acting on the state is inspired by the ``consequence operator'' in logic, usually denoted as $\mbox{Cn}$:
-\begin{equation}
-\mbox{Cn}(\Gamma) = \{ \mbox{ set of propositions that entails from } \Gamma \; \}
-\end{equation}
-but the function of $R$ can be broader than logical entailment.  We could use $R$ to perform the following functions which are central to LBAI:
-\begin{itemize}
-\item \emp{deduction} -- forward- and backward-chaining
-\item \emp{abduction} -- finding explanations
-\item \emp{inductive learning}
-\end{itemize}
-
-Below, we try to formalize the structure of logic from 2 perspectives:
-\begin{itemize}
-\item Static structure (formulas built from atomic concepts, logic operators, etc)
-\item Dynamic structure (mechanisms of proof, inference, etc)
-\end{itemize}
-
-\subsection{Static structure of logic}
-
-\begin{itemize}
-\item \emp{truth values} (eg. P(rain tomorrow) = 0.7)
-\item \emp{propositional structure} (eg. conjunction: $A \wedge B$) 
-\item \emp{sub-propositional structure} (eg. predication: loves(john, mary) )
-\item \emp{subsumption structure} (eg. $\mbox{dog} \subseteq \mbox{animal}$)
-\end{itemize}
-
-These structures can be ``transplanted'' to the vector space $X$ via:
-\begin{itemize}
-\item \emp{truth values: } an extra dimension conveying the ``strength'' of states
-\item \emp{propositional structure: } eg. conjunction as vector addition,
-\begin{equation}
-A \wedge B \quad \Leftrightarrow \quad \vect{x}_A + \vect{x}_B + ...
-\end{equation}
-but we may have to avoid linear dependencies (``clashing'') such as:
-\begin{equation}
-\vect{x}_3 = a_1 \vect{x}_1 + a_2 \vect{x}_2
-\end{equation}
-This would force the vector space dimension to become very high.
-\item \emp{sub-propositional structure: } eg. tensor products as composition of concept atoms:
-\begin{equation}
-\mbox{loves(john, pete)} \quad \Leftrightarrow \quad \overrightarrow{john} \otimes \overrightarrow{love} \otimes \overrightarrow{pete}
-\end{equation}
-\item \emp{subsumption structure: } eg. define the \textbf{positive cone} $C$ such that
-\begin{equation}
-\mbox{animal} \supseteq \mbox{dog} \quad \Leftrightarrow \quad \overrightarrow{animal} - \overrightarrow{dog} \in C
-\end{equation}
-\end{itemize}
-
-But the more logical structure we add to $X$, the more it will resemble logic, and this whole exercise becomes pointless.  Remember our original goal is to try something different from logic, by \textit{relaxing} what defines a logical structure.  So we would selectively add features to $X$.
-
-\subsection{Dynamic structure of logic}
-
-{\color{green}@Andrew: This is where I want to formalize a ``logical system''.  Particularly, the state $X$ has internal structure that I have ignored so far:  $X$ should be a \textbf{set} of propositions.  During deduction, we need to \textbf{select} a few propositions from $X$ and try to \textbf{match} them with existing logic rules (this is the job of the famous \textbf{unifcation} algorithm in logical AI systems).  The selection is part of the control variable $u$ (see below).  We need to decompose the vector $X$ into some analogue of ``propositions'', but I don't know how to do it yet.  Perhaps elucidating the algebraic form of the logic system will help us design the ``vectorization'' scheme.
-}
-
-The 2 ``pillar'' algorithms for deduction in LBAI are:
-
-\begin{itemize}
-\item \emp{Resolution}:  deducing new propositions (conclusions) from existing ones (premises) \\
-\begin{equation}
-\includegraphics[scale=0.5]{resolution-cartoon.jpg}
-\end{equation}
-\item \emp{Unificaiton}:  matching a proposition with variables (``holes'') with grounded (``without holes'') propositions \\
-\begin{equation}
-\includegraphics[scale=0.5]{unification-cartoon.jpg}
-\end{equation}
-\end{itemize}
-
-The algebraization of first-order predicate logic (a logic whose propositions can have internal variables) is a difficult subject, potentially involving Tarski's cylindrical algebra which the author is unfamiliar with.
-
-Here we introduce a crucial idea: using an \textbf{external memory} to manage the problem of \textbf{variable binding}.  Recall that a \textbf{Turing machine} is just a finite state machine equipped with a \textbf{memory tape};  It could be said that the memory tape is what enables the machine to have Turing-complete computing power.  Similarly, allowing a \textbf{propositional logic} to use an external memory storage for intermediate results, enables it to have the same expressive power as \textbf{predicate logic}.
-
-Below are 2 cartoons illustrating how \textbf{resolution} and \textbf{unification} are performed with the aid of \textbf{external memory}:
-
-{\color{green}@Andrew: I want to formalize these operations.  It may be more important than formalizing the \textbf{static} properties of logic.}
-
-\begin{equation}
-\includegraphics[scale=0.3]{resolution-cartoon-2.jpg}
+\includegraphics[scale=0.7]{genifer-model-00.png}
 \end{equation}
 
-\begin{equation}
-\includegraphics[scale=0.3]{unification-cartoon-2.jpg}
-\end{equation}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Example 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{tcolorbox}[width=\textwidth,colback={white},title={\centering \emp{Example 1: } primary-school arithmetic},colbacktitle=white,coltitle=black]
-
-A recurrent neural network is a \textit{much more powerful} learning machine than a feed-forward network, even if they look the same superficially.
-
-\begin{wrapfigure}{l}{2cm}
-\includegraphics[scale=0.6]{elementary-arithmetic.png}
-\end{wrapfigure} 
-
-As an example, consider the way we perform 2-digit subtraction in primary school.  This is done in two steps, and we put a dot on paper to mark ``carry-over''.
-
-The use of the paper is analogous to the ``tape'' in a Turing machine -- the ability to use short-term memory allows us to perform much more complex mental tasks.
-
-We did a simple experiment to train a neural network to perform primary-school subtraction.  The operator is learned easily if we train the two steps \textit{separately}.  The challenge is to find an algorithm that can learn \emp{multi-step} operations by itself.
-
-\end{tcolorbox}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Example 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{tcolorbox}[width=\textwidth,colback={white},title={\centering \emp{Example 2: } variable binding in predicate logic},colbacktitle=white,coltitle=black]
-
-The following formula in predicate logic defines the ``grandfather'' relation:
-
-\begin{equation}
-\includegraphics[scale=0.25]{linkage-in-logic-variables.jpg}
-\end{equation}
-
-We did a simple experiment to train a neural network to perform primary-school subtraction.  The operator is learned easily if we train the two steps \textit{separately}.  The challenge is to find an algorithm that can learn \emp{multi-step} operations by itself.
-
-\end{tcolorbox}  
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Control theory / reinforcement learning}
-
-{\color{green}@Andrew: as you will see, the control theory part is essentially separated from the ``logic'' aspects.}
-
-Main points:
-\begin{itemize}
-\item Intelligence is decomposed into \textbf{thinking} and \textbf{learning}.
-\item \textbf{Thinking} is governed by control theory (finding the best trajectory in ``thoughts space'') under the contraints of correct reasoning, ie, knowledge.
-\item The iterative ``thinking operator'' is implemented as a deep-\textbf{learning} neural network (DNN).  This DNN \textit{contrains} the dynamics of thinking, and it represents the totality of \textit{knowledge} in the system.
-\end{itemize}
-
-\begin{equation}
-\includegraphics[scale=0.5]{genifer-model-0.png}
-\end{equation}
-
-\subsection{What is control theory?}
-
-A \emp{dynamical system} can be defined by:
+A \textbf{neural network} is a non-linear operator with many parameters (called ``weights''):
 \begin{eqnarray}
-\mbox{discrete time:} \quad \quad & \vect{x}_{t+1} = \vect{F}(\vect{x}_t) \\
-\mbox{continuous time:} \quad \quad & \dot{\vect{x}} = \vect{f}(\vect{x}) \label{eqn1}
+\mbox{\footnotesize each layer's } \tikzmark{ww} \mbox{\footnotesize \textbf{weight} matrix} \quad \quad \mbox{\footnotesize total \# of layers} \tikzmark{LL} \nonumber \\
+\nonumber \\
+F(\vect{x}) = \sigmoid(W_1 \tikzmark{wa} \sigmoid(W_2 \tikzmark{wb} ... \sigmoid( W_L \tikzmark{wc} \tikzmark{L} \; \vect{x} )))
+\begin{tikzpicture}[overlay,remember picture]
+  \draw[-, shorten <=26pt, transform canvas={shift={(-10pt,10pt)}}] (ww.center) to (wa.center);
+  \draw[-, shorten <=38pt, transform canvas={shift={(-10pt,10pt)}}] (ww.center) to (wb.center);
+  \draw[-, shorten <=46pt, transform canvas={shift={(-10pt,10pt)}}] (ww.center) to (wc.center);
+  \draw (LL.center) +(-15pt,-3pt) -- ([shift={(-2pt,6pt)}]L.center);
+\end{tikzpicture}
 \end{eqnarray}
-($\vect{F}$ is implemented as the deep learning network in our approach.)
+$\sigmoid$ is a sigmoid-shaped non-linear function, applied component-wise to the vectors.
 
-A \emp{control system} can be defined as (sometimes I mix with continuous-time notation for the sake of simplicity):
+If continuous-time, $\vect{f}$ can also be implemented as neural network, but $\vect{f}$ and $\vect{F}$ are different in nature, they are related by: $\vect{x}(t + 1) = \vect{F}(\vect{x}(t))$.  For ease of discussion, sometimes I mix discrete-time and continuous-time notations.
+
+A \emp{control system} is a dynamical system added with the control vector $\vect{u}(t)$:
 \begin{equation}
 \dot{\vect{x}}(t) = f(\vect{x}(t), \vect{u}(t), t)
 \end{equation}
-where $\vect{u}(t)$ is the \emp{control vector}.  The goal of control theory is to find the optimal $\vect{u}^*(t)$ function, such that the system moves from the initial state $\vect{x}_0$ to the terminal state $\vect{x_\bot}$.
+The goal of control theory is to find the optimal $\vect{u}^*(t)$ function, such that the system moves from the initial state $\vect{x}_0$ to the terminal state $\vect{x_\bot}$.
 
-\subsection{What is reinforcement learning?}
+A typical control-theory problem is described by:
+\begin{eqnarray}
+\boxed{\mbox{state equation}} \quad & \dot{\vect{x}}(t) = \vect{f}[\vect{x}(t), \vect{u}(t), t] \label{eqn1}\\
+\boxed{\mbox{boundary condition}} \quad & \vect{x}(t_0) = \vect{x}_0 \,,\, \vect{x}(t_\bot) = \vect{x}_\bot \\
+\boxed{\mbox{objective function}} \quad & J = \int_{t_0}^{t_\bot} L[\vect{x}(t), \vect{u}(t), t] dt
+\end{eqnarray}
+and we seek the optimal control $\vect{u}^*(t)$.
 
-\textbf{Reinforcement learning} is synonymous with \textbf{dynamic programming}, which is also the main content of modern \textbf{control theory} with the state-space description.
-
-The goal of \textbf{reinforcement learning} is to learn the \emp{policy function}:
+According to control theory, the condition for \textbf{optimal path} is given by the Hamilton-Jacobi equation:
 \begin{equation}
-\begin{tikzcd}[]
-\mbox{policy : ~~state} \arrow[r, mapsto, "\scalebox{0.8}{action}"] & \mbox{state'}
-\end{tikzcd}
+\boxed{\mbox{Hamilton-Jacobi equation}} \quad
+0 = \frac{\partial J^*}{\partial t} + \min_u H
 \end{equation}
-when we are given the \emp{state space}, \emp{action space}, and \emp{reward function}:
+%\frac{d}{dt} V(x,t) = \min_u \{ C(x,u) + \langle \nabla V(x,t), f(x,u) \rangle \} 
+
+After the next section I will explain the meaning of $J$, $L$ and $H$.
+
+\subsection{Reinforcement learning / dynamic programming}
+
+\textbf{Reinforcement learning} is a branch of machine learning that is particularly suitable for controlling an \textbf{autonomous agent} who interacts with an \textbf{environment}.  It uses \textbf{sensory perception} and \textbf{rewards} to continually modify its \textbf{behavior}.  The exemplary image you should invoke in mind is that of a small insect that navigates a maze looking for food and avoiding predators:  $\vcenter{\hbox{\includegraphics[scale=0.5]{cockroach.png}}}$
+
+A reinforcement learning system consists of a 4-tuple:
 \begin{equation}
-\mbox{reward}: \boxed{\mbox{state}} \times \boxed{\mbox{action}} \rightarrow \mathbb{R}
+\boxed{\mbox{reinforcement learning system}} \; = (\vect{x} \in \mbox{States}, \vect{u} \in \mbox{Actions}, R = \mbox{Rewards}, \pi = \mbox{Policy})
 \end{equation}
-The action $a$ is the same notion as the control variable $u$ in control theory.
+For details readers may see my \textit{Reinforcement learning tutorial} \cite{YanRLtutorial}.
+
+%is synonymous with \textbf{dynamic programming}, which is also the main content of modern \textbf{control theory} with the state-space description.
+
+$U$ is the total rewards of a sequence of actions:
+%\begin{equation}
+%\boxed{\mbox{total value of state 0}} \; U(\vect{x}_0) = \sum_t \; \boxed{\mbox{reward at time t}} \; R(\vect{x}_t, \vect{u}_t)
+%\end{equation}
+\begin{eqnarray}
+\mbox{\footnotesize total value of state 0} \tikzmark{uu} & \quad \quad \quad & \mbox{\footnotesize reward at time $t$} \tikzmark{rr} \nonumber \\
+\nonumber \\
+\tikzmark{UU} U(\vect{x}_0) & = & \sum_t \; \tikzmark{RR} R(\vect{x}_t, \vect{u}_t)
+\begin{tikzpicture}[overlay,remember picture]
+  \draw (uu.center) +(-50pt,-3pt) -- ([shift={(4pt,12pt)}]UU.center);
+  \draw (rr.center) +(-35pt,-3pt) -- ([shift={(8pt,12pt)}]RR.center);
+\end{tikzpicture}
+\end{eqnarray}
+For example, the value of playing a chess move is not just the immediate reward of that move, but includes the consequences of playing that move (eg, greedily taking a pawn now may lead to checkmate 10 moves later).  Or, faced with delicious food, some people may choose not to eat, for fear of getting fat.
+
+%The goal of \textbf{reinforcement learning} is to learn the \emp{policy function}:
+%\begin{equation}
+%\begin{tikzcd}[]
+%\mbox{policy : ~~state} \arrow[r, mapsto, "\scalebox{0.8}{action}"] & \mbox{state'}
+%\end{tikzcd}
+%\end{equation}
+%when we are given the \emp{state space}, \emp{action space}, and \emp{reward function}:
+%\begin{equation}
+%\mbox{reward}: \boxed{\mbox{state}} \times \boxed{\mbox{action}} \rightarrow \mathbb{R}
+%\end{equation}
+%The action $a$ is the same notion as the control variable $u$ in control theory.
+
+The central idea of \textbf{Dynamic programming} is the \textbf{Bellman optimality condition}. Richard Bellman in 1953 proposed this formula, while he was working at RAND corporation, dealing with operations research problems.
+
+The \textbf{Bellman condition} says:  ``\uline{if we cut off a tiny bit from the endpoint of the optimal path, the remaining path is still an optimal path between the new endpoints}.''
 
 The \emp{Bellman equation} governs reinforcement learning just as in control theory:
 \begin{eqnarray}
@@ -373,6 +260,12 @@ Conceptually, $U$ is the \textbf{integration} of instantaneous rewards over time
 \begin{equation}
 \boxed{\mbox{utility, or value} U} = \int \boxed{\mbox{reward} R} \,dt
 \end{equation}
+
+\begin{itemize}
+\item Intelligence is decomposed into \textbf{thinking} and \textbf{learning}.
+\item \textbf{Thinking} is governed by control theory (finding the best trajectory in ``thoughts space'') under the contraints of correct reasoning, ie, knowledge.
+\item The iterative ``thinking operator'' is implemented as a deep-\textbf{learning} neural network (DNN).  This DNN \textit{contrains} the dynamics of thinking, and it represents the totality of \textit{knowledge} in the system.
+\end{itemize}
 
 \subsection{Connection with Hamiltonian mechanics}
 

@@ -10,7 +10,7 @@
 \usepackage{amssymb}			% for \multimap, \updownarrow, \bigstar
 \usepackage{sectsty}			% change section color
 \usepackage{turnstile}		% longer turnstiles
-\usepackage{hyperref}		% include web link for RL sample code
+\usepackage{hyperref}		% refs, links become clickable
 
 \usepackage{geometry}		% change paper size
 \geometry{
@@ -82,7 +82,7 @@ Juan Carlos Kuri Pinto
 \setlength{\parskip}{2.8ex}
 
 \begin{abstract}
-介绍一个基於 \textbf{增强学习} 和 \textbf{深度学习} 的极简约的 cognitive architecture，它在数学上是一个Hamiltonian 系统，而其 Lagrangian 对应於智能系统的「奖励」或「欲望」的价值。 经典逻辑 AI 的技巧可以搬到这个 setting 之下，而连续时间化之后，可以用上微分几何的技巧。 传统的「逻辑 AI 知识表述」被新的表述法取代，后者的结构是由神经网络的深度学习「诱导」出来的。
+这篇是背景，介绍一个基於 \textbf{增强学习} 和 \textbf{深度学习} 的极简约的 cognitive architecture，它在数学上是一个Hamiltonian 系统，而其 Lagrangian 对应於智能系统的「奖励」或「欲望」的价值。 经典逻辑 AI 的技巧可以搬到这个 setting 之下，而连续时间化之后，可以用上微分几何的技巧。 传统的「逻辑 AI 知识表述」被新的表述法取代，后者的结构是由神经网络的深度学习「诱导」出来的。
 % 简单介绍笔者的强人工智能理论和强化学习、动态规划、最优控制、
 % 假设 $x$ 是思维状态。 在经典逻辑智能中，$x$ 是一束命题，代表当下的思考状况。 思考的过程就是不断重复进行推导: $x \vdash x' \vdash ...$。 在经典 AI 中这个作用是靠无数的逻辑 rules 来达成的。 但现在我们的做法是将 $x$ 放到向量空间中，再用一个 recurrent 神经网络来取代整个 rules base。
 \end{abstract}
