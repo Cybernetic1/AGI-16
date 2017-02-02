@@ -9,7 +9,7 @@
 \usepackage{tikz-cd}			% commutative diagrams
 \usepackage{amssymb}			% for \multimap, \updownarrow, \bigstar
 \usepackage{sectsty}			% change section color
-\usepackage{turnstile}		% longer turnstiles
+%\usepackage{turnstile}		% longer turnstiles
 \usepackage{hyperref}		% refs, links become clickable
 
 \usepackage{geometry}		% change paper size
@@ -82,15 +82,17 @@ Juan Carlos Kuri Pinto
 \setlength{\parskip}{2.8ex}
 
 \begin{abstract}
-这篇是背景，介绍一个基於 \textbf{增强学习} 和 \textbf{深度学习} 的极简约的 cognitive architecture，它在数学上是一个Hamiltonian 系统，而其 Lagrangian 对应於智能系统的「奖励」或「欲望」的价值。 经典逻辑 AI 的技巧可以搬到这个 setting 之下，而连续时间化之后，可以用上微分几何的技巧。 传统的「逻辑 AI 知识表述」被新的表述法取代，后者的结构是由神经网络的深度学习「诱导」出来的。
-% 简单介绍笔者的强人工智能理论和强化学习、动态规划、最优控制、
-% 假设 $x$ 是思维状态。 在经典逻辑智能中，$x$ 是一束命题，代表当下的思考状况。 思考的过程就是不断重复进行推导: $x \vdash x' \vdash ...$。 在经典 AI 中这个作用是靠无数的逻辑 rules 来达成的。 但现在我们的做法是将 $x$ 放到向量空间中，再用一个 recurrent 神经网络来取代整个 rules base。
+这篇是背景，介绍一个基於 \textbf{增强学习} 和 \textbf{深度学习} 的极简约的 cognitive architecture。 系统包含一个 transition function，这函数的角色类似於逻辑推论算子 ($\vdash$)。 在数学上这是一个 Hamiltonian 系统，而其 Lagrangian 对应於智能系统的「奖励」或「欲望」的价值。 经典逻辑 AI 的技巧可以搬到这个 setting 之下，这会是我们第二篇论文的主题。
+%This is the first of a series of papers, introducing a minimalist cognitive architecture based on reinforcement learning and deep learning.  The system consists of an iterative function whose role is analogous to the consequence operator ($\vdash$) in logic.  Mathematically it is a Hamiltonian system, whose Lagrangian corresponds to the value of ``desires'' or ``rewards'' for the intelligent agent.  Techniques of classical logic-based AI can be transferred to the neural setting, the topic of our 2nd paper.
 \end{abstract}
 
-本文介绍一些（非原创的）已知理论，然后指出一些新的研究方向。
+如果想了解我们第二篇论文的主要理论 \cite{YanBridge}，这篇的大部分内容可以不理，除了 \S\ref{sec:0} 和对强化学习的基本认识（例如我的《强化学习 tutorial》\cite{YanRLtutorialEN}）。
+
+本篇大部份是背景理论，例如那「Hamiltonian 理论」已经是广为人知的，并非我们原创。
 
 \setcounter{section}{-1}
 \section{中心思想}
+\label{sec:0}
 
 标题中的\textbf{比喻}是指用增强学习的方法控制一隻自主的智能系统 (autonomous agent)，在「思维空间」中寻找最优路径：
 \begin{equation}
@@ -216,14 +218,20 @@ $\sigmoid$ 是一个 sigmoid 形状的非线性函数。
 
 一个强化学习的系统由 4 个元素的 tuple 构成
 \begin{equation}
-\boxed{\mbox{强化学习系统}} \; = (\mbox{States} \ni \vect{x}, \mbox{Actions} \ni \vect{u}, R = \mbox{Rewards}, \pi = \mbox{Policy})
+\boxed{\mbox{强化学习系统}} \; = (\vect{x} \in \mbox{States}, \vect{u} \in \mbox{Actions}, R = \mbox{Rewards}, \pi = \mbox{Policy})
 \end{equation}
 详细可参阅我写的 《强化学习 tutorial》。
 
 $U$ 是一连串行动的 rewards 的总和：
-\begin{equation}
-\boxed{\mbox{状态 0 的总价值} $\; U(\vect{x}_0)$} = \sum_t \; \boxed{\mbox{时间 t 时的奖励} $\; R(\vect{x}_t, \vect{u}_t)$}
-\end{equation}
+\begin{eqnarray}
+\mbox{\footnotesize 状态 0 的总价值} \tikzmark{uu} & \quad \quad \quad & \mbox{\footnotesize 时间 $t$ 时的奖励} \tikzmark{rr} \nonumber \\
+\nonumber \\
+\tikzmark{UU} U(\vect{x}_0) & = & \sum_t \; \tikzmark{RR} R(\vect{x}_t, \vect{u}_t)
+\begin{tikzpicture}[overlay,remember picture]
+  \draw (uu.center) +(-50pt,-3pt) -- ([shift={(4pt,12pt)}]UU.center);
+  \draw (rr.center) +(-35pt,-3pt) -- ([shift={(8pt,12pt)}]RR.center);
+\end{tikzpicture}
+\end{eqnarray}
 例如说，行一步棋的效用，不单是那步棋当前的利益，还包括走那步棋之后带来的后果。  例如，当下贪吃一只卒，但 10 步后可能被将死。  又或者，眼前有美味的食物，但有些人选择不吃，因为怕吃了会变肥。
 
 %一个 state 的效用 U 就是： 假设方案固定，考虑到未来所有可能的 transitions，从这个 state 开始的平均期望的 total reward 是多少 :
@@ -238,12 +246,16 @@ $U$ 是一连串行动的 rewards 的总和：
 Bellman equation 说的是： 「\textbf{如果从最佳选择的路径的末端截除一小部分，馀下的路径仍然是最佳路径。}」
 %换句话说，如果一系列的选择 A B C D E.... 是最优的，那么这系列除去开始的 A，那 B C D E.... 系列应用在后继的状态上也是最优的。
 %用数学表示：
-\begin{equation}
-\boxed{\mbox{全路径的价值}} = \max_u \{ \; \boxed{\mbox{在当前状态下选择 $\vect{u}$ 的奖励}} + \boxed{\mbox{馀下路径的价值}} \; \}
-\end{equation}
-\begin{equation}
-\boxed{\mbox{Bellman 方程}} \quad U^*(\vect{x}) = \max_{ \; \vect{u}} \{ R(\vect{u}) + U^*(\vect{x}_{t+1}) \; \}
-\end{equation}
+\begin{eqnarray}
+& \mbox{\footnotesize 全路径的价值} \tikzmark{uEntire} \quad \quad \mbox{\footnotesize 在当前状态下选择 $\vect{u}$ 的奖励} \tikzmark{rCurrent} \quad \quad \mbox{\footnotesize 馀下路径的价值} \tikzmark{uRest} \nonumber \\
+\nonumber \\
+& \boxed{\mbox{Bellman 方程}} \quad \tikzmark{UEntire} U^*(\vect{x}) = \max\limits_{\vect{u}} \{ \; \tikzmark{RCurrent} R(\vect{u}) + \tikzmark{URest} U^*(\vect{x}_{t+1}) \; \}
+\begin{tikzpicture}[overlay,remember picture]
+  \draw (uEntire.center) +(-30pt,-3pt) -- ([shift={(4pt,12pt)}]UEntire.center);
+  \draw (rCurrent.center) +(-80pt,-3pt) -- ([shift={(4pt,12pt)}]RCurrent.center);
+  \draw (uRest.center) +(-65pt,-3pt) -- ([shift={(8pt,12pt)}]URest.center);
+\end{tikzpicture}
+\end{eqnarray}
 %$*$ 表示 \emp{最优} (optimal)。 
 这条看似简单的式子是动态规划的\textbf{全部内容}。 它的意义是： 我们想获得最佳效益的路径，所以将路径切短一些，於是问题化解成一个较小的问题；  换句话说它是一个 \textbf{recursive relation}。
 
@@ -279,13 +291,13 @@ $Q$ 的好处是方便学习，只需要学习在每一个状态下选择哪个�
 \end{itemize}
 简单来说，「价值」就是每个瞬时「奖励」对时间的积分：
 \begin{equation}
-\boxed{\mbox{价值} U} = \int \boxed{\mbox{奖励} R} \,dt
+\boxed{\mbox{价值} $U$} = \int \boxed{\mbox{奖励} $R$} \,dt
 \end{equation}
 %（价值有时用 $V$ 表示，但为避免和势能 $V$ 混淆故不用。）
 
 用\emp{控制论}的术语，通常定义 cost functional：
 \begin{equation}
-\boxed{\mbox{价钱 } J} = \int L dt + \Phi(\vect{x}_\bot)
+\boxed{\mbox{价钱 } $J$} = \int L dt + \Phi(\vect{x}_\bot)
 \end{equation}
 其中 $L$ 是 ``running cost''，即行走每一步的「价钱」； $\Phi$ 是 terminal cost，即到达终点 $\vect{x}_\bot$ 时，那位置的价值。
 
@@ -301,7 +313,7 @@ $Q$ 的好处是方便学习，只需要学习在每一个状态下选择哪个�
 
 在\emp{分析力学}里 $L$ 又叫 \textbf{Lagrangian}，而 L 对时间的积分叫「\textbf{作用量}」：
 \begin{equation}
-\boxed{\mbox{作用量 (Action) \; S}} = \int L dt
+\boxed{\mbox{作用量 (action) } $S$} = \int L dt
 \end{equation}
 Hamilton 的\emp{最小作用量原理} (principle of least action) 说，在自然界的运动轨迹里，$S$ 的值总是取稳定值 (stationary value)，即比起邻近的轨迹它的 $S$ 值最小。
 

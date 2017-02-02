@@ -81,13 +81,15 @@ Juan Carlos Kuri Pinto
 
 \begin{abstract}
 % 这篇是背景，介绍一个基於 \textbf{增强学习} 和 \textbf{深度学习} 的极简约的 cognitive architecture，它在数学上是一个Hamiltonian 系统，而其 Lagrangian 对应於智能系统的「奖励」或「欲望」的价值。 经典逻辑 AI 的技巧可以搬到这个 setting 之下，而连续时间化之后，可以用上微分几何的技巧。 传统的「逻辑 AI 知识表述」被新的表述法取代，后者的结构是由神经网络的深度学习「诱导」出来的。
-This is the first of a series of papers, introducing a minimalist cognitive architecture based on reinforcement learning and deep learning.  The system consists of an iterative function whose role is analogous to the consequence operator ($\vdash$) in logic.  Mathematically it is a Hamiltonian system, whose Lagrangian corresponds to the value of ``desires'' or ``rewards'' in the intelligent system.  Techniques of classical logic-based AI can be transferred to the neural setting, the topic of the 2nd paper.
+This is the first of a series of papers, introducing a minimalist cognitive architecture based on reinforcement learning and deep learning.  The system consists of an iterative function whose role is analogous to the consequence operator ($\vdash$) in logic.  Mathematically it is a Hamiltonian system, whose Lagrangian corresponds to the value of ``desires'' or ``rewards'' for the intelligent agent.  Techniques of classical logic-based AI can be transferred to the neural setting, the topic of our 2nd paper.
 %Its continuous limit can be described by differential geometry.  The old-fashioned logic-based knowledge representation with discrete propositions is abandoned in favor of a representation induced by deep neural learning.
 % The problem of general intelligence can be described and solved in the logic-based AI paradigm, but the main obstacle is that learning is too slow.  The logic-based knowledge representation with discrete propositions is abandoned in favor of a neural-based ``amorphous'' representation induced from the top down, using a deep neural network (DNN).  The DNN acts iteratively on a state space (the ``mental state''), forming a dynamical system.  This system is in turn controlled by reinforcement learning, ``navigating'' the space of mental states as in a maze.
 \end{abstract}
 
 %本文介绍一些（非原创的）已知理论，然后指出一些新的研究方向。
-We introduce the basic architecture in \S\ref{sec:0}, only this section and the basics of reinforcement learning (eg. see my tutorial \cite{YanRLtutorial}) are required to understand the rest of our theory.  The ``Hamiltonian stuff'' is knowledge from existing theory and not our original contribution.
+In order to understand our main theory \cite{YanBridge}, most of the present paper can be ignored, except for \S\ref{sec:0} and a basic understanding of reinforcement learning (eg.  my tutorial \cite{YanRLtutorialEN}).
+
+Most of this paper is background information, eg. the ``Hamiltonian theory'' is already well-known and is not our original contribution.
 % The first part of this paper introduces some existing theory, and then speculates on new research directions.
 
 \setcounter{section}{-1}
@@ -153,7 +155,7 @@ The cognitive state is a vector $\vect{x} \in \mathbb{X}$ where $\mathbb{X}$ is 
 
 Mathematically this is a \emp{dynamical system} that can be defined by:
 \begin{eqnarray}
-\boxed{\mbox{discrete time}} \quad \quad & \vect{x}_{t+1} = \vect{F}(\vect{x}_t) \\
+\boxed{\mbox{discrete time}} \quad \quad & \vect{x}_{t+1} = \vect{F}(\vect{x}_t) \label{eqn0}\\
 \boxed{\mbox{continuous time}} \quad \quad & \dot{\vect{x}} = \vect{f}(\vect{x}) \label{eqn1}
 \end{eqnarray}
 %($\vect{F}$ is implemented as the deep learning network in our approach.)
@@ -181,7 +183,7 @@ If continuous-time, $\vect{f}$ can also be implemented as neural network, but $\
 
 A \emp{control system} is a dynamical system added with the control vector $\vect{u}(t)$:
 \begin{equation}
-\dot{\vect{x}}(t) = f(\vect{x}(t), \vect{u}(t), t)
+\dot{\vect{x}}(t) = f(\vect{x}(t), {\color{red} \vect{u}(t)}, t)
 \end{equation}
 The goal of control theory is to find the optimal $\vect{u}^*(t)$ function, such that the system moves from the initial state $\vect{x}_0$ to the terminal state $\vect{x_\bot}$.
 
@@ -202,7 +204,7 @@ According to control theory, the condition for \textbf{optimal path} is given by
 
 After the next section I will explain the meaning of $J$, $L$ and $H$.
 
-\subsection{Reinforcement learning / dynamic programming}
+\section{Reinforcement learning / dynamic programming}
 
 \textbf{Reinforcement learning} is a branch of machine learning that is particularly suitable for controlling an \textbf{autonomous agent} who interacts with an \textbf{environment}.  It uses \textbf{sensory perception} and \textbf{rewards} to continually modify its \textbf{behavior}.  The exemplary image you should invoke in mind is that of a small insect that navigates a maze looking for food and avoiding predators:  $\vcenter{\hbox{\includegraphics[scale=0.5]{cockroach.png}}}$
 
@@ -210,7 +212,7 @@ A reinforcement learning system consists of a 4-tuple:
 \begin{equation}
 \boxed{\mbox{reinforcement learning system}} \; = (\vect{x} \in \mbox{States}, \vect{u} \in \mbox{Actions}, R = \mbox{Rewards}, \pi = \mbox{Policy})
 \end{equation}
-For details readers may see my \textit{Reinforcement learning tutorial} \cite{YanRLtutorial}.
+For details readers may see my \textit{Reinforcement learning tutorial} \cite{YanRLtutorialEN}.
 
 %is synonymous with \textbf{dynamic programming}, which is also the main content of modern \textbf{control theory} with the state-space description.
 
@@ -245,30 +247,116 @@ The central idea of \textbf{Dynamic programming} is the \textbf{Bellman optimali
 
 The \textbf{Bellman condition} says:  ``\uline{if we cut off a tiny bit from the endpoint of the optimal path, the remaining path is still an optimal path between the new endpoints}.''
 
-The \emp{Bellman equation} governs reinforcement learning just as in control theory:
 \begin{eqnarray}
-\boxed{\mbox{optimal path}} = & \mbox{choose max reward on current path segment} \nonumber \\
-& \quad + \boxed{\mbox{the rest of optimal path}}
+& \mbox{\footnotesize value of entire path} \tikzmark{uEntire} \quad \quad \mbox{\footnotesize reward of choosing $\vect{u}$ at current state} \tikzmark{rCurrent} \quad \quad \mbox{\footnotesize value of rest of path} \tikzmark{uRest} \nonumber \\
+\nonumber \\
+& \boxed{\mbox{Bellman equation}} \quad \tikzmark{UEntire} U^*(\vect{x}) = \max\limits_{\vect{u}} \{ \; \tikzmark{RCurrent} R(\vect{u}) + \tikzmark{URest} U^*(\vect{x}_{t+1}) \; \}
+\begin{tikzpicture}[overlay,remember picture]
+  \draw (uEntire.center) +(-30pt,-3pt) -- ([shift={(4pt,12pt)}]UEntire.center);
+  \draw (rCurrent.center) +(-80pt,-3pt) -- ([shift={(4pt,12pt)}]RCurrent.center);
+  \draw (uRest.center) +(-65pt,-3pt) -- ([shift={(8pt,12pt)}]URest.center);
+\end{tikzpicture}
 \end{eqnarray}
-In math notation:
-\begin{equation}
-U^*_t = \max_{u} \{ \; \boxed{\mbox{reward}(u, t)} + U^*_{t-1} \; \}
-\end{equation}
-where $U$ is the ``long-term value'' or \emp{utility} of a path.
+This seemingly simple formula is the \uline{entire content} of dynamic programming;  What it means is that:  When seeking the path with the best value, we cut off a bit from the path, thus reducing the problem to a smaller problem;  In other words, it is a \textbf{recursive relation} over time.
 
-Conceptually, $U$ is the \textbf{integration} of instantaneous rewards over time:
+In AI reinforcement learning there is an oft-employed trick known as $Q$-learning.  $Q$ value is just a variation of $U$ value;  there is a $U$ value for each state, and $Q$ is the \textbf{decomposition} of $U$ by all the actions available to that state.  In other words, $Q$ is the utility of doing action $\vect{u}$ in state $\vect{x}$.  The relation between $Q$ and $U$ is:
 \begin{equation}
-\boxed{\mbox{utility, or value} U} = \int \boxed{\mbox{reward} R} \,dt
+U(\vect{x}) = \max\limits_{\vect{u}} \, Q(\vect{x}, \vect{u})
 \end{equation}
+The advantage of $Q$ is the ease of learning.  We just need to learn the value of actions under each state.  This is so-called ``\textbf{model free learning}''.
 
+%The \emp{Bellman equation} governs reinforcement learning just as in control theory:
+%\begin{eqnarray}
+%\boxed{\mbox{optimal path}} = & \mbox{choose max reward on current path segment} \nonumber \\
+%& \quad + \boxed{\mbox{the rest of optimal path}}
+%\end{eqnarray}
+%In math notation:
+%\begin{equation}
+%U^*_t = \max_{u} \{ \; \boxed{\mbox{reward}(u, t)} + U^*_{t-1} \; \}
+%\end{equation}
+%where $U$ is the ``long-term value'' or \emp{utility} of a path.
+
+%Conceptually, $U$ is the \textbf{integration} of instantaneous rewards over time:
+%\begin{equation}
+%\boxed{\mbox{utility, or value} U} = \int \boxed{\mbox{reward} R} \,dt
+%\end{equation}
+
+Under the reinforcement learning framework, intelligence is decomposed into \textbf{thinking} and \textbf{learning}:
 \begin{itemize}
-\item Intelligence is decomposed into \textbf{thinking} and \textbf{learning}.
-\item \textbf{Thinking} is governed by control theory (finding the best trajectory in ``thoughts space'') under the contraints of correct reasoning, ie, knowledge.
-\item The iterative ``thinking operator'' is implemented as a deep-\textbf{learning} neural network (DNN).  This DNN \textit{contrains} the dynamics of thinking, and it represents the totality of \textit{knowledge} in the system.
+\item \emp{Thinking} means finding the optimal trajectory of $\vect{x}$ according to the \textbf{knowledge} stored in the deep NN.  This is achieved using the Bellman equation to calculate $\vect{u}^*$.  The trajectory of $\vect{x}$ is constrained by the deep NN (in other words, the system must think in accordance with \textbf{correct knowledge}).  While thinking, the deep NN stays \textbf{constant}.
+
+\item \emp{Learning} means learning the weights in the deep NN.  Changing $W$ changes $\vect{F}$, which determines the state equation (\ref{eqn0}), so the entire system becomes a new one.  In other words, deep NN learning is a kind of \textbf{second-order learning}:  Consider 2 systems $\vect{F}$ and $\vect{F} + \epsilon \hat{\vect{F}}$, after \uline{many trials} of thinking with different premises, if the average reward is higher in the altered system, $\vect{F}$ will learn towards the $\hat{\vect{F}}$ direction.
+% 即是根据已学得的\textbf{知识}（知识储存在 deep NN 里），在思维空间中找寻 $\vect{x}$ 最优的轨迹，方法是根据 Bellman 方程计算 $\vect{u}^*$。 $\vect{x}$ 的轨迹受 deep NN 约束（亦即是说，系统只能依据\textbf{正确的知识}去思考），思考时 deep NN 是\textbf{不变}的。
+%\item \emp{学习}就是学习神经网络 deep NN 的 weights $W_\ell$，改变 $W$ 即改变 $\vect{F}$，而$\vect{F}$ 决定\textbf{状态方程} (\ref{eqn0})，所以整个系统变了另一个系统。 换句话说，deep NN 的学习是一种 \textbf{second-order learning}： 考虑两个系统 $\vect{F}$ 和 $\vect{F} + \epsilon \hat{\vect{F}}$，经过很多次思考过程，如果奖励的平均值在后者有所增加，则 $\vect{F}$ 向 $\hat{\vect{F}}$ 方向学习。
 \end{itemize}
 
-\subsection{Connection with Hamiltonian mechanics}
+\subsubsection{Prior art}
 
+The minimalist architecture based on reinforcement learning has been proposed by Itimar Ariel from Israel, in 2012 \cite{Arel2012}, and I also independently proposed in 2016 (precursor of this paper).  The prestigious researcher of signal processing, Simon Haykin, recently also used the ``RL + memory'' design, cf. his 2012 book \textit{Cognitive dynamic systems} \cite{Haykin2012}. Vladimir Anashin in the 1990's also proposed this kind of cognitive architecture \cite{Anashin2009}.  Perhaps there exist other precedents, eg: \cite{Ivancevic2006}.
+
+\section{Connections with the Hamiltonian}
+
+In \emp{reinforcement learning}, we are concerned with two quantities:
+\let\labelitemi\labelitemii
+\begin{itemize}
+\item $R(\vect{x}, \vect{u})$ = \emp{reward} of doing action $\vect{u}$ in state $\vect{x}$
+\item $U(\vect{x})$ = \emp{utility} or \emp{value} of state $\vect{x}$ 
+\end{itemize}
+Simply put, \textbf{utility} is the integral of instantaneous \textbf{rewards} over time:
+\begin{equation}
+\boxed{\mbox{utility} $U$} = \int \boxed{\mbox{reward} $R$} \,dt
+\end{equation}
+%（价值有时用 $V$ 表示，但为避免和势能 $V$ 混淆故不用。）
+
+In \emp{control-theoretic} parlance, it is usually defined the \textbf{cost functional}:
+\begin{equation}
+\boxed{\mbox{cost } $J$} = \int L dt + \Phi(\vect{x}_\bot)
+\end{equation}
+where $L$ is the \textbf{running cost}, ie, the cost of making each step; $\Phi$ is the \textbf{terminal cost}, ie, the value when the terminal state $\vect{x}_\bot$ is reached.
+
+%Define a continuous version of ``utility'':
+%\begin{equation}
+%V(x,t) = \min_u \{ \int_t^{t_\bot} C(x,u)dt + \Phi(x_\bot,t_\bot) \} 
+%\end{equation}
+%where $t$ is time, $u$ is a set of control parameters, $C$ is the \emp{cost-rate} function:
+%\begin{equation}
+%\int C dt = R = \mbox{reward}
+%\end{equation}
+%This integral expresses the ``cost of the path'', whereas $\Phi(x_\bot,t_\bot)$ is the ``cost at termination''.
+
+In \emp{analytical mechanics} $L$ is known as the \textbf{Lagrangian}, and the time-integral of $L$ is called the \textbf{action}:
+\begin{equation}
+\boxed{\mbox{action } $S$} = \int L dt
+\end{equation}
+Hamilton's \emp{principle of least action} says that $S$ always takes the \textbf{stationary value}, ie, the $S$ value is extremal compared with neighboring trajectories.
+
+The \textbf{Hamiltonian} is defined as $\displaystyle H = L + \frac{\partial J^*}{\partial \vect{x}} \vect{f}$, which came from the method of \textbf{Lagrange multipliers}.  For details please refer to my \textit{Control theory tutorial}\cite{YanControlTheoryTutorial}.
+
+All these are the same thing, so there is this correspondence:
+\begin{equation}
+\begin{tabular}{|c|c|c|}
+\hline 
+\emp{Reinforcement learning} & \emp{Control theory} & \emp{Analytical mechanics} \\ 
+\hline
+utility or value $U$ & cost $J$ & action $S$ \\ 
+\hline 
+instantaneous reward $R$ & running cost & Lagrangian $L$ \\ 
+\hline 
+action $a$ & control $u$ & (external force?) \\
+\hline
+\end{tabular} 
+\end{equation}
+
+%用比较浅显的例子： 和美女做爱能带来即时的快感 (= 奖励 $R$)，但如果强奸的话会坐牢，之后很长时间很苦闷，所以这个做法的长远价值 $U$ 比其他做法较低，正常人不会选择它。
+
+Interestingly, the reward $R$ corresponds to the \textbf{Lagrangian} in physics, whose unit is ``energy'';  In other words, ``desires'' or ``happiness'' appear to be measured by units of ``energy'', this coincides with the idea of ``positive energy'' in pop psychology.  Whereas, long-term value is measured in units of $[\mbox{energy} \times \mbox{time}]$.
+
+%一个智能系统，它有「智慧」的条件，就是每时每刻都不断追求「开心能量」或奖励 $R$ 的最大值，但它必需权衡轻重，有计划地找到长远的效用 $U$ 的最大值。
+
+This correspondence of these 3 theories is explained in detail in Daniel Liberzon's book \cite{Liberzon2012}.  While this correspondence has very interesting philosophical implications, it may not be very useful in practice: the traditional AI system is discrete-time; converting it to continuous-time seems to increase the computational burden, while it is unclear what advantages this might bring....
+
+\begin{comment}
+%==================================================================================
 An interesting insight from control theory is that our system is a Hamiltonian dynamical system in a broad sense.
 
 Hamilton's \emp{principle of least action} says that the trajectories of dynamical systems occuring in nature always choose to have their action $S$ taking \textbf{stationary values} when compared to neighboring paths.  The action is the time integral of the Lagrangian $L$:
@@ -295,19 +383,35 @@ H(\vect{x}, \vect{u}, t) = L(\vect{x}, \vect{u}, t) + \vect{\lambda}^T(t) f(\vec
 \end{equation}
 Physically, the unit of $\vect{f}$ is velocity, while the unit of $L$ is energy, therefore $\vect{\lambda}$ should have the unit of \emp{momentum}.  This is the reason why the phase space is made up of the diad of $(\mbox{position}, \mbox{momentum})$.
 
-In its most general form we have the \emp{Hamilton-Jacobi-Bellman equation}: \footnote{To digress a bit, this equation is also analogous to the \emp{Schr\"{o}dinger equation} in quantum mechanics:
-\begin{equation}
-i \hbar \frac{\partial}{\partial t} \Psi(x,t) = \left[ V(x,t) + \frac{-\hbar^2}{2\mu} \nabla^2 \right] \Psi(x,t).
-\end{equation}
-where $\Psi$ is analogous to our $U$ (perhaps $\Psi$ is something that nature wants to optimize?)}
+%==================================================================================
+\end{comment}
+
+The equation of motion for the continuous-time case is the famed \emp{Hamilton-Jacobi-Bellman equation}:
+% \footnote{To digress a bit, this equation is also analogous to the \emp{Schr\"{o}dinger equation} in quantum mechanics:
+%\begin{equation}
+%i \hbar \frac{\partial}{\partial t} \Psi(x,t) = \left[ V(x,t) + \frac{-\hbar^2}{2\mu} \nabla^2 \right] \Psi(x,t).
+%\end{equation}
+%where $\Psi$ is analogous to our $U$ (perhaps $\Psi$ is something that nature wants to optimize?)}
 \begin{equation}
 \boxed{\mbox{Hamilton-Jacobi-Bellman}} \quad
 0 = \frac{\partial U^*}{\partial t} + \min_u H
 \end{equation}
+of which the \emp{Schr\"{o}dinger equation} is a special case.
 
-All these ``physical'' ideas flow automatically from our definition of \textbf{rewards}, without the need to introduce them artificially.  But these ideas seem not immediately useful to our project, unless we are to explore \textbf{continuous-time} models.
+%All these ``physical'' ideas flow automatically from our definition of \textbf{rewards}, without the need to introduce them artificially.  But these ideas seem not immediately useful to our project, unless we are to explore \textbf{continuous-time} models.
 
-\subsection{Deep learning}
+\section{Future directions}
+
+\begin{itemize}
+\item \textbf{Relation to logic-based AI:}  In the system's state equation (\ref{eqn0}), $\vect{F}$ is free to change ($\vect{F}$ represents learned knowledge).  In other words, the entire system almost has no structure.  Searching for a candidate $\vect{F}$ in the infinite-dimensional function space is impractical, so we need to introduce the structure of logic-based AI into this system, such that the search space for $\vect{F}$ is reduced.  In machine learning, this is known as \textbf{inductive bias}, the \textit{sine qua non} of speeding up learning.  This will be addressed in our 2nd paper \textit{A bridge between logic and neural} \cite{YanBridge}.
+
+\item \textbf{Memory:}  In this minimal architecture there is no episodic memory, this will be dealt with by our 3rd paper, \textit{The structure of memory} \cite{YanMemory}.
+
+\end{itemize}
+
+\begin{comment}
+%==================================================================================
+\section{Deep learning}
 
 The combination of deep learning with reinforcement learning, ie deep reinforcement learning (DRL), is very powerful.  For example, DRL is able to play Atari games to human levels \cite{Mnih2013}.  Their architecture is depicted in this diagram:
 \begin{equation}
@@ -330,6 +434,9 @@ One solution that avoids the difficulty is to make the neural network compute th
 \includegraphics[scale=0.5]{model-Sayaka.png}
 \end{equation}
 This means that we can compute $Q$ for any transition $x \stackrel{u}{\mapsto} x'$.  During the ``action'' (ie, ``thinking'') stage, we hold $x$ fixed, and search for $(u, x')$ that maximizes $Q$;  This can be done by \textbf{stochastic gradient descent}.  During the ``learning'' stage, we are given certain transitions $(x, u, x')$ and we train the neural network to adjust $Q$ via standard \textbf{Bellman update}.
+
+%==================================================================================
+\end{comment}
 
 % ================================== comment out ==================================
 \iffalse
@@ -552,11 +659,6 @@ When the forward and backward states get close enough, a successful path is foun
 
 % ================================== comment out ==================================
 \fi
-
-\section*{Acknowledgement}
-
-\footnotesize{In a forum discussion with Ben Goertzel dated 25 June 2014 on the AGI mailing-list: (agi@listbox.com), YKY asked: Why bother with neural networks, which typically require many neurons to encode data, when logic-based AI can represent a proposition with just a few symbols?  Ben's insight is that neural networks are capable of learning their own representations, and their learning algorithms are relatively speaking much faster.  We have been working on "neo-classical" logic-based AI for a long time, and began to realize that inductive learning in logic (based on combinatorial search in a symbolic space) is perhaps \textit{the bottleneck} in the entire logic-based paradigm.  So we try to look for alternatives that might learn faster, though we would still emphasize that logic-based AI remains a viable approach to AGI. %, provided that the right search heuristics be found (most probably in the form of \emp{hierarchical organization} of the learning space).
-}
 
 \bibliographystyle{plain} % or number or aaai ...
 \bibliography{AGI-book}
