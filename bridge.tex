@@ -41,10 +41,13 @@
 \sectionfont{\color{blue}} 
 \subsectionfont{\color{blue}} 
 \subsubsectionfont{\color{blue}} 
+\setcounter{secnumdepth}{3}		% use numbers in subsubsections
 
+\let\emptyset\varnothing			% more beautiful empty set symbol
 \newcommand{\vect}[1]{\boldsymbol{#1}}
 \newcommand*\sigmoid{\vcenter{\hbox{\includegraphics{sigmoid.png}}}}
 \newcommand*\KB{\vcenter{\hbox{\includegraphics{KB-symbol.png}}}}
+\newcommand*\NN{\vcenter{\hbox{\includegraphics{NN-symbol.png}}}}
 \newcommand*\invsigmoid{\vcenter{\hbox{\includegraphics{inverse-sigmoid.png}}}}
 \newcommand{\invW}{\, \rotatebox[origin=c]{90}{W}}
 \newcommand{\invw}{\, \rotatebox[origin=c]{90}{w}}
@@ -138,7 +141,7 @@ $\sigmoid$ 作用在 $\vect{x}$ 的每个分量上，它的作用在座标变换
 \boxed{\mbox{离散时间}} \quad \quad & \vect{x}_{t+1} = \vect{F}(\vect{x}_t) \label{eqn0}\\
 \boxed{\mbox{连续时间}} \quad \quad & \dot{\vect{x}} = \vect{f}(\vect{x}) \label{eqn:continuous-time}
 \end{eqnarray}
-由此可以看出，$\mathbb{X}$ 是一个\textbf{微分流形}。 更深入地讲，它是一个力学上的 Hamiltonian 系统，具有 symplectic（辛流形）结构。 但这超出了本文範围，详见本篇的前篇 \cite{Yan2017}。
+由此可以看出，$\mathbb{X}$ 是一个\textbf{微分流形}。 更深入地讲，它是一个力学上的 Hamiltonian 系统，具有 symplectic（辛流形）结构。 但这超出了本文範围，详见本篇的前篇 \cite{YanLabyrinth}。
 %换句话说，它是微分流形，而且有一个辛度量 (metric)。
 
 % 所以问题就是要赋予 $F$ 更多的\textbf{结构}，特别是逻辑结构。 直观地说，越多的结构令\textbf{搜寻空间}越小，学习会越快。 这是机器学习里面 inductive bias 的标准做法。
@@ -274,13 +277,17 @@ x \cup \KB \sdtstile{}{} x'
 我们的目的是将逻辑的结构 transfer 到神经网络。 逻辑的结构有两方面：
 \begin{itemize}
 \item 命题的内部结构 (sub-propositional structure)
-\item 多个命题的集合（= 记忆的结构）
+\item 命题之间的结构 （= mental state 的结构）
 \end{itemize}
-以下分述之。 \uline{谓词逻辑的命题结构比较特别，所以我初时专注於分析它。 但后来发现《记忆的结构》\cite{YanMemory}（我们的第3篇论文）也很重要。}
+% 以下分述之。 
 
 % 在系统的状态方程 (\ref{eqn0}) 中，$\vect{F}$ 是可以自由变动的（$\vect{F}$ 代表被学习的知识），换句话说，整个系统几乎没有结构。 在无限维的泛函空间搜寻 $\vect{F}$ 是不切实际的，所以要引入逻辑 AI 的结构，令 $\vect{F}$ 的搜寻範围缩小。 在机器学习中这种做法叫 inductive bias，是加快学习的必经之路。
 
-\subsection{Semantic distance 与 Compositionality}
+\subsection{命题内部结构}
+
+谓词逻辑的命题结构比较特别，所以我初时专注於分析它。 但后来发现其实 \textbf{命题-level} 的结构 (\S\ref{sec:Proposition-level}) 才是比较重要的（即它更能缩小搜寻空间）。
+
+\subsubsection{Semantic distance 与 compositionality}
 
 我们的目的是想将整套逻辑 AI 的器材搬到 \emp{连续} 的微分流形上去实现。  这个做法，是受了 Google 的 Word2Vec \cite{Mikolov2013} 算法的启发，它可以将自然语言的词语 embed 到度量空间中，而且词语之间的距离是 \emp{semantic distance} （\textbf{语义学上的距离}）：
 \begin{equation}
@@ -294,14 +301,20 @@ x \cup \KB \sdtstile{}{} x'
 \end{equation}
 例如「\textit{我爱你}」由「\textit{我、爱、你}」三个原子组成。 %如果原子用向量表示，那么「我爱你」和「没有你我不能生存」这两句意义相近，但形式上 (syntax) 却很不同，导致这两组原子的 tensor products 可能相距颇远。 
 
-举个例子，以下这些句子的意义相近：
+举个反例： %，以下这些句子的意义相近：
+%\begin{itemize}
+%\item \textsl{pot calling the kettle black}
+%\item \textsl{五十步笑百步}
+%\item \textsl{Those who live in glass houses should not throw stones}
+%\item \textsl{其身不正} %~ 其令不行}
+%\end{itemize}
 \begin{itemize}
-\item \textsl{pot calling the kettle black}
-\item \textsl{五十步笑百步}
-\item \textsl{Those who live in glass houses should not throw stones}
-\item \textsl{其身不正} %~ 其令不行}
+\item \textsl{John 对 Jennifer 说「我爱妳」}
+\item \textsl{John 对 Jessica 说「我爱妳」}
+\item \textsl{Jenifer 发怒走了}
 \end{itemize}
-虽然可以想像这些句子之间（粗略地）可以建立一一对应，但仍然很难想像用「乘积」乘出来的位置会相近，因为这牵涉到每个词语在句子中的 interpretation \footnote{例如，``pot'' 象徵有污点的人。 经典 AI 研究者 Jerry Hobbs 开发了自然语言智能系统 Tacitus \cite{Hobbs1988} \cite{Hobbs2003}（这个字有「沉默」的意思），他的理论是基於逻辑上的 abductive interpretations（即逻辑上反方向推导，寻找句子意义的解释）， 没有这种解释的话，将句子分拆成词语~ 并不足以组成句子的完整意义； 亦即是说，na\"{i}ve compositionality 在人类语言中并不成立。}。 所以句子的意义 \uline{不是简单地由词语 bottom-up 生成的}。
+「\textit{妳}」字的意思在第 1、2 句中分别指 Jennifer 和 Jessica，如果简单地用「乘积」乘出来，欠缺了 pronoun resolution，就会导致谬误。 % 虽然可以想像这些句子之间（粗略地）可以建立一一对应，但仍然很难想像用「乘积」乘出来的位置会相近，因为
+这牵涉到每个词语在句子中的 interpretation \footnote{例如代名词、象徵和比喻等。 经典 AI 研究者 Jerry Hobbs 开发了自然语言智能系统 Tacitus \cite{Hobbs1988} \cite{Hobbs2003}（这个字有「沉默」的意思），他的理论是基於逻辑上的 abductive interpretations（即逻辑上反方向推导，寻找句子意义的解释）， 没有这种解释的话，将句子分拆成词语~ 并不足以组成句子的完整意义； 亦即是说，na\"{i}ve compositionality 在人类语言中并不成立。}。 所以句子的意义 \uline{不是简单地由词语 bottom-up 生成的}。
 
 用 tensor product 的做法，得出的空间结构是 syntactic 而不是 semantic 的，但神经网络学习的重点是 \emp{泛化} (generalization)，它基於「邻近的点的意义相近」才能成功，所以一定要 semantic distance。
 
@@ -309,7 +322,7 @@ x \cup \KB \sdtstile{}{} x'
 
 % 换句话说，$\vect{F}: \mathbb{X} \rightarrow \mathbb{X}$ 应该由两个\textbf{家族合并}而成： 一个是根据 Bellman 的学习算子，另一个是逻辑的学习算子。
 
-\subsection{基於 ``features'' 的逻辑}
+\subsubsection{基於 ``features'' 的逻辑}
 
 上节看到 tensor product 的做法似乎有问题，它用原子 ``algebraically'' 组合成句子，原子之间的距离可以是语义学相近的，但「乘出来」的句子在语义空间上的位置可能 \textbf{很不准确}。 另一方面，在神经网络里，「状态」$\vect{x}$ 是由一组 features 组成的，换句话说，它是一些 features 的 conjunction（也可以看成是乘积）。 两者都是乘积，但前者有问题，因为它是由自然语言的字／词构成的，而后者是由概念原子 (conceptual atoms / features) 构成的。  所以，如果我们避免将自然语言的字／句 na\"{i}ve 地映照到 representation 上，使用概念原子的乘积应该没有问题。
 %我们想要的是相反的特性： 句子之间要有 semantic distance，但这样似乎不能将句子分拆成原子，尤其是日常语言中的词语 (words)。
@@ -318,7 +331,7 @@ x \cup \KB \sdtstile{}{} x'
 
 假设思维空间的 metric 是语义的（语义相近则点的距离相近）。 根据「神经原理」(\ref{NeuralPostulate})， \uline{每个 thought 必然是由一组 features 表述}，形如 $\vect{x} = (x_1, x_2, ..., x_n)$，每个 $x_i$ 是一个 feature 或\textbf{概念原子}。 例如：
 \begin{equation}
-\vect{x} = \textit{我很肚饿} = \textit{关於我的} \wedge \textit{关於生理的} \wedge \textit{关於食物的} \wedge \textit{负面的} \wedge .... 
+\vect{x} = \textit{我很肚饿} = \textit{关於我的} \cap \textit{关於生理的} \cap \textit{关於食物的} \cap \textit{负面的} \cap .... 
 \end{equation}
 这些 features 可以数量很多，它们是 \textbf{sub-symbolic} 的，很多 features 的乘积构成通常意义下的 symbols。
 
@@ -342,7 +355,7 @@ x \; (1 - y) = 0
 
 %在人脑中句子可能是依据语义组织的，它们不是由词语 algebraically「乘出来」，而语言的产生（说话）不是直接将句子的原子成份「读出来」，而是需要额外运算。 
 
-\subsection{逻辑中的 linkage 现象}
+\subsubsection{逻辑中的 linkage 现象}
 
 在经典\textbf{谓词逻辑} (predicate logic) 中有一个 ``linkage'' 的现象，例如以下这个式子（\textit{爸爸的爸爸是爷爷}）：
 
@@ -421,7 +434,7 @@ Now，我们关心的是怎样 ``combine'' 逻辑结构和神经网络结构。 
 
 \textbf{注意：} 暂时我还未设计出使用 linkage 的 learning algorithm，我也不肯定使用了 linkage 之后会不会对学习速度有重大改进....？
 
-\subsection{用 relation algebra 如何？}
+\subsubsection{用 relation algebra 如何？}
 
 以前曾经对 relation algebra \cite{Schmidt2010} \cite{Maddux2006} 有些幢憬，因为它比较接近人类自然语言，但其实 relation algebra (RA) 和 first-order logic (FOL) 基本上是等效的，在 FOL 里面有 linkage 的复杂性，但在 RA 里面这个复杂性其实也没有消失。 可以说「\underline{复杂度是守恒的}」\footnote{这句话是 category theorist Eugenia Cheng 说的。}。
 
@@ -443,7 +456,7 @@ Now，我们关心的是怎样 ``combine'' 逻辑结构和神经网络结构。 
 
 「长度」本身没有不妥，但我们的目的是将逻辑式子嵌入到状态空间 $\vect{x}$ 里，这时 variable length 令人很头痛，但 fixed length 没有此问题。 如果硬要将 variable length 的式子嵌入到（有限维）向量空间中，\uline{似乎必须用到 \emp{fractal} 结构}（因为它有自相似性），同时需要设计一种新的神经网络，它先天性地有 fractal 结构在里面； 但这比较复杂，我没有在这方向 explore。
 
-\subsection{逻辑结构 summary}
+\subsubsection{逻辑结构 summary}
 
 逻辑命题的\textbf{内部} (sub-propositional) 结构，传统上有两种方法表达： 一是 predicate logic，二是 relation algebra。 无论是哪种方式，它的本质都是想处理 \emp{variable substitution}。 有趣的是，「代数」的本质其实也是「代入」，但代数中的代入法则是 implicit 的，所以用代数来 explicitly 表达代入的概念反而很难。
 
@@ -475,7 +488,7 @@ $X,Y,Z$ 代表 domains，即所有「人」或「物体」(objects) 的集合。
 
 （这段的 references 太多，我有空再补上....）
 
-\subsection{用时间换取空间}
+\subsubsection{用时间换取空间}
 
 上面说的是 substitution 在空间中的 linkage 结构。 但也可以将 substitution \textbf{分拆}成若干个简单的步骤。 方法是： 将某些内容放进记忆体中的「盒子」中，\uline{这些盒子充当 variables 的角色，也就是很具体地实现 substitution 的动作}。 换句话说，将\textbf{空间复杂性}转换成\textbf{时间复习性}\footnote{人脑的脑电波由 0.5 Hz 到 40 Hz 都有，我们感觉上瞬间的动作可能已经过了若干次迴路。}； 以下是示意图：
 \begin{equation}
@@ -485,9 +498,9 @@ X，Y 是状态空间 $\mathbb{X} \ni \vect{x}$ 里面的「盒子」 = variable
 
 先前我说的 linkage 结构，放在有限维向量空间比较方便，但它是 first-order logic，处理 higher-order 关系时有很大困难。 Higher-order relations 似乎还是要用这种分拆步骤的方法解决。
 
-\subsection{Cartesian-closedness}
+\subsubsection{Cartesian-closedness}
 
-折腾了这么久，但仍然缺少了一个重要的特性： Cartesian closedness。 它指的是在某个範畴内，对任意的 $A,B$，都必然可以找到它们的：
+折腾了这么久，但仍然缺少了一个重要的特性： Cartesian-closedness。 它指的是在某个範畴内，对任意的 $A,B$，都必然可以找到它们的：
 \begin{equation}
 \boxed{\mbox{product}} \; A \times B \quad \mbox{和} \quad B^A \; \; \boxed{\mbox{exponentiation}} 
 \end{equation}
@@ -496,7 +509,7 @@ X，Y 是状态空间 $\mathbb{X} \ni \vect{x}$ 里面的「盒子」 = variable
 A \wedge B \quad \mbox{和} \quad A \rightarrow B
 \end{equation}
 
-为什么需要 Cartesian closed？  注意在 minimal architecture 里，只有两种记忆，即瞬时记忆 $\vect{x}$ 和永久记忆 $\vect{F} = \KB \vdash$。 从 logic-based AI 的角度来看，$\KB$ 里装著 logic rules，但 $\vect{x}$ 里面只有 ground facts。 Ground sentence 指的是\textbf{没有变量}的命题，例如：
+为什么需要 Cartesian-closed？  注意在 minimal architecture 里，只有两种记忆，即瞬时记忆 $\vect{x}$ 和永久记忆 $\vect{F} = \KB \vdash$。 从 logic-based AI 的角度来看，$\KB$ 里装著 logic rules，但 $\vect{x}$ 里面只有 ground facts。 Ground sentence 指的是\textbf{没有变量}的命题，例如：
 \begin{equation}
 \vect{x} = \textit{见到地上有血迹}
 \end{equation}
@@ -504,34 +517,90 @@ A \wedge B \quad \mbox{和} \quad A \rightarrow B
 \begin{equation}
 \forall Z. \quad \mbox{\textit{$Z$有血迹}} \rightarrow \mbox{\textit{$Z$可能是凶案现场}}
 \end{equation}
-如果在 $\vect{x}$ 里面可以存放 rule，那表示 $\vect{x} \ni \mathbb{X}$ 是一个 Cartesian-closed category。 这样的 $\mathbb{X}$ 是一个更 powerful 的结构，亦即系统可以思考更复杂的 thoughts。 更重要的是，$\vect{x} \ni \mathbb{X}$ 和 $F = \KB \vdash$ 现在\textbf{地位平等}，因为它们都是 $\mathbb{X} \rightarrow \mathbb{X}$ 的\textbf{函数}，因为 Cartesian-closed 表示 $\mathbb{X} \supset \mathbb{X}^{\mathbb{X}}$。 这个特性在 belief revision 中似乎会很有用（见下节）。
+如果在 $\vect{x}$ 里面可以存放 rule，那表示 $\vect{x} \ni \mathbb{X}$ 是一个 Cartesian-closed category。 这样的 $\mathbb{X}$ 是一个更 powerful 的结构，亦即系统可以思考更复杂的 thoughts。 更重要的是，$\vect{x} \ni \mathbb{X}$ 和 $F = \KB \vdash$ 现在\textbf{地位平等}，因为它们都是 $\mathbb{X} \rightarrow \mathbb{X}$ 的\textbf{函数}，因为 Cartesian-closed 表示 $\mathbb{X} \simeq \mathbb{X}^{\mathbb{X}}$。 这个特性在 belief revision 中似乎会很有用（见下节）。
 
 如何在神经网络中做到 Cartesian-closed？ 记得神经网络中 $\vect{x}$ 是一组 features $= (x_1, x_2, ..., x_n)$。 一个办法是将所有 $\vect{x}$ 都变成 $\mathbb{X} \rightarrow \mathbb{X}$ 的函数。 逻辑的 implication $A \rightarrow B$ 显然是函数，但单一 ground sentence $A$ 也可以是函数： $\top \rightarrow A$ ，其中 $\top$ 是逻辑「真」。 注意： 这些函数中可以有 linkages，即处理变量的能力。
 
 转到神经网络中，$A \rightarrow B$ 是一个 $\mathbb{X} \rightarrow \mathbb{X}$ 的神经网络。 $\top \rightarrow A$ 也是一个 $\mathbb{X} \rightarrow \mathbb{X}$ 的神经网络，但它将 $\vect{1} \mapsto \vect{A}$。
 
-那 $\mathbb{X}$ 是一个怎样的空间？  它本身可以是一个深度神经网路的 weights，但\uline{这个神经网络的输入／输出层必须有足够的}\textbf{\uline{阔度}}\uline{去处理}\textbf{\uline{它自己}}！ 
+那 $\mathbb{X}$ 是一个怎样的空间？  它本身可以是一个深度神经网路的 weights，但\uline{这个神经网络的输入／输出层必须有足够的}\textbf{\uline{阔度}}\uline{去处理}\textbf{\uline{它自己}}！  表面上似乎不可能.... 越多的 weights 需要更多的 weights 去处理.... 但如果令 $\vect{x}$ 储存一些 partial functions 或许可以。
 
-\subsection{Belief revision}
+\subsubsection{Belief revision}
 
 Belief revision （也可以叫 ``truth maintenance''）是经典逻辑 AI 发展的高峰。 如果可以用我们的新 architecture 做到 belief revision，我们会很有信心这个理论是 general intelligence。 
 
 正常的逻辑运作模式是由 $\KB$ 作用在 $\vect{x}$ 上给出新的 $\vect{x}$：
 \begin{equation}
-\KB \odot \vect{x} = \vect{x}'
+\KB ( \vect{x} ) = \vect{x}'
 \end{equation}
 但 belief revision 或者可以看成是 $\vect{x}$ 作用在 $\KB$ 上的结果：
 \begin{equation}
-\vect{x} \odot \KB = \KB'
+\vect{x} ( \KB ) = \KB'
 \end{equation}
-由於 Cartesian closedness，$\vect{x}$ 和 $\KB$ 的地位是平等的，使上面的运作成为可能。 
+由於 Cartesian-closedness，$\vect{x}$ 和 $\KB$ 的地位是平等的，使上面的运作成为可能。 
 
 这只是一个 vague idea，我会再回到这里填补这空白....
+
+\subsection{命题-level 结构}
+\label{sec:Proposition-level}
+
+\subsubsection{思维状态分拆成命题}
+\label{sec:PropositionalDecomposition}
+
+将思维状态 $\vect{x} \in \mathbb{X}$（你当下所思想的东西）分拆为命题的集合，是有必要的。 $\vect{x}$ 由一些 \emp{thoughts}（思维单元）组成，一个 thought 对应於逻辑中的一条\textbf{命题}，举例来说：
+\begin{equation}
+\vect{x} = \mbox{ 我正在上课 } \wedge \mbox{ 我很肚饿 } \wedge ....
+\end{equation}
+也可以有另一个状态：
+\begin{equation}
+\vect{x}_2 = \mbox{ 我正在搭地铁 } \wedge \mbox{ 我很肚饿 } \wedge ....
+\end{equation}
+如果不分拆的话，$\vect{x}$ 和 $\vect{x_2}$ 会是两个完全不同的状态。 分拆之后，它们有共同的\textbf{因子}，这些因子可以 factor out 来处理，换句话说可以用较小的 $\KB$ 处理大量的情况，达到资讯压缩的 economy。 
+
+%Thoughts 独立的好处是表述的 economy（状态 $\vect{x}$ 分拆成若干独立的 thoughts）。 $\vect{x}$ 是 $M$ 个 thoughts 的集合，$M$ 是 working memory 的大小。
+
+\subsubsection{Boolean algebra}
+
+A \textbf{Boolean algebra} is a structure with:
+\begin{eqnarray}
+& \mbox{\footnotesize underlying set} \tikzmark{underSet} \quad \mbox{\footnotesize binary ops} \tikzmark{binaryOps} \quad \mbox{\footnotesize unary op} \tikzmark{unaryOp} \nonumber\\
+\nonumber \\
+& \mathcal{B} = ( \, \tikzmark{UnderSet} A, \tikzmark{BinaryOps} \overbrace{\wedge, \vee}, \tikzmark{UnaryOp} \neg \, )
+\begin{tikzpicture}[overlay,remember picture]
+  \draw (underSet.center) +(-35pt,-4pt) -- ([shift={(3pt,11pt)}]UnderSet.center);
+  \draw (binaryOps.center) +(-29pt,-3pt) -- ([shift={(13pt,14pt)}]BinaryOps.center);
+  \draw (unaryOp.center) +(-30pt,-3pt) -- ([shift={(4pt,11pt)}]UnaryOp.center);
+\end{tikzpicture}
+\end{eqnarray}
+但似乎最重要的结构（尤其是当引入了 fuzzy-probabilistic 之后）是这个 commutativity：
+\begin{equation}
+\forall a,b \in \mathcal{B}.  \quad \quad a \wedge b = b \wedge a
+\end{equation}
+更简单地讲： 状态 $\vect{x}$ 只需要是\uline{一个命题的集合，命题的次序和相同重复可忽略}。 
+
+如果放到 vector space 上，这结构是一个 \textbf{symmetric algebra}，亦即一个 tensor algebra 加上 commutative 的条件。 （但我暂时没有用这方面的理论） 
+
+\subsubsection{命题 $\rightarrow$ 向量空间}
+
+目的是想将所有命题 map 到向量空间上，\uline{次序和重复不重要}。
+
+考虑最简单的情况： $P_1$ 和 $P_2$ 是两个命题的\textbf{容器}，思维状态 = $(P_1, P_2)$，而每个命题可以是 $A$ 或 $B$。 我们可以这样摆放 $P_1 \times P_2$ 空间的元素：
+\begin{equation}
+\includegraphics[scale=0.8]{lower-triangular.png}
+\end{equation}
+对角线上的元素可以不要，因为像 $(A,A)$ 等是多馀的重复。 换句话说，全体命题的集合就是 $\{ \mbox{ lower-triangular 那些元素  } \} \; \setminus \mbox{ diagonal } \cup \; \emptyset$。
+
+在高维情况下这种空间的节省很有效率： symmetrize 之后，hypercube 的一角的体积是原体积的 $1/n!$。 % （根据 $n = 2, 3$ 猜测，未验证）
+
+然后，在 symmetrized 空间上的函数 $\vect{F}: \mathbb{X} \rightarrow \mathbb{X}$ 也可以缩小 domain，其中 $\mathbb{X} = \mbox{sym}(\mathbb{P}^n)$ 而 $\mathbb{P}$ 是单个 proposition 的空间。  换句话说，如果输入是 $(p_1, p_2, ... , p_n)$，则按照 $\mathbb{P}$ 上的 order 对 $p_i$ \textbf{排序}，然后才呼叫 $\vect{F}$ 计算。
+
+在 $\mathbb{P}$ 上的排序是很简单的，因为每个 $p \in \mathbb{P}$ 已经有其位置（位置是深度学习 learn 出来的），然后用 lexicographic ordering 即可。
 
 \section{结论}
 
 %如上所述，适当地利用记忆体，可以不理会 linkage 的空间结构。 
-我在这篇论文中 elucidate 了逻辑的空间结构，先前仍是一个谜，妨碍思考，但现在有了比较清晰的理解，算是一种有益的贡献吧。 
+%我在这篇论文中 elucidate 了逻辑的空间结构，先前仍是一个谜，妨碍思考，但现在有了比较清晰的理解，算是一种有益的贡献吧。 
+本篇分析了逻辑的基本结构，然后将这些结构附加到神经网络上，以加速学习。 现正计划写代码验证这些想法的有效性。
 
 % ====================================================================================
 \begin{comment}

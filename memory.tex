@@ -16,6 +16,9 @@
 \usepackage[normalem]{ulem}	% underline with line breaks: /uline
 \usepackage{hyperref}		% refs, links become clickable
 
+\usepackage{xr}				% external references
+\externaldocument{bridge}
+
 \usepackage{geometry}		% change paper size
 \geometry{
   a4paper,         % or letterpaper
@@ -192,21 +195,11 @@ Z-transform 的\textbf{连续时间}版本是 Laplace transform （不知有没�
 
 \section{Mental state $\vect{x}$ = working memory = 命题的集合}
 
-神经的状态空间由一些 \emp{thoughts}（思维）组成，一个 thought 对应於逻辑中的一条\textbf{命题}，例如：
-\begin{equation}
-\vect{x} = \mbox{ 我正在上课 } \wedge \mbox{ 我很肚饿 } \wedge ....
-\end{equation}
-这两个 thoughts 是独立的。 也可以有另一个状态：
-\begin{equation}
-\vect{x}_2 = \mbox{ 我正在搭地铁 } \wedge \mbox{ 我很肚饿 } \wedge ....
-\end{equation}
-Thoughts 独立的好处是表述的 economy（状态 $\vect{x}$ 分拆成若干独立的 thoughts）。 $\vect{x}$ 是 $M$ 个 thoughts 的集合，$M$ 是 working memory 的大小。 认知科学里有个说法 \cite{}：
+在第二篇论文 \cite{YanBridge} 的 \S\ref{sec:PropositionalDecomposition} 里讲述了思维状态 $\vect{x}$ 应该被\textbf{分拆}成若干个命题的\textbf{集合}。  $\vect{x}$ 是 $M$ 个 thoughts 的集合，$M$ 是 working memory 的大小。 认知科学里有个说法 \cite{CogSci}：
 \begin{equation}
 \mbox{size of human working memory } \approx 7 \pm 2 \mbox{ items}
 \end{equation}
-但这些 items 可以有 \emp{chunking} \cite{}，例如去超级市场买东西，「意大利粉、茄汁、芝士、香肠」这 4 件东西可以聚合成一个 chunk，这样可以记住的 items 数目多很多。
-
-%思维空间是 $M$ 个 hypercube 的卡积。
+但这些 items 可以有 \emp{chunking} \cite{Chunking}，例如去超级市场买东西，「意大利粉、茄汁、芝士、香肠」这 4 件东西可以聚合成一个 chunk，这样可以记住的 items 数目多很多。
 
 \section{记忆 = 状态的历史}
 

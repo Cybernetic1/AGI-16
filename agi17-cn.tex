@@ -10,6 +10,7 @@
 \usepackage{amssymb}			% for \multimap, \updownarrow, \bigstar
 \usepackage{sectsty}			% change section color
 %\usepackage{turnstile}		% longer turnstiles
+\usepackage[normalem]{ulem}	% underline with line breaks: /uline
 \usepackage{hyperref}		% refs, links become clickable
 
 \usepackage{geometry}		% change paper size
@@ -345,7 +346,12 @@ action $a$ & control $u$ & （外力？） \\
 \section{研究方向}
 
 \begin{itemize}
-\item \textbf{与经典逻辑 AI 的关系：} 在系统的状态方程 (\ref{eqn0}) 中，$\vect{F}$ 是可以自由变动的（$\vect{F}$ 代表学习得来的知识），换句话说，整个系统几乎没有结构。 在无限维的泛函空间搜寻 $\vect{F}$ 是不切实际的，所以要引入逻辑 AI 的结构，令 $\vect{F}$ 的搜寻範围缩小。 在机器学习中这种做法叫 inductive bias，是加快学习的必经之路。 这个问题会在我们的论文《神经与逻辑之间的桥》\cite{YanBridge} 探讨。
+
+\item 这几篇论文的对象是数学家，希望他们能帮助解决人工智能中最瓶颈的问题： \textbf{学习}。 在这 minimal architecture 中，$\vect{x}$ 代表「正在思考的事」，而 Hamiltonian $H$ 代表「系统已知的知识」。 「学习」的\textbf{目的}是要找一个 $H$，代表「对世界的正确 model ／知识」。 注意： 在一般的控制论问题中，$H$ 是系统的定义，它是不变的。 所以我们的问题是一个非一般的控制论问题。  最优的 $H^*$ 要满足的条件是： \uline{在很多很多次的思考 trajectory （思考过程）中，用 $H^*$ 比用其他 $H$ 所得的分数（奖励）最多}。 其实 $H^*$ 可以不是唯一的，只要它的平均分数够高就可以，正如不同的人有不同的知识和想法，但他们都可以算是「有智慧」的人。 
+
+当然如果 $H$ 没有其他结构，它就只有 symplectic 结构，它的搜寻空间太大了（顶多是加上 regularity 的约束，这 regularity 指的是限制函数的起伏）。 但其实 $H$ 也可以加上\textbf{逻辑}的结构（很明显，逻辑是思考的规律），这是第二篇论文《神经与逻辑之间的桥》\cite{YanBridge} 的题目。 $H$ 的逻辑结构或许可以表示为 $H$ 的某种 symmetry group，而这关联到 $H$ 的 \textbf{integrability}，但我不是这方面的专家。
+
+%\item \textbf{与经典逻辑 AI 的关系：} 在系统的状态方程 (\ref{eqn0}) 中，$\vect{F}$ 是可以自由变动的（$\vect{F}$ 代表学习得来的知识），换句话说，整个系统几乎没有结构。 在无限维的泛函空间搜寻 $\vect{F}$ 是不切实际的，所以要引入逻辑 AI 的结构，令 $\vect{F}$ 的搜寻範围缩小。 在机器学习中这种做法叫 inductive bias，是加快学习的必经之路。 这个问题会在我们的论文《神经与逻辑之间的桥》\cite{YanBridge} 探讨。
 
 \item \textbf{记忆：}  这 minimal architecture 里面没有 episodic memory，这会在第3篇论文《记忆的结构》\cite{YanMemory}中探讨。
 
