@@ -2,17 +2,20 @@
 \usepackage{graphicx}
 \usepackage{amsmath}			% for "cases"
 \usepackage{amsfonts}		% for frakur fonts
-\usepackage{mathrsfs}		% for curly "E" error symbol
+% \usepackage{mathrsfs}		% for curly "E" error symbol
 \usepackage{float}
-\usepackage{tcolorbox}		% for wrapping example in color box
-%\usepackage{wrapfig}			% wrap figure beside text, used in example
+\usepackage[most]{tcolorbox}		% for wrapping example in color box
+%\usepackage{wrapfig}		% wrap figure beside text, used in example
 \usepackage{tikz-cd}			% commutative diagrams
-\usepackage{amssymb}			% for \multimap, \updownarrow, \bigstar
+\usepackage{tikz}
+\usepackage{amssymb}			% for \multimap \updownarrow \bigstar \varnothing
 \usepackage{sectsty}			% change section color
+\usepackage[normalem]{ulem}	% underline with line breaks: /uline
 %\usepackage{turnstile}		% longer turnstiles
 \usepackage{wasysym}			% smileys
 %\usepackage{cancel}			% center "not" line for "broken heart"
-\usepackage{soul}			% allow line breaking in \underline
+\usepackage{hyperref}		% refs, links become clickable
+\usepackage[]{algorithm2e}	% algorithms
 
 % *************** Delete when not using Chinese or colors **********************
 \usepackage{xeCJK}
@@ -38,6 +41,7 @@
 }
 \usepackage[fontsize=13pt]{scrextend}
 
+\let\emptyset\varnothing			% more beautiful empty set symbol
 \newcommand{\vect}[1]{\boldsymbol{#1}}
 \newcommand*\sigmoid{\vcenter{\hbox{\includegraphics{sigmoid.png}}}}
 \newcommand*\KB{\vcenter{\hbox{\includegraphics{KB-symbol.png}}}}
@@ -46,6 +50,11 @@
 \newcommand{\invw}{\, \rotatebox[origin=c]{90}{w}}
 \newcommand*\rectifier{\vcenter{\hbox{\includegraphics{rectifier.png}}}}
 \newcommand{\dashh}{\textemdash~}
+
+\newcommand{\tikzmark}[1]{\tikz[overlay,remember picture] \node (#1) {};}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\interfootnotelinepenalty=10000
 
 % ***** Boxed variables inside math equations
 % \newcommand*{\boxedcolor}{black}
@@ -77,7 +86,9 @@
 
 
 \begin{abstract}
-Logic-based AI and connectionist AI has long been separated, but we found a correspondence between the two sides.  Logic structure is similar to human natural language, whereas the brain is connectionist.  A chief goal of machine learning is to use inductive bias to speed up learning, but this goal may seem a bit aimless without guidance.  If we add logical structure onto neural structure, we give it more constraints, ie. inductive bias.
+Logic-based inductive learning is based on slow combinatorial search; the bottleneck of classical AI.  Neural network learning is based on gradient descent, which is much faster.  We examine the abstract structure of logic (the consequence operator $\vdash$) and try to transfer this structure to the neural-network setting.
+
+%本篇讨论经典逻辑 AI 和神经网络之间的一个对应关系，探讨二者的数学结构。 将逻辑 AI 的结构引进神经网络中，也就是 inductive bias，可能加快学习的速度。
 
 %Logic-based AI 和 connectionist AI 长久分裂，但作者最近发现可以建立两者之间的对应关系。逻辑的结构类似人类的自然语言，但大脑是用神经思考的。 机器学习的主要目标，是用 inductive bias 去加快学习速度，但这目标太空泛。 将逻辑结构加到神经结构之上，就增加了约束，亦即 inductive bias。
 % 假设 $x$ 是思维状态。 在经典逻辑智能中，$x$ 是一束命题，代表当下的思考状况。 思考的过程就是不断重复进行推导: $x \vdash x' \vdash ...$。 在经典 AI 中这个作用是靠无数的逻辑 rules 来达成的。 但现在我们的做法是将 $x$ 放到向量空间中，再用一个 recurrent 神经网络来取代整个 rules base。
@@ -87,159 +98,119 @@ Logic-based AI and connectionist AI has long been separated, but we found a corr
 
 % \textbf{人工智能}基本上分为两大阵营： \emp{逻辑 AI} (logic-based AI) 和 \emp{神经网络} (connectionism)。
 
-On the logical side, the structure is highly abstract and symbolic, but learning is too slow;  My aim is to build a ``bridge'' to \textbf{transfer} logical structure to the neural side.
+%On the logical side, the structure is highly abstract and symbolic, but learning is too slow;  My aim is to build a ``bridge'' to \textbf{transfer} logical structure to the neural side.
 
 %逻辑 AI 那边，「结构」很抽象符号化，但\textbf{学习算法}太慢；  我的目的是建立一道「桥」，将逻辑 AI 的某部分结构\textbf{转移}到神经网络那边。
 
-This problem has taken a long time to solve because the structure of logic is not a common mathematical structure;  it is difficult merely to articulate this structure in mathematical terms.  That is until I discovered the use of model theory, that I finally got a satisfactory solution:
-
+This problem took a long time to solve because the structure of logic is not easily expressible as a mathematical structure.  The perspective of \textbf{model theory} is helpful in understanding this connection:
+%That is until I discovered the use of model theory, that I finally got a satisfactory solution:
 %这个问题搞了很久都未能解决，因为逻辑 AI 那边的结构不是一般常见的数学结构，单是要要表述出来也有很大困难。 直到我应用了 model theory 的观点，才找到满意的解决方案：
 \begin{equation}
 \includegraphics[scale=0.6]{bridge.png}
 \end{equation}
 
-I will first explain the structure of the logic side, and then the structure of the neural side.
+I will first explain the structure of the neural side, then the structure of the logic side.
 %首先解释 logic 那边的结构，然后再解释 neural network 那边的结构。
 
-% =====================================================================================
-\begin{comment}
+\section{The structure of neural networks}
 
-\section{Neural architecture}
-
-Itamar Arel 在 2012 年 \cite{Arel2012}、和我在 2016 年 \cite{Yan2017}、独立地提出了同样的 cognitive architecture： 合并 \textbf{增强学习}和\textbf{深度学习}。
-
-打个比喻来说，就是用\emp{增强学习}去控制一隻智慧生物，在「思考空间」的迷宫中找最佳路径：
-\begin{equation}
-\includegraphics[scale=0.5]{maze-metaphor.png}
-\end{equation}
-增强学习特别适合解决这类问题，可以参看我写的 tutorial。
-
-关键是将「思考」看成是一个\emp{动态系统} (dynamical system)，它运行在\emp{思维状态} (mental states) 的空间中：
-\begin{equation}
-\label{fig:mental-state}
-\includegraphics[scale=0.5]{mental-state.png}
-\end{equation}
-
-举例来说，一个\emp{思维状态}可以是以下的一束命题：
-\renewcommand\labelitemi{\textbullet}
-\begin{itemize}
-\item 我在我的房间内，正在写一篇论文。
-\item 我正在写一句句子的开头：「我在我的房间内，....」
-\item 我将会写一个动词词组 (verb phrase)：「正在写....」
-\end{itemize}
-
-思考的过程就是从一个思维状态 \emp{过渡} (transition) 到另一个思维状态。 就算我现在说话，我的脑子也是靠思维状态记住我说话说到句子结构的哪部分，所以我才能组织句子的语法。
-
-\textbf{思维状态}是一支向量 $\vect{x} \in X$，$X$ 是全体\emp{思维空间}，思考算子 (reasoning operator) $F: X \rightarrow X$ 是一个 endomorphism。
-
-%, we would have at disposal all the tools available in vector space such as:
-
-%\begin{itemize}
-%\item numerical optimization (including gradient descent)
-%\item differential equations governing time evolution
-%\item dynamical systems theory, control theory (eg. adaptive filters)
-%\item Lie algebra and $C^*$-algebra of continuous operators
-%\item matrix theory, iteration and fixed-point theory
-%\item dynamic programming (aka. reinforcement learning)
-%\item neural networks and deep learning ... etc.
-%\end{itemize}
-
-% 换句话说： 我们将逻辑 AI 的整套器材搬到向量空间中去处理。 这个做法，部分是受到 Google 的 PageRank 和 Word2Vec \cite{Mikolov2013} 算法的启发，因为它们都是在向量空间中运作，而且非常成功。 %, both exploit the efficiency of vector and matrix calculus.
-
-一个\emp{动态系统 (dynamical system)} 可以用以下方法定义：
+A \textbf{neural network} is basically:
+%一个\textbf{神经网络}基本上是：
 \begin{eqnarray}
-\mbox{离散时间：} \quad \quad & \vect{x}_{n+1} = \vect{F}(\vect{x}_n) \\
-\mbox{连续时间：} \quad \quad & \dot{\vect{x}} = \vect{f}(\vect{x}) \label{eqn-dynsys}
+& \mbox{\footnotesize \textbf{weight} matrix } \tikzmark{weightMatrix} \mbox{\footnotesize for each layer} \quad \quad \mbox{\footnotesize total \# of layers} \tikzmark{numLayers} \nonumber \\
+\nonumber \\
+& F(\vect{x}) = \sigmoid(W_1 \tikzmark{wa} \sigmoid(W_2 \tikzmark{wb} ... \sigmoid( W_L \tikzmark{wc} \tikzmark{L} \; \vect{x} )))
+\begin{tikzpicture}[overlay,remember picture]
+  \draw[-, shorten <=17pt, transform canvas={shift={(-10pt,10pt)}}] (weightMatrix.center) to (wa.center);
+  \draw[-, shorten <=21pt, transform canvas={shift={(-10pt,10pt)}}] (weightMatrix.center) to (wb.center);
+  \draw[-, shorten <=33pt, transform canvas={shift={(-10pt,10pt)}}] (weightMatrix.center) to (wc.center);
+  \draw (numLayers.center) +(-40pt,-5pt) -- ([shift={(-2pt,6pt)}]L.center);
+\end{tikzpicture}
 \end{eqnarray}
-% 其中 $f$ 也可以随时间改变。 如果 $f$ 不依赖时间，则系统是 time-invariant （定常的），形式上如(\ref{eqn-dynsys}) 那种微分方程叫作 autonomous （自主的）。
-为方便起见，有时我会滥用 $F$ 和 $f$ 的表述（不区分连续和离散）。
+where $\sigmoid$ is the sigmoid function applied component-wise to each neuron (whose role is to provide \textbf{non-linearity}).
 
-一个（连续时间的）\emp{控制系统 (control system)} 定义为：
+$\sigmoid$ acts on each component of $\vect{x}$;  Its action is \textbf{not invariant} under a change of coordinates.  Therefore, $\sigmoid$ is not a vector operation, and thus \uline{$\mathbb{X}$ is not a \textbf{vector space} structure}.  Common practice is to denote $\vec{x}$ as a vector, but this is misleading.
+%$\sigmoid$ 作用在 $\vect{x}$ 的每个分量上，它的作用在座标变换下\textbf{没有不变性}。 所以 $\sigmoid$ 不是一个向量运算，从而 \underline{$\mathcal{X}$ 的结构也不是\textbf{向量空间}的结构}。 通常习惯把 $\vec{x}$ 写成向量形式，但这是误导的。
+
+Consider, for example, to recognize \textit{``white cat chasing black cat''}.  The \textit{``cat''} object has to be recognied twice;  Obviously we should not waste 2 neural networks to do this.  If we connect a neural network \textbf{head to tail}, we get a minimalist cognitive architecture with a \textbf{recurrent} loop:
 \begin{equation}
-\dot{\vect{x}}(t) = f(\vect{x}(t), \vect{u}(t), t) \label{eqn-ctrlsys}
+\includegraphics[scale=0.6]{genifer-model-00.png}
 \end{equation}
-其中 $\vect{u}(t)$ 是\emp{控制向量}。 控制论的目的就是找出最好的 $\vect{u}^*(t)$，令系统由初始状态 $\vect{x}_0$ 去到终点状态 $\vect{x_\bot}$。
-
-% \textbf{动力系统} (\ref{eqn-dynsys}) 有标准的 Hamiltonian 力学解释，这可以看成是「思维动力学」。 系统的\textbf{相位空间}有 symplectic 结构，可以利用这结构更有效地解微分方程 (\ref{eqn-dynsys})。
-
-% 而\textbf{控制系统} \ref{eqn-ctrlsys} 中，每次到达新状态 $x$，外部会给出一个奖励 $r(x)$，它对应於 Lagrangian，其单位是\textbf{能量}。 （换句话说，智能系统的欲望是用能量量度的； 详见 tutorial。）  
-
-增强学习、最优控制、和 \emp{动态规划} (dynamic programming) 都是同义词。 其中心思想是 Bellman equation； 根据 Bellman update 寻找状态空间中的\emp{最优路径}。
-
-注意： 人工智能中的 \emp{A* search}，是动态规划的一个特例。 换句话说，用动态规划在某个空间中「漫游」，可以模拟 best-first 搜寻的功能。
-
-我们的目标是学习 $F \in \{$ 无限维的算子空间 $\}$。 实践上 $F$ 可以用 deep learning network (dNN) 代表，换句话说 $F$ 就是一个有很多 parameters 的非线性算子 (= 神经网络)。 
-
-一个\textbf{神经网络}基本上是：
-\begin{equation}
-F(\vect{x}) = \sigmoid(W_1 \sigmoid(W_2 ... \sigmoid(W_L \; \vect{x} )))
-\end{equation}
-其中 $L$ 是层数，W 是每层的权重\textbf{矩阵}，$\sigmoid$ 是对每个分量的 sigmoid function （其作用是赋予非线性）。
-
-% 所有 $W$ 的分量存在於一个\textbf{高维流形}之中，\textbf{学习}的目的就是在这流形中寻找最好的 $W^*$。 在这流形上可以定义一个\textbf{度量} (metric)（例如引入随机性之后，用 Kullback–Leibler divergence 定义），这是 information geometry 的做法，用 geodesic 可以令学习快点。 
-
-在这框架下，智能系统的运作可以分开成两方面： \emp{思考} 和 \emp{学习}。
-
-\emp{思考}即是根据已学得的知识（知识储存在 dNN 里），在思维空间中找寻 $\vect{x}$ 最优的轨迹，方法是用控制论计算 $\vect{u}^*$。 $\vect{x}$ 的轨迹受 dNN 约束（系统只能依据「正确」的知识去思考），但思考时 dNN 是不变的。
-
-\emp{学习}就是学习神经网络 dNN 的 weights $W$。 此时令 $u = 0$，即忽略控制论方面。
-
-而很明显，「自由」的 $F$ 算子没有「内部结构」，它能够学习的就像是曱甴那样的、简单的「条件反射」行为。 如果要达到人类的智慧，则要学习很久（到时我们都死了）。
-
-所以问题就是要赋予 $F$ 更多的\textbf{结构}，特别是逻辑结构。 直观地说，越多的结构令\textbf{搜寻空间}越小，学习会越快。 这是机器学习里面 inductive bias 的标准做法。
-
-\end{comment}
-% ======================================================================================
-
-\begin{comment}
-\section{Logic-based AI}
-
-% Strong AI 的问题在理论上已经被\emp{数理逻辑}完整地描述了，馀下的问题是\emp{学习算法}，因为在逻辑 AI 的架构下，学习算法很慢（复杂性很高），这就是我们要解决的。
-
-% 我研究 logic-based AI 很多年，因此我的思路喜欢将新问题还原到逻辑 AI 那边去理解，但实际上我提倡的解决办法不是靠经典逻辑，甚至不是 symbolic 的。  但在这篇文章我还是会经常跳回到逻辑 AI 去方便理解。
-
-用数理逻辑 (mathematical logic) 模拟人的思想是可行的，例如有 deduction, abduction, induction 等这些模式，详细可见《Computational logic and human thinking》by Robert Kowalski, 2011.  这些方面不影响本文的阅读。 值得一提的是，作者 Kowalski 是 logic programming，特别是 Prolog，的理论奠基人之一。
-
-在经典逻辑 AI 中，「思考」是透过一些类似以下的步骤：
+Its state equation is:
 \begin{eqnarray}
-\mbox{前提} & \vdash & \mbox{结论} \\
-\boxed{\mbox{今天早上下雨}} & \vdash & \boxed{\mbox{草地是湿的}}
+\boxed{\mbox{discrete time}} \quad \quad & \vect{x}_{t+1} = \vect{F}(\vect{x}_t) \label{eqn0}\\
+\boxed{\mbox{continuous time}} \quad \quad & \dot{\vect{x}} = \vect{f}(\vect{x}) \label{eqn:continuous-time}
 \end{eqnarray}
-亦即由一些\emp{命题}(propositions)推导到另一些命题。
+From this we can see that $\mathbb{X}$ is a \textbf{differentiable manifold}.  The deeper theory is that it is a Hamiltonian system, having a \textbf{symplectic} structure (cf. our first paper \cite{YanLabyrinth}).
 
-推导必须依靠一些逻辑的法则命题 (rule propositions)，所谓「法则」是指命题里面带有 x 这样的\emp{变量}(variables)：
+\subsection{What are ``features''?}
+
+Now let's think about how a neural network performs pattern recognition, perhaps it would be illuminating....
+%现在思考一下，神经网络怎样识别模式，或许会有帮助：
+
+Consider the simplest case, eg. a layer of neural network extracting visual features from the digit ``9''.  This layer may have many neurons (left figure), each neuron locally covers a region of the input layer, the so-called ``local receptive field'' in the neuroscience of vision (right figure).
+%考虑最简单的情况，例如提取 digit ``9'' 的特徵的一层网络。 这层网络可以有很多神经元（左图），每个神经元局部地覆盖输入层，即所谓视觉神经元的 local receptive field（右图）。
 \begin{equation}
-\boxed{\mbox{地方 x 下雨}} \wedge \boxed{\mbox{x 是露天的}} \vdash \boxed{\mbox{地方 x 是湿的}}
+\includegraphics[scale=0.5]{feature-recognition.png}
 \end{equation}
-这些法则好比「逻辑引擎」的燃料，没有燃料引擎是不能推动的。
+Suppose the red neuron is responsible for recognizing the ``diagonal line'' feature.  Its equation is $\vect{y} = \sigmoid (W \vect{x})$.  The matrix $W$'s role is to affine ``rotate'' the feature space, so that the features we desire is pointing in a certain direction.  Then we use $\sigmoid$ to ``\textbf{squeeze}'' the desired and undesired features.  The output after $\sigmoid$ represents the \textbf{presence or absence} of a particular feature, ie $\{0, 1\}$.  This is a form of information \textbf{compression}.
 
-注意： 命题里面的 x，好比是有「洞」的命题，它可以透过 substitution 代入一些实物 (objects)，而变成完整的命题。 这种「句子内部」(sub-propositional)的结构可以用 predicate logic （谓词逻辑）表达，但暂时不需要理会这些细节。
-
-「所有人失恋了都会不开心」：
+%更准确地说，特徵被挤压到 $[0,1]$ 区间内，资讯没有消失，但如果计算的\textbf{解析度} (resolution) 有限，资讯确实会损失的。 如果输出层有 $n$ 个神经元，它们能够代表的 distributive features 个数是 $[0,1]^n$。 这是连续统的 $n$ 次幂，但解析度令它变成是有限的。
+From the above reasoning, we may draw a general principle, which I call the \textbf{Neural Postulate}:
 \begin{equation}
-\forall z. \; \cancel\heartsuit(z) \rightarrow \frownie{}(z)
-\end{equation}
-在数理逻辑中这算是一条 \emp{公理} (axiom)，但在 AI 中这些公理是从主体的经验中\textbf{学习}出来的，我们仍沿用「公理」这术语。 在 AI 术语中，公理的集合叫 knowledge base，记作 $\KB$。 注意 $\KB$ 是一堆 \textbf{formulas} 的集合。 
+\begin{array}{l}
+\mbox{\textbullet \underline{Each neuron represents the presence or absence of a certain \textbf{feature}}}\\
+\mbox{\textbullet \underline{Higher-layer neurons represents \textbf{relations} between lower-layer features}}
+\end{array}
+\end{equation}  
 
-Logic-based AI 可以看成是将世界的「模型」压缩成一个 $\KB$： %，里面装著大量逻辑式子
+Following this line of thinking, we may conjecture this correspondence:
+\begin{eqnarray}
+\label{conclusion1}
+\mathcal{M} & \quad \simeq \quad & \mathcal{X} \nonumber \\
+\mbox{constant} \quad \includegraphics[scale=0.5]{node.png} & \quad \Leftrightarrow \quad & \mbox{neuron} \\
+\mbox{relation} \quad \includegraphics[scale=0.5]{link.png} & \quad \Leftrightarrow \quad & \mbox{relation between higher and lower neurons} \nonumber
+\end{eqnarray}
+
+%But beware that this correspondence may not be 1-1, it could be one constant corresponding to several neurons' (linear?) \textbf{combination}.  The actual situation may be illustrated as follows (each layer may contain a vast number of neurons):
+%\begin{equation}
+%\label{conclusion2}
+%\includegraphics[scale=0.5]{actual-bridge.png}
+%\end{equation}
+%$R(a,b)$ can be searched for among the \textbf{common parents} of $a, b$ (eg. those blue neurons;  The value of $R(a, b)$ = a certain linear combination of blue neurons).  This can be verified by the condition:  If the signals of $a$ and $b$ are both ``present'', the value of $R(a, b)$ should also be ``true''.
+
+The following cartoon illustrates this correspondence from the perspective of \textbf{model theory}:
 \begin{equation}
-\includegraphics[scale=0.5]{world-model-compression.png}
+\includegraphics[scale=0.75]{model-theory-cartoon.png}
 \end{equation}
-世界模型是由大量的逻辑式子经过组合而\emp{生成}的，有点像向量空间是由其「基底」生成； 但这生成过程在逻辑中特别复杂，所以符号逻辑具有很高的\emp{压缩比}，但要学习一套逻辑 $\KB$，则相应地也有极高的\emp{复杂度}。
 
+\begin{tcolorbox}[breakable, enhanced]
+
+\textbf{A little digression on chaos theory:}
+
+The role of $\sigmoid^{-1}$ is to ``stretch'', dragging points that are close neighbors to more distant positions.  Looking at the common \textbf{threshold functions}, we see they are all non-linear \textbf{deformations} away from the identity $y = x$:
 \begin{equation}
-x \cup \KB \sdtstile{}{} x'
+\includegraphics[scale=0.25]{activation-functions.png}
 \end{equation}
+This is very similar to the ``horseshoe'' proposed by Steven Smale \cite{Smale1967}, a recipe for creating chaos.  A variant of the Smale horseshoe is the ``baker map'', analogous to kneading dough in bakery.  ``Stretching'' and then putting back to the original space, and repeating this process, creates chaos \cite{Gilmore2011} \cite{Tel2006}.  
 
-\begin{equation}
-\KB \, , \, \Gamma \sststile{}{} \Delta
-\end{equation}
+%There is something of significance here: $\vect{F}^{-1}$ has the typical characteristic of chaos: the ``sensitivity to small changes in initial conditions''.  According to my view, the forward propagation of a neural network performs pattern recogntion = \textbf{information compression}, and backward is de-compression.  While operating backwards, a single output value may correspond to many different inputs ($\vect{F}^{-1}(\vect{x})$ can be many patterns), thus small changes in the ouput (eg 0.99 and 0.98) will cause $\vect{F}^{-1}$ to fluctuate wildly, ie, chaos.  That means the inverse $\vect{F}$ is \textbf{unpredictable}, or to put it succinctly:  the forward neural network $\vect{F}$ is an \textbf{irreversible} compression process.
 
-\end{comment}
+%The recent example of DeepDream \cite{wikiDeepDreaming} that generates ``psychedelic'' images using the $\vect{F}^{-1}$ pre-image serves as evidence that $\vect{F}^{-1}$ could be wildly different from the original image:
+%\begin{equation}
+%\includegraphics[scale=0.09]{neuromorphic-art.jpg}
+%\end{equation}
+
+%In forward mode there does not exist this kind of ``stretching'', which seems to imply that chaos would be absent.  Also, according to the contraction mapping theorem, the iteration of $\vect{F}$ will terminate at fixed point(s), provided that $\vect{F}$ is contractive, ie, the spectral radius of the Jacobian matrix of $\vect{F}$ $\le 1$, but this latter point is not yet confirmed (indeed, if $W$ is unconstrained, it seems not to hold).
+
+%Time-reversal of chaos is not necessarily chaotic.  However, in ergodic theory one can calculate the \textbf{topological entropy} which is time-reversal invariant.  I am not sure if other measures of entropy might explain the irreversibility (may need to consult some experts in ergodic theory....)
+
+\end{tcolorbox}
 
 \section{Structure of logic}
 
 A \textbf{logic system} can be defined as:
+\let\labelitemi\labelitemii
 \begin{itemize}
 \item a set of symbols for \textbf{constants}, \textbf{predicates}, and \textbf{functions}
 \item \textbf{propositions} built from the above atoms
@@ -248,40 +219,271 @@ A \textbf{logic system} can be defined as:
 % \item 命题的内部结构（命题由概念原子组合而成）
 \end{itemize}
 
+The learning algorithm for logic-based AI is studied under the topic of ILP (inductive logic programming), which is a well-established field (cf my tutorial \cite{YanILPtutorial} or de Raedt's textbook \cite{DeRaedt2008}).  ILP performs \textbf{combinatorial search} in the symbolic space of logic formulas, and is very slow.  The gradient descent of neural networks is much faster.  In the following we examine the prospects of combining these 2 approaches.
+
+%From raw sensory data, we can \textbf{inductively} learn a set of logic formulas, ie. the knowledge base $\KB$.  This process is under the research heading of \textbf{inductive logic programming} (ILP).  Everyone familiar with classical AI knows ILP, but in recent decades the popular focus is on \textbf{statistical learning}, and this kind of symbolic logic learning is relatively neglected.
+%由一些原始的 sensory data，可以透过逻辑学习出一些 logic formulas，即知识库 (knowledge base) $\KB$。 这个过程叫逻辑\textbf{诱导学习} (inductive logic programming, ILP)。 学经典 AI 的人都知道 ILP，但近数十年来，注意力集中在统计学习，这种符号逻辑的学习法被忽视。 
+
+%Raw sensory data can be processed using neural-based pattern recognition, or it can be processed via ILP-based pattern recognition.  The result of these two pathways should obviously be isomorphic (at least approximately):
+%\begin{equation}
+%\begin{tikzcd}[]
+%\mbox{Logic representation} \arrow[rr, phantom, "\simeq"] & & \mbox{Neural representation} \\
+% & \arrow[ul, "\mbox{inductive logic learning}"] \arrow[ur, "\mbox{deep NN learning}" swap] %\includegraphics[scale=0.5]{sensory-data.png} &
+%\end{tikzcd}
+%\end{equation}
+
+%I have spent a lot of time thinking how to transition logic-based representations to the neural side, but found this target to be very elusive.
+%我以前花了很多时间思考怎样将逻辑的 representation 过渡到神经网络去，但发觉这个目标非常 elusive。
+
+%On the one hand, logic is the study of the laws of human thinking, developed over centuries.  The logical description is correct;  There should be a correspondence between logic and neural, as they are both doing the same thing (intelligence).
+%一方面，逻辑是几百年来发展起来的关於人类思考的规律； 逻辑的描述是正确的； 逻辑和神经之间必然有一个 correspondence，因为它们都在做同样的事（智能）。 
+
+%In \textbf{cognitive science}, many researchers believe the representations inside our brains are so-called ``mental models'', and few would believe that the brain uses a representation like the propositions in symbolic logic, or to think with the sort of symbolic manipulations as $\lambda$-calculus.
+%在\textbf{认知科学}里，有很多人相信大脑的内部的 representation 是一些所谓 ``mental models''，而很少人会相信大脑使用一些像命题那样的符号结构做 representation，甚至用 $\lambda$-calculus 那样的符号 manipulation 去思考。
+
+%As an example, when we verbally describe a case of murder, the reader would establish in her mind's eye a ``model'' that is similar to real experience yet is unreal.  The human brain seems to use such mental models to think, rather than with a bunch of propositions.  Examples of model-based reasoning using logic are \cite{Magnani1999} \cite{Magnani2002}.
+%举例来说，用文字描述一起凶杀案，读者心目中会建立一个「模型」，它类似於真实经验但又不是真实的。 人脑似乎是用这样的 mental models 思考，而不是一些命题的集合。 %至於 mental models 是什么，目前认知科学还未有定论。
+
+%So eventually I realized that the logic-neural correspondence must be achieved through model theory:
+%\begin{equation}
+%\includegraphics[scale=0.75]{model-theory.png}
+%\end{equation}
+
+%$\vdash$ means deducing from a set of (symbolic logic) \textbf{formulas} to new formulas.  $\vDash$ means that a \textbf{model} necessarily entails another model.
+
+% \footnote{Knowledge-based model construction (\textbf{KBMC}) 这个术语较少人知道，但其实是最关键的结构； 换句话说，就是从 $\KB$ 中抽出一组命题 $\Gamma$，去\textbf{组合}一个 model 或 proof tree，而这个 proof tree 的某个节点，就是新的结论。 亦即 $\Gamma \vdash Q$。 KBMC 的概念适用於经典逻辑也适用於 Bayesian networks。}
+
+Our idea is to transfer the structure of logic to neural networks.  The logic structure can be broken down into:
+\begin{itemize}
+\item propositional-level structure \\
+(the mental state $\vect{x}$ is represented as a \textbf{set} of propositions $p_i \in \vect{x}$)
+\item sub-propositional structure
+\end{itemize}
+
+\subsection{Propositional-level structure}
+
+\subsubsection{Decomposition of the mental state into propositions}
+
+The mental state $\vect{x}$ may be broken down into a conjunction of propositions:
+\begin{equation}
+\vect{x}_1 = \mbox{ I'm attending a seminar } \wedge \mbox{ I feel hungry } \wedge ....
+\end{equation}
+There could be another mental state:
+\begin{equation}
+\vect{x}_2 = \mbox{ I'm riding the subway } \wedge \mbox{ I feel hungry } \wedge ....
+\end{equation}
+It would be highly inefficient if $x_1$ and $x_2$ are considered completely different states (without decomposition).
+
+\subsubsection{Boolean algebra}
+
+A \textbf{Boolean algebra} is a structure with:
+\begin{eqnarray}
+& \mbox{\footnotesize underlying set} \tikzmark{underSet} \quad \mbox{\footnotesize binary ops} \tikzmark{binaryOps} \quad \mbox{\footnotesize unary op} \tikzmark{unaryOp} \nonumber\\
+\nonumber \\
+& \mathcal{B} = ( \, \tikzmark{UnderSet} A, \tikzmark{BinaryOps} \overbrace{\wedge, \vee}, \tikzmark{UnaryOp} \neg \, )
+\begin{tikzpicture}[overlay,remember picture]
+  \draw (underSet.center) +(-35pt,-4pt) -- ([shift={(3pt,11pt)}]UnderSet.center);
+  \draw (binaryOps.center) +(-29pt,-3pt) -- ([shift={(13pt,14pt)}]BinaryOps.center);
+  \draw (unaryOp.center) +(-30pt,-3pt) -- ([shift={(4pt,11pt)}]UnaryOp.center);
+\end{tikzpicture}
+\end{eqnarray}
+From my experience in logic-based AI, the most essential aspect of the Boolean structure (especially after introducing fuzzy-probabilistic reasoning) is this \textbf{commutativity} relation:
+\begin{equation}
+\forall a,b \in \mathcal{B}.  \quad \quad a \wedge b = b \wedge a
+\end{equation}
+
+\subsubsection{Mapping propositions $\rightarrow$ vector space}
+
+\textbf{Our gaol:} map a set of propositions (\textit{order is unimportant}) to a vector space.
+
+Consider the simplest situation:  $P_1$ and $P_2$ are two \textbf{containers} for propositions, the mental state is $(P_1, P_2)$.  Each proposition can be either $A$ or $B$.  We can arrange the placement of elements of $P_1 \times P_2$ in this way:
+\begin{equation}
+\includegraphics[scale=0.8]{lower-triangular.png}
+\end{equation}
+For example, the 3 {\color{red}red} dots represent $\{ A \}$, $\{ B \}$, and $\{ A, B \}$.  The diagonal elements are not needed, because $(A, A)$ etc. are \textit{redundant} repetitions.  In other words, all the propositional combinations are:
+\begin{equation}
+\{ \mbox{ lower-triangular elements } \} \; \setminus \mbox{ diagonal } \cup \; \emptyset
+\end{equation}
+More abstractly, elements in this ``symmetric space'', eg. $(p_1, p_2, ..., p_n)$, are \textit{invariant} under actions of the \textbf{symmetric group} $S_n$, $n$ is finite.
+
+In high dimensions, this space-saving scheme is extremely efficient:  After symmetrization, a ``corner'' of the hypercube has a volume that is only $1/n!$ of the original cube.  Even as the \textbf{curse of dimensionality} grows exponentially, $n!$ is well sufficient to offset it.
+
+Now consider the \textbf{functions} that live on this symmetric space;  How are their structures affected?  Before symmetrization, the functions have domains:
+\begin{equation}
+\vect{F}: \mathbb{X} \rightarrow \mathbb{X} \quad = \quad \mathbb{P}^n \rightarrow \mathbb{P}^n
+\end{equation}
+where $\mathbb{P}$ is the space of a single proposition.  After symmetrization:
+\begin{equation}
+\vect{F}: \mbox{sym}(\mathbb{P}^n) \rightarrow \mbox{sym}(\mathbb{P}^n)
+\end{equation}
+The symmetric space $\mbox{sym}(\mathbb{P}_1, \mathbb{P}_2, .... \mathbb{P}_n)$ possesses an \textbf{order}.  That is to say, if the input to a function is $(p_1, p_2, ... , p_n)$, we need to \textbf{sort} the $p_i$'s according to a certain order on $\mathbb{P}$, before calling $\vect{F}$ to calculate.
+
+Sorting in $\mathbb{P}$ is simple, because each $p \in \mathbb{P}$ already has a \textbf{location} in vector space (that is learned via deep learning).  $p_1 > p_2$ can be defined by a \textbf{cone} in the vector space, and then the order in $\mathbb{P}^n$ can be given by \textbf{lexicographic ordering}.
+
+The algorithm in this section is very simple, yet it can achieve a $1/n!$ improvement.  It is very worth implementing to see its actual performance $\smiley$
+
+\subsection{Sub-propositional structure}
+
+This part is more complicated.  Traditionally the structure of predicate logic is so esoteric from the point of view of mathematics that it hindered the progress of logic and logic-based AI.
+
+\subsubsection{Semantic distance and failure of compositionality}
+
+Word2Vec\cite{Mikolov2013} embeds words into vector space with ``semantic distance'':
+\begin{equation}
+\includegraphics[scale=0.3]{word2vec-relations.png}
+\end{equation}
+
+After Word2Vec, a natural next step is to represent \textbf{sentences} with semantic distance.    One popular approach (eg \cite{Coecke2010}) is via \textbf{tensor products}.  For example:
+\begin{equation}
+\mbox{\textit{``I love you''}} \quad \Rightarrow \quad \mbox{i} \otimes \mbox{love} \otimes \mbox{you}
+\end{equation}
+but this approach has serious problems:  For example, pronouns such as ``you'' refer to various entities and must be resolved using rather complicated procedures, known as ``abductive interpretation'' in logic-based AI.  Without such interpretations the word-entity correspondence becomes very inaccurate.
+
+\subsubsection{A logic based on ``features''}
+
+Assuming that the compositionality problem can be bypassed, perhaps with logical atoms referring directly to entities (no pronouns, metaphors, etc), we may represent sentences by a ``conjunction'' of features (different from the $\wedge$ for propositions), eg:
+\begin{eqnarray}
+\vect{x} &=& \textit{I feel hungry} \nonumber \\
+ &=& \textit{me} \cap \textit{physiology} \cap \textit{food} \cap \textit{negative-emotion} \cap .... 
+\end{eqnarray}
+This is like using a series of binary choices (= features) to determine an idea, like the game ``20 Questions''.
+
+\subsubsection{OpenCog's logic based on hypergraphs}
+
+To represent a complex scenario with many inter-relations, without using pronouns, perhaps \textbf{hypergraph} is a good choice.  This is the idea behind \href{http://wiki.opencog.org/w/The_Open_Cognition_Project}{OpenCog}'s representation.
+
+A hypergraph is also called a ``set system''.  Any hypergraph can be represented as a set of edges, each edge being an element of the power set of the nodes.  Eg:
+\begin{equation}
+\includegraphics[scale=0.6]{hypergraph-wikipedia.png}
+\end{equation}
+
+This representation is convenient for our purpose:  Each edge can be represented as 1 proposition.  The mental state $\vect{x}$ = a hypergraph = a set of propositions.  We can use the symmetric space proposed above to represent the mental state.
+
+Each proposition (edge) is a product of atomic concepts (nodes), we may further fix \#(nodes) per edge to, say, 3 or 4:
+\begin{equation}
+\boxed{\mbox{proposition}} \quad \vect{p} = c_1 \; c_2 \; c_3 \; c_4
+\end{equation}
+For example $c_1 \; c_2 \; c_3$ could be like subject-verb-object in natural language, where $c_1$ and $c_3$ are from the same underlying set of concepts;  $c_4$ may express some auxiliary meaning, etc.  We don't need to be very precise about this, as the actual representation can be figured out via machine learning.  This is the age of \textit{post-modern}\footnote{With ``modern'' meaning ``structuralist'', as in designating structural elements such as ``NP (noun phrase)'' in phrase-structure grammar or the ``is-a'' link in old-fashioned AI.} AI!
+
+\subsubsection{``Linkage'' phenomena in predicate logic}
+
+Next we consider \textbf{variable substitution}, a key feature of predicate logics.  For example:
+\begin{equation}
+\forall X \; \forall Y \; \forall Z.  \quad  \text{grandfather}({\color{red}X} \tikzmark{x}, {\color{red}Z} \tikzmark{z}) \leftarrow \text{father}({\color{red}X} \tikzmark{p}, {\color{red}Y} \tikzmark{y}) \wedge \mbox{father}({\color{red}Y} \tikzmark{q}, {\color{red}Z} \tikzmark{r})
+\begin{tikzpicture}[overlay,remember picture,out=45,in=135,distance=1.1cm]
+  \draw[-,red, transform canvas={shift={(-5pt,10pt)}}] (x.center) to (p.center);
+  \draw[-,red, transform canvas={shift={(-5pt,10pt)}}] (y.center) to (q.center);
+  \draw[-,red, transform canvas={shift={(-5pt,-3pt)}}, out=-45,in=225] (z.center) to (r.center);
+\end{tikzpicture}
+\label{linkage-father}
+\end{equation}
+
+\begin{equation}
+\vect{F}: \; (x_1, ..., {\color{red} x_i} \tikzmark{a}, ... , x_n) \mapsto (y_1, ... , \tikzmark{b} {\color{red} y_j} , ... , y_n)
+\begin{tikzpicture}[overlay,remember picture,out=45,in=135,distance=1.1cm]
+  \draw[->,red,shorten >=7pt,shorten <=7pt] (a.center) to node [auto, above=2pt] {$id$} (b.center);
+\end{tikzpicture}
+\end{equation}
+
+\begin{eqnarray}
+\vect{F}: \begin{cases}
+ {\color{red} y_{j}} \equiv {\color{red} x_{i}}, \quad \mbox{if } \vect{x} = \hat{\vect{a}} \mbox{ for some coordinates except } x_i\\
+ {\color{red} y_{h}} \equiv {\color{red} x_{k}}, \quad \mbox{if } \vect{x} = \hat{\vect{b}} \mbox{ for some coordinates except } x_k\\
+ ... \mbox{ etc } ... \\
+ \mbox{is free otherwise}
+ \end{cases}
+\label{linkages}
+\end{eqnarray}
+
+\begin{equation}
+\includegraphics[scale=0.7]{linkage-geometric-view.png}
+\label{fig:diagonals}
+\end{equation}
+
+\begin{equation}
+\includegraphics[scale=0.9]{gradient-descent.png}
+\end{equation}
+而我们需要的是新的 back-prop，它在「混合」的 function space 上 optimize（至於 exactly 怎样混合我还不清楚），$J$ 在 logic 的 sub-space 上分数较高：
+\begin{equation}
+\includegraphics[scale=0.9]{gradient-descent-2.png}
+\end{equation}
+
+\subsubsection{Learning algorithm with linkages}
+
+\begin{equation}
+\includegraphics[scale=0.8]{linkage-propositional-view.png}
+\end{equation}
+
+\begin{algorithm}[H]
+ \KwData{training data?}
+ \KwResult{learn linkages}
+ initialization\;
+ \While{not at end of this document}{
+  read current\;
+  \eIf{identity seems to exist}{
+   learn the identity\;
+   while interleaving with dual-brain normalization\;
+   }{
+   find next identity\;
+  }
+ }
+% \caption{How to write algorithms}
+\end{algorithm}
+
+\subsubsection{How about relation algebra?}
+
 Personally I think \textbf{relation algebra} \cite{Schmidt2010} \cite{Maddux2006} is closer to human natural language, but the standard form used in mathematical logic research is first-order logic (FOL).  This is however not of the essence, because all logics are basically easily interconvertable.  In the following we concentrate on FOL.
 %个人认为 relation algebra \cite{Schmidt2010} \cite{Maddux2006} 比较接近人类自然语言，但在数理逻辑研究中最通用的逻辑是 first-order logic (FOL)。 然而这并不是重点，因为各种逻辑基本上是等效的，而且相互之间可以很容易地转换。 以下集中讨论 FOL。  
 
-From raw sensory data, we can \textbf{inductively} learn a set of logic formulas, ie. the knowledge base $\KB$.  This process is under the research heading of \textbf{inductive logic programming} (ILP).  Everyone familiar with classical AI knows ILP, but in recent decades the popular focus is on \textbf{statistical learning}, and this kind of symbolic logic learning is relatively neglected.
-%由一些原始的 sensory data，可以透过逻辑学习出一些 logic formulas，即知识库 (knowledge base) $\KB$。 这个过程叫逻辑\textbf{诱导学习} (inductive logic programming, ILP)。 学经典 AI 的人都知道 ILP，但近数十年来，注意力集中在统计学习，这种符号逻辑的学习法被忽视。 
-
-Raw sensory data can be processed using neural-based pattern recognition, or it can be processed via ILP-based pattern recognition.  The result of these two pathways should obviously be isomorphic (at least approximately):
 \begin{equation}
-\begin{tikzcd}[]
-\mbox{Logic representation} \arrow[rr, phantom, "\simeq"] & & \mbox{Neural representation} \\
-& \arrow[ul, "\mbox{inductive logic learning}"] \arrow[ur, "\mbox{deep NN learning}" swap] \includegraphics[scale=0.5]{sensory-data.png} &
-\end{tikzcd}
+ \mbox{father} \circ \mbox{father} = \mbox{grandfather}
+\end{equation}
+实际的推导是这样的：
+\begin{eqnarray}
+\mbox{John father Pete} \nonumber \\
+\mbox{Pete father Paul} \nonumber \\
+\mbox{John father $\circ$ father Paul} 
+\end{eqnarray}
+这时要 \emp{代入} 上面的等式才能得出结论：
+\begin{equation}
+\mbox{John grandfather Paul}
 \end{equation}
 
-I have spent a lot of time thinking how to transition logic-based representations to the neural side, but found this target to be very elusive.
-%我以前花了很多时间思考怎样将逻辑的 representation 过渡到神经网络去，但发觉这个目标非常 elusive。
+\subsubsection{Fractal structure?}
 
-On the one hand, logic is the study of the laws of human thinking, developed over centuries.  The logical description is correct;  There should be a correspondence between logic and neural, as they are both doing the same thing (intelligence).
-%一方面，逻辑是几百年来发展起来的关於人类思考的规律； 逻辑的描述是正确的； 逻辑和神经之间必然有一个 correspondence，因为它们都在做同样的事（智能）。 
+\subsubsection{Sub-propositional structure -- summary}
 
-In \textbf{cognitive science}, many researchers believe the representations inside our brains are so-called ``mental models'', and few would believe that the brain uses a representation like the propositions in symbolic logic, or to think with the sort of symbolic manipulations as $\lambda$-calculus.
-%在\textbf{认知科学}里，有很多人相信大脑的内部的 representation 是一些所谓 ``mental models''，而很少人会相信大脑使用一些像命题那样的符号结构做 representation，甚至用 $\lambda$-calculus 那样的符号 manipulation 去思考。
-
-As an example, when we verbally describe a case of murder, the reader would establish in her mind's eye a ``model'' that is similar to real experience yet is unreal.  The human brain seems to use such mental models to think, rather than with a bunch of propositions.  Examples of model-based reasoning using logic are \cite{Magnani1999} \cite{Magnani2002}.
-%举例来说，用文字描述一起凶杀案，读者心目中会建立一个「模型」，它类似於真实经验但又不是真实的。 人脑似乎是用这样的 mental models 思考，而不是一些命题的集合。 %至於 mental models 是什么，目前认知科学还未有定论。
-
-So eventually I realized that the logic-neural correspondence must be achieved through model theory:
 \begin{equation}
-\includegraphics[scale=0.75]{model-theory.png}
+\frac{\mbox{propositional calculus}}{\mbox{Boolean algebra}} = \frac{\mbox{predicate calculus}}{\mbox{cylindric algebra}}
+\end{equation}
+Higher-order logic (HOL) 的代数化可以用 \emp{topoi theory} 给出 \cite{Lambek1988} \cite{MacLane1992}：
+\begin{equation}
+\frac{\mbox{intuitionistic propositional calculus}}{\mbox{Heyting algebra}} = \frac{\mbox{higher-order logic}}{\mbox{elementary topos}}
 \end{equation}
 
-$\vdash$ means deducing from a set of (symbolic logic) \textbf{formulas} to new formulas.  $\vDash$ means that a \textbf{model} necessarily entails another model.
+\begin{equation}
+\includegraphics[scale=0.8]{cylindrification.png}
+\end{equation}
 
-% \footnote{Knowledge-based model construction (\textbf{KBMC}) 这个术语较少人知道，但其实是最关键的结构； 换句话说，就是从 $\KB$ 中抽出一组命题 $\Gamma$，去\textbf{组合}一个 model 或 proof tree，而这个 proof tree 的某个节点，就是新的结论。 亦即 $\Gamma \vdash Q$。 KBMC 的概念适用於经典逻辑也适用於 Bayesian networks。}
+\subsubsection{Trading space with time}
+
+\begin{equation}
+\includegraphics[scale=0.4]{unification-cartoon-2.jpg}
+\end{equation}
+
+\subsubsection{Cartesian-closedness}
+
+\begin{equation}
+\boxed{\mbox{product}} \; A \times B \quad \mbox{和} \quad B^A \; \; \boxed{\mbox{exponentiation}} 
+\end{equation}
+在逻辑中这是指：
+\begin{equation}
+A \wedge B \quad \mbox{和} \quad A \rightarrow B
+\end{equation}
+
+\subsubsection{Application to belief revision}
+
+\section{Conclusion}
 
 % ====================================================================================
 \begin{comment}
@@ -331,9 +533,6 @@ P(\mbox{臭蛋} | \mbox{臭味}) = \vec{p}_2
 如果有「声音」又有「臭味」，则「有人放屁」的机率很高，而「臭蛋」的机率却会减少。 换句话说，「臭蛋」的机率被扯到「放屁」那边去了； 这个现象叫 ``explaining away''，它说明 Bayesian network 中，所有节点都是 globally 相关的。 所以，当求解 Bayesian network 的某个节点时，它的概率会是一连串很复杂的 sum-product 形式。 看来用 Bayesian network 表示 $\vdash$ 的方法太复杂了。
 
 可幸的是，可以用 Monte Carlo 方法求解 Bayesian network： 开始时随机地指定节点的概率，然后随机地选取某些节点来作「\textbf{局部}」的 update； 当随机 update 的次数趋近无限，节点的机率会收敛到正确的值。 换句话说： 这是一个 \textit{local} 的计算 Bayesian network 的方法。
-
-% ==================================================================================
-\end{comment}
 
 \section{Model theory}
 
@@ -391,7 +590,7 @@ Whereas, the structure of $\mathcal{M} = \vcenter{\hbox{\includegraphics{algebra
 %而 $\mathcal{M} = \vcenter{\hbox{\includegraphics{algebraic-model.png}}}$ 的结构就是模型论研究的对象。
 %是 free 的； 换句话说，那 $i$ map 的 source domain 是固定的，但 target domain 是自由的。 这导致 $i$ map 的学习很困难，因为 $\mathcal{M}$ 和 $\mathcal{X}$ 的结构都不清楚。 必须更详细分析 $\mathcal{M}, \mathcal{X}$ 的结构。
 
-%\section{模型论和 interpretation 的结构}
+\section{模型论和 interpretation 的结构}
 
 In model theory, $\mathcal{L}$ is the category of logic formulas, $\mathcal{M} = \vcenter{\hbox{\includegraphics{algebraic-model.png}}}$ could be any algebraic structure.  We just need to map the constants, predicates, relations, functions in $\mathcal{L}$ to the structure in $\mathcal{M}$.  For the sake of conciseness, we will just constants symbols and relation symbols, as these two are the \textbf{essence} of logic.
 
@@ -405,74 +604,6 @@ In model theory, $\mathcal{L}$ is the category of logic formulas, $\mathcal{M} =
 Our problem is that we don't know the structure of  $\vcenter{\hbox{\includegraphics{algebraic-model.png}}}$.  For a long time, researchers have treated neural networks as ``black boxes'', but if we don't know the structure of $\mathcal{X} =  \vcenter{\hbox{\includegraphics{cloud.png}}}$ we cannot build the isomorphism $\mathcal{M} \simeq \mathcal{X}$.
 
 %问题是在神经那边缺乏 $\vcenter{\hbox{\includegraphics{algebraic-model.png}}}$ 的结构。 一直以来，人们习惯把神经网络看成是 ``black box''，但如果我们不知道 $\mathcal{X} =  \vcenter{\hbox{\includegraphics{cloud.png}}}$ 的结构，就无法建立 $\mathcal{M} \simeq \mathcal{X}$ 的 isomorphism。
-
-\section{The structure of neural networks}
-
-So, what is the structure of neural network representations?
-%那么，神经网络的 representation 究竟是什么结构？  
-
-Basically a \textbf{neural network} is:
-%一个\textbf{神经网络}基本上是：
-\begin{equation}
-F(\vect{x}) = \sigmoid(W_1 \sigmoid(W_2 ... \sigmoid(W_L \; \vect{x} )))
-\end{equation}
-where $L$ is the number of layers, $W_\ell$ is the \textbf{weight matrix} for each layer, $\sigmoid$ is the sigmoid function applied component-wise to each neuron (whose role is to provide \textbf{non-linearity}).
-
-%其中 $L$ 是层数，$W_\ell$ 是每层的权重\textbf{矩阵}，$\sigmoid$ 是对每个分量的 sigmoid function （其作用是赋予非线性）。
-
-$\sigmoid$ acts on each component of $\vect{x}$;  Its action is \textbf{not invariant} under a change of coordinates.  Therefore, $\sigmoid$ is not a vector operation, and thus \ul{$\mathcal{X}$ is also not a \textbf{vector space} structure}.  Common practice is to denote $\vec{x}$ as a vector, but this is misleading.
-%$\sigmoid$ 作用在 $\vect{x}$ 的每个分量上，它的作用在座标变换下\textbf{没有不变性}。 所以 $\sigmoid$ 不是一个向量运算，从而 \underline{$\mathcal{X}$ 的结构也不是\textbf{向量空间}的结构}。 通常习惯把 $\vec{x}$ 写成向量形式，但这是误导的。
-
-If we connect a neural network \textbf{head to tail} forming a loop, we get the simplest form of a cognitive architecture, whose \textbf{state equation} is $\vect{x}_{n+1} = F(\vect{x}_n)$, or in continuous time $\dot{\vect{x}} = f(\vect{x})$.  From this we can see that $\vect{x} \in \mathcal{X}$ is a \textbf{differential manifold}.  The deeper theory is that it is a Hamiltonian system, having the \textbf{symplectic} structure. In other words, $\mathcal{X}$ is a differential manifold endowed with a symplectic metric.  But this is outside the scope of this paper, please refer to my \cite{Yan2017}.
-
-%如果将神经网络\textbf{首尾相接}造成迴路，这是一种智能系统的最简单形式，它的状态方程是 $\vect{x}_{n+1} = F(\vect{x}_n)$ （或连续时间的 $\dot{\vect{x}} = f(\vect{x})$），由此可以看出，$\vect{x} \in \mathcal{X}$ 是一个\textbf{微分流形}。 更深入地讲，它是一个力学上的 Hamiltonian 系统，具有 symplectic（辛流形）结构。 换句话说，它是微分流形，而且有一个辛度量 (metric)。 但这超出了本文範围，详见作者的 \cite{Yan2017}。
-
-% 所以问题就是要赋予 $F$ 更多的\textbf{结构}，特别是逻辑结构。 直观地说，越多的结构令\textbf{搜寻空间}越小，学习会越快。 这是机器学习里面 inductive bias 的标准做法。
-
-Now let's think about how a neural network performs pattern recognition, perhaps it would be illuminating:
-%现在思考一下，神经网络怎样识别模式，或许会有帮助：
-
-Consider the simplest case, eg. a layer of neural network extracting visual features from the digit ``9''.  This layer may have many neurons (left figure), each neuron locally covers a region of the input layer, the so-called ``local receptive field'' in the neuroscience of vision (right figure).
-%考虑最简单的情况，例如提取 digit ``9'' 的特徵的一层网络。 这层网络可以有很多神经元（左图），每个神经元局部地覆盖输入层，即所谓视觉神经元的 local receptive field（右图）。
-\begin{equation}
-\includegraphics[scale=0.5]{feature-recognition.png}
-\end{equation}
-Suppose the red neuron is responsible for recognizing the ``diagonal line'' feature.  Its equation is $\vect{y} = \sigmoid (W \vect{x})$.  The matrix $W$'s role is to affine ``rotate'' the feature space, so that the features we desire is pointing in a certain direction.  Then we use $\sigmoid$ to ``\textbf{squeeze}'' the desired and undesired features.  The output after $\sigmoid$ represents the \textbf{presence or absence} of a particular feature, ie $\{0, 1\}$.  This is a form of information \textbf{compression}.
-
-%假设红色的神经元专门负责辨识「对角线」这一特徵。 它的方程式是 $\vect{y} = \sigmoid (W \vect{x})$。  矩阵 $W$ 的作用是 affine「旋转」特徵空间，令我们想要的特徵指向某一方向。 然后再用 $\sigmoid$ 「\textbf{挤压}」想要的特徵和不想要的特徵。 Sigmoid 之后的输出，代表某类特徵的\textbf{存在与否}，即 $\{0, 1\}$。 这是一种资讯的\textbf{压缩}。
-
-%更准确地说，特徵被挤压到 $[0,1]$ 区间内，资讯没有消失，但如果计算的\textbf{解析度} (resolution) 有限，资讯确实会损失的。 如果输出层有 $n$ 个神经元，它们能够代表的 distributive features 个数是 $[0,1]^n$。 这是连续统的 $n$ 次幂，但解析度令它变成是有限的。
-
-Let's digress a bit on \textbf{chaos theory}:  the role of $\sigmoid^{-1}$ is to ``stretch'', dragging points that are close neighbors to more distant positions.  Looking at the common \textbf{activation functions}, we see they are all non-linear \textbf{deformations} away from the identity $y = x$:
-\begin{equation}
-\includegraphics[scale=0.25]{activation-functions.png}
-\end{equation}
-This is very similar to the ``horseshoe'' proposed by Steven Smale \cite{Smale1967}, a recipe for creating chaos.  In other words, ``stretching'' and then putting back to the original space, and repeating this process, will create chaos \cite{Gilmore2011} \cite{Tel2006}. (The neural network running backwards in time has $\sigmoid^{-1}$, so its forward movement is also chaotic.)  A variant of the Smale horseshoe is the ``baker map'', analogous to kneading dough in bakery.
-%这和 Steven Smale 提出的「马蹄」\cite{Smale1967} 非常类似，它是制造混沌的处方之一。 换句话说，「拉扯」然后放回原空间，如此不断重复，就会产生混沌 \cite{Gilmore2011} \cite{Tel2006}。 （神经网络的时间逆向就是 $\sigmoid^{-1}$，所以时间向前也是混沌。） Smale 马蹄的另一个变种叫做 baker map，其作用类似於「搓面粉」。
-
-To summarize:\\
-\underline{Each neuron represents the presence or absence of a certain \textbf{feature}.}\\
-\underline{Higher-layer neurons represents \textbf{relations} between lower-layer features}.
-
-%总结来说： \underline{每个神经元的输出代表某个 feature 的存在与否}。\\
-%而，\underline{更高层的神经元代表下层 features 之间的\textbf{关系}}。
-
-Following this line of thinking, we may conjecture this correspondence:
-%凭这个思路推广，可以推测这样的 correspondence：
-\begin{eqnarray}
-\label{conclusion1}
-\mathcal{M} & \quad \simeq \quad & \mathcal{X} \nonumber \\
-\mbox{constant} \quad \includegraphics[scale=0.5]{node.png} & \quad \Leftrightarrow \quad & \mbox{neuron} \\
-\mbox{relation} \quad \includegraphics[scale=0.5]{link.png} & \quad \Leftrightarrow \quad & \mbox{relation between higher and lower neurons} \nonumber
-\end{eqnarray}
-But beware that this correspondence may not be 1-1, it could be one constant corresponding to several neurons' (linear?) \textbf{combination}.  The actual situation may be illustrated as follows (each layer may contain a vast number of neurons):
-%但要注意的是这对应未必是一对一的，可能是一个 constant 对应几个 neurons 的\textbf{线性组合}。 具体情况可能像以下的示意图（实际上每层神经网络可能有很多神经元）：
-\begin{equation}
-\label{conclusion2}
-\includegraphics[scale=0.5]{actual-bridge.png}
-\end{equation}
-$R(a,b)$ can be searched for among the \textbf{common parents} of $a, b$ (eg. those blue neurons;  The value of $R(a, b)$ = a certain linear combination of blue neurons).  This can be verified by the condition:  If the signals of $a$ and $b$ are both ``present'', the value of $R(a, b)$ should also be ``true''.
-%$R(a,b)$ 可以在 $a, b$ 的 common parents 中寻找（例如那些蓝色神经元，$R(a, b)$ 的值 = 蓝色神经元的某个线性组合）。  验证的方法是： 当 $a$ 和 $b$ 的信号都是「有」时，$R(a, b)$ 的值也应该是 true。 
 
 \section{Conclusion}
 
@@ -515,6 +646,9 @@ For further research, I hope some professional mathematicians can help with thes
 \item In model theory there  are ultra-filters and ultra-products, which originated in functional analysis.  Recently there has been novel research crossing between model theory and Banach space \cite{Iovino2002}.  Simply put, the ultra-product is a way to multiply existing models to yield new models.  I looked at it briefly and found that ultra-products often involve sets of infinite cardinality and are very ``big'' constructs.  So they may not be very practical for computational implementation.
 
 \end{itemize}
+
+% ==================================================================================
+\end{comment}
 
 \section*{Acknowledgement}
 
