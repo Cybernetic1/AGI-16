@@ -20,6 +20,13 @@
    inkscape:export-ydpi="400">
   <defs
      id="defs4">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective3106" />
     <marker
        inkscape:stockid="Arrow1Lstart"
        orient="auto"
@@ -67,9 +74,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.3083984"
-     inkscape:cx="372.70712"
-     inkscape:cy="563.56471"
+     inkscape:zoom="3.4764403"
+     inkscape:cx="392.8051"
+     inkscape:cy="354.38497"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -316,5 +323,58 @@
            height="85.600838"
            x="189.54471"
            y="198.6467" /></flowRegion><flowPara
-         id="flowPara4940">∅</flowPara></flowRoot>  </g>
+         id="flowPara4940">∅</flowPara></flowRoot>    <path
+       style="opacity:1;fill:#ffaaaa;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 381.63989,762.87042 -60.19623,-36.9782 -0.25094,-80.92124 z"
+       id="path3124"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/cube-corner.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="opacity:1;fill:#ffd5d5;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 382.28361,763.01596 15.28875,-73.36928 -75.92459,-45.09617 z"
+       id="path3122"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/cube-corner.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <g
+       id="g3108"
+       style="fill:none;stroke:#000000"
+       inkscape:export-filename="/home/yky/latex/AGI-17/cube-corner.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600">
+      <path
+         d="m 321.4641,725.93424 60.801,37.78087 75.17245,-49.34926 -59.61151,-24.52352"
+         style="fill:none;stroke:#000000"
+         id="path3174"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cccc" />
+      <path
+         d="m 397.82604,689.84233 0,-67.13541 -76.36194,21.28667 0,81.94065"
+         style="fill:none;stroke:#000000"
+         id="path3176"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cccc" />
+      <path
+         d="m 397.82604,622.70692 59.61151,14.46374 0,77.19519 -59.61151,-24.52352 z"
+         style="fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-linejoin:bevel"
+         id="path3178" />
+      <path
+         d="m 321.4641,643.99359 60.801,22.28279 75.17245,-29.10572 -59.61151,-14.46374 z"
+         style="opacity:1;fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-linecap:square;stroke-linejoin:bevel"
+         id="path3180" />
+      <path
+         d="m 382.2651,666.27638 0,97.43873 75.17245,-49.34926 0,-77.19519 z"
+         style="opacity:1;fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-linejoin:round"
+         id="path3182" />
+      <path
+         d="m 321.4641,643.99359 60.801,22.28279 0,97.43873 -60.801,-37.78087 z"
+         style="opacity:1;fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-linejoin:bevel"
+         id="path3184" />
+    </g>
+  </g>
 </svg>

@@ -15,7 +15,7 @@
 \usepackage{wasysym}			% smileys
 %\usepackage{cancel}			% center "not" line for "broken heart"
 \usepackage{hyperref}		% refs, links become clickable
-\usepackage[]{algorithm2e}	% algorithms
+\usepackage[boxed]{algorithm2e}	% algorithms
 
 % *************** Delete when not using Chinese or colors **********************
 \usepackage{xeCJK}
@@ -29,6 +29,7 @@
 \sectionfont{\color{blue}} 
 \subsectionfont{\color{blue}} 
 \subsubsectionfont{\color{blue}} 
+\setcounter{secnumdepth}{3}
 
 \usepackage{geometry}		% change paper size
 \geometry{
@@ -43,12 +44,14 @@
 
 \let\emptyset\varnothing			% more beautiful empty set symbol
 \newcommand{\vect}[1]{\boldsymbol{#1}}
-\newcommand*\sigmoid{\vcenter{\hbox{\includegraphics{sigmoid.png}}}}
-\newcommand*\KB{\vcenter{\hbox{\includegraphics{KB-symbol.png}}}}
-\newcommand*\invsigmoid{\vcenter{\hbox{\includegraphics{inverse-sigmoid.png}}}}
+\newcommand*\sigmoid{\raisebox{-.2\height}{\includegraphics{sigmoid.png}}}
+\newcommand*\KB{\raisebox{-.2\height}{\includegraphics{KB-symbol.png}}}
+\newcommand*\NN{\raisebox{-.2\height}{\includegraphics{NN-symbol.png}}}
+\newcommand*\invsigmoid{\raisebox{-.2\height}{\includegraphics{inverse-sigmoid.png}}}
 \newcommand{\invW}{\, \rotatebox[origin=c]{90}{W}}
 \newcommand{\invw}{\, \rotatebox[origin=c]{90}{w}}
-\newcommand*\rectifier{\vcenter{\hbox{\includegraphics{rectifier.png}}}}
+\newcommand*\rectifier{\raisebox{-.2\height}{\includegraphics{rectifier.png}}}
+\newcommand*\halfsquare{\raisebox{-.1\height}{\includegraphics{half-square.png}}}
 \newcommand{\dashh}{\textemdash~}
 
 \newcommand{\tikzmark}[1]{\tikz[overlay,remember picture] \node (#1) {};}
@@ -132,7 +135,7 @@ where $\sigmoid$ is the sigmoid function applied component-wise to each neuron (
 $\sigmoid$ acts on each component of $\vect{x}$;  Its action is \textbf{not invariant} under a change of coordinates.  Therefore, $\sigmoid$ is not a vector operation, and thus \uline{$\mathbb{X}$ is not a \textbf{vector space} structure}.  Common practice is to denote $\vec{x}$ as a vector, but this is misleading.
 %$\sigmoid$ 作用在 $\vect{x}$ 的每个分量上，它的作用在座标变换下\textbf{没有不变性}。 所以 $\sigmoid$ 不是一个向量运算，从而 \underline{$\mathcal{X}$ 的结构也不是\textbf{向量空间}的结构}。 通常习惯把 $\vec{x}$ 写成向量形式，但这是误导的。
 
-Consider, for example, to recognize \textit{``white cat chasing black cat''}.  The \textit{``cat''} object has to be recognied twice;  Obviously we should not waste 2 neural networks to do this.  If we connect a neural network \textbf{head to tail}, we get a minimalist cognitive architecture with a \textbf{recurrent} loop:
+Consider, for example, to recognize \textit{``white cat chases black cat''}.  The \textit{``cat''} object has to be recognied twice;  Obviously we should not waste 2 neural networks to do this.  If we connect a neural network \textbf{head to tail}, we get a minimalist cognitive architecture with a \textbf{recurrent} loop:
 \begin{equation}
 \includegraphics[scale=0.6]{genifer-model-00.png}
 \end{equation}
@@ -219,7 +222,7 @@ A \textbf{logic system} can be defined as:
 % \item 命题的内部结构（命题由概念原子组合而成）
 \end{itemize}
 
-The learning algorithm for logic-based AI is studied under the topic of ILP (inductive logic programming), which is a well-established field (cf my tutorial \cite{YanILPtutorial} or de Raedt's textbook \cite{DeRaedt2008}).  ILP performs \textbf{combinatorial search} in the symbolic space of logic formulas, and is very slow.  The gradient descent of neural networks is much faster.  In the following we examine the prospects of combining these 2 approaches.
+The learning algorithm for logic-based AI is studied under the topic of ILP (inductive logic programming), which is a well-established field (cf. my tutorial \cite{YanILPtutorial} or de Raedt's textbook \cite{DeRaedt2008}).  ILP performs \textbf{combinatorial search} in the symbolic space of logic formulas, and is very slow.  The gradient descent of neural networks is much faster.  In the following we examine the prospects of combining these 2 approaches.
 
 %From raw sensory data, we can \textbf{inductively} learn a set of logic formulas, ie. the knowledge base $\KB$.  This process is under the research heading of \textbf{inductive logic programming} (ILP).  Everyone familiar with classical AI knows ILP, but in recent decades the popular focus is on \textbf{statistical learning}, and this kind of symbolic logic learning is relatively neglected.
 %由一些原始的 sensory data，可以透过逻辑学习出一些 logic formulas，即知识库 (knowledge base) $\KB$。 这个过程叫逻辑\textbf{诱导学习} (inductive logic programming, ILP)。 学经典 AI 的人都知道 ILP，但近数十年来，注意力集中在统计学习，这种符号逻辑的学习法被忽视。 
@@ -272,7 +275,7 @@ There could be another mental state:
 \begin{equation}
 \vect{x}_2 = \mbox{ I'm riding the subway } \wedge \mbox{ I feel hungry } \wedge ....
 \end{equation}
-It would be highly inefficient if $x_1$ and $x_2$ are considered completely different states (without decomposition).
+It would be very inefficient if $x_1$ and $x_2$ are considered completely different states (without decomposition).
 
 \subsubsection{Boolean algebra}
 
@@ -298,15 +301,19 @@ From my experience in logic-based AI, the most essential aspect of the Boolean s
 
 Consider the simplest situation:  $P_1$ and $P_2$ are two \textbf{containers} for propositions, the mental state is $(P_1, P_2)$.  Each proposition can be either $A$ or $B$.  We can arrange the placement of elements of $P_1 \times P_2$ in this way:
 \begin{equation}
-\includegraphics[scale=0.8]{lower-triangular.png}
+\includegraphics[scale=0.75]{lower-triangular.png}
 \end{equation}
-For example, the 3 {\color{red}red} dots represent $\{ A \}$, $\{ B \}$, and $\{ A, B \}$.  The diagonal elements are not needed, because $(A, A)$ etc. are \textit{redundant} repetitions.  In other words, all the propositional combinations are:
+For example, the 3 {\color{red}red} dots in the lower triangle $\halfsquare$ represent $\{ A \}$, $\{ B \}$, and $\{ A, B \}$.  The diagonal elements are not needed, because $(A, A)$ etc. are \textit{redundant} repetitions.  In other words, all the propositional combinations are:
 \begin{equation}
-\{ \mbox{ lower-triangular elements } \} \; \setminus \mbox{ diagonal } \cup \; \emptyset
+\halfsquare \; \setminus \mbox{ diagonal } \cup \; \emptyset
 \end{equation}
 More abstractly, elements in this ``symmetric space'', eg. $(p_1, p_2, ..., p_n)$, are \textit{invariant} under actions of the \textbf{symmetric group} $S_n$, $n$ is finite.
 
-In high dimensions, this space-saving scheme is extremely efficient:  After symmetrization, a ``corner'' of the hypercube has a volume that is only $1/n!$ of the original cube.  Even as the \textbf{curse of dimensionality} grows exponentially, $n!$ is well sufficient to offset it.
+In high dimensions, this space-saving scheme is extremely efficient:  After symmetrization, a ``corner'' of the hypercube has a volume that is only $1/n!$ of the original cube, eg. $n = 3$:
+\begin{equation}
+\includegraphics[scale=0.5]{cube-corner.png}
+\end{equation}
+Even as the \textbf{curse of dimensionality} grows exponentially, $n!$ is well sufficient to offset it.
 
 Now consider the \textbf{functions} that live on this symmetric space;  How are their structures affected?  Before symmetrization, the functions have domains:
 \begin{equation}
@@ -314,13 +321,15 @@ Now consider the \textbf{functions} that live on this symmetric space;  How are 
 \end{equation}
 where $\mathbb{P}$ is the space of a single proposition.  After symmetrization:
 \begin{equation}
-\vect{F}: \mbox{sym}(\mathbb{P}^n) \rightarrow \mbox{sym}(\mathbb{P}^n)
+\vect{F}: \mbox{sym}(\mathbb{P}^n) \rightarrow \mbox{sym}(\mathbb{P}^n) \quad = \quad \halfsquare \rightarrow \halfsquare
 \end{equation}
 The symmetric space $\mbox{sym}(\mathbb{P}_1, \mathbb{P}_2, .... \mathbb{P}_n)$ possesses an \textbf{order}.  That is to say, if the input to a function is $(p_1, p_2, ... , p_n)$, we need to \textbf{sort} the $p_i$'s according to a certain order on $\mathbb{P}$, before calling $\vect{F}$ to calculate.
 
 Sorting in $\mathbb{P}$ is simple, because each $p \in \mathbb{P}$ already has a \textbf{location} in vector space (that is learned via deep learning).  $p_1 > p_2$ can be defined by a \textbf{cone} in the vector space, and then the order in $\mathbb{P}^n$ can be given by \textbf{lexicographic ordering}.
 
-The algorithm in this section is very simple, yet it can achieve a $1/n!$ improvement.  It is very worth implementing to see its actual performance $\smiley$
+When implementing with as a neural network $\NN: \mathbb{R}^n \rightarrow \mathbb{R}^n$, we can keep the entire network, using only $\halfsquare$ as its domain and co-domain.  It seems that we have gained nothing, but consider if we train the network with 100 samples on $\halfsquare$ versus the whole hypercube.  $\halfsquare$ will receive the ``full strength'' of the data set whereas the hypercube will have its ``firepower'' diluted by $n!$.
+
+%The algorithm in this section is very simple, yet it can achieve a $1/n!$ improvement.  It is very worth implementing to see its actual performance $\smiley$
 
 \subsection{Sub-propositional structure}
 
@@ -356,18 +365,18 @@ A hypergraph is also called a ``set system''.  Any hypergraph can be represented
 \begin{equation}
 \includegraphics[scale=0.6]{hypergraph-wikipedia.png}
 \end{equation}
-
 This representation is convenient for our purpose:  Each edge can be represented as 1 proposition.  The mental state $\vect{x}$ = a hypergraph = a set of propositions.  We can use the symmetric space proposed above to represent the mental state.
 
-Each proposition (edge) is a product of atomic concepts (nodes), we may further fix \#(nodes) per edge to, say, 3 or 4:
+Each proposition (edge) is a product of atomic concepts (nodes), we may further fix \#(nodes) per edge to, say, 3:
 \begin{equation}
-\boxed{\mbox{proposition}} \quad \vect{p} = c_1 \; c_2 \; c_3 \; c_4
+\boxed{\mbox{proposition}} \quad \vect{p} = c_1 \; c_2 \; c_3
 \end{equation}
-For example $c_1 \; c_2 \; c_3$ could be like subject-verb-object in natural language, where $c_1$ and $c_3$ are from the same underlying set of concepts;  $c_4$ may express some auxiliary meaning, etc.  We don't need to be very precise about this, as the actual representation can be figured out via machine learning.  This is the age of \textit{post-modern}\footnote{With ``modern'' meaning ``structuralist'', as in designating structural elements such as ``NP (noun phrase)'' in phrase-structure grammar or the ``is-a'' link in old-fashioned AI.} AI!
+For example $c_1 \; c_2 \; c_3$ could be like subject-verb-object in natural language, where $c_1$ and $c_3$ are from the set of nouns / entities;  $c_2$ from the set of verbs / relations.  We don't need to be very precise about this, as the actual representation can be figured out via machine learning.  This is the age of \textit{post-modern}\footnote{With ``modern'' meaning ``structuralist'', as in designating structural elements such as ``NP (noun phrase)'' in phrase-structure grammar or the ``is-a'' link in old-fashioned AI.} AI!
 
 \subsubsection{``Linkage'' phenomena in predicate logic}
 
 Next we consider \textbf{variable substitution}, a key feature of predicate logics.  For example:
+
 \begin{equation}
 \forall X \; \forall Y \; \forall Z.  \quad  \text{grandfather}({\color{red}X} \tikzmark{x}, {\color{red}Z} \tikzmark{z}) \leftarrow \text{father}({\color{red}X} \tikzmark{p}, {\color{red}Y} \tikzmark{y}) \wedge \mbox{father}({\color{red}Y} \tikzmark{q}, {\color{red}Z} \tikzmark{r})
 \begin{tikzpicture}[overlay,remember picture,out=45,in=135,distance=1.1cm]
@@ -378,13 +387,17 @@ Next we consider \textbf{variable substitution}, a key feature of predicate logi
 \label{linkage-father}
 \end{equation}
 
+The links symbolize that the same variables must be substituted by the same objects, which is really the \textit{essence} of \textbf{substitution}.
+
+To duplicate this effect in neural networks, we can force a coordinate of the input space to be identified with another coordinate of the output space:
+
 \begin{equation}
 \vect{F}: \; (x_1, ..., {\color{red} x_i} \tikzmark{a}, ... , x_n) \mapsto (y_1, ... , \tikzmark{b} {\color{red} y_j} , ... , y_n)
 \begin{tikzpicture}[overlay,remember picture,out=45,in=135,distance=1.1cm]
   \draw[->,red,shorten >=7pt,shorten <=7pt] (a.center) to node [auto, above=2pt] {$id$} (b.center);
 \end{tikzpicture}
 \end{equation}
-
+But such identities do not always hold.  They only exist at specific values of $\vect{x}$:
 \begin{eqnarray}
 \vect{F}: \begin{cases}
  {\color{red} y_{j}} \equiv {\color{red} x_{i}}, \quad \mbox{if } \vect{x} = \hat{\vect{a}} \mbox{ for some coordinates except } x_i\\
@@ -394,47 +407,95 @@ Next we consider \textbf{variable substitution}, a key feature of predicate logi
  \end{cases}
 \label{linkages}
 \end{eqnarray}
-
+Geometrically, a linkage is a diagonal line that \textit{restricts} the ``graph'' of the neural network function:
 \begin{equation}
-\includegraphics[scale=0.7]{linkage-geometric-view.png}
+\includegraphics[scale=0.65]{linkage-geometric-view.png}
 \label{fig:diagonals}
-\end{equation}
-
-\begin{equation}
-\includegraphics[scale=0.9]{gradient-descent.png}
-\end{equation}
-而我们需要的是新的 back-prop，它在「混合」的 function space 上 optimize（至於 exactly 怎样混合我还不清楚），$J$ 在 logic 的 sub-space 上分数较高：
-\begin{equation}
-\includegraphics[scale=0.9]{gradient-descent-2.png}
 \end{equation}
 
 \subsubsection{Learning algorithm with linkages}
 
+As an optimization problem, the goal of learning is to find the optimal neural network $F^*$ in a function space (figuratively):
 \begin{equation}
-\includegraphics[scale=0.8]{linkage-propositional-view.png}
+\includegraphics[scale=0.75]{gradient-descent.png}
+\end{equation}
+We need a new algorithm that gives priority (higher scores) to linkages:
+\begin{equation}
+\includegraphics[scale=0.75]{gradient-descent-2.png}
 \end{equation}
 
+Below is a figure that shows the ``internal threads'' of a function ($\vdash$) that maps a premise to a conclusion, ie:
+\begin{equation}
+P_1 \wedge P_2 \wedge P_3 \wedge ... \quad \vdash \quad Q_1 \wedge Q_2 \wedge ...
+\end{equation}
+\begin{equation}
+\includegraphics[scale=0.7]{linkage-propositional-view.png}
+\end{equation}
+where \colorbox{yellow}{yellow} ``ribbons'' represent $\mbox{id}$ mappings (that respect coordinate positions), \colorbox{cyan!20}{blue} ribbons represent abitrary mappings.
+
+As for learning algorithm, one idea is to \textit{force} the learning of diagonals, whenever a potential identity function is detected.  This creates a ``propensity'' for generalization.  After a diagonal is learned, it may be destroyed by subsequent learning; which is fine.  Also, the forcing of a diagonal may accidentally destroy previously learned knowledge.  This may be balanced by \textbf{dual-lobe} re-normalization.
+\newsavebox{\algbox}
+\begin{lrbox}{\algbox}
+\begin{minipage}{0.8\linewidth}
 \begin{algorithm}[H]
- \KwData{training data?}
- \KwResult{learn linkages}
- initialization\;
- \While{not at end of this document}{
-  read current\;
+ % \KwData{training data?}
+ % \KwResult{learn linkages}
+ % initialization\;
+ \For{each data item}{
+  detect if a potential identity may exist\;
   \eIf{identity seems to exist}{
-   learn the identity\;
-   while interleaving with dual-brain normalization\;
+   force-learn the diagonal\;
    }{
-   find next identity\;
+   learn as usual\;
   }
  }
+ dual-lobe re-normalization\;
 % \caption{How to write algorithms}
 \end{algorithm}
+\end{minipage}
+\end{lrbox}
+\begin{equation}
+	\usebox{\algbox}
+\end{equation}
 
-\subsubsection{How about relation algebra?}
+\begin{tcolorbox}[breakable, enhanced]
+\setlength{\parskip}{2.8ex}
 
-Personally I think \textbf{relation algebra} \cite{Schmidt2010} \cite{Maddux2006} is closer to human natural language, but the standard form used in mathematical logic research is first-order logic (FOL).  This is however not of the essence, because all logics are basically easily interconvertable.  In the following we concentrate on FOL.
+\section*{Appendix: logic and logic-based AI}
+\renewcommand{\thesection}{A}
+
+This part is to be separated to become a tutorial paper...
+
+\setcounter{subsection}{0}
+\subsection{Algebraic logic}
+
+Traditionally, there are 2 ways to express the \textbf{sub-propositional} structure of logic:  via \textbf{predicate logic} and \textbf{relation algebra}.  No matter which way, their essence is \textbf{variable substitution}.  Interestingly, substitution is also the essence of ``algebra'', but here substitutions occur \textbf{implicitly}, so it is actually difficult to use algebra to express them explicitly.
+
+As for \textbf{$\lambda$-calculus}, it is essentially also a scheme for managing substitutions.  Whereas \textbf{combinatory logic}, equivalent to $\lambda$-calculus, eliminates the use of ``variables''.  The price to pay is an increase in length of the formulas (more complex than relation algebra).
+
+The algebraization of (first-order) predicate logic is given by Alfred Tarski's \textbf{cylindric algebra}:
+\begin{equation}
+\frac{\mbox{propositional calculus}}{\mbox{Boolean algebra}} = \frac{\mbox{predicate calculus}}{\mbox{cylindric algebra}}
+\end{equation}
+The algebraization of \textbf{higher-order logic} (HOL) is provided by \textbf{topoi theory} \cite{Lambek1988} \cite{MacLane1992}:
+\begin{equation}
+\frac{\mbox{intuitionistic propositional calculus}}{\mbox{Heyting algebra}} = \frac{\mbox{higher-order logic}}{\mbox{elementary topos}}
+\end{equation}
+HOL is equivalent to \textbf{untyped} $\lambda$-calculus, whereas the \textbf{typed} $\lambda$-calculus (= type theory) is somewhat weaker.  The characteristic of the entire HOL family is ``substitution of equal by equals'', which causes the length of formulas to increase.  But predicate logic performs substitution with \textbf{objects}, so it does not increase the length of formulas;  However, its algebraization introduces notions such as cylindrification and the diagonal set.  For example, in fig. (\ref{fig:diagonals}) there is the diagonal $y_1 \equiv x_2$.
+
+This is an illustration of \textbf{cylindrification}:
+\begin{equation}
+\includegraphics[scale=0.8]{cylindrification.png}
+\end{equation}
+
+\subsection{Relation algebra}
+
+%Personally I think \textbf{relation algebra} \cite{Schmidt2010} \cite{Maddux2006} is closer to human natural language, but the standard form used in mathematical logic research is first-order logic (FOL).  This is however not of the essence, because all logics are basically easily interconvertable.  In the following we concentrate on FOL.
 %个人认为 relation algebra \cite{Schmidt2010} \cite{Maddux2006} 比较接近人类自然语言，但在数理逻辑研究中最通用的逻辑是 first-order logic (FOL)。 然而这并不是重点，因为各种逻辑基本上是等效的，而且相互之间可以很容易地转换。 以下集中讨论 FOL。  
 
+以前曾经对 relation algebra \cite{Schmidt2010} \cite{Maddux2006} 有些幢憬，因为它比较接近人类自然语言，但其实 relation algebra (RA) 和 first-order logic (FOL) 基本上是等效的，在 FOL 里面有 linkage 的复杂性，但在 RA 里面这个复杂性其实也没有消失。 可以说「\underline{复杂度是守恒的}」\footnote{这句话是 category theorist Eugenia Cheng 说的。}。
+
+举例来说，在 (\ref{linkage-father}) 中表达「\textit{爸爸的爸爸是爷爷}」，可以用 RA 更简单地表达：
 \begin{equation}
  \mbox{father} \circ \mbox{father} = \mbox{grandfather}
 \end{equation}
@@ -448,42 +509,66 @@ Personally I think \textbf{relation algebra} \cite{Schmidt2010} \cite{Maddux2006
 \begin{equation}
 \mbox{John grandfather Paul}
 \end{equation}
+所以 linkage 的复杂性变成了代数 formula 长度的复杂性。 
 
-\subsubsection{Fractal structure?}
+\subsection{Fractal structure}
 
-\subsubsection{Sub-propositional structure -- summary}
+「长度」本身没有不妥，但我们的目的是将逻辑式子嵌入到状态空间 $\vect{x}$ 里，这时 variable length 令人很头痛，但 fixed length 没有此问题。 如果硬要将 variable length 的式子嵌入到（有限维）向量空间中，\uline{似乎必须用到 \emp{fractal} 结构}（因为它有自相似性），同时需要设计一种新的神经网络，它先天性地有 fractal 结构在里面； 但这比较复杂，我没有在这方向 explore。
 
-\begin{equation}
-\frac{\mbox{propositional calculus}}{\mbox{Boolean algebra}} = \frac{\mbox{predicate calculus}}{\mbox{cylindric algebra}}
-\end{equation}
-Higher-order logic (HOL) 的代数化可以用 \emp{topoi theory} 给出 \cite{Lambek1988} \cite{MacLane1992}：
-\begin{equation}
-\frac{\mbox{intuitionistic propositional calculus}}{\mbox{Heyting algebra}} = \frac{\mbox{higher-order logic}}{\mbox{elementary topos}}
-\end{equation}
+\subsection{Trading space with time}
 
-\begin{equation}
-\includegraphics[scale=0.8]{cylindrification.png}
-\end{equation}
-
-\subsubsection{Trading space with time}
-
+上面说的是 substitution 在空间中的 linkage 结构。 但也可以将 substitution \textbf{分拆}成若干个简单的步骤。 方法是： 将某些内容放进记忆体中的「盒子」中，\uline{这些盒子充当 variables 的角色，也就是很具体地实现 substitution 的动作}。 换句话说，将\textbf{空间复杂性}转换成\textbf{时间复习性}\footnote{人脑的脑电波由 0.5 Hz 到 40 Hz 都有，我们感觉上瞬间的动作可能已经过了若干次迴路。}； 以下是示意图：
 \begin{equation}
 \includegraphics[scale=0.4]{unification-cartoon-2.jpg}
 \end{equation}
+X，Y 是状态空间 $\mathbb{X} \ni \vect{x}$ 里面的「盒子」 = variables。
 
-\subsubsection{Cartesian-closedness}
+先前我说的 linkage 结构，放在有限维向量空间比较方便，但它是 first-order logic，处理 higher-order 关系时有很大困难。 Higher-order relations 似乎还是要用这种分拆步骤的方法解决。
 
+\subsection{Cartesian-closedness}
+
+折腾了这么久，但仍然缺少了一个重要的特性： Cartesian-closedness。 它指的是在某个範畴内，对任意的 $A,B$，都必然可以找到它们的：
 \begin{equation}
 \boxed{\mbox{product}} \; A \times B \quad \mbox{和} \quad B^A \; \; \boxed{\mbox{exponentiation}} 
 \end{equation}
-在逻辑中这是指：
+In logic this refers to:
 \begin{equation}
 A \wedge B \quad \mbox{和} \quad A \rightarrow B
 \end{equation}
 
-\subsubsection{Application to belief revision}
+为什么需要 Cartesian-closed？  注意在 minimal architecture 里，只有两种记忆，即瞬时记忆 $\vect{x}$ 和永久记忆 $\vect{F} = \KB \vdash$。 从 logic-based AI 的角度来看，$\KB$ 里装著 logic rules，但 $\vect{x}$ 里面只有 ground facts。 Ground sentence 指的是\textbf{没有变量}的命题，例如：
+\begin{equation}
+\vect{x} = \textit{见到地上有血迹}
+\end{equation}
+相比之下，logic rule 是有变量的 conditional statement，例如：
+\begin{equation}
+\forall Z. \quad \mbox{\textit{$Z$有血迹}} \rightarrow \mbox{\textit{$Z$可能是凶案现场}}
+\end{equation}
+如果在 $\vect{x}$ 里面可以存放 rule，那表示 $\vect{x} \ni \mathbb{X}$ 是一个 Cartesian-closed category。 这样的 $\mathbb{X}$ 是一个更 powerful 的结构，亦即系统可以思考更复杂的 thoughts。 更重要的是，$\vect{x} \ni \mathbb{X}$ 和 $F = \KB \vdash$ 现在\textbf{地位平等}，因为它们都是 $\mathbb{X} \rightarrow \mathbb{X}$ 的\textbf{函数}，因为 Cartesian-closed 表示 $\mathbb{X} \simeq \mathbb{X}^{\mathbb{X}}$。 这个特性在 belief revision 中似乎会很有用（见下节）。
 
-\section{Conclusion}
+如何在神经网络中做到 Cartesian-closed？ 记得神经网络中 $\vect{x}$ 是一组 features $= (x_1, x_2, ..., x_n)$。 一个办法是将所有 $\vect{x}$ 都变成 $\mathbb{X} \rightarrow \mathbb{X}$ 的函数。 逻辑的 implication $A \rightarrow B$ 显然是函数，但单一 ground sentence $A$ 也可以是函数： $\top \rightarrow A$ ，其中 $\top$ 是逻辑「真」。 注意： 这些函数中可以有 linkages，即处理变量的能力。
+
+转到神经网络中，$A \rightarrow B$ 是一个 $\mathbb{X} \rightarrow \mathbb{X}$ 的神经网络。 $\top \rightarrow A$ 也是一个 $\mathbb{X} \rightarrow \mathbb{X}$ 的神经网络，但它将 $\vect{1} \mapsto \vect{A}$。
+
+那 $\mathbb{X}$ 是一个怎样的空间？  它本身可以是一个深度神经网路的 weights，但\uline{这个神经网络的输入／输出层必须有足够的}\textbf{\uline{阔度}}\uline{去处理}\textbf{\uline{它自己}}！  表面上似乎不可能.... 越多的 weights 需要更多的 weights 去处理.... 但如果令 $\vect{x}$ 储存一些 partial functions 或许可以。
+
+\subsection{Application to belief revision}
+
+Belief revision （也可以叫 ``truth maintenance''）是经典逻辑 AI 发展的高峰。 如果可以用我们的新 architecture 做到 belief revision，我们会很有信心这个理论是 general intelligence。 
+
+正常的逻辑运作模式是由 $\KB$ 作用在 $\vect{x}$ 上给出新的 $\vect{x}$：
+\begin{equation}
+\KB ( \vect{x} ) = \vect{x}'
+\end{equation}
+但 belief revision 或者可以看成是 $\vect{x}$ 作用在 $\KB$ 上的结果：
+\begin{equation}
+\vect{x} ( \KB ) = \KB'
+\end{equation}
+由於 Cartesian-closedness，$\vect{x}$ 和 $\KB$ 的地位是平等的，使上面的运作成为可能。 
+
+这只是一个 vague idea，我会再回到这里填补这空白....
+
+\end{tcolorbox}
 
 % ====================================================================================
 \begin{comment}
