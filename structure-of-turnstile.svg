@@ -1,0 +1,955 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="structure-of-turnstile.svg">
+  <defs
+     id="defs4">
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mend-4"
+       style="overflow:visible">
+      <path
+         id="path3983-4"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker5307"
+       style="overflow:visible">
+      <path
+         id="path5309"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker5303"
+       style="overflow:visible">
+      <path
+         id="path5305"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mend-3"
+       style="overflow:visible">
+      <path
+         id="path3983-8"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mendk"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Mendk"
+       style="overflow:visible;">
+      <path
+         id="path5040"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="stroke:#ff0000;stroke-width:1.0pt;fill:#ff0000;fill-rule:evenodd"
+         transform="scale(0.4) rotate(180) translate(10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mend-6"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3983-1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mend-7"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3983-9"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Send"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Send"
+       style="overflow:visible;">
+      <path
+         id="path3989"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;"
+         transform="scale(0.2) rotate(180) translate(6,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Mend"
+       style="overflow:visible;">
+      <path
+         id="path3983"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;"
+         transform="scale(0.4) rotate(180) translate(10,0)" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Mstart"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mstart">
+      <path
+         transform="scale(0.4) translate(10,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path4151" />
+    </marker>
+    <marker
+       style="overflow:visible;"
+       id="Arrow2Mend"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mend">
+      <path
+         transform="scale(0.6) rotate(180) translate(0,0)"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         style="fill-rule:evenodd;stroke-width:0.62500000;stroke-linejoin:round;"
+         id="path4172" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Mend-5"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mend">
+      <path
+         inkscape:connector-curvature="0"
+         transform="scale(-0.6,-0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         id="path4172-6" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Mend-9"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mend">
+      <path
+         inkscape:connector-curvature="0"
+         transform="scale(-0.6,-0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         id="path4172-1" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Mend-3"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mend">
+      <path
+         inkscape:connector-curvature="0"
+         transform="scale(-0.6,-0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         id="path4172-61" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Mend-37"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mend">
+      <path
+         inkscape:connector-curvature="0"
+         transform="scale(-0.6,-0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         id="path4172-4" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Mend-4"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mend">
+      <path
+         inkscape:connector-curvature="0"
+         transform="scale(-0.6,-0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         id="path4172-8" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1"
+     inkscape:cx="387.96375"
+     inkscape:cy="515.0273"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1050"
+     inkscape:window-height="1652"
+     inkscape:window-x="0"
+     inkscape:window-y="2"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:#ffff00;fill-opacity:0.31372549;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 272.05975,451.42209 66.14472,-50.6676 -0.25042,126.22056 -65.8943,-56.08086"
+       id="path5735-3-8"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/structure-of-turnstile.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:#ffff00;fill-opacity:0.31372549;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 362.51957,505.80902 -24.42617,-0.61272 0,-20.33602 24.67659,-0.30561"
+       id="path5735-9-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/structure-of-turnstile.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:#ffff00;fill-opacity:0.31372549;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 428.82538,527.40701 -65.8943,-22.08086 0,-19.4721 66.57668,-85.96348"
+       id="path5735-3"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/structure-of-turnstile.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:#ffff00;fill-opacity:0.31372549;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 455.17493,484.21103 -24.42617,-0.61272 0,-20.33602 24.67659,-0.30561"
+       id="path5735-9"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/structure-of-turnstile.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:#ffff00;fill-opacity:0.31372549;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 520.49553,527.05905 -65.8943,-42.94478 0,-20.33602 66.57668,-64.23564"
+       id="path5735"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/structure-of-turnstile.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       id="path7618"
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0;marker-mid:url(#Arrow2Mend);marker-end:none"
+       d="m 89.675208,638.92881 c 0,19.60611 41.637522,35.5 93.000002,35.5 51.36248,0 93,-15.89389 93,-35.5"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccc"
+       inkscape:export-filename="/home/yky/latex/AGI-17/carousel.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0;marker-mid:none;marker-end:none"
+       d="m 89.675208,638.92881 c 0,-19.60611 41.637522,-35.5 93.000002,-35.5 51.36248,0 93,15.89389 93,35.5"
+       id="path3119"
+       inkscape:export-filename="/home/yky/latex/AGI-17/carousel.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600"
+       inkscape:connector-curvature="0" />
+    <g
+       id="g4038"
+       transform="translate(159.67521,387.56663)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/carousel.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600">
+      <rect
+         ry="0"
+         rx="0"
+         y="271.86218"
+         x="49.5"
+         height="24"
+         width="23"
+         id="rect4036"
+         style="fill:#ffffff;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+      <flowRoot
+         xml:space="preserve"
+         id="flowRoot3908-7"
+         style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+         transform="translate(-253.7847,-270.73691)"><flowRegion
+           id="flowRegion3910-5"><rect
+             id="rect3912-3"
+             width="207.85046"
+             height="25.396408"
+             x="115"
+             y="544.36218"
+             style="text-align:end;text-anchor:end" /></flowRegion><flowPara
+           id="flowPara3914-5"
+           style="font-size:14px;text-align:end;text-anchor:end"> P<flowSpan
+   style="font-size:65.00091553%;text-align:end;text-anchor:end;baseline-shift:sub"
+   id="flowSpan4924-3">5</flowSpan></flowPara></flowRoot>    </g>
+    <g
+       id="g4038-2"
+       transform="translate(66.175208,383.56663)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/carousel.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600">
+      <rect
+         ry="0"
+         rx="0"
+         y="271.86218"
+         x="49.5"
+         height="24"
+         width="23"
+         id="rect4036-7"
+         style="fill:#ffffff;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+      <flowRoot
+         xml:space="preserve"
+         id="flowRoot3908-7-0"
+         style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+         transform="translate(-253.7847,-270.73691)"><flowRegion
+           id="flowRegion3910-5-9"><rect
+             id="rect3912-3-3"
+             width="207.85046"
+             height="25.396408"
+             x="115"
+             y="544.36218"
+             style="text-align:end;text-anchor:end" /></flowRegion><flowPara
+           id="flowPara3914-5-6"
+           style="font-size:14px;text-align:end;text-anchor:end"> P<flowSpan
+   style="font-size:65.00091553%;text-align:end;text-anchor:end;baseline-shift:sub"
+   id="flowSpan4924-3-0">4</flowSpan></flowPara></flowRoot>    </g>
+    <g
+       id="g4038-6"
+       transform="translate(65.175208,327.06663)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/carousel.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600">
+      <rect
+         ry="0"
+         rx="0"
+         y="271.86218"
+         x="49.5"
+         height="24"
+         width="23"
+         id="rect4036-2"
+         style="fill:#ffffff;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+      <flowRoot
+         xml:space="preserve"
+         id="flowRoot3908-7-6"
+         style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+         transform="translate(-253.7847,-270.73691)"><flowRegion
+           id="flowRegion3910-5-1"><rect
+             id="rect3912-3-8"
+             width="207.85046"
+             height="25.396408"
+             x="115"
+             y="544.36218"
+             style="text-align:end;text-anchor:end" /></flowRegion><flowPara
+           id="flowPara3914-5-7"
+           style="font-size:14px;text-align:end;text-anchor:end"> P<flowSpan
+   style="font-size:65.00091553%;text-align:end;text-anchor:end;baseline-shift:sub"
+   id="flowSpan4924-3-9">3</flowSpan></flowPara></flowRoot>    </g>
+    <g
+       id="g4038-20"
+       transform="translate(114.17521,319.06663)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/carousel.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600">
+      <rect
+         ry="0"
+         rx="0"
+         y="271.86218"
+         x="49.5"
+         height="24"
+         width="23"
+         id="rect4036-23"
+         style="fill:#ffffff;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+      <flowRoot
+         xml:space="preserve"
+         id="flowRoot3908-7-7"
+         style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+         transform="translate(-253.7847,-270.73691)"><flowRegion
+           id="flowRegion3910-5-5"><rect
+             id="rect3912-3-9"
+             width="207.85046"
+             height="25.396408"
+             x="115"
+             y="544.36218"
+             style="text-align:end;text-anchor:end" /></flowRegion><flowPara
+           id="flowPara3914-5-2"
+           style="font-size:14px;text-align:end;text-anchor:end"> P<flowSpan
+   style="font-size:65.00091553%;text-align:end;text-anchor:end;baseline-shift:sub"
+   id="flowSpan4924-3-2">2</flowSpan></flowPara></flowRoot>    </g>
+    <g
+       id="g4038-8"
+       transform="translate(163.17521,322.56663)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/carousel.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600">
+      <rect
+         ry="0"
+         rx="0"
+         y="271.86218"
+         x="49.5"
+         height="24"
+         width="23"
+         id="rect4036-9"
+         style="fill:#ffffff;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+      <flowRoot
+         xml:space="preserve"
+         id="flowRoot3908-7-73"
+         style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+         transform="translate(-253.7847,-270.73691)"><flowRegion
+           id="flowRegion3910-5-61"><rect
+             id="rect3912-3-29"
+             width="207.85046"
+             height="25.396408"
+             x="115"
+             y="544.36218"
+             style="text-align:end;text-anchor:end" /></flowRegion><flowPara
+           id="flowPara3914-5-3"
+           style="font-size:14px;text-align:end;text-anchor:end"> P<flowSpan
+   style="font-size:65.00091553%;text-align:end;text-anchor:end;baseline-shift:sub"
+   id="flowSpan4924-3-19">1</flowSpan></flowPara></flowRoot>    </g>
+    <g
+       id="g4038-8-4"
+       transform="translate(250.67521,354.56663)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/carousel.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600">
+      <rect
+         ry="9"
+         rx="15"
+         y="269.36218"
+         x="45"
+         height="27"
+         width="54"
+         id="rect4036-9-7"
+         style="fill:#ffffff;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+      <flowRoot
+         xml:space="preserve"
+         id="flowRoot3908-7-73-8"
+         style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+         transform="translate(-64.7847,-270.23691)"><flowRegion
+           id="flowRegion3910-5-61-4"><rect
+             id="rect3912-3-29-5"
+             width="37.350464"
+             height="21.896423"
+             x="115"
+             y="544.36218"
+             style="text-align:end;text-anchor:end" /></flowRegion><flowPara
+           id="flowPara3914-5-3-0"
+           style="font-size:14px;text-align:end;text-anchor:end"> RNN</flowPara></flowRoot>    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:6, 3;stroke-dashoffset:0"
+       d="m 254.67521,637.92881 40.5,0"
+       id="path4196"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/yky/latex/AGI-17/carousel.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600" />
+    <g
+       id="g5546"
+       transform="translate(4,340.27334)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/structure-of-turnstile.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600">
+      <path
+         inkscape:export-ydpi="600"
+         inkscape:export-xdpi="600"
+         inkscape:export-filename="/home/yky/latex/AGI-17/state-vector.png"
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0"
+         d="m 542.84379,61.332546 0,124.500004 m -25,0 0,-124.500004"
+         id="path3906-6"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cccc" />
+      <path
+         inkscape:export-ydpi="600"
+         inkscape:export-xdpi="600"
+         inkscape:export-filename="/home/yky/latex/AGI-17/state-vector.png"
+         style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="m 542.29787,81.201596 -25.78125,0 25.78125,0 z"
+         id="path2987-10"
+         inkscape:connector-curvature="0" />
+      <path
+         inkscape:export-ydpi="600"
+         inkscape:export-xdpi="600"
+         inkscape:export-filename="/home/yky/latex/AGI-17/state-vector.png"
+         style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="m 542.23441,186.43967 -25.78125,0 25.78125,0 z"
+         id="path2987-2-0"
+         inkscape:connector-curvature="0" />
+      <path
+         inkscape:export-ydpi="600"
+         inkscape:export-xdpi="600"
+         inkscape:export-filename="/home/yky/latex/AGI-17/state-vector.png"
+         style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="m 542.23441,165.39207 -25.78125,0 25.78125,0 z"
+         id="path2987-70-6"
+         inkscape:connector-curvature="0" />
+      <path
+         inkscape:export-ydpi="600"
+         inkscape:export-xdpi="600"
+         inkscape:export-filename="/home/yky/latex/AGI-17/state-vector.png"
+         style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="m 542.23441,143.63736 -25.78125,0 25.78125,0 z"
+         id="path2987-93-1"
+         inkscape:connector-curvature="0" />
+      <path
+         inkscape:export-ydpi="600"
+         inkscape:export-xdpi="600"
+         inkscape:export-filename="/home/yky/latex/AGI-17/state-vector.png"
+         style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="m 542.23441,122.58975 -25.78125,0 25.78125,0 z"
+         id="path2987-60-5"
+         inkscape:connector-curvature="0" />
+      <path
+         inkscape:export-ydpi="600"
+         inkscape:export-xdpi="600"
+         inkscape:export-filename="/home/yky/latex/AGI-17/state-vector.png"
+         style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="m 542.23441,102.24922 -25.78125,0 25.78125,0 z"
+         id="path2987-626-5"
+         inkscape:connector-curvature="0" />
+      <path
+         sodipodi:nodetypes="ccc"
+         inkscape:export-ydpi="600"
+         inkscape:export-xdpi="600"
+         inkscape:export-filename="/home/yky/latex/AGI-17/state-vector.png"
+         style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="m 544.23441,60.153986 -27.78125,0 z"
+         id="path2987-18-4"
+         inkscape:connector-curvature="0" />
+      <flowRoot
+         inkscape:export-ydpi="600"
+         inkscape:export-xdpi="600"
+         inkscape:export-filename="/home/yky/latex/AGI-17/state-vector.png"
+         xml:space="preserve"
+         id="flowRoot3908-76"
+         style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+         transform="translate(408.89392,-487.85222)"><flowRegion
+           id="flowRegion3910-56"><rect
+             id="rect3912-9"
+             width="35.350464"
+             height="209.89636"
+             x="113"
+             y="544.86218"
+             style="text-align:start;text-anchor:start" /></flowRegion><flowPara
+           id="flowPara3914-3"
+           style="font-size:14px;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start"><flowSpan
+             style="font-size:13px;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start"
+             id="flowSpan4906-7">P</flowSpan><flowSpan
+             style="font-size:65.00091553%;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start;baseline-shift:sub"
+             id="flowSpan4394">1 </flowSpan></flowPara><flowPara
+           id="flowPara4348"
+           style="font-size:14px;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start"><flowSpan
+             id="flowSpan4350"
+             style="font-size:13px;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start">P</flowSpan><flowSpan
+             style="font-size:65.00091553%;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start;baseline-shift:sub"
+             id="flowSpan4396">2 </flowSpan></flowPara><flowPara
+           id="flowPara4356"
+           style="font-size:14px;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start"><flowSpan
+             id="flowSpan4358"
+             style="font-size:13px;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start">P</flowSpan><flowSpan
+             style="font-size:65.00091553%;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start;baseline-shift:sub"
+             id="flowSpan4398">3 </flowSpan></flowPara><flowPara
+           id="flowPara4369"
+           style="font-size:13px;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start">....</flowPara><flowPara
+           id="flowPara4374"
+           style="font-size:13px;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start">....</flowPara><flowPara
+           id="flowPara4389"
+           style="font-size:14px;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start">P<flowSpan
+   style="font-size:65.00091553%;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start;baseline-shift:sub"
+   id="flowSpan4918-4"> n</flowSpan></flowPara></flowRoot>      <path
+         inkscape:export-ydpi="600"
+         inkscape:export-xdpi="600"
+         inkscape:export-filename="/home/yky/latex/AGI-17/carousel.png"
+         sodipodi:nodetypes="ccc"
+         inkscape:connector-curvature="0"
+         d="m 529.13243,186.46648 c -11.63065,52.14724 -27.52454,3.76125 -25.07055,-65.39264 -2.45399,-80.810334 15.89389,-104.042946 25.68405,-61.098161"
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0;marker-mid:url(#Arrow2Mend);marker-end:none"
+         id="path7618-2" />
+    </g>
+    <g
+       transform="translate(-87.480474,340.27334)"
+       id="g5546-5"
+       inkscape:export-filename="/home/yky/latex/AGI-17/structure-of-turnstile.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600">
+      <path
+         inkscape:export-ydpi="600"
+         inkscape:export-xdpi="600"
+         inkscape:export-filename="/home/yky/latex/AGI-17/state-vector.png"
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0"
+         d="m 542.84379,61.332546 0,124.500004 m -25,0 0,-124.500004"
+         id="path3906-6-2"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cccc" />
+      <path
+         inkscape:export-ydpi="600"
+         inkscape:export-xdpi="600"
+         inkscape:export-filename="/home/yky/latex/AGI-17/state-vector.png"
+         style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="m 542.29787,81.201596 -25.78125,0 25.78125,0 z"
+         id="path2987-10-5"
+         inkscape:connector-curvature="0" />
+      <path
+         inkscape:export-ydpi="600"
+         inkscape:export-xdpi="600"
+         inkscape:export-filename="/home/yky/latex/AGI-17/state-vector.png"
+         style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="m 542.23441,186.43967 -25.78125,0 25.78125,0 z"
+         id="path2987-2-0-4"
+         inkscape:connector-curvature="0" />
+      <path
+         inkscape:export-ydpi="600"
+         inkscape:export-xdpi="600"
+         inkscape:export-filename="/home/yky/latex/AGI-17/state-vector.png"
+         style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="m 542.23441,165.39207 -25.78125,0 25.78125,0 z"
+         id="path2987-70-6-74"
+         inkscape:connector-curvature="0" />
+      <path
+         inkscape:export-ydpi="600"
+         inkscape:export-xdpi="600"
+         inkscape:export-filename="/home/yky/latex/AGI-17/state-vector.png"
+         style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="m 542.23441,143.63736 -25.78125,0 25.78125,0 z"
+         id="path2987-93-1-4"
+         inkscape:connector-curvature="0" />
+      <path
+         inkscape:export-ydpi="600"
+         inkscape:export-xdpi="600"
+         inkscape:export-filename="/home/yky/latex/AGI-17/state-vector.png"
+         style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="m 542.23441,122.58975 -25.78125,0 25.78125,0 z"
+         id="path2987-60-5-3"
+         inkscape:connector-curvature="0" />
+      <path
+         inkscape:export-ydpi="600"
+         inkscape:export-xdpi="600"
+         inkscape:export-filename="/home/yky/latex/AGI-17/state-vector.png"
+         style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="m 542.23441,102.24922 -25.78125,0 25.78125,0 z"
+         id="path2987-626-5-0"
+         inkscape:connector-curvature="0" />
+      <path
+         sodipodi:nodetypes="ccc"
+         inkscape:export-ydpi="600"
+         inkscape:export-xdpi="600"
+         inkscape:export-filename="/home/yky/latex/AGI-17/state-vector.png"
+         style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="m 544.23441,60.153986 -27.78125,0 z"
+         id="path2987-18-4-7"
+         inkscape:connector-curvature="0" />
+      <flowRoot
+         inkscape:export-ydpi="600"
+         inkscape:export-xdpi="600"
+         inkscape:export-filename="/home/yky/latex/AGI-17/state-vector.png"
+         xml:space="preserve"
+         id="flowRoot3908-76-8"
+         style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+         transform="translate(408.89392,-487.85222)"><flowRegion
+           id="flowRegion3910-56-68"><rect
+             id="rect3912-9-84"
+             width="35.350464"
+             height="209.89636"
+             x="113"
+             y="544.86218"
+             style="text-align:start;text-anchor:start" /></flowRegion><flowPara
+           id="flowPara3914-3-3"
+           style="font-size:14px;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start"><flowSpan
+             style="font-size:13px;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start"
+             id="flowSpan4906-7-1">P</flowSpan><flowSpan
+             style="font-size:65.00091553%;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start;baseline-shift:sub"
+             id="flowSpan4394-4">1 </flowSpan></flowPara><flowPara
+           id="flowPara4348-9"
+           style="font-size:14px;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start"><flowSpan
+             id="flowSpan4350-20"
+             style="font-size:13px;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start">P</flowSpan><flowSpan
+             style="font-size:65.00091553%;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start;baseline-shift:sub"
+             id="flowSpan4396-68">2 </flowSpan></flowPara><flowPara
+           id="flowPara4356-9"
+           style="font-size:14px;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start"><flowSpan
+             id="flowSpan4358-2"
+             style="font-size:13px;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start">P</flowSpan><flowSpan
+             style="font-size:65.00091553%;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start;baseline-shift:sub"
+             id="flowSpan4398-6">3 </flowSpan></flowPara><flowPara
+           id="flowPara4369-6"
+           style="font-size:13px;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start">....</flowPara><flowPara
+           id="flowPara4374-4"
+           style="font-size:13px;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start">....</flowPara><flowPara
+           id="flowPara4389-9"
+           style="font-size:14px;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start">P<flowSpan
+   style="font-size:65.00091553%;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start;baseline-shift:sub"
+   id="flowSpan4918-4-5"> n</flowSpan></flowPara></flowRoot>      <path
+         inkscape:export-ydpi="600"
+         inkscape:export-xdpi="600"
+         inkscape:export-filename="/home/yky/latex/AGI-17/carousel.png"
+         sodipodi:nodetypes="ccc"
+         inkscape:connector-curvature="0"
+         d="m 529.13243,186.46648 c -11.63065,52.14724 -27.52454,3.76125 -25.07055,-65.39264 -2.45399,-80.810334 15.89389,-104.042946 25.68405,-61.098161"
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0;marker-mid:url(#Arrow2Mend);marker-end:none"
+         id="path7618-2-0" />
+    </g>
+    <g
+       transform="translate(-178.96092,340.27334)"
+       id="g5546-7"
+       inkscape:export-filename="/home/yky/latex/AGI-17/structure-of-turnstile.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600">
+      <path
+         inkscape:export-ydpi="600"
+         inkscape:export-xdpi="600"
+         inkscape:export-filename="/home/yky/latex/AGI-17/state-vector.png"
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0"
+         d="m 542.84379,61.332546 0,124.500004 m -25,0 0,-124.500004"
+         id="path3906-6-1"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cccc" />
+      <path
+         inkscape:export-ydpi="600"
+         inkscape:export-xdpi="600"
+         inkscape:export-filename="/home/yky/latex/AGI-17/state-vector.png"
+         style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="m 542.29787,81.201596 -25.78125,0 25.78125,0 z"
+         id="path2987-10-7"
+         inkscape:connector-curvature="0" />
+      <path
+         inkscape:export-ydpi="600"
+         inkscape:export-xdpi="600"
+         inkscape:export-filename="/home/yky/latex/AGI-17/state-vector.png"
+         style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="m 542.23441,186.43967 -25.78125,0 25.78125,0 z"
+         id="path2987-2-0-2"
+         inkscape:connector-curvature="0" />
+      <path
+         inkscape:export-ydpi="600"
+         inkscape:export-xdpi="600"
+         inkscape:export-filename="/home/yky/latex/AGI-17/state-vector.png"
+         style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="m 542.23441,165.39207 -25.78125,0 25.78125,0 z"
+         id="path2987-70-6-72"
+         inkscape:connector-curvature="0" />
+      <path
+         inkscape:export-ydpi="600"
+         inkscape:export-xdpi="600"
+         inkscape:export-filename="/home/yky/latex/AGI-17/state-vector.png"
+         style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="m 542.23441,143.63736 -25.78125,0 25.78125,0 z"
+         id="path2987-93-1-2"
+         inkscape:connector-curvature="0" />
+      <path
+         inkscape:export-ydpi="600"
+         inkscape:export-xdpi="600"
+         inkscape:export-filename="/home/yky/latex/AGI-17/state-vector.png"
+         style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="m 542.23441,122.58975 -25.78125,0 25.78125,0 z"
+         id="path2987-60-5-6"
+         inkscape:connector-curvature="0" />
+      <path
+         inkscape:export-ydpi="600"
+         inkscape:export-xdpi="600"
+         inkscape:export-filename="/home/yky/latex/AGI-17/state-vector.png"
+         style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="m 542.23441,102.24922 -25.78125,0 25.78125,0 z"
+         id="path2987-626-5-1"
+         inkscape:connector-curvature="0" />
+      <path
+         sodipodi:nodetypes="ccc"
+         inkscape:export-ydpi="600"
+         inkscape:export-xdpi="600"
+         inkscape:export-filename="/home/yky/latex/AGI-17/state-vector.png"
+         style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="m 544.23441,60.153986 -27.78125,0 z"
+         id="path2987-18-4-06"
+         inkscape:connector-curvature="0" />
+      <flowRoot
+         inkscape:export-ydpi="600"
+         inkscape:export-xdpi="600"
+         inkscape:export-filename="/home/yky/latex/AGI-17/state-vector.png"
+         xml:space="preserve"
+         id="flowRoot3908-76-1"
+         style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+         transform="translate(408.89392,-487.85222)"><flowRegion
+           id="flowRegion3910-56-5"><rect
+             id="rect3912-9-9"
+             width="35.350464"
+             height="209.89636"
+             x="113"
+             y="544.86218"
+             style="text-align:start;text-anchor:start" /></flowRegion><flowPara
+           id="flowPara3914-3-4"
+           style="font-size:14px;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start"><flowSpan
+             style="font-size:13px;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start"
+             id="flowSpan4906-7-90">P</flowSpan><flowSpan
+             style="font-size:65.00091553%;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start;baseline-shift:sub"
+             id="flowSpan4394-9">1 </flowSpan></flowPara><flowPara
+           id="flowPara4348-1"
+           style="font-size:14px;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start"><flowSpan
+             id="flowSpan4350-7"
+             style="font-size:13px;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start">P</flowSpan><flowSpan
+             style="font-size:65.00091553%;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start;baseline-shift:sub"
+             id="flowSpan4396-7">2 </flowSpan></flowPara><flowPara
+           id="flowPara4356-11"
+           style="font-size:14px;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start"><flowSpan
+             id="flowSpan4358-59"
+             style="font-size:13px;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start">P</flowSpan><flowSpan
+             style="font-size:65.00091553%;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start;baseline-shift:sub"
+             id="flowSpan4398-7">3 </flowSpan></flowPara><flowPara
+           id="flowPara4369-76"
+           style="font-size:13px;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start">....</flowPara><flowPara
+           id="flowPara4374-7"
+           style="font-size:13px;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start">....</flowPara><flowPara
+           id="flowPara4389-3"
+           style="font-size:14px;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start">P<flowSpan
+   style="font-size:65.00091553%;text-align:start;line-height:162.00000048%;writing-mode:lr-tb;text-anchor:start;baseline-shift:sub"
+   id="flowSpan4918-4-65"> n</flowSpan></flowPara></flowRoot>      <path
+         inkscape:export-ydpi="600"
+         inkscape:export-xdpi="600"
+         inkscape:export-filename="/home/yky/latex/AGI-17/carousel.png"
+         sodipodi:nodetypes="ccc"
+         inkscape:connector-curvature="0"
+         d="m 529.13243,186.46648 c -11.63065,52.14724 -27.52454,3.76125 -25.07055,-65.39264 -2.45399,-80.810334 15.89389,-104.042946 25.68405,-61.098161"
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0;marker-mid:url(#Arrow2Mend);marker-end:none"
+         id="path7618-2-6" />
+    </g>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot5828"
+       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       transform="translate(39.420697,431.1435)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/structure-of-turnstile.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600"><flowRegion
+         id="flowRegion5830"><rect
+           id="rect5832"
+           width="53.563004"
+           height="48.811447"
+           x="226.77885"
+           y="15.658858" /></flowRegion><flowPara
+         id="flowPara5834"
+         style="font-size:24px">⊣</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot5828-1"
+       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       transform="translate(134.44383,463.14204)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/structure-of-turnstile.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600"><flowRegion
+         id="flowRegion5830-2"><rect
+           id="rect5832-9"
+           width="53.563004"
+           height="48.811447"
+           x="226.77885"
+           y="15.658858" /></flowRegion><flowPara
+         id="flowPara5834-3"
+         style="font-size:24px">⊣</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot5828-9"
+       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       transform="translate(224.72341,442.83993)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/structure-of-turnstile.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600"><flowRegion
+         id="flowRegion5830-0"><rect
+           id="rect5832-8"
+           width="53.563004"
+           height="48.811447"
+           x="226.77885"
+           y="15.658858" /></flowRegion><flowPara
+         id="flowPara5834-8"
+         style="font-size:24px">⊣</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot5876"
+       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       transform="translate(-7.230953,431.1435)"
+       inkscape:export-filename="/home/yky/latex/AGI-17/structure-of-turnstile.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600"><flowRegion
+         id="flowRegion5878"><rect
+           id="rect5880"
+           width="93.73526"
+           height="41.900093"
+           x="199.56538"
+           y="7.8835835" /></flowRegion><flowPara
+         id="flowPara5882"
+         style="font-size:24px">... ...</flowPara></flowRoot>  </g>
+</svg>

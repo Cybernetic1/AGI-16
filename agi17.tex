@@ -1,10 +1,18 @@
+% TO-DO:
+% * Actions = all possible transtions in RL
+% * In RL, Q-learning is still unclear -- currently I'm using NN = transition F(x)
+%   -- U(x) -> U(x') so it seems that generalization can occur in Q-space (?)
+% * Structure of the turnstile is an important feature of the transition F(x)
+% * Explain difference with AIXI
+% * "inward" vs "outward"
+
 \documentclass[orivec]{llncs}
 \usepackage{graphicx}
 \usepackage{amsmath}		% for "cases"
 \usepackage{amsfonts}	% for frakur fonts
 \usepackage{mathrsfs}	% for curly "E" error symbol
 \usepackage{float}
-\usepackage{tcolorbox}	% for wrapping example in color box
+\usepackage[most]{tcolorbox}	% for wrapping example in color box
 \usepackage{wrapfig}		% wrap figure beside text, used in example
 \usepackage{tikz-cd}		% commutative diagrams
 % \usepackage{amsfonts}
@@ -24,6 +32,7 @@
 \subsectionfont{\color{blue}} 
 \subsubsectionfont{\color{blue}} 
 \definecolor{green}{rgb}{0,0.7,0}
+\definecolor{grey}{rgb}{0.95,0.95,0.95}
 
 \usepackage{geometry}		% change paper size
 \geometry{
@@ -61,7 +70,7 @@
 \title{Wandering in the Labyrinth of Thinking\\
 \normalsize{-- a minimalist cognitive architecture combining\\
 reinforcement learning and deep learning}}
-\titlerunning{Wandering in the Maze of Thinking}
+\titlerunning{Wandering in the Labyrinth of Thinking}
 \author{\usebox{\MyName} (King-Yin Yan)
 % \\ \footnotesize{General.Intelligence@Gmail.com}
 \and
@@ -81,15 +90,19 @@ Juan Carlos Kuri Pinto
 
 \begin{abstract}
 % 这篇是背景，介绍一个基於 \textbf{增强学习} 和 \textbf{深度学习} 的极简约的 cognitive architecture，它在数学上是一个Hamiltonian 系统，而其 Lagrangian 对应於智能系统的「奖励」或「欲望」的价值。 经典逻辑 AI 的技巧可以搬到这个 setting 之下，而连续时间化之后，可以用上微分几何的技巧。 传统的「逻辑 AI 知识表述」被新的表述法取代，后者的结构是由神经网络的深度学习「诱导」出来的。
-This is the first of a series of papers, introducing a minimalist cognitive architecture based on reinforcement learning and deep learning.  The system consists of an iterative function whose role is analogous to the consequence operator ($\vdash$) in logic.  Mathematically it is a Hamiltonian system, whose Lagrangian corresponds to the value of ``desires'' or ``rewards'' for the intelligent agent.  Techniques of classical logic-based AI can be transferred to the neural setting, the topic of our 2nd paper.
+This is the first of a series of papers, introducing a minimalist cognitive architecture based on reinforcement learning and deep learning.  The system consists of an iterative function whose role is analogous to the consequence operator ($\vdash$) in logic.  It is fascinating to note this is a Hamiltonian system, whose Lagrangian corresponds to the value of ``desires'' or ``rewards'' for the intelligent agent;  but the usefulness of this idea is as yet unknown.  More importantly, the structure of classical logic-based AI can be transferred to the neural setting, the topic of our 2nd paper.
 %Its continuous limit can be described by differential geometry.  The old-fashioned logic-based knowledge representation with discrete propositions is abandoned in favor of a representation induced by deep neural learning.
 % The problem of general intelligence can be described and solved in the logic-based AI paradigm, but the main obstacle is that learning is too slow.  The logic-based knowledge representation with discrete propositions is abandoned in favor of a neural-based ``amorphous'' representation induced from the top down, using a deep neural network (DNN).  The DNN acts iteratively on a state space (the ``mental state''), forming a dynamical system.  This system is in turn controlled by reinforcement learning, ``navigating'' the space of mental states as in a maze.
 \end{abstract}
 
+\begin{keywords}
+reinforcement learning, control theory, deep learning, cognitive architecture
+\end{keywords}
+
 %本文介绍一些（非原创的）已知理论，然后指出一些新的研究方向。
 In order to understand our main theory \cite{YanBridge}, most of the present paper can be ignored, except for \S\ref{sec:0} and a basic understanding of reinforcement learning (eg.  my tutorial \cite{YanRLtutorialEN}).
 
-Most of this paper is background information, eg. the ``Hamiltonian theory'' is already well-known and is not our original contribution.
+% Most of this paper is background information, eg. the ``Hamiltonian theory'' is already well-known and is not our original contribution.
 % The first part of this paper introduces some existing theory, and then speculates on new research directions.
 
 \setcounter{section}{-1}
@@ -98,13 +111,13 @@ Most of this paper is background information, eg. the ``Hamiltonian theory'' is 
 
 The \textbf{metaphor} here is that of reinforcement learning controlling an autonomous agent to navigate the maze of ``thoughts space'', seeking the optimal path:
 \begin{equation}
-\includegraphics[scale=0.5]{maze-metaphor.png}
+\vcenter{\hbox{\includegraphics[scale=0.5]{maze-metaphor.png}}}
 \end{equation}
 
 The main idea is to regard ``thinking'' as a \emp{dynamical system} operating on \emp{mental states}:
 \begin{equation}
 \label{fig:mental-state}
-\includegraphics[scale=0.5]{mental-state.png}
+\vcenter{\hbox{\includegraphics[scale=0.5]{mental-state.png}}}
 \end{equation}
 
 For example, a mental state could be the following set of propositions:
@@ -143,7 +156,7 @@ Google's \textbf{PageRank} is one of the earlier successful applications of vect
 
 This is the cartoon version of our architecture:
 \begin{equation}
-\includegraphics[scale=0.5]{architecture-cartoon.png}
+\vcenter{\hbox{\includegraphics[scale=0.5]{architecture-cartoon.png}}}
 \end{equation}
 
 %=======================================================================================
@@ -162,7 +175,7 @@ Mathematically this is a \emp{dynamical system} that can be defined by:
 
 In our cognitive architecture design, $\vect{F}$ is implemented as a deep neural network (the word ``deep'' simply means ``many layers''):
 \begin{equation}
-\includegraphics[scale=0.7]{genifer-model-00.png}
+\vcenter{\hbox{\includegraphics[scale=0.7]{genifer-model-00.png}}}
 \end{equation}
 
 A \textbf{neural network} is a non-linear operator with many parameters (called ``weights''):
@@ -281,6 +294,28 @@ The advantage of $Q$ is the ease of learning.  We just need to learn the value o
 %\boxed{\mbox{utility, or value} U} = \int \boxed{\mbox{reward} R} \,dt
 %\end{equation}
 
+\subsection{Internal vs external view of reinforcement learning}
+
+Traditionally, RL deals with acting in an \textit{external} environment; value / utility is assigned to \textit{external} states.  In this view, the \textit{internal} mental state of the agent may change without any noticeable change externally:
+\begin{equation}
+\vcenter{\hbox{\includegraphics[scale=0.6]{save-princess.png}}}
+\end{equation}
+The usefulness of RL (ie, the Bellman update technique) makes me wonder if it'd be advantageous to invert the perspective to consider the internal mental landscape instead.  Then, an internal state would have higher utility when it has been visited by many successful ``thinking'' trajectories.
+
+\subsection{Actions = cognitive state-transitions = ``thinking''}
+
+In our system there are 2 things that need to be learned:
+\begin{enumerate}
+\item The transition function $\vect{F}: \vect{x} \mapsto \vect{x}'$.  $\vect{F}$ represents the \textbf{knowledge} that constrains thinking.  In other words, the learning of $\vect{F}$ is the learning of ``static'' knowledge.
+\item Find the optimal trajectory of the state $\vect{x}$.  This corresponds to optimal ``thinking'' under the constraints of static knowledge.
+\end{enumerate}
+\begin{equation}
+\vcenter{\hbox{\includegraphics[scale=0.7]{Q-learning-2-views.png}}}
+\end{equation}
+In traditional reinforcement learning (left view), the system chooses an action $\vect{a}$, and the transition function $\vect{F}$ gives the probability of reaching each state $\vect{x}_i$ given action $\vect{a}$.  In our model (right view), all possible cognitive states are potentially \textbf{reachable} from any other state, and therefore the action $a$ coincides with the next state $x'$.
+
+\begin{comment}
+%==================================================================================
 Under the reinforcement learning framework, intelligence is decomposed into \textbf{thinking} and \textbf{learning}:
 \begin{itemize}
 \item \emp{Thinking} means finding the optimal trajectory of $\vect{x}$ according to the \textbf{knowledge} stored in the deep NN.  This is achieved using the Bellman equation to calculate $\vect{u}^*$.  The trajectory of $\vect{x}$ is constrained by the deep NN (in other words, the system must think in accordance with \textbf{correct knowledge}).  While thinking, the deep NN stays \textbf{constant}.
@@ -289,12 +324,19 @@ Under the reinforcement learning framework, intelligence is decomposed into \tex
 % 即是根据已学得的\textbf{知识}（知识储存在 deep NN 里），在思维空间中找寻 $\vect{x}$ 最优的轨迹，方法是根据 Bellman 方程计算 $\vect{u}^*$。 $\vect{x}$ 的轨迹受 deep NN 约束（亦即是说，系统只能依据\textbf{正确的知识}去思考），思考时 deep NN 是\textbf{不变}的。
 %\item \emp{学习}就是学习神经网络 deep NN 的 weights $W_\ell$，改变 $W$ 即改变 $\vect{F}$，而$\vect{F}$ 决定\textbf{状态方程} (\ref{eqn0})，所以整个系统变了另一个系统。 换句话说，deep NN 的学习是一种 \textbf{second-order learning}： 考虑两个系统 $\vect{F}$ 和 $\vect{F} + \epsilon \hat{\vect{F}}$，经过很多次思考过程，如果奖励的平均值在后者有所增加，则 $\vect{F}$ 向 $\hat{\vect{F}}$ 方向学习。
 \end{itemize}
+%==================================================================================
+\end{comment}
 
-\subsubsection{Prior art}
+\subsection{Prior art}
 
-The minimalist architecture based on reinforcement learning has been proposed by Itimar Ariel from Israel, in 2012 \cite{Arel2012}, and I also independently proposed in 2016 (precursor of this paper).  The prestigious researcher of signal processing, Simon Haykin, recently also used the ``RL + memory'' design, cf. his 2012 book \textit{Cognitive dynamic systems} \cite{Haykin2012}. Vladimir Anashin in the 1990's also proposed this kind of cognitive architecture \cite{Anashin2009}.  Perhaps there exist other precedents, eg: \cite{Ivancevic2006}.
+The minimalist architecture based on reinforcement learning has been proposed by Itimar Ariel from Israel, in 2012 \cite{Arel2012}, and I also independently proposed in 2016 (precursor of this paper).  The prestigious researcher of signal processing, Simon Haykin, recently also used the ``RL + memory'' design, cf. his 2012 book \textit{Cognitive dynamic systems} \cite{Haykin2012}. Vladimir Anashin in the 1990's also proposed this kind of cognitive architecture \cite{Anashin2009}.  There may exist more precedents, eg: \cite{Ivancevic2006}.
 
-\section{Connections with the Hamiltonian}
+\subsubsection{Comparison with AIXI}
+
+AIXI's environmental setting is the same as ours, but its agent's internal model is a universal Turing machine, and the optimal action is chosen by maximizing potential rewards over all programs of the UTM.  In our (minimal) model, the UTM is \uline{restricted} to an RNN, where the RNN's \textbf{state} is analogous to the UTM's \textbf{tape}, and the optimal weights (program) are found via Bellman optimality.
+
+\begin{tcolorbox}[colback=grey, breakable, enhanced]
+\subsection*{Connections with the Hamiltonian}
 
 In \emp{reinforcement learning}, we are concerned with two quantities:
 \let\labelitemi\labelitemii
@@ -353,7 +395,7 @@ Interestingly, the reward $R$ corresponds to the \textbf{Lagrangian} in physics,
 
 %一个智能系统，它有「智慧」的条件，就是每时每刻都不断追求「开心能量」或奖励 $R$ 的最大值，但它必需权衡轻重，有计划地找到长远的效用 $U$ 的最大值。
 
-This correspondence of these 3 theories is explained in detail in Daniel Liberzon's book \cite{Liberzon2012}.  While this correspondence has very interesting philosophical implications, it may not be very useful in practice: the traditional AI system is discrete-time; converting it to continuous-time seems to increase the computational burden, while it is unclear what advantages this might bring....
+This correspondence of these 3 theories is explained in detail in Daniel Liberzon's book \cite{Liberzon2012}.  While this correspondence has very interesting philosophical implications, it may not be very useful in practice:  the traditional AI system is discrete-time; converting it to continuous-time seems to increase the computational burden.  The recent advent of \textbf{symplectic integrators} \cite{} are known to produce better numerical solutions that retain qualitative features of the exact solution, eg. quasi-periodicity.
 
 \begin{comment}
 %==================================================================================
@@ -400,6 +442,8 @@ of which the \emp{Schr\"{o}dinger equation} is a special case.
 
 %All these ``physical'' ideas flow automatically from our definition of \textbf{rewards}, without the need to introduce them artificially.  But these ideas seem not immediately useful to our project, unless we are to explore \textbf{continuous-time} models.
 
+\end{tcolorbox}
+
 \section{Future directions}
 
 \begin{itemize}
@@ -415,23 +459,23 @@ of which the \emp{Schr\"{o}dinger equation} is a special case.
 
 The combination of deep learning with reinforcement learning, ie deep reinforcement learning (DRL), is very powerful.  For example, DRL is able to play Atari games to human levels \cite{Mnih2013}.  Their architecture is depicted in this diagram:
 \begin{equation}
-\includegraphics[scale=0.5]{Atari-Q-learning.jpg}
+\vcenter{\hbox{\includegraphics[scale=0.5]{Atari-Q-learning.jpg}}}
 \end{equation}
 
 Recall our main architecture:
 \begin{equation}
-\includegraphics[scale=0.5]{genifer-model-0.png}
+\vcenter{\hbox{\includegraphics[scale=0.5]{genifer-model-0.png}}}
 \end{equation}
 
 The ``transition function'' neural network can also take an \textbf{action} parameter $u$:
 \begin{equation}
-\includegraphics[scale=0.5]{model-with-u.png}
+\vcenter{\hbox{\includegraphics[scale=0.5]{model-with-u.png}}}
 \end{equation}
 But such a neural network requires a novel learning algorithm that is \textbf{reward-driven} rather than the traditionally \textbf{error-driven} back-propagation.  Such an algorithm is difficult to design because it cannot rely on old-fashioned gradient descent.
 
 One solution that avoids the difficulty is to make the neural network compute the Q-value:
 \begin{equation}
-\includegraphics[scale=0.5]{model-Sayaka.png}
+\vcenter{\hbox{\includegraphics[scale=0.5]{model-Sayaka.png}}}
 \end{equation}
 This means that we can compute $Q$ for any transition $x \stackrel{u}{\mapsto} x'$.  During the ``action'' (ie, ``thinking'') stage, we hold $x$ fixed, and search for $(u, x')$ that maximizes $Q$;  This can be done by \textbf{stochastic gradient descent}.  During the ``learning'' stage, we are given certain transitions $(x, u, x')$ and we train the neural network to adjust $Q$ via standard \textbf{Bellman update}.
 
@@ -591,16 +635,16 @@ What other properties are desired for the implementation of $R$?
 
 First, cartoon version:
 \begin{equation}
-\includegraphics[scale=0.5]{architecture-cartoon.png}
+\vcenter{\hbox{\includegraphics[scale=0.5]{architecture-cartoon.png}}}
 \end{equation}
 
 \begin{equation}
-\includegraphics[scale=0.5]{RNN-topology.png}
+\vcenter{\hbox{\includegraphics[scale=0.5]{RNN-topology.png}}}
 \end{equation}
 
 TO-DO:  The state space $X$ may be too large and we may need an \emp{attention mechanism} to select some parts of $X$ for processing by $R$.  This is the notion of \emp{working memory} in cognitive science.
 \begin{equation}
-\includegraphics[scale=0.4]{working-memory.png}
+\vcenter{\hbox{\includegraphics[scale=0.4]{working-memory.png}}}
 \end{equation}
 
 \section{Deep Recurrent Learning}
@@ -646,7 +690,7 @@ Since its derivative is piecewise constant, it does not suffer from the vanishin
 This is inspired by forward- and backward-chaining in LBAI.  We propagate the state vector from both the initial state $\vec{x}_0$ as well as the final state $\vec{x}^*$.  This bi-directional propagation is added with noise and repeated many times, thus implementing a \emp{stochastic local search}:
 
 \begin{equation}
-\includegraphics[scale=0.6]{forward-backward-algorithm.png}
+\vcenter{\hbox{\includegraphics[scale=0.6]{forward-backward-algorithm.png}}}
 \end{equation}
 
 When the forward and backward states get close enough, a successful path is found, and we record the gap and the noises along the path, and use them to train $R$ so that this new path would be recognized.

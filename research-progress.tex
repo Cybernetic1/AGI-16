@@ -1,10 +1,3 @@
-% TO-DO:
-% * translate Chinese bits
-% * emphasize on CCC
-% * detailed abstract
-% * structure of the turnstile is an important feature of the transition F(x)
-% ? merge labyrinth & bridge papers
-
 \documentclass[orivec]{llncs}
 \usepackage{graphicx}
 \usepackage{amsmath}			% for "cases"
@@ -25,12 +18,12 @@
 \usepackage[boxed]{algorithm2e}	% algorithms
 
 % *************** Delete when not using Chinese or colors **********************
-% \usepackage{xeCJK}
-% \setCJKmainfont[BoldFont=SimHei,ItalicFont=KaiTi]{SimSun}
+\usepackage{xeCJK}
+\setCJKmainfont[BoldFont=SimHei,ItalicFont=KaiTi]{SimSun}
 \usepackage{color}
 \definecolor{Cerulean}{RGB}{100,100,200}
 \newcommand{\emp}[1]{\textbf{\textcolor{Cerulean}{#1}}}
-\definecolor{grey}{rgb}{0.98,0.98,0.98}  % grey
+\definecolor{grey}{rgb}{0.9,0.9,0.9}  % grey
 
 % \chapterfont{\color{blue}}  % sets colour of chapters
 \sectionfont{\color{blue}} 
@@ -80,50 +73,48 @@
 \newsavebox{\MyName}
 \savebox{\MyName}{\includegraphics[scale=0.6]{YKY.png}}
 
-\title{A bridge between logic and neural}
-\titlerunning{A bridge between logic and neural}
+\title{Research progress \today}
+% \titlerunning{Research progress \today}
 \author{\usebox{\MyName} (King-Yin Yan)
 % \\ \footnotesize{General.Intelligence@Gmail.com}
 }
+\date{\today}	% does not fucking work
 \institute{General.Intelligence@Gmail.com}
 
 \begin{document}
 
 \maketitle
+%\noindent
+%\makebox[\linewidth]{\small \today}
+
 \setlength{\parindent}{0em}
 % \setlength{\parskip}{2.8ex plus0.8ex minus0.8ex}
 \setlength{\parskip}{2.8ex}
 
+%\begin{abstract}
+%Logic-based inductive learning is based on slow combinatorial search; the bottleneck of classical AI.  Neural network learning is based on gradient descent, which is much faster.  We examine the abstract structure of logic (the consequence operator $\vdash$) and try to transfer this structure to the neural-network setting.
+%\end{abstract}
 
-\begin{abstract}
-Logic-based inductive learning is based on slow combinatorial search --- the bottleneck of classical AI.  Neural network learning is based on gradient descent, which is much faster.  We examine the abstract structure of logic (the consequence operator $\vdash$) and try to transfer this structure to the neural-network setting.
+This is the basic architecture:
+\begin{equation}
+\includegraphics[scale=0.3]{basic-architecture.jpg}
+\end{equation}
+where I use the symbol $\NN$ for a neural network.
 
-%本篇讨论经典逻辑 AI 和神经网络之间的一个对应关系，探讨二者的数学结构。 将逻辑 AI 的结构引进神经网络中，也就是 inductive bias，可能加快学习的速度。
+The mental state is a vector $\vect{x}$ which should possess a logical structure:
+\begin{equation}
+\includegraphics[scale=0.3]{logical-structure.jpg}
+\end{equation}
 
-%Logic-based AI 和 connectionist AI 长久分裂，但作者最近发现可以建立两者之间的对应关系。逻辑的结构类似人类的自然语言，但大脑是用神经思考的。 机器学习的主要目标，是用 inductive bias 去加快学习速度，但这目标太空泛。 将逻辑结构加到神经结构之上，就增加了约束，亦即 inductive bias。
-% 假设 $x$ 是思维状态。 在经典逻辑智能中，$x$ 是一束命题，代表当下的思考状况。 思考的过程就是不断重复进行推导: $x \vdash x' \vdash ...$。 在经典 AI 中这个作用是靠无数的逻辑 rules 来达成的。 但现在我们的做法是将 $x$ 放到向量空间中，再用一个 recurrent 神经网络来取代整个 rules base。
-\end{abstract}
 
-\begin{keywords}
-neural-symbolic integration, logic, algebraic logic
-\end{keywords}
-
-% 有个问题希望数学专业的人帮手解决一下：
-
-% \textbf{人工智能}基本上分为两大阵营： \emp{逻辑 AI} (logic-based AI) 和 \emp{神经网络} (connectionism)。
-
-%On the logical side, the structure is highly abstract and symbolic, but learning is too slow;  My aim is to build a ``bridge'' to \textbf{transfer} logical structure to the neural side.
-
-%逻辑 AI 那边，「结构」很抽象符号化，但\textbf{学习算法}太慢；  我的目的是建立一道「桥」，将逻辑 AI 的某部分结构\textbf{转移}到神经网络那边。
-
-This problem took a long time to solve because the structure of logic is not easily expressible as a mathematical structure:  % The perspective of \textbf{model theory} is helpful in understanding this connection:
+This problem took a long time to solve because the structure of logic is not easily expressible as a mathematical structure.  The perspective of \textbf{model theory} is helpful in understanding this connection:
 %That is until I discovered the use of model theory, that I finally got a satisfactory solution:
 %这个问题搞了很久都未能解决，因为逻辑 AI 那边的结构不是一般常见的数学结构，单是要要表述出来也有很大困难。 直到我应用了 model theory 的观点，才找到满意的解决方案：
 \begin{equation}
-\vcenter{\hbox{\includegraphics[scale=0.6]{bridge.png}}}
+\includegraphics[scale=0.6]{bridge.png}
 \end{equation}
 
-% I will first explain the structure of the neural side, then the structure of the logic side.
+I will first explain the structure of the neural side, then the structure of the logic side.
 %首先解释 logic 那边的结构，然后再解释 neural network 那边的结构。
 
 \section{The structure of neural networks}
@@ -148,14 +139,14 @@ $\sigmoid$ acts on each component of $\vect{x}$;  Its action is \textbf{not inva
 
 Consider, for example, to recognize \textit{``white cat chases black cat''}.  The \textit{``cat''} object has to be recognied twice;  Obviously we should not waste 2 neural networks to do this.  If we connect a neural network \textbf{head to tail}, we get a minimalist cognitive architecture with a \textbf{recurrent} loop:
 \begin{equation}
-\vcenter{\hbox{\includegraphics[scale=0.6]{genifer-model-00.png}}}
+\includegraphics[scale=0.6]{genifer-model-00.png}
 \end{equation}
 Its state equation is:
 \begin{eqnarray}
 \boxed{\mbox{discrete time}} \quad \quad & \vect{x}_{t+1} = \vect{F}(\vect{x}_t) \label{eqn0}\\
 \boxed{\mbox{continuous time}} \quad \quad & \dot{\vect{x}} = \vect{f}(\vect{x}) \label{eqn:continuous-time}
 \end{eqnarray}
-From this we can see that $\mathbb{X}$ is a \textbf{differentiable manifold} (cf. our 1st paper \cite{YanLabyrinth}).  % The deeper theory is that it is a Hamiltonian system, having a \textbf{symplectic} structure (cf. our first paper \cite{YanLabyrinth}).
+From this we can see that $\mathbb{X}$ is a \textbf{differentiable manifold}.  The deeper theory is that it is a Hamiltonian system, having a \textbf{symplectic} structure (cf. our first paper \cite{YanLabyrinth}).
 
 \subsection{What are ``features''?}
 
@@ -165,7 +156,7 @@ Now let's think about how a neural network performs pattern recognition, perhaps
 Consider the simplest case, eg. a layer of neural network extracting visual features from the digit ``9''.  This layer may have many neurons (left figure), each neuron locally covers a region of the input layer, the so-called ``local receptive field'' in the neuroscience of vision (right figure).
 %考虑最简单的情况，例如提取 digit ``9'' 的特徵的一层网络。 这层网络可以有很多神经元（左图），每个神经元局部地覆盖输入层，即所谓视觉神经元的 local receptive field（右图）。
 \begin{equation}
-\vcenter{\hbox{\includegraphics[scale=0.5]{feature-recognition.png}}}
+\includegraphics[scale=0.5]{feature-recognition.png}
 \end{equation}
 Suppose the red neuron is responsible for recognizing the ``diagonal line'' feature.  Its equation is $\vect{y} = \sigmoid (W \vect{x})$.  The matrix $W$'s role is to affine ``rotate'' the feature space, so that the features we desire is pointing in a certain direction.  Then we use $\sigmoid$ to ``\textbf{squeeze}'' the desired and undesired features.  The output after $\sigmoid$ represents the \textbf{presence or absence} of a particular feature, ie $\{0, 1\}$.  This is a form of information \textbf{compression}.
 
@@ -173,8 +164,8 @@ Suppose the red neuron is responsible for recognizing the ``diagonal line'' feat
 From the above reasoning, we may draw a general principle, which I call the \textbf{Neural Postulate}:
 \begin{equation}
 \begin{array}{l}
-\bullet \; \mbox{ \underline{Each neuron represents the presence or absence of a certain \textbf{feature}}}\\
-\bullet \; \mbox{ \underline{Higher-layer neurons represents \textbf{relations} between lower-layer features}}
+\mbox{\textbullet \underline{Each neuron represents the presence or absence of a certain \textbf{feature}}}\\
+\mbox{\textbullet \underline{Higher-layer neurons represents \textbf{relations} between lower-layer features}}
 \end{array}
 \end{equation}  
 
@@ -189,22 +180,22 @@ Following this line of thinking, we may conjecture this correspondence:
 %But beware that this correspondence may not be 1-1, it could be one constant corresponding to several neurons' (linear?) \textbf{combination}.  The actual situation may be illustrated as follows (each layer may contain a vast number of neurons):
 %\begin{equation}
 %\label{conclusion2}
-%\vcenter{\hbox{\includegraphics[scale=0.5]{actual-bridge.png}}}
+%\includegraphics[scale=0.5]{actual-bridge.png}
 %\end{equation}
 %$R(a,b)$ can be searched for among the \textbf{common parents} of $a, b$ (eg. those blue neurons;  The value of $R(a, b)$ = a certain linear combination of blue neurons).  This can be verified by the condition:  If the signals of $a$ and $b$ are both ``present'', the value of $R(a, b)$ should also be ``true''.
 
 The following cartoon illustrates this correspondence from the perspective of \textbf{model theory}:
 \begin{equation}
-\vcenter{\hbox{\includegraphics[scale=0.7]{model-theory-cartoon.png}}}
+\includegraphics[scale=0.75]{model-theory-cartoon.png}
 \end{equation}
 
-\begin{tcolorbox}[colback=grey, breakable, enhanced]
+\begin{tcolorbox}[breakable, enhanced]
 
-\subsection*{A little digression on chaos theory:}
+\textbf{A little digression on chaos theory:}
 
 The role of $\sigmoid^{-1}$ is to ``stretch'', dragging points that are close neighbors to more distant positions.  Looking at the common \textbf{threshold functions}, we see they are all non-linear \textbf{deformations} away from the identity $y = x$:
 \begin{equation}
-\vcenter{\hbox{\includegraphics[scale=0.25]{activation-functions.png}}}
+\includegraphics[scale=0.25]{activation-functions.png}
 \end{equation}
 This is very similar to the ``horseshoe'' proposed by Steven Smale \cite{Smale1967}, a recipe for creating chaos.  A variant of the Smale horseshoe is the ``baker map'', analogous to kneading dough in bakery.  ``Stretching'' and then putting back to the original space, and repeating this process, creates chaos \cite{Gilmore2011} \cite{Tel2006}.  
 
@@ -212,7 +203,7 @@ This is very similar to the ``horseshoe'' proposed by Steven Smale \cite{Smale19
 
 %The recent example of DeepDream \cite{wikiDeepDreaming} that generates ``psychedelic'' images using the $\vect{F}^{-1}$ pre-image serves as evidence that $\vect{F}^{-1}$ could be wildly different from the original image:
 %\begin{equation}
-%\vcenter{\hbox{\includegraphics[scale=0.09]{neuromorphic-art.jpg}}}
+%\includegraphics[scale=0.09]{neuromorphic-art.jpg}
 %\end{equation}
 
 %In forward mode there does not exist this kind of ``stretching'', which seems to imply that chaos would be absent.  Also, according to the contraction mapping theorem, the iteration of $\vect{F}$ will terminate at fixed point(s), provided that $\vect{F}$ is contractive, ie, the spectral radius of the Jacobian matrix of $\vect{F}$ $\le 1$, but this latter point is not yet confirmed (indeed, if $W$ is unconstrained, it seems not to hold).
@@ -242,7 +233,7 @@ The learning algorithm for logic-based AI is studied under the topic of ILP (ind
 %\begin{equation}
 %\begin{tikzcd}[]
 %\mbox{Logic representation} \arrow[rr, phantom, "\simeq"] & & \mbox{Neural representation} \\
-% & \arrow[ul, "\mbox{inductive logic learning}"] \arrow[ur, "\mbox{deep NN learning}" swap] %\vcenter{\hbox{\includegraphics[scale=0.5]{sensory-data.png}}} &
+% & \arrow[ul, "\mbox{inductive logic learning}"] \arrow[ur, "\mbox{deep NN learning}" swap] %\includegraphics[scale=0.5]{sensory-data.png} &
 %\end{tikzcd}
 %\end{equation}
 
@@ -260,7 +251,7 @@ The learning algorithm for logic-based AI is studied under the topic of ILP (ind
 
 %So eventually I realized that the logic-neural correspondence must be achieved through model theory:
 %\begin{equation}
-%\vcenter{\hbox{\includegraphics[scale=0.75]{model-theory.png}}}
+%\includegraphics[scale=0.75]{model-theory.png}
 %\end{equation}
 
 %$\vdash$ means deducing from a set of (symbolic logic) \textbf{formulas} to new formulas.  $\vDash$ means that a \textbf{model} necessarily entails another model.
@@ -276,7 +267,7 @@ Our idea is to transfer the structure of logic to neural networks.  The logic st
 
 \subsection{Propositional-level structure}
 
-\subsubsection{Mental state = \{ propositions \} }
+\subsubsection{Decomposition of the mental state into propositions}
 
 The mental state $\vect{x}$ may be broken down into a conjunction of propositions:
 \begin{equation}
@@ -301,84 +292,56 @@ A \textbf{Boolean algebra} is a structure with:
   \draw (unaryOp.center) +(-30pt,-3pt) -- ([shift={(4pt,11pt)}]UnaryOp.center);
 \end{tikzpicture}
 \end{eqnarray}
-The most essential part of the Boolean structure is this \textbf{commutativity} relation:
+From my experience in logic-based AI, the most essential aspect of the Boolean structure (especially after introducing fuzzy-probabilistic reasoning) is this \textbf{commutativity} relation:
 \begin{equation}
 \forall a,b \in \mathcal{B}.  \quad \quad a \wedge b = b \wedge a
 \end{equation}
-We may ignore the distinction between $a \wedge b$ and $a \vee b$ because they degenerate into the following Bayesian network if we use fuzzy-probabilistic truth values \cite{Yan2012}:
+
+\subsubsection{Mapping propositions $\rightarrow$ vector space}
+
+\textbf{Our gaol:} map a set of propositions (\textit{order is unimportant}) to a vector space.
+
+Consider the simplest situation:  $P_1$ and $P_2$ are two \textbf{containers} for propositions, the mental state is $(P_1, P_2)$.  Each proposition can be either $A$ or $B$.  We can arrange the placement of elements of $P_1 \times P_2$ in this way:
 \begin{equation}
-\vcenter{\hbox{\includegraphics[scale=0.5]{Bayes-net-ABC.png}}}
+\includegraphics[scale=0.75]{lower-triangular.png}
 \end{equation}
-
-\subsubsection{``Carousel'' as a set of propositions}
-
-\textbf{Our goal:} embed a set of propositions (\textit{order is unimportant}) as a vector.  Suppose we know how to encode individual propositions as vectors, then the problem is how to encode a \textit{variable} number of propositions as a longer vector.
-
-My first attempt is to fix the number of propositions to $n$, and impose a symmetry (commutativity) on the long vector, ie, that it be invariant under permutation of the ``sub-vectors'' (by the symmetric group $S_n$):
+For example, the 3 {\color{red}red} dots in the lower triangle $\halfsquare$ represent $\{ A \}$, $\{ B \}$, and $\{ A, B \}$.  The diagonal elements are not needed, because $(A, A)$ etc. are \textit{redundant} repetitions.  In other words, all the propositional combinations are:
 \begin{equation}
-\vcenter{\hbox{\includegraphics[scale=0.8]{state-vector.png}}}
+\halfsquare \; \setminus \mbox{ diagonal } \cup \; \emptyset
 \end{equation}
-The vector space $\mathbb{X}$ then becomes a quotient $\mathbb{X} / S_n$ by the symmetry.  Then the neural network can operate on this much-smaller quotient space.  At first sight, this seems nice, but it is then realized that usually the neural network needs to detect the \textit{presence} of a particular proposition among the $P_i$'s, and that means it needs to detect the proposition on \textit{each} position $i$.  That off-sets the advantage gained by the reduction in size of the quotient space.
+More abstractly, elements in this ``symmetric space'', eg. $(p_1, p_2, ..., p_n)$, are \textit{invariant} under actions of the \textbf{symmetric group} $S_n$, $n$ is finite.
 
-An alternative way to represent a set (that is easy for neural networks to processs) is to put its elements into a \textbf{carousel}: 
+In high dimensions, this space-saving scheme is extremely efficient:  After symmetrization, a ``corner'' of the hypercube has a volume that is only $1/n!$ of the original cube, eg. $n = 3$:
 \begin{equation}
-\vcenter{\hbox{\includegraphics[scale=0.7]{carousel.png}}}
+\includegraphics[scale=0.5]{cube-corner.png}
 \end{equation}
-For example, if we want to recognize the conjunction $a \wedge b \wedge c$, we use an RNN to \textit{collect} these elements as they carousel in a circle.  Note that the RNN for this carousel is not the same as the RNN in the ``outer'' architecture.  Thus we get an \textbf{RNN-within-RNN} architecture:
+Even as the \textbf{curse of dimensionality} grows exponentially, $n!$ is well sufficient to offset it.
+
+Now consider the \textbf{functions} that live on this symmetric space;  How are their structures affected?  Before symmetrization, the functions have domains:
 \begin{equation}
-\vcenter{\hbox{\includegraphics[scale=0.75]{RNN-in-RNN.png}}}
+\vect{F}: \mathbb{X} \rightarrow \mathbb{X} \quad = \quad \mathbb{P}^n \rightarrow \mathbb{P}^n
 \end{equation}
-$\mbox{RNN}_1$ is the ``outer'' loop for processing the state-transition $\vect{x} \mapsto \vect{x}'$.  $\mbox{RNN}_2$ is the ``inner'' loop for processing individual propositions within the state $\vect{x}$.
+where $\mathbb{P}$ is the space of a single proposition.  After symmetrization:
+\begin{equation}
+\vect{F}: \mbox{sym}(\mathbb{P}^n) \rightarrow \mbox{sym}(\mathbb{P}^n) \quad = \quad \halfsquare \rightarrow \halfsquare
+\end{equation}
+The symmetric space $\mbox{sym}(\mathbb{P}_1, \mathbb{P}_2, .... \mathbb{P}_n)$ possesses an \textbf{order}.  That is to say, if the input to a function is $(p_1, p_2, ... , p_n)$, we need to \textbf{sort} the $p_i$'s according to a certain order on $\mathbb{P}$, before calling $\vect{F}$ to calculate.
 
-%Consider the simplest situation:  $P_1$ and $P_2$ are two \textbf{containers} for propositions, the mental state is $(P_1, P_2)$.  Each proposition can be either $A$ or $B$.  We can arrange the placement of elements of $P_1 \times P_2$ in this way:
-%\begin{equation}
-%\vcenter{\hbox{\includegraphics[scale=0.75]{lower-triangular.png}}}
-%\end{equation}
-%For example, the 3 {\color{red}red} dots in the lower triangle $\halfsquare$ represent $\{ A \}$, $\{ B \}$, and $\{ A, B \}$.  The diagonal elements are not needed, because $(A, A)$ etc. are \textit{redundant} repetitions.  In other words, all the propositional combinations are:
-%\begin{equation}
-%\halfsquare \; \setminus \mbox{ diagonal } \cup \; \emptyset
-%\end{equation}
-%More abstractly, elements in this ``symmetric space'', eg. $(p_1, p_2, ..., p_n)$, are \textit{invariant} under actions of the \textbf{symmetric group} $S_n$, $n$ is finite.
+Sorting in $\mathbb{P}$ is simple, because each $p \in \mathbb{P}$ already has a \textbf{location} in vector space (that is learned via deep learning).  $p_1 > p_2$ can be defined by a \textbf{cone} in the vector space, and then the order in $\mathbb{P}^n$ can be given by \textbf{lexicographic ordering}.
 
-%In high dimensions, this space-saving scheme is extremely efficient:  After symmetrization, a ``corner'' of the hypercube has a volume that is only $1/n!$ of the original cube, eg. $n = 3$:
-%\begin{equation}
-%\vcenter{\hbox{\includegraphics[scale=0.5]{cube-corner.png}}}
-%\end{equation}
-%Even as the \textbf{curse of dimensionality} grows exponentially, $n!$ is well sufficient to offset it.
-
-%Now consider the \textbf{functions} that live on this symmetric space;  How are their structures affected?  Before symmetrization, the functions have domains:
-%\begin{equation}
-%\vect{F}: \mathbb{X} \rightarrow \mathbb{X} \quad = \quad \mathbb{P}^n \rightarrow \mathbb{P}^n
-%\end{equation}
-%where $\mathbb{P}$ is the space of a single proposition.  After symmetrization:
-%\begin{equation}
-%\vect{F}: \mbox{sym}(\mathbb{P}^n) \rightarrow \mbox{sym}(\mathbb{P}^n) \quad = \quad \halfsquare \rightarrow \halfsquare
-%\end{equation}
-%The symmetric space $\mbox{sym}(\mathbb{P}_1, \mathbb{P}_2, .... \mathbb{P}_n)$ possesses an \textbf{order}.  That is to say, if the input to a function is $(p_1, p_2, ... , p_n)$, we need to \textbf{sort} the $p_i$'s according to a certain order on $\mathbb{P}$, before calling $\vect{F}$ to calculate.
-
-%Sorting in $\mathbb{P}$ is simple, because each $p \in \mathbb{P}$ already has a \textbf{location} in vector space (that is learned via deep learning).  $p_1 > p_2$ can be defined by a \textbf{cone} in the vector space, and then the order in $\mathbb{P}^n$ can be given by \textbf{lexicographic ordering}.
-
-%When implementing with as a neural network $\NN: \mathbb{R}^n \rightarrow \mathbb{R}^n$, we can keep the entire network, using only $\halfsquare$ as its domain and co-domain.  It seems that we have gained nothing, but consider if we train the network with 100 samples on $\halfsquare$ versus the whole hypercube.  $\halfsquare$ will receive the ``full strength'' of the data set whereas the hypercube will have its ``firepower'' diluted by $n!$.
+When implementing with as a neural network $\NN: \mathbb{R}^n \rightarrow \mathbb{R}^n$, we can keep the entire network, using only $\halfsquare$ as its domain and co-domain.  It seems that we have gained nothing, but consider if we train the network with 100 samples on $\halfsquare$ versus the whole hypercube.  $\halfsquare$ will receive the ``full strength'' of the data set whereas the hypercube will have its ``firepower'' diluted by $n!$.
 
 %The algorithm in this section is very simple, yet it can achieve a $1/n!$ improvement.  It is very worth implementing to see its actual performance $\smiley$
 
-\subsubsection{The structure of $\vdash$}
-
-Besides commutativity, another important aspect of $\vdash$ is that it usually does not change $\vect{x} \mapsto \vect{x}'$ completely:  the premise may be some propositions in $\vect{x}$ but not all of $\vect{x}$, and the conclusion is usually just 1 or a few propositions that are added to $\vect{x}$:
-\begin{equation}
-\vcenter{\hbox{\includegraphics[scale=0.75]{structure-of-turnstile.png}}}
-\end{equation}
-
 \subsection{Sub-propositional structure}
 
-% This part is more complicated.  
-Traditionally the structure of predicate logic is rather esoteric from the point of view of mathematics, this has hindered the progress of logic and logic-based AI.
+This part is more complicated.  Traditionally the structure of predicate logic is so esoteric from the point of view of mathematics that it hindered the progress of logic and logic-based AI.
 
 \subsubsection{Semantic distance and failure of compositionality}
 
 Word2Vec\cite{Mikolov2013} embeds words into vector space with ``semantic distance'':
 \begin{equation}
-\vcenter{\hbox{\includegraphics[scale=0.3]{word2vec-relations.png}}}
+\includegraphics[scale=0.3]{word2vec-relations.png}
 \end{equation}
 
 After Word2Vec, a natural next step is to represent \textbf{sentences} with semantic distance.    One popular approach (eg \cite{Coecke2010}) is via \textbf{tensor products}.  For example:
@@ -402,7 +365,7 @@ To represent a complex scenario with many inter-relations, without using pronoun
 
 A hypergraph is also called a ``set system''.  Any hypergraph can be represented as a set of edges, each edge being an element of the power set of the nodes.  Eg:
 \begin{equation}
-\vcenter{\hbox{\includegraphics[scale=0.6]{hypergraph-wikipedia.png}}}
+\includegraphics[scale=0.6]{hypergraph-wikipedia.png}
 \end{equation}
 This representation is convenient for our purpose:  Each edge can be represented as 1 proposition.  The mental state $\vect{x}$ = a hypergraph = a set of propositions.  We can use the symmetric space proposed above to represent the mental state.
 
@@ -410,7 +373,7 @@ Each proposition (edge) is a product of atomic concepts (nodes), we may further 
 \begin{equation}
 \boxed{\mbox{proposition}} \quad \vect{p} = c_1 \; c_2 \; c_3
 \end{equation}
-For example $c_1 \; c_2 \; c_3$ could be like subject-verb-object in natural language, where $c_1$ and $c_3$ are from the set of nouns / entities;  $c_2$ from the set of verbs / relations.  We don't need to be very precise about this, as the actual representation can be figured out via machine learning --- in the \textbf{post-structuralist} view of AI, as opposed to the structuralist view, where structural elements are designated with labels such as ``NP (noun phrase)'' in phrase-structure grammar or the ``is-a'' link in old-fashioned AI.
+For example $c_1 \; c_2 \; c_3$ could be like subject-verb-object in natural language, where $c_1$ and $c_3$ are from the set of nouns / entities;  $c_2$ from the set of verbs / relations.  We don't need to be very precise about this, as the actual representation can be figured out via machine learning.  This is the age of \textit{post-modern}\footnote{With ``modern'' meaning ``structuralist'', as in designating structural elements such as ``NP (noun phrase)'' in phrase-structure grammar or the ``is-a'' link in old-fashioned AI.} AI!
 
 \subsubsection{``Linkage'' phenomena in predicate logic}
 
@@ -448,7 +411,7 @@ But such identities do not always hold.  They only exist at specific values of $
 \end{eqnarray}
 Geometrically, a linkage is a diagonal line that \textit{restricts} the ``graph'' of the neural network function:
 \begin{equation}
-\vcenter{\hbox{\includegraphics[scale=0.65]{linkage-geometric-view.png}}}
+\includegraphics[scale=0.65]{linkage-geometric-view.png}
 \label{fig:diagonals}
 \end{equation}
 
@@ -456,21 +419,21 @@ Geometrically, a linkage is a diagonal line that \textit{restricts} the ``graph'
 
 As an optimization problem, the goal of learning is to find the optimal neural network $F^*$ in a function space (figuratively):
 \begin{equation}
-\vcenter{\hbox{\includegraphics[scale=0.75]{gradient-descent.png}}}
+\includegraphics[scale=0.75]{gradient-descent.png}
 \end{equation}
 We need a new algorithm that gives priority (higher scores) to linkages:
 \begin{equation}
-\vcenter{\hbox{\includegraphics[scale=0.75]{gradient-descent-2.png}}}
+\includegraphics[scale=0.75]{gradient-descent-2.png}
 \end{equation}
 
-%Below is a figure that shows the ``internal threads'' of a function ($\vdash$) that maps a premise to a conclusion, ie:
-%\begin{equation}
-%P_1 \wedge P_2 \wedge P_3 \wedge ... \quad \vdash \quad Q_1 \wedge Q_2 \wedge ...
-%\end{equation}
-%\begin{equation}
-%\vcenter{\hbox{\includegraphics[scale=0.7]{linkage-propositional-view.png}}}
-%\end{equation}
-%where \colorbox{yellow}{yellow} ``ribbons'' represent $\mbox{id}$ mappings (that respect coordinate positions), \colorbox{cyan!20}{blue} ribbons represent abitrary mappings.
+Below is a figure that shows the ``internal threads'' of a function ($\vdash$) that maps a premise to a conclusion, ie:
+\begin{equation}
+P_1 \wedge P_2 \wedge P_3 \wedge ... \quad \vdash \quad Q_1 \wedge Q_2 \wedge ...
+\end{equation}
+\begin{equation}
+\includegraphics[scale=0.7]{linkage-propositional-view.png}
+\end{equation}
+where \colorbox{yellow}{yellow} ``ribbons'' represent $\mbox{id}$ mappings (that respect coordinate positions), \colorbox{cyan!20}{blue} ribbons represent abitrary mappings.
 
 As for learning algorithm, one idea is to \textit{force} the learning of diagonals, whenever a potential identity function is detected.  This creates a ``propensity'' for generalization.  After a diagonal is learned, it may be destroyed by subsequent learning; which is fine.  Also, the forcing of a diagonal may accidentally destroy previously learned knowledge.  This may be balanced by \textbf{dual-lobe} re-normalization.
 \newsavebox{\algbox}
@@ -497,15 +460,15 @@ As for learning algorithm, one idea is to \textit{force} the learning of diagona
 	\usebox{\algbox}
 \end{equation}
 
-\begin{tcolorbox}[colback=grey, breakable, enhanced]
+\begin{tcolorbox}[breakable, enhanced]
 \setlength{\parskip}{2.8ex}
 
-%\section*{Appendix: logic in logic-based AI}
-%\renewcommand{\thesection}{A}
+\section*{Appendix: logic and logic-based AI}
+\renewcommand{\thesection}{A}
 
-% This part is to be separated to become a tutorial paper...
+This part is to be separated to become a tutorial paper...
 
-%\setcounter{subsection}{0}
+\setcounter{subsection}{0}
 \subsection{Algebraic logic}
 
 Traditionally, there are 2 ways to express the \textbf{sub-propositional} structure of logic:  via \textbf{predicate logic} and \textbf{relation algebra}.  No matter which way, their essence is \textbf{variable substitution}.  Interestingly, substitution is also the essence of ``algebra'', but here substitutions occur \textbf{implicitly}, so it is actually difficult to use algebra to express them explicitly.
@@ -524,7 +487,7 @@ HOL is equivalent to \textbf{untyped} $\lambda$-calculus, whereas the \textbf{ty
 
 This is an illustration of \textbf{cylindrification}:
 \begin{equation}
-\vcenter{\hbox{\includegraphics[scale=0.8]{cylindrification.png}}}
+\includegraphics[scale=0.8]{cylindrification.png}
 \end{equation}
 
 \subsection{Relation algebra}
@@ -532,84 +495,82 @@ This is an illustration of \textbf{cylindrification}:
 %Personally I think \textbf{relation algebra} \cite{Schmidt2010} \cite{Maddux2006} is closer to human natural language, but the standard form used in mathematical logic research is first-order logic (FOL).  This is however not of the essence, because all logics are basically easily interconvertable.  In the following we concentrate on FOL.
 %个人认为 relation algebra \cite{Schmidt2010} \cite{Maddux2006} 比较接近人类自然语言，但在数理逻辑研究中最通用的逻辑是 first-order logic (FOL)。 然而这并不是重点，因为各种逻辑基本上是等效的，而且相互之间可以很容易地转换。 以下集中讨论 FOL。  
 
-I used to think \textbf{relation algebra} (RA) \cite{Schmidt2010} \cite{Maddux2006} is a promising knowledge representation language, for it seems close to natural language in some aspects, when in fact RA and first-order logic (FOL) are basically equivalent.  In FOL there is the complexity of linkages, whereas in RA this complexity has not disappeared;  We could say ``\underline{complexity is conserved}'' \footnote{This is a quote from the category theorist Eugenia Cheng.}.
+以前曾经对 relation algebra \cite{Schmidt2010} \cite{Maddux2006} 有些幢憬，因为它比较接近人类自然语言，但其实 relation algebra (RA) 和 first-order logic (FOL) 基本上是等效的，在 FOL 里面有 linkage 的复杂性，但在 RA 里面这个复杂性其实也没有消失。 可以说「\underline{复杂度是守恒的}」\footnote{这句话是 category theorist Eugenia Cheng 说的。}。
 
-For example, ``\textit{father's father is grand-father}'' in (\ref{linkage-father}) can be expressed easily in RA:
+举例来说，在 (\ref{linkage-father}) 中表达「\textit{爸爸的爸爸是爷爷}」，可以用 RA 更简单地表达：
 \begin{equation}
  \mbox{father} \circ \mbox{father} = \mbox{grandfather}
 \end{equation}
-The actual inference steps are:
+实际的推导是这样的：
 \begin{eqnarray}
 \mbox{John father Pete} \nonumber \\
 \mbox{Pete father Paul} \nonumber \\
 \mbox{John father $\circ$ father Paul} 
 \end{eqnarray}
-Then we need to perform a \emp{substitution} to get the conclusion:
+这时要 \emp{代入} 上面的等式才能得出结论：
 \begin{equation}
 \mbox{John grandfather Paul}
 \end{equation}
-So the complexity of linkages becomes the complexity in \textit{formula length}.
+所以 linkage 的复杂性变成了代数 formula 长度的复杂性。 
 
 \subsection{Fractal structure}
 
-While ``size'' is not an issue of itself, if our goal is to embed logic formulas into the state $\vect{x}$, then a \textit{variable} number of formulas does pose a problem.  If we must put a variable number of formulas into a (finite-dimensional) vector space, it seems that some sort of \uline{self-similar or \textbf{fractal structure} is required}, and we also need a new kind of neural network that \textit{a priori}ly has fractal structure;  but this seems rather complicated and we have not explored further.
+「长度」本身没有不妥，但我们的目的是将逻辑式子嵌入到状态空间 $\vect{x}$ 里，这时 variable length 令人很头痛，但 fixed length 没有此问题。 如果硬要将 variable length 的式子嵌入到（有限维）向量空间中，\uline{似乎必须用到 \emp{fractal} 结构}（因为它有自相似性），同时需要设计一种新的神经网络，它先天性地有 fractal 结构在里面； 但这比较复杂，我没有在这方向 explore。
 
-\subsection{Concrete substitution}
+\subsection{Trading space with time}
 
-We described the geometric structure of linkages in substitutions, but we can also view substitution as a \textbf{multi-step} process:  by storing some information into memory ``boxes'', \uline{such boxes serve as \textbf{variables}, concretely carrying out the substitution}.  In other words, converting \textbf{space complexity} into \textbf{time complexity}\footnote{Human brain waves occur in various frequencies from 0.5 Hz to 40 Hz.  What we percieve as instantaneous in our mind may be the result of many iterations of basic steps.};  below is a conceptual diagram:
+上面说的是 substitution 在空间中的 linkage 结构。 但也可以将 substitution \textbf{分拆}成若干个简单的步骤。 方法是： 将某些内容放进记忆体中的「盒子」中，\uline{这些盒子充当 variables 的角色，也就是很具体地实现 substitution 的动作}。 换句话说，将\textbf{空间复杂性}转换成\textbf{时间复习性}\footnote{人脑的脑电波由 0.5 Hz 到 40 Hz 都有，我们感觉上瞬间的动作可能已经过了若干次迴路。}； 以下是示意图：
 \begin{equation}
-\vcenter{\hbox{\includegraphics[scale=0.5]{concrete-substitution.png}}}
+\includegraphics[scale=0.4]{unification-cartoon-2.jpg}
 \end{equation}
-X and Y are ``boxes'' (= variables) in the state $\vect{x} \in \mathbb{X}$.
+X，Y 是状态空间 $\mathbb{X} \ni \vect{x}$ 里面的「盒子」 = variables。
 
-The linkage structure mentioned earlier is easy to use in finite-dimensional vector spaces, but it is first-order logic, which has limitations when dealing with \textbf{higher-order} relations.  For the latter, the multi-step method may be a good solution.
-
-\end{tcolorbox}
+先前我说的 linkage 结构，放在有限维向量空间比较方便，但它是 first-order logic，处理 higher-order 关系时有很大困难。 Higher-order relations 似乎还是要用这种分拆步骤的方法解决。
 
 \subsection{Cartesian-closedness}
 
-We still lack a crucial property: \textbf{Cartesian-closedness}.  This means that in a certain category, for 2 arbitrary objects $A,B$, we could always find their:
+折腾了这么久，但仍然缺少了一个重要的特性： Cartesian-closedness。 它指的是在某个範畴内，对任意的 $A,B$，都必然可以找到它们的：
 \begin{equation}
-\boxed{\mbox{product}} \; A \times B \quad \mbox{and} \quad B^A \; \; \boxed{\mbox{exponentiation}} 
+\boxed{\mbox{product}} \; A \times B \quad \mbox{和} \quad B^A \; \; \boxed{\mbox{exponentiation}} 
 \end{equation}
 In logic this refers to:
 \begin{equation}
-A \wedge B \quad \mbox{and} \quad A \rightarrow B
+A \wedge B \quad \mbox{和} \quad A \rightarrow B
 \end{equation}
 
-Why do we need Cartesian-closedness?  Notice that in our minimal architecture we only have 2 types of memory:  the \textbf{instantaneous} $\vect{x}$ and the \textbf{permanent} $\vect{F} = \KB \vdash$.  From the logic-based AI point of view, $\KB$ stores \textbf{logic rules}, whereas $\vect{x}$ contains only \textbf{ground facts}.  \textbf{Ground sentences} are formulas \textbf{without variables}, for example:
+为什么需要 Cartesian-closed？  注意在 minimal architecture 里，只有两种记忆，即瞬时记忆 $\vect{x}$ 和永久记忆 $\vect{F} = \KB \vdash$。 从 logic-based AI 的角度来看，$\KB$ 里装著 logic rules，但 $\vect{x}$ 里面只有 ground facts。 Ground sentence 指的是\textbf{没有变量}的命题，例如：
 \begin{equation}
-\vect{x} = \textit{seeing the floor has blood stains}
+\vect{x} = \textit{见到地上有血迹}
 \end{equation}
-In contrast, \textbf{logic rules} are \textit{conditional statements} that contain variables, eg:
+相比之下，logic rule 是有变量的 conditional statement，例如：
 \begin{equation}
-\forall Z. \quad \mbox{\textit{$Z$ has blood stain}} \rightarrow \mbox{\textit{$Z$ may be a crime scene}}
+\forall Z. \quad \mbox{\textit{$Z$有血迹}} \rightarrow \mbox{\textit{$Z$可能是凶案现场}}
 \end{equation}
-If we want to store a rule inside $\vect{x}$, that means $\vect{x} \ni \mathbb{X}$ is a Cartesian-closed category.  Such an $\mathbb{X}$ is a more powerful structure, that allows the system to think more complex thoughts.  More importantly, $\vect{x} \ni \mathbb{X}$ and $F = \KB \vdash$ are now on \textbf{equal footing} because they are both $\mathbb{X} \rightarrow \mathbb{X}$ \textbf{functions}, since Cartesian-closed implies $\mathbb{X} \simeq \mathbb{X}^{\mathbb{X}}$.  This property is very useful in \textbf{belief revision} (see below).
+如果在 $\vect{x}$ 里面可以存放 rule，那表示 $\vect{x} \ni \mathbb{X}$ 是一个 Cartesian-closed category。 这样的 $\mathbb{X}$ 是一个更 powerful 的结构，亦即系统可以思考更复杂的 thoughts。 更重要的是，$\vect{x} \ni \mathbb{X}$ 和 $F = \KB \vdash$ 现在\textbf{地位平等}，因为它们都是 $\mathbb{X} \rightarrow \mathbb{X}$ 的\textbf{函数}，因为 Cartesian-closed 表示 $\mathbb{X} \simeq \mathbb{X}^{\mathbb{X}}$。 这个特性在 belief revision 中似乎会很有用（见下节）。
 
-How can a neural network be Cartesian-closed?  Recall that in a neural network $\vect{x}$ is a set of \textbf{features} $= (x_1, x_2, ..., x_n)$.  One method is to change all $\vect{x}$'s into functions $\mathbb{X} \rightarrow \mathbb{X}$.  The logical \textbf{implication} $A \rightarrow B$ is obviously a function, but a single ground sentence $A$ can also be turned into a function, as $\top \rightarrow A$, where $\top$ = logical ``true''.   Note:  These functions may contain \textit{linkages}, ie, the ability to deal with variables.
+如何在神经网络中做到 Cartesian-closed？ 记得神经网络中 $\vect{x}$ 是一组 features $= (x_1, x_2, ..., x_n)$。 一个办法是将所有 $\vect{x}$ 都变成 $\mathbb{X} \rightarrow \mathbb{X}$ 的函数。 逻辑的 implication $A \rightarrow B$ 显然是函数，但单一 ground sentence $A$ 也可以是函数： $\top \rightarrow A$ ，其中 $\top$ 是逻辑「真」。 注意： 这些函数中可以有 linkages，即处理变量的能力。
 
-As neural networks, $A \rightarrow B$ is a neural network $\mathbb{X} \rightarrow \mathbb{X}$.  $\top \rightarrow A$ is also a neural network $\mathbb{X} \rightarrow \mathbb{X}$, but it maps $\vect{1} \mapsto \vect{A}$.
+转到神经网络中，$A \rightarrow B$ 是一个 $\mathbb{X} \rightarrow \mathbb{X}$ 的神经网络。 $\top \rightarrow A$ 也是一个 $\mathbb{X} \rightarrow \mathbb{X}$ 的神经网络，但它将 $\vect{1} \mapsto \vect{A}$。
 
-So what kind of space is $\mathbb{X}$?  It could be the \textbf{weights} of a deep-learning network, but \uline{this NN's input/output layer must have the }\textbf{\uline{width}}\uline{  to process }\textbf{\uline{itself}} !  This seems impossible.   At first I tried to \textit{restrict} $\vect{F}(\vect{x})$ to the mapping $a \wedge b \wedge c \wedge .... \rightarrow d$, or in other words, $\vect{F}|_{\vect{x} = a \wedge b \wedge c...}$.  Such ``\textbf{micro-functions}'' may be smaller in size than the whole $\vect{F}$.  But a \textbf{multi-layer} neural network is a very peculiar machine in the sense that its classification of the source domain is dependent on \textit{every} layer of weights, in other words, its components are intertwined and the mapping as a whole \textit{cannot be decomposed} easily.
-
-At this time the only solution I can think of is to ``clamp'' the 2 sides of $a \wedge b \wedge c \wedge .... \rightarrow d$ to $\vect{F}(\vect{x})$ and force it to reproduce this input-output pair.  This has the effect that the content of $\vect{x}$ gets \textit{transferred} into $\vect{F}$.
+那 $\mathbb{X}$ 是一个怎样的空间？  它本身可以是一个深度神经网路的 weights，但\uline{这个神经网络的输入／输出层必须有足够的}\textbf{\uline{阔度}}\uline{去处理}\textbf{\uline{它自己}}！  表面上似乎不可能.... 越多的 weights 需要更多的 weights 去处理.... 但如果令 $\vect{x}$ 储存一些 partial functions 或许可以。
 
 \subsection{Application to belief revision}
 
-Belief revision (also known as ``truth maintenance'') is a high-water mark of classical logic-based AI.  If our new architecture can perform belief revision, we can be fairly assured that it has general intelligence.
+Belief revision （也可以叫 ``truth maintenance''）是经典逻辑 AI 发展的高峰。 如果可以用我们的新 architecture 做到 belief revision，我们会很有信心这个理论是 general intelligence。 
 
-Normally, a logical operation is the $\KB$ acting on $\vect{x}$ to yield a new $\vect{x}$:
+正常的逻辑运作模式是由 $\KB$ 作用在 $\vect{x}$ 上给出新的 $\vect{x}$：
 \begin{equation}
 \KB ( \vect{x} ) = \vect{x}'
 \end{equation}
-Whereas belief revision can perhaps be viewed as $\vect{x}$ acting on $\KB$:
+但 belief revision 或者可以看成是 $\vect{x}$ 作用在 $\KB$ 上的结果：
 \begin{equation}
 \vect{x} ( \KB ) = \KB'
 \end{equation}
-Because of Cartesian-closedness, $\vect{x}$ and $\KB$ have equal status, that makes the above operation possible.
+由於 Cartesian-closedness，$\vect{x}$ 和 $\KB$ 的地位是平等的，使上面的运作成为可能。 
 
-This is just a vague idea, I shall return to fill in this blank....
+这只是一个 vague idea，我会再回到这里填补这空白....
+
+\end{tcolorbox}
 
 % ====================================================================================
 \begin{comment}
@@ -647,9 +608,9 @@ P(A|B,C,D,...) = \vec{p}
 \end{equation}
 其中 $\vec{p}$ 是一个 conditional probability table (CPT)。
 
-用一个例子说明：
+对不起，用一个较粗俗的例子说明（在我多年的教学经验里，这是最易懂的例子）：
 \begin{equation}
-\vcenter{\hbox{\includegraphics[scale=0.5]{suicide-note.png}}}
+\includegraphics[scale=0.5]{farting.png}
 \end{equation}
 这个 Bayesian network 是由两个 CPT 生成的：
 \begin{eqnarray}
@@ -659,6 +620,77 @@ P(\mbox{臭蛋} | \mbox{臭味}) = \vec{p}_2
 如果有「声音」又有「臭味」，则「有人放屁」的机率很高，而「臭蛋」的机率却会减少。 换句话说，「臭蛋」的机率被扯到「放屁」那边去了； 这个现象叫 ``explaining away''，它说明 Bayesian network 中，所有节点都是 globally 相关的。 所以，当求解 Bayesian network 的某个节点时，它的概率会是一连串很复杂的 sum-product 形式。 看来用 Bayesian network 表示 $\vdash$ 的方法太复杂了。
 
 可幸的是，可以用 Monte Carlo 方法求解 Bayesian network： 开始时随机地指定节点的概率，然后随机地选取某些节点来作「\textbf{局部}」的 update； 当随机 update 的次数趋近无限，节点的机率会收敛到正确的值。 换句话说： 这是一个 \textit{local} 的计算 Bayesian network 的方法。
+
+\section{Model theory}
+
+For the basics of model theory, cf \cite{Doets1996} \cite{Manzano1999}.  The model-theoretic approach is to separate the \textbf{symbolic language} $\mathcal{L}$ and the $\mathcal{L}$-structures it refers to.  They are related by \textbf{interpretation} maps.
+
+% 模型论基础可参看 \cite{Doets1996} \cite{Manzano1999}。 模型论的做法是将逻辑的符号\textbf{语言} (language $\mathcal{L}$) 和它所指涉的\textbf{结构} $\mathcal{L}$-structure 分割，中间用 interpretation map 关联起来。
+
+$\mathcal{L}$ contains the set of symbols (predicates, relations, functions, constants), which recursively generates formulas and compound formulas.  These are the \textbf{symbolic} stuff.
+
+%$\mathcal{L}$ 就是符号的集合 (predicates, relations, functions, constants)，递归地生成出句子和复合句子。 这些都是 symbolic 的东西。
+
+An $\mathcal{L}$-structure can be any abstract algebraic structure.  It usually consists of a \textbf{base set}, and functions and relations defined over that set.
+
+%$\mathcal{L}$-structure 可以是任何抽象代数结构，它通常包含一个 base 集合，然后在集合上定义一些函数和关系。 
+
+The central idea of model theory is using the interpretation map $i$ to ``preserve'' certain relations, for example:
+
+%模型论的中心思想是透过 interpretation $i$ 去「保存」一些关系，例如：
+\begin{equation}
+R(a,b) \stackrel{i}{\mapsto} R^\mathcal{M}(a^\mathcal{M}, b^\mathcal{M})
+\end{equation}
+
+$R$ is a relation, $x^\mathcal{M}$ denotes the object corresponding to $x$ in the structure $\mathcal{M}$.  The left side is symbolic logic;  the right side is the actual structure.  When model theory is applied to first-order logic, we get the equivalence of $\vdash$ and $\vDash$ (which looks like tautology).  This can be found in any mathematical logic textbook, such as \cite{Hedman2004}.
+
+%$R$ 是一个关系，$x^\mathcal{M}$ 代表在结构 $\mathcal{M}$ 之上，$x$ 所对应的物体。 左边是符号逻辑，右边是实体的结构。 模型论应用在 first-order logic，得出 $\vdash$ 和 $\vDash$ 等价的结论（看起来就好像同语反覆），这在数理逻辑教科书中都有，例如 \cite{Hedman2004}。 
+
+If we use category theory to express the correspondence between logic and neural:
+%如果用範畴论的方法表示逻辑结构和神经结构之间的对应：
+\begin{equation}
+\begin{tikzcd}[]
+\mathcal{L} \arrow[d, "i"] \\
+\mathcal{M} \arrow[r, phantom, "\simeq"] & \mathcal{X} \\
+& \arrow[u, "\mbox{deep NN}" swap] \mathcal{S}
+\end{tikzcd}
+\end{equation}
+\begin{itemize}
+\item $\mathcal{L}$ = category of logic theories (= sets of formulas)
+\item $i$ = interpretation maps
+\item $\mathcal{M}$ = category of models (from logic)
+\item $\mathcal{X}$ = category of models (from deep NNs)
+\item $\mathcal{S}$ = sensory input
+\end{itemize}
+
+The above diagram says the same as this cartoon explanation:
+%上图等同於下面的卡通解释：
+\begin{equation}
+\includegraphics[scale=0.7]{model-theory-cartoon.png}
+\end{equation}
+
+In other words, $\mathcal{X} = \vcenter{\hbox{\includegraphics{cloud.png}}}$ is \textbf{induced} from deep learning;  but its structure is \textbf{opaque} to us (that is the weakness of neural networks).
+%换句话说，$\mathcal{X} = \vcenter{\hbox{\includegraphics{cloud.png}}}$ 是由深度学习 induce 出来的结构； 但它的结构对我们来说是不透明的（这是神经网络的弱点）。
+
+Whereas, the structure of $\mathcal{M} = \vcenter{\hbox{\includegraphics{algebraic-model.png}}}$ is the subject matter of model theory.
+
+%而 $\mathcal{M} = \vcenter{\hbox{\includegraphics{algebraic-model.png}}}$ 的结构就是模型论研究的对象。
+%是 free 的； 换句话说，那 $i$ map 的 source domain 是固定的，但 target domain 是自由的。 这导致 $i$ map 的学习很困难，因为 $\mathcal{M}$ 和 $\mathcal{X}$ 的结构都不清楚。 必须更详细分析 $\mathcal{M}, \mathcal{X}$ 的结构。
+
+\section{模型论和 interpretation 的结构}
+
+In model theory, $\mathcal{L}$ is the category of logic formulas, $\mathcal{M} = \vcenter{\hbox{\includegraphics{algebraic-model.png}}}$ could be any algebraic structure.  We just need to map the constants, predicates, relations, functions in $\mathcal{L}$ to the structure in $\mathcal{M}$.  For the sake of conciseness, we will just constants symbols and relation symbols, as these two are the \textbf{essence} of logic.
+
+%在模型论中，$\mathcal{L}$ 是逻辑句子的範畴，$\mathcal{M} = \vcenter{\hbox{\includegraphics{algebraic-model.png}}}$ 可以是任何抽象代数结构。 只需把 $\mathcal{L}$ 中的 constants, predicates, relations, functions 映射到 $\mathcal{M}$ 就行。 为简化讨论，我们只考虑 constants 和 relations，因为二者是逻辑中最\textbf{本质}的东西。 
+\begin{eqnarray}
+\mathcal{L} & \quad \stackrel{i}{\rightarrow} \quad & \mathcal{M} \nonumber \\
+\mbox{constant symbol} & \quad \stackrel{i}{\mapsto} \quad & \; \includegraphics[scale=0.5]{node.png} \\
+\mbox{relation symbol} & \quad \stackrel{i}{\mapsto} \quad & \; \includegraphics[scale=0.5]{link.png} \nonumber
+\end{eqnarray}
+
+Our problem is that we don't know the structure of  $\vcenter{\hbox{\includegraphics{algebraic-model.png}}}$.  For a long time, researchers have treated neural networks as ``black boxes'', but if we don't know the structure of $\mathcal{X} =  \vcenter{\hbox{\includegraphics{cloud.png}}}$ we cannot build the isomorphism $\mathcal{M} \simeq \mathcal{X}$.
+
+%问题是在神经那边缺乏 $\vcenter{\hbox{\includegraphics{algebraic-model.png}}}$ 的结构。 一直以来，人们习惯把神经网络看成是 ``black box''，但如果我们不知道 $\mathcal{X} =  \vcenter{\hbox{\includegraphics{cloud.png}}}$ 的结构，就无法建立 $\mathcal{M} \simeq \mathcal{X}$ 的 isomorphism。
 
 \section{Conclusion}
 
