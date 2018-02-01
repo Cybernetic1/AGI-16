@@ -231,7 +231,7 @@ $$ \mbox{Las Vegas} \rightarrow ... ... \rightarrow \mbox{New York} $$
 would still be the cheapest route for the remaining stops.)
 
 Mathematically:
-$$ U^*(S) = \max_a \{ R(a) + U^*(S') \} $$
+$$ U^*(S) = \max_a \{ R(a) + U^*(S') \} \quad \quad \mbox{or,} $$
 $$ U^*(\mbox{whole path}) = \max_a \{ R(\mbox{choose action $a$ in current state}) + U^*(\mbox{rest of path}) \} $$
 $*$ denotes \emp{optimal}. This seemingly simple formula is the \uline{entire content} of dynamic programming;  What it means is that:  When seeking the path with the best value, we cut off a bit from the path, thus reducing the problem to a smaller problem;  In other words, it is a \textbf{recursive relation} over time.
 

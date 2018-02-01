@@ -239,7 +239,7 @@ $$ \mbox{深圳} \rightarrow ... ... \rightarrow \mbox{北京} $$
 
 用数学表示：
 $$ U^*(S) = \max_a \{ R(a) + U^*(S') \} $$
-$$ U^*(\mbox{全路径}) = \max_a \{ R(\mbox{在当前状态下选取 a}) + U^*(馀下路径) \} $$
+$$ \mbox{ie,} \quad \quad U^*(\mbox{全路径}) = \max_a \{ R(\mbox{在当前状态下选取 a}) + U^*(\mbox{馀下路径}) \} $$
 $*$ 表示 \emp{最优} (optimal)。 这条看似简单的式子是动态规划的全部内容； 它的意义是： 我们想获得最佳效益的路径，所以将路径切短一些，於是问题化解成一个较小的问题；  换句话说它是一个 recursive relation。
 
 \subsection{Delta rule}
