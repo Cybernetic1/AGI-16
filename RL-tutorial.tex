@@ -1,73 +1,19 @@
-\documentclass[orivec]{llncs}
-\usepackage{graphicx}
-\usepackage{amsmath}			% for "cases"
-\usepackage{amsfonts}		% for frakur fonts
-\usepackage{mathrsfs}		% for curly "E" error symbol
-\usepackage{float}
-\usepackage{tcolorbox}		% for wrapping example in color box
-\usepackage{wrapfig}			% wrap figure beside text, used in example
-\usepackage{tikz-cd}			% commutative diagrams
-\usepackage{amssymb}			% for \multimap, \updownarrow, \bigstar
-\usepackage{sectsty}			% change section color
-\usepackage{turnstile}		% longer turnstiles
+\input{../YKY-preamble}
+
 \usepackage{hyperref}		% include web link for RL sample code
 
-\usepackage{geometry}		% change paper size
-\geometry{
-  a4paper,         % or letterpaper
-  textwidth=18cm,  % llncs has 12.2cm
-  textheight=24cm, % llncs has 19.3cm
-  heightrounded,   % integer number of lines
-  hratio=1:1,      % horizontally centered
-  vratio=2:3,      % not vertically centered
-}
-\usepackage[fontsize=14pt]{scrextend}
-
-% *************** Delete when not using Chinese or colors **********************
-\usepackage{xeCJK}
-\setCJKmainfont[BoldFont=SimHei,ItalicFont=KaiTi]{SimSun}
-\usepackage{color}
 \definecolor{Cerulean}{RGB}{100,100,200}
 \newcommand{\emp}[1]{\textbf{\textcolor{Cerulean}{#1}}}
-\definecolor{grey}{rgb}{0.9,0.9,0.9}  % grey
-
-% \chapterfont{\color{blue}}  % sets colour of chapters
-\sectionfont{\color{blue}} 
-\subsectionfont{\color{blue}} 
-\subsubsectionfont{\color{blue}} 
-
-\newcommand{\vect}[1]{\boldsymbol{#1}}
-\newcommand*\sigmoid{\vcenter{\hbox{\includegraphics{sigmoid.png}}}}
-\newcommand*\KB{\vcenter{\hbox{\includegraphics{KB-symbol.png}}}}
-\newcommand*\invsigmoid{\vcenter{\hbox{\includegraphics{inverse-sigmoid.png}}}}
-\newcommand{\invW}{\, \rotatebox[origin=c]{90}{W}}
-\newcommand{\invw}{\, \rotatebox[origin=c]{90}{w}}
-\newcommand*\rectifier{\vcenter{\hbox{\includegraphics{rectifier.png}}}}
-\newcommand{\dashh}{\textemdash~}
-\newcommand{\code}[1]{{\footnotesize{\ttfamily #1}}}
-\newcommand{\tab}{\hspace*{1cm} }
-
-
-% ***** Boxed variables inside math equations
-% \newcommand*{\boxedcolor}{black}
-\makeatletter
-% \renewcommand{\boxed}[1]{\textcolor{\boxedcolor}{%
-% \fbox{\normalcolor\m@th$\displaystyle#1$}}}
-% \setlength{\fboxsep}{1pt}
-\renewcommand{\boxed}[1]{\fbox{\m@th$\displaystyle\scalebox{0.9}{#1}$} \,}
-\makeatother
-
-\overfullrule=0mm
 
 \newsavebox{\MyName}
 \savebox{\MyName}{\includegraphics[scale=0.6]{YKY.png}}
 
 \title{强化学习 tutorial}
-\titlerunning{强化学习 tutorial}
+%\titlerunning{强化学习 tutorial}
 \author{\usebox{\MyName} (King-Yin Yan)
-% \\ \footnotesize{General.Intelligence@Gmail.com}
+\\ \footnotesize{General.Intelligence@Gmail.com}
 }
-\institute{General.Intelligence@Gmail.com}
+%\institute{General.Intelligence@Gmail.com}
 
 \begin{document}
 
@@ -271,7 +217,7 @@ $$ U(1,3) = -0.04 + U(2,3) $$
 换句话说，这是两个 states 之间，U 值的 local (局部的)约束。
 
 TD learning 的思想是：  假设其他 $U(S')$ 的值正确，利用 Bellman optimality 来调整当下 state 的 $U(S)$。 当尝试的次数多了，所有 $U$ 值都会趋向理想。 Agent 只需要用这条 update rule：
-$$ U(S) \mbox{  +=  } \alpha ( \; R(S) + \gamma U(S') - U(S) \; ) $$
+$$ U(S) \mbox{  +=  } \alpha [ \; R(S) + \gamma U(S') - U(S) \; ] $$
 
 $\alpha$ 是 learning rate，它决定学习的速度（但它不能太大，避免 overshooting）。  后面那东西是 $U(S)$ 和 $U(S)$ 的估值 (estimation) 之间的差别。  对於理想的 $U(S)$ 和 $U(S')$，那差别会是 0。  而在每个 time step，我们只是用 $\alpha$ 部分地 调整这个差别。
 
@@ -284,12 +230,12 @@ $P$ 是 state transitions 的机率，换句话是关於世界的一个 model。
 $Q$ 值只是 $U$ 值的一个变种 ;   $U$ 是对每个 state 而言的，$Q$ 把 $U$ 值分拆成每个 state 中的每个 action 的份量。  换句话说，$Q$ 就是在 state $S$ 做 action $A$ 的 utility。
 
 $Q$ 和 $U$ 之间的关系是：
-$$ U(S) = \max_A  Q(A, S) $$
+$$ U(S) = \max_A  Q(S, A) $$
 
 $Q$ 的好处是什么？  下面将会介绍 active learning，而 $Q$ value  配合 TD learning，可以在 active learning 中也消除 $P$，达到 model-free 的效果。
 
 上面的 update rule 只要用这个关系改写就行：
-$$ U(S) \mbox{  +=  } \alpha ( \; R(S) + \gamma \max_{A'}  Q(A', S') - Q(A, S) \; ) $$
+$$ Q(S, A) \mbox{  +=  } \alpha [ \; R(S) + \gamma \max_{A'}  Q(S', A') - Q(S, A) \; ] $$
 
 \subsection{Active learning}
 
@@ -302,16 +248,13 @@ $$ U(S) \mbox{  +=  } \alpha ( \; R(S) + \gamma \max_{A'}  Q(A', S') - Q(A, S) \
 Agent 需要尝试一些未知的状态／行动，才会学到 optimal policy；  这就是所谓的 exploration vs exploitation （好奇心 vs 短暂贪婪）之间的平衡。
 
 方法是，人工地将未知状态的价值增加一点：
-$$ U(S) = R(S) + \gamma \max_A \mathcal{F}[ \; \sum_{S'} P(S \rightarrow S') U(S'), \; N(A, S) \; ] $$
-其中 $N(A, S)$ 是状态 $S$ 和行动 $A$ 这对组合出现过（被经历过）的次数，$\mathcal{F}$ 是 exploration 函数，它平时回覆正常的 $U$ 的估计值，但当 $N$ 很小时（亦即我们对 $S$，$A$ 的经验少），它会回覆一个比较大的估值，那代表「好奇心」的效用。
+$$ U(S) = R(S) + \gamma \max_A \mathcal{F}[ \; \sum_{S'} P(S \rightarrow S') U(S'), \; N(S, A) \; ] $$
+其中 $N(S, A)$ 是状态 $S$ 和行动 $A$ 这对组合出现过（被经历过）的次数，$\mathcal{F}$ 是 exploration 函数，它平时回覆正常的 $U$ 的估计值，但当 $N$ 很小时（亦即我们对 $S$，$A$ 的经验少），它会回覆一个比较大的估值，那代表「好奇心」的效用。
 
 % 结语
 
 % 本来想写一篇人人能读懂的 RL 简介，但发觉写到长篇大论才勉强解释完。  希望女朋友能读懂 :)
 
-%\section*{Acknowledgements}
-
-\bibliographystyle{plain} % or number or aaai ...
-\bibliography{AGI-book}
+%\bibliographystyle{plain} % or number or aaai ...
 
 \end{document}
