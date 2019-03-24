@@ -87,7 +87,7 @@
 
 \textbf{Reinforcement learning} is a branch of machine learning that is particularly suitable for controlling an \textbf{autonomous agent} who interacts with an \textbf{environment}.  It uses \textbf{sensory perception} and \textbf{rewards} to continually modify its \textbf{behavior}.
 
-When you hear reinforcement learning, it should invoke an imagery in your mind of a little critter such as this cockroach: $\vcenter{\hbox{\includegraphics[scale=0.5]{cockroach.png}}}$
+When you hear reinforcement learning, it should invoke an imagery in your mind of a little critter such as this cockroach: $\vcenter{\hbox{\includegraphics[scale=0.2]{cockroach.png}}}$
 
 As for the idea of an \textbf{environment}, you should think of a maze such as in this: classic game:\begin{equation}
 \includegraphics[scale=0.8]{pacman-0.png}
@@ -264,7 +264,7 @@ $$ U(1,3) = -0.04 + U(2,3) $$
 In other words, this is the \textbf{local constraint} on the $U$ values between 2 states.
 
 The idea of TD learning:  assume other $U(S')$ estimates are correct, use the Bellman optimality constraint to \textbf{adjust} the $U(S)$ of the current state.  As the number of trials grows large, all the $U$ estimates will approach ideal.  The agent only needs to use this update rule:
-$$ U(S) \mbox{  +=  } \alpha ( \; R(S) + \gamma U(S') - U(S) \; ) $$
+$$ U(S) \mbox{  +=  } \alpha [ \; R(S) + \gamma U(S') - U(S) \; ] $$
 
 $\alpha$ is the \textbf{learning rate}, it determines the speed of learning (but it cannot be too large, lest \textbf{overshooting} may occur).  The stuff after $\alpha$ is the difference between the current estimated $U(S)$ and the $U(S)$ estimated using ideal constraints.  For the ideal $U(S)$ and $U(S')$, this difference would be 0.  Whereas for each time step, we just use $\alpha$ to \textbf{partially} adjust this difference.
 
@@ -277,12 +277,12 @@ $P$ is the probabilities of state transitions, in other words a \textbf{model} o
 $Q$ value is just a variation of $U$ value;  there is a $U$ value for each state, and $Q$ is the \textbf{decomposition} of $U$ by all the actions in that state.  In other words, $Q$ is the utility of doing action $A$ in state $S$.
 
 The relation between $Q$ and $U$ is:
-$$ U(S) = \max_A  Q(A, S) $$
+$$ U(S) = \max_A  Q(S, A) $$
 
 What is $Q$ good for?  Below we will introduce \textbf{active} learning, and $Q$ values, when combined with TD learning, can eliminate $P$ in active learning, thus achieving the model-free effect.
 
 The update rule (in the last section) needs only be revised with this new rule:
-$$ U(S) \mbox{  +=  } \alpha ( \; R(S) + \gamma \max_{A'}  Q(A', S') - Q(A, S) \; ) $$
+$$ Q(S, A) \mbox{  +=  } \alpha [ \; R(S) + \gamma \max_{A'}  Q(S', A') - Q(S, A) \; ] $$
 
 \section{Active learning}
 
@@ -295,8 +295,8 @@ When we actually execute the above, we find that the agent's policies are really
 The agent needs to try some unknown states or actions in order to learn the optimal policy;  This is the so-called \textbf{exploration} vs \textbf{exploitation} trade-off.
 
 The way to do this, is to artificially increase the utilities of unknown states:
-$$ U(S) = R(S) + \gamma \max_A \mathcal{F}[ \; \sum_{S'} P(S \rightarrow S') U(S'), \; N(A, S) \; ] $$
-where $N(A, S)$ is the number of times the combination of state $S$ and action $A$ has occurred (= has been experienced), $\mathcal{F}$ is the exploration function, it normally returns the estimate of $U$, but when $N$ is small (that means we have little experience of $S$, $A$), it will return a relatively larger estimate, which represents the utility of ``curiosity''.
+$$ U(S) = R(S) + \gamma \max_A \mathcal{F}[ \; \sum_{S'} P(S \rightarrow S') U(S'), \; N(S, A) \; ] $$
+where $N(S, A)$ is the number of times the combination of state $S$ and action $A$ has occurred (= has been experienced), $\mathcal{F}$ is the exploration function, it normally returns the estimate of $U$, but when $N$ is small (that means we have little experience of $S$, $A$), it will return a relatively larger estimate, which represents the utility of ``curiosity''.
 
 % 结语
 
@@ -304,7 +304,7 @@ where $N(A, S)$ is the number of times the combination of state $S$ and action $
 
 %\section*{Acknowledgements}
 
-\bibliographystyle{plain} % or number or aaai ...
-\bibliography{AGI-book}
+%\bibliographystyle{plain} % or number or aaai ...
+%\bibliography{AGI-book}
 
 \end{document}

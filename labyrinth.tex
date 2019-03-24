@@ -49,6 +49,7 @@
 
 \newcommand{\vect}[1]{\boldsymbol{#1}}
 \newcommand*\sigmoid{\vcenter{\hbox{\includegraphics{sigmoid.png}}}}
+\newcommand*\KB{\vcenter{\hbox{\includegraphics{KB-symbol.png}}}}
 \newcommand*\rectifier{\vcenter{\hbox{\includegraphics{rectifier.png}}}}
 \newcommand{\dashh}{\textemdash~}
 \newcommand{\english}[1]{\rmfamily \textit{``#1''}\rmfamily}
@@ -73,10 +74,6 @@ reinforcement learning and deep learning}}
 \titlerunning{Wandering in the Labyrinth of Thinking}
 \author{\usebox{\MyName} (King-Yin Yan)
 % \\ \footnotesize{General.Intelligence@Gmail.com}
-\and
-Ben Goertzel
-\and
-Juan Carlos Kuri Pinto
 }
 \institute{General.Intelligence@Gmail.com}
 
@@ -90,7 +87,7 @@ Juan Carlos Kuri Pinto
 
 \begin{abstract}
 % 这篇是背景，介绍一个基於 \textbf{增强学习} 和 \textbf{深度学习} 的极简约的 cognitive architecture，它在数学上是一个Hamiltonian 系统，而其 Lagrangian 对应於智能系统的「奖励」或「欲望」的价值。 经典逻辑 AI 的技巧可以搬到这个 setting 之下，而连续时间化之后，可以用上微分几何的技巧。 传统的「逻辑 AI 知识表述」被新的表述法取代，后者的结构是由神经网络的深度学习「诱导」出来的。
-This is the first of a series of papers, introducing a minimalist cognitive architecture based on reinforcement learning and deep learning.  The system consists of an iterative function whose role is analogous to the consequence operator ($\vdash$) in logic.  It is fascinating to note this is a Hamiltonian system, whose Lagrangian corresponds to the value of ``desires'' or ``rewards'' for the intelligent agent;  but the usefulness of this idea is as yet unknown.  More importantly, the structure of classical logic-based AI can be transferred to the neural setting, the topic of our 2nd paper.
+Introducing a minimalist cognitive architecture based on reinforcement learning and deep learning.  The system consists of an iterative function whose role is analogous to the consequence operator ($\vdash$) in logic, and is approximated by a deep neural network (this is the key efficiency-boosting aspect).
 %Its continuous limit can be described by differential geometry.  The old-fashioned logic-based knowledge representation with discrete propositions is abandoned in favor of a representation induced by deep neural learning.
 % The problem of general intelligence can be described and solved in the logic-based AI paradigm, but the main obstacle is that learning is too slow.  The logic-based knowledge representation with discrete propositions is abandoned in favor of a neural-based ``amorphous'' representation induced from the top down, using a deep neural network (DNN).  The DNN acts iteratively on a state space (the ``mental state''), forming a dynamical system.  This system is in turn controlled by reinforcement learning, ``navigating'' the space of mental states as in a maze.
 \end{abstract}
@@ -100,7 +97,7 @@ reinforcement learning, control theory, deep learning, cognitive architecture
 \end{keywords}
 
 %本文介绍一些（非原创的）已知理论，然后指出一些新的研究方向。
-In order to understand our main theory \cite{YanBridge}, most of the present paper can be ignored, except for \S\ref{sec:0} and a basic understanding of reinforcement learning (eg.  my tutorial \cite{YanRLtutorialEN}).
+% In order to understand our main theory \cite{YanBridge}, most of the present paper can be ignored, except for \S\ref{sec:0} and a basic understanding of reinforcement learning (eg.  my tutorial \cite{YanRLtutorialEN}).
 
 % Most of this paper is background information, eg. the ``Hamiltonian theory'' is already well-known and is not our original contribution.
 % The first part of this paper introduces some existing theory, and then speculates on new research directions.
@@ -128,14 +125,14 @@ For example, a mental state could be the following set of propositions:
 \item I am about to write a gerund phrase ``writing a paper...''
 \end{itemize}
 
-Thinking is the process of \emp{transitioning} from one mental state to another.  Even as I am speaking now, I use my mental state to keep track of where I am at within the sentence's syntax, so that I can structure sentences grammatically.
+Thinking is the process of \emp{transitioning} from one mental state to another.  Even as I am speaking now, I use my mental state to keep track of where I am at within the sentence's syntax, so that I can structure my sentences grammatically.
 
-The following 3 theories are actually synonymous:
-\begin{itemize}
-\item in artificial intelligence, \textbf{reinforcement learning (RL)}
-\item in operations research, \textbf{dynamic programming}
-\item in modern control theory, the \textbf{state space} description
-\end{itemize}
+%The following 3 disciplines are actually synonymous:
+%\begin{itemize}
+%\item in artificial intelligence, \textbf{reinforcement learning (RL)}
+%\item in operations research, \textbf{dynamic programming}
+%\item in modern control theory, the \textbf{state space} description
+%\end{itemize}
 
 %\begin{itemize}
 %\item numerical optimization (eg gradient descent)
@@ -215,11 +212,11 @@ According to control theory, the condition for \textbf{optimal path} is given by
 \end{equation}
 %\frac{d}{dt} V(x,t) = \min_u \{ C(x,u) + \langle \nabla V(x,t), f(x,u) \rangle \} 
 
-After the next section I will explain the meaning of $J$, $L$ and $H$.
+In the next section I will explain the meaning of $J$, $L$ and $H$.
 
 \section{Reinforcement learning / dynamic programming}
 
-\textbf{Reinforcement learning} is a branch of machine learning that is particularly suitable for controlling an \textbf{autonomous agent} who interacts with an \textbf{environment}.  It uses \textbf{sensory perception} and \textbf{rewards} to continually modify its \textbf{behavior}.  The exemplary image you should invoke in mind is that of a small insect that navigates a maze looking for food and avoiding predators:  $\vcenter{\hbox{\includegraphics[scale=0.5]{cockroach.png}}}$
+\textbf{Reinforcement learning} is a branch of machine learning that is particularly suitable for controlling an \textbf{autonomous agent} who interacts with an \textbf{environment}.  It uses \textbf{sensory perception} and \textbf{rewards} to continually modify its \textbf{behavior}.  The exemplary image you should invoke in mind is that of a small insect that navigates a maze looking for food and avoiding predators:  $\vcenter{\hbox{\includegraphics[scale=0.1]{cockroach.png}}}$
 
 A reinforcement learning system consists of a 4-tuple:
 \begin{equation}
@@ -309,10 +306,11 @@ In our system there are 2 things that need to be learned:
 \item The transition function $\vect{F}: \vect{x} \mapsto \vect{x}'$.  $\vect{F}$ represents the \textbf{knowledge} that constrains thinking.  In other words, the learning of $\vect{F}$ is the learning of ``static'' knowledge.
 \item Find the optimal trajectory of the state $\vect{x}$.  This corresponds to optimal ``thinking'' under the constraints of static knowledge.
 \end{enumerate}
+
+In traditional reinforcement learning (left view), the system chooses an action $\vect{a}$, and the transition function $\vect{F}$ gives the probability of reaching each state $\vect{x}_i$ given action $\vect{a}$.  In our model (right view), all possible cognitive states are potentially \textbf{reachable} from any other state, and therefore the action $a$ coincides with the next state $x'$.
 \begin{equation}
 \vcenter{\hbox{\includegraphics[scale=0.7]{Q-learning-2-views.png}}}
 \end{equation}
-In traditional reinforcement learning (left view), the system chooses an action $\vect{a}$, and the transition function $\vect{F}$ gives the probability of reaching each state $\vect{x}_i$ given action $\vect{a}$.  In our model (right view), all possible cognitive states are potentially \textbf{reachable} from any other state, and therefore the action $a$ coincides with the next state $x'$.
 
 \begin{comment}
 %==================================================================================
@@ -327,7 +325,7 @@ Under the reinforcement learning framework, intelligence is decomposed into \tex
 %==================================================================================
 \end{comment}
 
-\subsection{Prior art}
+\subsection{Prior art: other cognitive architectures}
 
 The minimalist architecture based on reinforcement learning has been proposed by Itimar Ariel from Israel, in 2012 \cite{Arel2012}, and I also independently proposed in 2016 (precursor of this paper).  The prestigious researcher of signal processing, Simon Haykin, recently also used the ``RL + memory'' design, cf. his 2012 book \textit{Cognitive dynamic systems} \cite{Haykin2012}. Vladimir Anashin in the 1990's also proposed this kind of cognitive architecture \cite{Anashin2009}.  There may exist more precedents, eg: \cite{Ivancevic2006}.
 
@@ -335,123 +333,108 @@ The minimalist architecture based on reinforcement learning has been proposed by
 
 AIXI's environmental setting is the same as ours, but its agent's internal model is a universal Turing machine, and the optimal action is chosen by maximizing potential rewards over all programs of the UTM.  In our (minimal) model, the UTM is \uline{restricted} to an RNN, where the RNN's \textbf{state} is analogous to the UTM's \textbf{tape}, and the optimal weights (program) are found via Bellman optimality.
 
-\begin{tcolorbox}[colback=grey, breakable, enhanced]
-\subsection*{Connections with the Hamiltonian}
+\section{Logical structure}
 
-In \emp{reinforcement learning}, we are concerned with two quantities:
-\let\labelitemi\labelitemii
+The transition function $F$ appearing in (\ref{eqn0}) is ``free'' without further restrictions.  The learning of $F$ may be slow without further \textbf{induction bias}, \textit{cf} the ``no free lunch'' theorem.  But we know that the transition function is similar to the logic consequence or entailment operator $\vdash$.  So we would like to impose the structure of deductive logic on $F$.
+
+By logic structure we mean that $F$ would act like a knowledge base $\KB$ containing a large number of logic \textbf{rules}, as in the setting of classical logic-based AI.
+
+A logic rule is a conditional formula with variables.  For example:
+\begin{equation}
+\forall X \; \forall Y \; \forall Z.  \quad \text{father}({\color{red}X} \tikzmark{p}, {\color{red}Y} \tikzmark{y}) \wedge \mbox{father}({\color{red}Y} \tikzmark{q}, {\color{red}Z} \tikzmark{r}) \Rightarrow \text{grandfather}({\color{red}X} \tikzmark{x}, {\color{red}Z} \tikzmark{z}) 
+\begin{tikzpicture}[overlay,remember picture,distance=1.1cm]
+\draw[-,red, transform canvas={shift={(-5pt,10pt)}}, out=135,in=45] (x.center) to (p.center);
+\draw[-,red, transform canvas={shift={(-5pt,-3pt)}}, out=-20,in=210] (y.center) to (q.center);
+\draw[-,red, transform canvas={shift={(-5pt,-3pt)}}, out=-25,in=215] (r.center) to (z.center);
+\end{tikzpicture}
+\label{linkage-father}
+\end{equation}
+where the red lines show what I call ``linkages'' between different appearances of the same variables.
+
+\textbf{Quantification} of logic variables, with their linkages, result in \textbf{cylindrical} and \textbf{diagonal} structures when the logic is interpreted \textit{geometrically}.  This is the reason why Tarski discovered the \textbf{cylindric algebra} structure of first-order predicate logic.  Such geometric shapes can be illustrated by the following figures:
+
+
+
+Recall that inside our RL model:
 \begin{itemize}
-\item $R(\vect{x}, \vect{u})$ = \emp{reward} of doing action $\vect{u}$ in state $\vect{x}$
-\item $U(\vect{x})$ = \emp{utility} or \emp{value} of state $\vect{x}$ 
+	\item state = mental state = set of logic propositions
+	\item environment = state space = mental space
+	\item actions = logic rules
 \end{itemize}
-Simply put, \textbf{utility} is the integral of instantaneous \textbf{rewards} over time:
+
+Basically, an action = a logic rule is of the form:
 \begin{equation}
-\boxed{\mbox{utility} $U$} = \int \boxed{\mbox{reward} $R$} \,dt
+\label{eqn:action}
+\mathsf{xxx} \wedge \mathsf{xxx} \wedge .... \Rightarrow \mathsf{xxx}
 \end{equation}
-%（价值有时用 $V$ 表示，但为避免和势能 $V$ 混淆故不用。）
+where $\mathsf{xxx}$ denotes a logic \textbf{proposition}.
 
-In \emp{control-theoretic} parlance, it is usually defined the \textbf{cost functional}:
+Each proposition is a composition of 3 atomic concepts (think of these as word vectors as in Word2Vec):
 \begin{equation}
-\boxed{\mbox{cost } $J$} = \int L dt + \Phi(\vect{x}_\bot)
+\mbox{proposition} = \mathsf{xxx} = \mathsf{x} \cdot \mathsf{x} \cdot \mathsf{x}.
 \end{equation}
-where $L$ is the \textbf{running cost}, ie, the cost of making each step; $\Phi$ is the \textbf{terminal cost}, ie, the value when the terminal state $\vect{x}_\bot$ is reached.
+Each $\mathsf{x} \in \mathbb{R}^n$ , where $n$ is the dimension needed to represent a single word-vector (or atomic concept).
 
-%Define a continuous version of ``utility'':
-%\begin{equation}
-%V(x,t) = \min_u \{ \int_t^{t_\bot} C(x,u)dt + \Phi(x_\bot,t_\bot) \} 
-%\end{equation}
-%where $t$ is time, $u$ is a set of control parameters, $C$ is the \emp{cost-rate} function:
-%\begin{equation}
-%\int C dt = R = \mbox{reward}
-%\end{equation}
-%This integral expresses the ``cost of the path'', whereas $\Phi(x_\bot,t_\bot)$ is the ``cost at termination''.
+An \textbf{action} is the conclusion of a rule, \textit{ie}, the right-hand side of (\ref{eqn:action}).
 
-In \emp{analytical mechanics} $L$ is known as the \textbf{Lagrangian}, and the time-integral of $L$ is called the \textbf{action}:
+We use a ``free'' neural network (\textit{ie}, standard feed-forward NN) to approximate the set of \textit{all} rules.
+
+The \textbf{input} of the NN would be the state vector:
 \begin{equation}
-\boxed{\mbox{action } $S$} = \int L dt
+\mathsf{xxx}_1 \wedge \mathsf{xxx}_2 \wedge .... \mathsf{xxx}_m .
 \end{equation}
-Hamilton's \emp{principle of least action} says that $S$ always takes the \textbf{stationary value}, ie, the $S$ value is extremal compared with neighboring trajectories.
+We fix the number of conjunctions to be $m$, with the assumption that conjunctions of length $< m$ could be filled with ``dummy'' (always-true) propositions.
 
-The \textbf{Hamiltonian} is defined as $\displaystyle H = L + \frac{\partial J^*}{\partial \vect{x}} \vect{f}$, which came from the method of \textbf{Lagrange multipliers}.  For details please refer to my \textit{Control theory tutorial}\cite{YanControlTheoryTutorial}.
-
-All these are the same thing, so there is this correspondence:
+The \textbf{output} of the NN would be the \textbf{probability} of an action:
 \begin{equation}
-\begin{tabular}{|c|c|c|}
-\hline 
-\emp{Reinforcement learning} & \emp{Control theory} & \emp{Analytical mechanics} \\ 
-\hline
-utility or value $U$ & cost $J$ & action $S$ \\ 
-\hline 
-instantaneous reward $R$ & running cost & Lagrangian $L$ \\ 
-\hline 
-action $a$ & control $u$ & (external force?) \\
-\hline
-\end{tabular} 
+p(\mathsf{xxx}).
 \end{equation}
+Note that we don't just want the action itself, we need the \textbf{probability distribution} over these actions.  The \textbf{Bellman update} of reinforcement learning should update the probability distribution over such actions.
 
-%用比较浅显的例子： 和美女做爱能带来即时的快感 (= 奖励 $R$)，但如果强奸的话会坐牢，之后很长时间很苦闷，所以这个做法的长远价值 $U$ 比其他做法较低，正常人不会选择它。
+\subsection{Implementation issues}
 
-Interestingly, the reward $R$ corresponds to the \textbf{Lagrangian} in physics, whose unit is ``energy'';  In other words, ``desires'' or ``happiness'' appear to be measured by units of ``energy'', this coincides with the idea of ``positive energy'' in pop psychology.  Whereas, long-term value is measured in units of $[\mbox{energy} \times \mbox{time}]$.
-
-%一个智能系统，它有「智慧」的条件，就是每时每刻都不断追求「开心能量」或奖励 $R$ 的最大值，但它必需权衡轻重，有计划地找到长远的效用 $U$ 的最大值。
-
-This correspondence of these 3 theories is explained in detail in Daniel Liberzon's book \cite{Liberzon2012}.  While this correspondence has very interesting philosophical implications, it may not be very useful in practice:  the traditional AI system is discrete-time; converting it to continuous-time seems to increase the computational burden.  The recent advent of \textbf{symplectic integrators} \cite{} are known to produce better numerical solutions that retain qualitative features of the exact solution, eg. quasi-periodicity.
-
-\begin{comment}
-%==================================================================================
-An interesting insight from control theory is that our system is a Hamiltonian dynamical system in a broad sense.
-
-Hamilton's \emp{principle of least action} says that the trajectories of dynamical systems occuring in nature always choose to have their action $S$ taking \textbf{stationary values} when compared to neighboring paths.  The action is the time integral of the Lagrangian $L$:
-\begin{equation}
-\boxed{\mbox{Action} S} = \int \boxed{\mbox{Lagrangian} L} \; dt
-\end{equation}
-From this we see that the Lagrangian corresponds to the instantaneous ``rewards'' of our system.  It is perhaps not a coincidence that the Lagrangian has units of \textbf{energy}, in accordance with the folk psychology notion of ``positive energy'' when we talk about desirable things.
-
-The \emp{Hamiltonian} $H$ arises when we consider a typical control theory problem;  The system is defined via:
+All the ``knowledge'' of the agent is contained in the $Q$-learning function:
 \begin{eqnarray}
-\mbox{state equation:} \quad & \dot{\vect{x}}(t) = \vect{f}[\vect{x}(t), \vect{u}(t), t] \\
-\mbox{boundary condition:} \quad & \vect{x}(t_0) = \vect{x}_0 \,,\, \vect{x}(t_\bot) = \vect{x}_\bot \\
-\mbox{objective function:} \quad & J = \int_{t_0}^{t_\bot} L[\vect{x}(t), \vect{u}(t), t] dt
+Q: \mathbb{X} \times \mathbb{A} &\rightarrow& [0,1] \in \mathbb{R} \nonumber \\
+(x,a) &\mapsto& P(a)
 \end{eqnarray}
-The goal is to find the optimal control $\vect{u}^*(t)$.
+where $\mathbb{X}$ = state space, $\mathbb{A}$ = action space, $P(\_)$ = probability distribution.
 
-Now apply the technique of \emp{Lagrange multipliers} for finding the maximum of a function, this leads to the new objective function:
+The function space of $Q$ is equivalent to:
 \begin{equation}
-U = \int_{t_0}^{t_\bot} \{ L + \vect{\lambda}^T(t) \left[ f(\vect{x}, \vect{u}, t) - \dot{\vect{x}} \right] \} dt
+\mathbb{X} \rightarrow \mathbb{R} (\mathbb{A}) = \mathbb{R}^{\mathbb{A}}
 \end{equation}
-So we can introduce a new scalar function $H$, ie the Hamiltonian:
+which is very large.  For example, if $\mathbb{A}$ has finitely 10 discrete actions, $\mathbb{R}(\mathbb{A})$ would be $\mathbb{R}^{10}$.  It would be much worse if $\mathbb{A}$ is continuously-valued, but there exists a number of techniques to deal with continuous actions in the RL literature.
+
+For our purpose, I think the \textbf{Gaussian kernel} (\textit{ie}, radial basis function) method is very suitable.  The true probability distribution is approximated by:
 \begin{equation}
-H(\vect{x}, \vect{u}, t) = L(\vect{x}, \vect{u}, t) + \vect{\lambda}^T(t) f(\vect{x}, \vect{u}, t)
+P(\vect{a}) \approx \hat{P}(\vect{a}) = \frac{1}{N h} \sum_{i = 1}^{N} \Phi \left( \frac{\vect{a} - \vect{a}_i}{h} \right)
 \end{equation}
-Physically, the unit of $\vect{f}$ is velocity, while the unit of $L$ is energy, therefore $\vect{\lambda}$ should have the unit of \emp{momentum}.  This is the reason why the phase space is made up of the diad of $(\mbox{position}, \mbox{momentum})$.
+where $\Phi(u)$ denotes the Gaussian kernel $= \frac{1}{\sqrt{2 \pi}} e^{- u^2 / 2}$.
 
-%==================================================================================
-\end{comment}
-
-The equation of motion for the continuous-time case is the famed \emp{Hamilton-Jacobi-Bellman equation}:
-% \footnote{To digress a bit, this equation is also analogous to the \emp{Schr\"{o}dinger equation} in quantum mechanics:
-%\begin{equation}
-%i \hbar \frac{\partial}{\partial t} \Psi(x,t) = \left[ V(x,t) + \frac{-\hbar^2}{2\mu} \nabla^2 \right] \Psi(x,t).
-%\end{equation}
-%where $\Psi$ is analogous to our $U$ (perhaps $\Psi$ is something that nature wants to optimize?)}
+For each state $x$, our NN should output a probabilistic \textit{choice} of $k$ actions.  So we only need to maintain $k$ ``peaks'' given by Gaussian kernels.  Each peak is determined by its mean (a vector) and variance (a scalar).  We fix the variance globally as the parameter $h$.  So our NN, ie, $Q$-function, would be of the form:
 \begin{equation}
-\boxed{\mbox{Hamilton-Jacobi-Bellman}} \quad
-0 = \frac{\partial U^*}{\partial t} + \min_u H
+Q: \mathbb{X} \rightarrow \mathbb{A}^k
 \end{equation}
-of which the \emp{Schr\"{o}dinger equation} is a special case.
+where each $a \in \mathbb{A}$ is of the form $\mathsf{xxx}$ and is of size $\mathbb{R}^{3n}$, as explained above.  Thus our NN is of the from:
+\begin{eqnarray}
+Q: \mathbb{X} &\rightarrow& \mathbb{A}^k \nonumber \\
+= (\mathbb{R}^{3n})^m &\rightarrow& (\mathbb{R}^{3n})^k \nonumber \\
+= \mathbb{R}^{3mn} &\rightarrow& \mathbb{R}^{3kn} 
+\end{eqnarray}
 
-%All these ``physical'' ideas flow automatically from our definition of \textbf{rewards}, without the need to introduce them artificially.  But these ideas seem not immediately useful to our project, unless we are to explore \textbf{continuous-time} models.
+\section{Algorithm}
 
-\end{tcolorbox}
+
 
 \section{Future directions}
 
 \begin{itemize}
-\item \textbf{Relation to logic-based AI:}  In the system's state equation (\ref{eqn0}), $\vect{F}$ is free to change ($\vect{F}$ represents learned knowledge).  In other words, the entire system almost has no structure.  Searching for a candidate $\vect{F}$ in the infinite-dimensional function space is impractical, so we need to introduce the structure of logic-based AI into this system, such that the search space for $\vect{F}$ is reduced.  In machine learning, this is known as \textbf{inductive bias}, the \textit{sine qua non} of speeding up learning.  This will be addressed in our 2nd paper \textit{A bridge between logic and neural} \cite{YanBridge}.
+% \item \textbf{Relation to logic-based AI:}  In the system's state equation (\ref{eqn0}), $\vect{F}$ is free to change ($\vect{F}$ represents learned knowledge).  In other words, the entire system almost has no structure.  Searching for a candidate $\vect{F}$ in the infinite-dimensional function space is impractical, so we need to introduce the structure of logic-based AI into this system, such that the search space for $\vect{F}$ is reduced.  In machine learning, this is known as \textbf{inductive bias}, the \textit{sine qua non} of speeding up learning.  This will be addressed in our 2nd paper \textit{A bridge between logic and neural} \cite{YanBridge}.
 
-\item \textbf{Memory:}  In this minimal architecture there is no episodic memory, this will be dealt with by our 3rd paper, \textit{The structure of memory} \cite{YanMemory}.
-
+\item \textbf{Memory:}  In this minimal architecture there is no episodic memory, this will be dealt with in a later paper. %\textit{The structure of memory} \cite{YanMemory}.
 \end{itemize}
+
 
 \begin{comment}
 %==================================================================================
@@ -703,6 +686,116 @@ When the forward and backward states get close enough, a successful path is foun
 
 % ================================== comment out ==================================
 \fi
+
+\begin{tcolorbox}[colback=grey, breakable, enhanced]
+	\subsection*{Appendix:  connections with Hamiltonian control and quantum mechanics}
+	
+	In \emp{reinforcement learning}, we are concerned with two quantities:
+	\let\labelitemi\labelitemii
+	\begin{itemize}
+		\item $R(\vect{x}, \vect{u})$ = \emp{reward} of doing action $\vect{u}$ in state $\vect{x}$
+		\item $U(\vect{x})$ = \emp{utility} or \emp{value} of state $\vect{x}$ 
+	\end{itemize}
+	Simply put, \textbf{utility} is the integral of instantaneous \textbf{rewards} over time:
+	\begin{equation}
+	\boxed{\mbox{utility} $U$} = \int \boxed{\mbox{reward} $R$} \,dt
+	\end{equation}
+	%（价值有时用 $V$ 表示，但为避免和势能 $V$ 混淆故不用。）
+	
+	In \emp{control-theoretic} parlance, it is usually defined the \textbf{cost functional}:
+	\begin{equation}
+	\boxed{\mbox{cost } $J$} = \int L dt + \Phi(\vect{x}_\bot)
+	\end{equation}
+	where $L$ is the \textbf{running cost}, ie, the cost of making each step; $\Phi$ is the \textbf{terminal cost}, ie, the value when the terminal state $\vect{x}_\bot$ is reached.
+	
+	%Define a continuous version of ``utility'':
+	%\begin{equation}
+	%V(x,t) = \min_u \{ \int_t^{t_\bot} C(x,u)dt + \Phi(x_\bot,t_\bot) \} 
+	%\end{equation}
+	%where $t$ is time, $u$ is a set of control parameters, $C$ is the \emp{cost-rate} function:
+	%\begin{equation}
+	%\int C dt = R = \mbox{reward}
+	%\end{equation}
+	%This integral expresses the ``cost of the path'', whereas $\Phi(x_\bot,t_\bot)$ is the ``cost at termination''.
+	
+	In \emp{analytical mechanics} $L$ is known as the \textbf{Lagrangian}, and the time-integral of $L$ is called the \textbf{action}:
+	\begin{equation}
+	\boxed{\mbox{action } $S$} = \int L dt
+	\end{equation}
+	Hamilton's \emp{principle of least action} says that $S$ always takes the \textbf{stationary value}, ie, the $S$ value is extremal compared with neighboring trajectories.
+	
+	The \textbf{Hamiltonian} is defined as $\displaystyle H = L + \frac{\partial J^*}{\partial \vect{x}} \vect{f}$, which came from the method of \textbf{Lagrange multipliers}.  For details please refer to my \textit{Control theory tutorial}\cite{YanControlTheoryTutorial}.
+	
+	All these are the same thing, so there is this correspondence:
+	\begin{equation}
+	\begin{tabular}{|c|c|c|}
+	\hline 
+	\emp{Reinforcement learning} & \emp{Control theory} & \emp{Analytical mechanics} \\ 
+	\hline
+	utility or value $U$ & cost $J$ & action $S$ \\ 
+	\hline 
+	instantaneous reward $R$ & running cost & Lagrangian $L$ \\ 
+	\hline 
+	action $a$ & control $u$ & (external force?) \\
+	\hline
+	\end{tabular} 
+	\end{equation}
+	
+	%用比较浅显的例子： 和美女做爱能带来即时的快感 (= 奖励 $R$)，但如果强奸的话会坐牢，之后很长时间很苦闷，所以这个做法的长远价值 $U$ 比其他做法较低，正常人不会选择它。
+	
+	Interestingly, the reward $R$ corresponds to the \textbf{Lagrangian} in physics, whose unit is ``energy'';  In other words, ``desires'' or ``happiness'' appear to be measured by units of ``energy'', this coincides with the idea of ``positive energy'' in pop psychology.  Whereas, long-term value is measured in units of $[\mbox{energy} \times \mbox{time}]$.
+	
+	%一个智能系统，它有「智慧」的条件，就是每时每刻都不断追求「开心能量」或奖励 $R$ 的最大值，但它必需权衡轻重，有计划地找到长远的效用 $U$ 的最大值。
+	
+	This correspondence of these 3 theories is explained in detail in Daniel Liberzon's book \cite{Liberzon2012}.  While this correspondence has very interesting philosophical implications, it may not be very useful in practice:  the traditional AI system is discrete-time; converting it to continuous-time seems to increase the computational burden.  The recent advent of \textbf{symplectic integrators} \cite{} are known to produce better numerical solutions that retain qualitative features of the exact solution, eg. quasi-periodicity.
+	
+	\begin{comment}
+	%==================================================================================
+	An interesting insight from control theory is that our system is a Hamiltonian dynamical system in a broad sense.
+	
+	Hamilton's \emp{principle of least action} says that the trajectories of dynamical systems occuring in nature always choose to have their action $S$ taking \textbf{stationary values} when compared to neighboring paths.  The action is the time integral of the Lagrangian $L$:
+	\begin{equation}
+	\boxed{\mbox{Action} S} = \int \boxed{\mbox{Lagrangian} L} \; dt
+	\end{equation}
+	From this we see that the Lagrangian corresponds to the instantaneous ``rewards'' of our system.  It is perhaps not a coincidence that the Lagrangian has units of \textbf{energy}, in accordance with the folk psychology notion of ``positive energy'' when we talk about desirable things.
+	
+	The \emp{Hamiltonian} $H$ arises when we consider a typical control theory problem;  The system is defined via:
+	\begin{eqnarray}
+	\mbox{state equation:} \quad & \dot{\vect{x}}(t) = \vect{f}[\vect{x}(t), \vect{u}(t), t] \\
+	\mbox{boundary condition:} \quad & \vect{x}(t_0) = \vect{x}_0 \,,\, \vect{x}(t_\bot) = \vect{x}_\bot \\
+	\mbox{objective function:} \quad & J = \int_{t_0}^{t_\bot} L[\vect{x}(t), \vect{u}(t), t] dt
+	\end{eqnarray}
+	The goal is to find the optimal control $\vect{u}^*(t)$.
+	
+	Now apply the technique of \emp{Lagrange multipliers} for finding the maximum of a function, this leads to the new objective function:
+	\begin{equation}
+	U = \int_{t_0}^{t_\bot} \{ L + \vect{\lambda}^T(t) \left[ f(\vect{x}, \vect{u}, t) - \dot{\vect{x}} \right] \} dt
+	\end{equation}
+	So we can introduce a new scalar function $H$, ie the Hamiltonian:
+	\begin{equation}
+	H(\vect{x}, \vect{u}, t) = L(\vect{x}, \vect{u}, t) + \vect{\lambda}^T(t) f(\vect{x}, \vect{u}, t)
+	\end{equation}
+	Physically, the unit of $\vect{f}$ is velocity, while the unit of $L$ is energy, therefore $\vect{\lambda}$ should have the unit of \emp{momentum}.  This is the reason why the phase space is made up of the diad of $(\mbox{position}, \mbox{momentum})$.
+	
+	%==================================================================================
+	\end{comment}
+	
+	The equation of motion for the continuous-time case is the famed \emp{Hamilton-Jacobi-Bellman equation}:
+	% \footnote{To digress a bit, this equation is also analogous to the \emp{Schr\"{o}dinger equation} in quantum mechanics:
+	%\begin{equation}
+	%i \hbar \frac{\partial}{\partial t} \Psi(x,t) = \left[ V(x,t) + \frac{-\hbar^2}{2\mu} \nabla^2 \right] \Psi(x,t).
+	%\end{equation}
+	%where $\Psi$ is analogous to our $U$ (perhaps $\Psi$ is something that nature wants to optimize?)}
+	\begin{equation}
+	\boxed{\mbox{Hamilton-Jacobi-Bellman}} \quad
+	0 = \frac{\partial U^*}{\partial t} + \min_u H
+	\end{equation}
+	of which the \emp{Schr\"{o}dinger equation} is a special case.
+	
+	%All these ``physical'' ideas flow automatically from our definition of \textbf{rewards}, without the need to introduce them artificially.  But these ideas seem not immediately useful to our project, unless we are to explore \textbf{continuous-time} models.
+	
+\end{tcolorbox}
+
 
 \bibliographystyle{plain} % or number or aaai ...
 \bibliography{AGI-book}
