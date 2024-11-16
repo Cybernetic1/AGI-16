@@ -2,23 +2,23 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="744.09448819"
    height="1052.3622047"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.4 r9939"
+   inkscape:version="1.3.2 (1:1.3.2+202311252150+091e20ef0f)"
    sodipodi:docname="genifer-model-0.svg"
    inkscape:export-filename="/home/yky/latex/genifer5/genifer-model-0.png"
    inkscape:export-xdpi="200"
-   inkscape:export-ydpi="200">
+   inkscape:export-ydpi="200"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -27,16 +27,19 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="355.64121"
-     inkscape:cy="529.70848"
+     inkscape:cx="355"
+     inkscape:cy="544"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1050"
-     inkscape:window-height="1652"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
      inkscape:window-x="0"
-     inkscape:window-y="2"
-     inkscape:window-maximized="1" />
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:showpageshadow="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1" />
   <defs
      id="defs4">
     <marker
@@ -404,7 +407,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -798,7 +801,7 @@
        inkscape:export-ydpi="600" />
     <flowRoot
        transform="translate(-157.19531,400.7761)"
-       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
        id="flowRoot2987-3"
        xml:space="preserve"
        inkscape:export-filename="/home/yky/latex/presentation/RNN.png"
@@ -810,8 +813,9 @@
            height="37"
            width="57"
            id="rect2991-3" /></flowRegion><flowPara
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Serif;-inkscape-font-specification:Serif"
-         id="flowPara2993-6">F</flowPara></flowRoot>    <image
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20px;line-height:1.25;font-family:serif;-inkscape-font-specification:Serif"
+         id="flowPara2993-6">F</flowPara></flowRoot>
+    <image
        width="132"
        height="95"
        xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAC1AS0DASIA AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3 ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3 uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iii gAooooAKKKKACiiigAoopCcAk0ABOBUTXVujbXmjVvQsK4TxF4nmubl7WzkMcCEqzKcFz359K5kv nrXbTwUpRvJ2OOpjIxdkrnsqsGGVIIpa8o0zW7vS5laGQmP+KMn5SP8APevTdOvotRso7mE/K4zj 0PcVjXw8qW+xrRrxqrQt0UUVgbhRRVHVdSi0uwkuZedv3V/vHsKaTbshNpK7LjMqjLEAepqNLqCR tsc0bH0DA15VqGsXepzGS4lJXPCA/Kv0FUxIQQQeR3rvjgG1qzieNV9EezA0tcH4a8TzJcpZXshk jc7Udjyp9DXdjkda46tKVOVpHVSqqpG6FooorM0CiiuX8U+Im00C0tWAuGGWf+4P8aunBzlyxInN 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 oKKKYFmiiigAooooAKKKKACiiigAooooA//Z "
@@ -824,7 +828,7 @@
     <flowRoot
        xml:space="preserve"
        id="flowRoot3155"
-       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
        transform="translate(-180,172)"
        inkscape:export-filename="/home/yky/latex/presentation/reasoner-model.jpg.png"
        inkscape:export-xdpi="800"
@@ -835,7 +839,9 @@
            height="56"
            x="222"
            y="818.36218" /></flowRegion><flowPara
-         id="flowPara3161">mental state,</flowPara></flowRoot>    <g
+         id="flowPara3161"
+         style="font-size:20px;line-height:1.25">mental state,</flowPara></flowRoot>
+    <g
        id="g3586"
        transform="matrix(0.61016949,0,0,0.56521739,-94.54201,259.44312)"
        inkscape:export-filename="/home/yky/latex/AGI-16/genifer-model-0.png"
@@ -1603,16 +1609,15 @@
        inkscape:export-xdpi="600"
        inkscape:export-ydpi="600" />
     <text
-       sodipodi:linespacing="125%"
        id="text2995-0-6"
        y="342.23599"
        x="369.63342"
-       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
        xml:space="preserve"
        inkscape:export-filename="/home/yky/latex/AGI-17/model-with-u.png"
        inkscape:export-xdpi="600"
        inkscape:export-ydpi="600"><tspan
-         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Latin Modern Roman;-inkscape-font-specification:Latin Modern Roman;font-size:28px"
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:28px;line-height:1.25;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman'"
          y="342.23599"
          x="369.63342"
          id="tspan2997-6-4"
@@ -1647,7 +1652,7 @@
     <flowRoot
        xml:space="preserve"
        id="flowRoot3137-8-5"
-       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
        transform="translate(189.9834,243.47655)"
        inkscape:export-filename="/home/yky/latex/AGI-17/model-Sayaka.png"
        inkscape:export-xdpi="600"
@@ -1658,8 +1663,11 @@
            height="61"
            x="337"
            y="275.36218" /></flowRegion><flowPara
-         id="flowPara3143-1-5">deep</flowPara><flowPara
-         id="flowPara5207">NN</flowPara></flowRoot>    <g
+         id="flowPara3143-1-5"
+         style="font-size:20px;line-height:1.25">deep</flowPara><flowPara
+         id="flowPara5207"
+         style="font-size:20px;line-height:1.25">NN</flowPara></flowRoot>
+    <g
        id="g5426"
        transform="translate(-65,88)"
        inkscape:export-filename="/home/yky/latex/AGI-17/model-Sayaka.png"
@@ -2074,30 +2082,28 @@
          inkscape:export-xdpi="600"
          inkscape:export-filename="/home/yky/latex/AGI-16/genifer-model-0.png"
          xml:space="preserve"
-         style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
          x="574.32227"
          y="535.65222"
-         id="text2995-8-9"
-         sodipodi:linespacing="125%"><tspan
+         id="text2995-8-9"><tspan
            sodipodi:role="line"
            id="tspan2997-8-4"
            x="574.32227"
            y="535.65222"
-           style="font-size:28px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Latin Modern Roman;-inkscape-font-specification:Latin Modern Roman">x, u, x<tspan
-   style="font-size:65.00091553%;font-weight:normal;baseline-shift:sub"
+           style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:28px;line-height:1.25;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman'">x, u, x<tspan
+   style="font-weight:normal;font-size:65.0009%;baseline-shift:sub"
    id="tspan3710">t+1</tspan></tspan></text>
     </g>
     <text
-       sodipodi:linespacing="125%"
        id="text2995-8-6"
        y="461.65222"
        x="500.32227"
-       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
        xml:space="preserve"
        inkscape:export-filename="/home/yky/latex/AGI-17/model-Sayaka.png"
        inkscape:export-xdpi="600"
        inkscape:export-ydpi="600"><tspan
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Serif;-inkscape-font-specification:Serif"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20px;line-height:1.25;font-family:serif;-inkscape-font-specification:Serif"
          y="461.65222"
          x="500.32227"
          id="tspan2997-8-9"
@@ -2172,7 +2178,7 @@
            style="fill:#ffffff;stroke:#000000" />
         <flowRoot
            transform="translate(-18,-15)"
-           style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
            id="flowRoot3015-8"
            xml:space="preserve"><flowRegion
              id="flowRegion3017-7"><rect
@@ -2181,14 +2187,17 @@
                height="86"
                width="131"
                id="rect3019-2" /></flowRegion><flowPara
-             id="flowPara3021-8">reinforcement</flowPara><flowPara
-             id="flowPara3023-2">learner</flowPara></flowRoot>      </g>
+             id="flowPara3021-8"
+             style="font-size:20px;line-height:1.25">reinforcement</flowPara><flowPara
+             id="flowPara3023-2"
+             style="font-size:20px;line-height:1.25">learner</flowPara></flowRoot>
+      </g>
       <flowRoot
          inkscape:export-ydpi="600"
          inkscape:export-xdpi="600"
          inkscape:export-filename="/home/yky/latex/AGI-16/genifer-model-0.png"
          transform="translate(-113.83423,241.5343)"
-         style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
          id="flowRoot3137-8-2"
          xml:space="preserve"><flowRegion
            id="flowRegion3139-4-7"><rect
@@ -2197,7 +2206,9 @@
              height="36"
              width="81"
              id="rect3141-8-6" /></flowRegion><flowPara
-           id="flowPara3143-1-1">controls</flowPara></flowRoot>    </g>
+           id="flowPara3143-1-1"
+           style="font-size:20px;line-height:1.25">controls</flowPara></flowRoot>
+    </g>
     <g
        id="g5754"
        transform="translate(0,-1.9392097)"
@@ -2227,7 +2238,7 @@
            style="fill:#ffffff;stroke:#000000" />
         <flowRoot
            transform="translate(-18,-15)"
-           style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
            id="flowRoot3015-1"
            xml:space="preserve"><flowRegion
              id="flowRegion3017-4"><rect
@@ -2236,16 +2247,19 @@
                height="86"
                width="131"
                id="rect3019-9" /></flowRegion><flowPara
-             id="flowPara3021-1">reinforcement</flowPara><flowPara
-             id="flowPara3023-0">learner</flowPara></flowRoot>      </g>
+             id="flowPara3021-1"
+             style="font-size:20px;line-height:1.25">reinforcement</flowPara><flowPara
+             id="flowPara3023-0"
+             style="font-size:20px;line-height:1.25">learner</flowPara></flowRoot>
+      </g>
       <flowRoot
          inkscape:export-ydpi="600"
          inkscape:export-xdpi="600"
          inkscape:export-filename="/home/yky/latex/AGI-16/genifer-model-0.png"
          inkscape:transform-center-y="11.105003"
          inkscape:transform-center-x="12"
-         transform="matrix(0.97889645,0.20435687,-0.20435687,0.97889645,44.31666,-108.05036)"
-         style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+         transform="rotate(11.791853,545.31294,160.54572)"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
          id="flowRoot5350-7"
          xml:space="preserve"><flowRegion
            id="flowRegion5352-5"><rect
@@ -2254,7 +2268,9 @@
              height="49"
              width="156"
              id="rect5354-8" /></flowRegion><flowPara
-           id="flowPara5356-7">controls</flowPara></flowRoot>    </g>
+           id="flowPara5356-7"
+           style="font-size:20px;line-height:1.25">controls</flowPara></flowRoot>
+    </g>
     <g
        transform="translate(9.5138806,-444.25648)"
        id="g5782-0"
@@ -2290,7 +2306,7 @@
            style="fill:#ffffff;stroke:#000000" />
         <flowRoot
            transform="translate(-18,-15)"
-           style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
            id="flowRoot3015-8-9"
            xml:space="preserve"><flowRegion
              id="flowRegion3017-7-6"><rect
@@ -2299,14 +2315,17 @@
                height="86"
                width="131"
                id="rect3019-2-1" /></flowRegion><flowPara
-             id="flowPara3021-8-0">reinforcement</flowPara><flowPara
-             id="flowPara3023-2-4">learner</flowPara></flowRoot>      </g>
+             id="flowPara3021-8-0"
+             style="font-size:20px;line-height:1.25">reinforcement</flowPara><flowPara
+             id="flowPara3023-2-4"
+             style="font-size:20px;line-height:1.25">learner</flowPara></flowRoot>
+      </g>
       <flowRoot
          inkscape:export-ydpi="600"
          inkscape:export-xdpi="600"
          inkscape:export-filename="/home/yky/latex/AGI-16/genifer-model-0.png"
          transform="translate(-113.83423,241.5343)"
-         style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
          id="flowRoot3137-8-2-2"
          xml:space="preserve"><flowRegion
            id="flowRegion3139-4-7-2"><rect
@@ -2315,11 +2334,13 @@
              height="36"
              width="81"
              id="rect3141-8-6-2" /></flowRegion><flowPara
-           id="flowPara3143-1-1-0">controls</flowPara></flowRoot>    </g>
+           id="flowPara3143-1-1-0"
+           style="font-size:20px;line-height:1.25">controls</flowPara></flowRoot>
+    </g>
     <g
        id="g4178-7"
        transform="translate(204.33887,362.61876)"
-       inkscape:export-filename="/home/yky/latex/AGI-17/genifer-model-00.png"
+       inkscape:export-filename="../2019/genifer-model-00.png"
        inkscape:export-xdpi="600"
        inkscape:export-ydpi="600">
       <path
@@ -2637,7 +2658,7 @@
     </g>
     <flowRoot
        transform="translate(151.33887,281.61876)"
-       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
        id="flowRoot2999-50"
        xml:space="preserve"
        inkscape:export-filename="/home/yky/latex/AGI-17/genifer-model-00.png"
@@ -2649,12 +2670,13 @@
            height="36"
            width="75"
            id="rect3003-6" /></flowRegion><flowPara
-         style="font-size:28px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Latin Modern Roman;-inkscape-font-specification:Latin Modern Roman"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:28px;line-height:1.25;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman'"
          id="flowPara3005-1"><flowSpan
            style="font-weight:bold"
            id="flowSpan3535">x</flowSpan><flowSpan
-           style="font-size:65.00091553000000033%;baseline-shift:sub;-inkscape-font-specification:Latin Modern Roman;font-family:Latin Modern Roman"
-           id="flowSpan3517">t+1</flowSpan></flowPara></flowRoot>    <path
+           style="font-size:65.0009%;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman';baseline-shift:sub"
+           id="flowSpan3517">t+1</flowSpan></flowPara></flowRoot>
+    <path
        sodipodi:nodetypes="cc"
        inkscape:connector-curvature="0"
        id="path3007-0"
@@ -2684,7 +2706,7 @@
     <flowRoot
        xml:space="preserve"
        id="flowRoot3137-2"
-       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
        transform="translate(134.33887,483.61876)"
        inkscape:export-filename="/home/yky/latex/AGI-17/genifer-model-00.png"
        inkscape:export-xdpi="600"
@@ -2695,22 +2717,26 @@
            height="40"
            x="337"
            y="275.36218" /></flowRegion><flowPara
-         id="flowPara3143-15"><flowSpan
-   style="font-size:28px;font-style:italic;font-weight:bold;font-family:Latin Modern Roman;-inkscape-font-specification:Latin Modern Roman"
-   id="flowSpan3537">F </flowSpan>= deep NN </flowPara></flowRoot>    <flowRoot
+         id="flowPara3143-15"
+         style="font-size:20px;line-height:1.25"><flowSpan
+   style="font-style:italic;font-weight:bold;font-size:28px;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman'"
+   id="flowSpan3537"> </flowSpan>= deep NN </flowPara></flowRoot>
+    <flowRoot
        xml:space="preserve"
        id="flowRoot3519"
-       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Arial;font-style:normal;font-weight:normal;font-size:20px;line-height:125%;letter-spacing:0px;word-spacing:0px;-inkscape-font-specification:Arial;font-stretch:normal;font-variant:normal;text-anchor:middle;text-align:center;writing-mode:lr"><flowRegion
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"><flowRegion
          id="flowRegion3521"><rect
            id="rect3523"
            width="138"
            height="125"
            x="433"
            y="906.36218" /></flowRegion><flowPara
-         id="flowPara3525"></flowPara></flowRoot>    <flowRoot
+         id="flowPara3525"
+         style="font-size:20px;line-height:1.25"> </flowPara></flowRoot>
+    <flowRoot
        xml:space="preserve"
        id="flowRoot3527"
-       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
        transform="translate(-64,-124)"
        inkscape:export-filename="/home/yky/latex/AGI-17/genifer-model-00.png"
        inkscape:export-xdpi="600"
@@ -2722,10 +2748,11 @@
            x="434"
            y="897.36218" /></flowRegion><flowPara
          id="flowPara3533"
-         style="font-size:28px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Latin Modern Roman;-inkscape-font-specification:Latin Modern Roman">x</flowPara></flowRoot>    <flowRoot
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:28px;line-height:1.25;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman'">x</flowPara></flowRoot>
+    <flowRoot
        xml:space="preserve"
        id="flowRoot3527-2"
-       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
        transform="translate(-96.56034,-382.40686)"
        inkscape:export-filename="/home/yky/latex/AGI-17/model-Sayaka.png"
        inkscape:export-xdpi="600"
@@ -2737,10 +2764,11 @@
            x="434"
            y="897.36218" /></flowRegion><flowPara
          id="flowPara3533-6"
-         style="font-size:28px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Latin Modern Roman;-inkscape-font-specification:Latin Modern Roman">x</flowPara></flowRoot>    <flowRoot
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:28px;line-height:1.25;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman'">x</flowPara></flowRoot>
+    <flowRoot
        xml:space="preserve"
        id="flowRoot3527-4"
-       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
        transform="translate(-102.56034,-654.40686)"
        inkscape:export-filename="/home/yky/latex/AGI-17/model-with-u.png"
        inkscape:export-xdpi="600"
@@ -2752,10 +2780,11 @@
            x="434"
            y="897.36218" /></flowRegion><flowPara
          id="flowPara3533-68"
-         style="font-size:28px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Latin Modern Roman;-inkscape-font-specification:Latin Modern Roman">x</flowPara></flowRoot>    <flowRoot
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:28px;line-height:1.25;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman'">x</flowPara></flowRoot>
+    <flowRoot
        xml:space="preserve"
        id="flowRoot3527-9"
-       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
        transform="translate(-93.560344,-825.40686)"
        inkscape:export-filename="/home/yky/latex/AGI-17/genifer-model-0.png"
        inkscape:export-xdpi="600"
@@ -2767,9 +2796,10 @@
            x="434"
            y="897.36218" /></flowRegion><flowPara
          id="flowPara3533-0"
-         style="font-size:28px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Latin Modern Roman;-inkscape-font-specification:Latin Modern Roman">x</flowPara></flowRoot>    <flowRoot
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:28px;line-height:1.25;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman'">x</flowPara></flowRoot>
+    <flowRoot
        transform="translate(125.00955,23.386434)"
-       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
        id="flowRoot2999-50-4"
        xml:space="preserve"
        inkscape:export-filename="/home/yky/latex/AGI-17/model-Sayaka.png"
@@ -2781,14 +2811,15 @@
            height="36"
            width="75"
            id="rect3003-6-4" /></flowRegion><flowPara
-         style="font-size:28px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Latin Modern Roman;-inkscape-font-specification:Latin Modern Roman"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:28px;line-height:1.25;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman'"
          id="flowPara3005-1-7"><flowSpan
            style="font-weight:bold"
            id="flowSpan3535-3">x</flowSpan><flowSpan
-           style="font-size:65.00091553%;baseline-shift:sub;font-family:Latin Modern Roman;-inkscape-font-specification:Latin Modern Roman"
-           id="flowSpan3517-1">t+1</flowSpan></flowPara></flowRoot>    <flowRoot
+           style="font-size:65.0009%;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman';baseline-shift:sub"
+           id="flowSpan3517-1">t+1</flowSpan></flowPara></flowRoot>
+    <flowRoot
        transform="translate(111.00955,-237.61357)"
-       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
        id="flowRoot2999-50-3"
        xml:space="preserve"
        inkscape:export-filename="/home/yky/latex/AGI-17/model-with-u.png"
@@ -2800,14 +2831,15 @@
            height="36"
            width="75"
            id="rect3003-6-41" /></flowRegion><flowPara
-         style="font-size:28px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Latin Modern Roman;-inkscape-font-specification:Latin Modern Roman"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:28px;line-height:1.25;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman'"
          id="flowPara3005-1-9"><flowSpan
            style="font-weight:bold"
            id="flowSpan3535-2">x</flowSpan><flowSpan
-           style="font-size:65.00091553%;baseline-shift:sub;font-family:Latin Modern Roman;-inkscape-font-specification:Latin Modern Roman"
-           id="flowSpan3517-2">t+1</flowSpan></flowPara></flowRoot>    <flowRoot
+           style="font-size:65.0009%;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman';baseline-shift:sub"
+           id="flowSpan3517-2">t+1</flowSpan></flowPara></flowRoot>
+    <flowRoot
        transform="translate(110.00955,-419.61357)"
-       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
        id="flowRoot2999-50-42"
        xml:space="preserve"
        inkscape:export-filename="/home/yky/latex/AGI-17/genifer-model-0.png"
@@ -2819,15 +2851,16 @@
            height="36"
            width="75"
            id="rect3003-6-3" /></flowRegion><flowPara
-         style="font-size:28px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Latin Modern Roman;-inkscape-font-specification:Latin Modern Roman"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:28px;line-height:1.25;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman'"
          id="flowPara3005-1-2"><flowSpan
            style="font-weight:bold"
            id="flowSpan3535-6">x</flowSpan><flowSpan
-           style="font-size:65.00091553%;baseline-shift:sub;font-family:Latin Modern Roman;-inkscape-font-specification:Latin Modern Roman"
-           id="flowSpan3517-8">t+1</flowSpan></flowPara></flowRoot>    <flowRoot
+           style="font-size:65.0009%;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman';baseline-shift:sub"
+           id="flowSpan3517-8">t+1</flowSpan></flowPara></flowRoot>
+    <flowRoot
        xml:space="preserve"
        id="flowRoot3137-2-5"
-       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
        transform="translate(100.104,-37.090163)"
        inkscape:export-filename="/home/yky/latex/AGI-17/model-with-u.png"
        inkscape:export-xdpi="600"
@@ -2838,12 +2871,14 @@
            height="40"
            x="337"
            y="275.36218" /></flowRegion><flowPara
-         id="flowPara3143-15-7"><flowSpan
-   style="font-size:28px;font-style:italic;font-weight:bold;font-family:Latin Modern Roman;-inkscape-font-specification:Latin Modern Roman"
-   id="flowSpan3537-3">F </flowSpan>= deep NN </flowPara></flowRoot>    <flowRoot
+         id="flowPara3143-15-7"
+         style="font-size:20px;line-height:1.25"><flowSpan
+   style="font-style:italic;font-weight:bold;font-size:28px;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman'"
+   id="flowSpan3537-3">F </flowSpan>= deep NN </flowPara></flowRoot>
+    <flowRoot
        xml:space="preserve"
        id="flowRoot3137-2-2"
-       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
        transform="translate(98.104,-213.09016)"
        inkscape:export-filename="/home/yky/latex/AGI-17/genifer-model-0.png"
        inkscape:export-xdpi="600"
@@ -2854,12 +2889,14 @@
            height="40"
            x="337"
            y="275.36218" /></flowRegion><flowPara
-         id="flowPara3143-15-1"><flowSpan
-   style="font-size:28px;font-style:italic;font-weight:bold;font-family:Latin Modern Roman;-inkscape-font-specification:Latin Modern Roman"
-   id="flowSpan3537-5">F </flowSpan>= deep NN </flowPara></flowRoot>    <flowRoot
+         id="flowPara3143-15-1"
+         style="font-size:20px;line-height:1.25"><flowSpan
+   style="font-style:italic;font-weight:bold;font-size:28px;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman'"
+   id="flowSpan3537-5">F </flowSpan>= deep NN </flowPara></flowRoot>
+    <flowRoot
        xml:space="preserve"
        id="flowRoot3527-8"
-       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
        transform="translate(-216.56034,84.59314)"
        inkscape:export-filename="/home/yky/latex/AGI-17/genifer-model-00.png"
        inkscape:export-xdpi="600"
@@ -2871,5 +2908,19 @@
            x="434"
            y="897.36218" /></flowRegion><flowPara
          id="flowPara3533-07"
-         style="font-size:28px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Latin Modern Roman;-inkscape-font-specification:Latin Modern Roman">x</flowPara></flowRoot>  </g>
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:28px;line-height:1.25;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman'">x</flowPara></flowRoot>
+    <g
+       id="g1"
+       transform="translate(32,6)">
+      <path
+         style="fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+         d="m 455.0478,764.75 h -11.06343 l -4.25993,15.89826"
+         id="path1"
+         sodipodi:nodetypes="ccc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+         d="m 442.11822,771.94295 h 10.78032"
+         id="path2" />
+    </g>
+  </g>
 </svg>
